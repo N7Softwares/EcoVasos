@@ -120,7 +120,7 @@
 // Diseño (N7 Team)
 Route::get('/disenio', function () {
     return view('frontend.pages.disenio');
-});
+})->name('disenio');
 // Backend section start
 
     Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'admin']], function () {

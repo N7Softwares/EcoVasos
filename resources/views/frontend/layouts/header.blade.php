@@ -9,7 +9,7 @@
           <ul>
             <li><a href="{{route('about-us')}}">Nosotros</a></li>
             <li><a href="#">Productos</a></li>
-            <li><a href="{{route('about-us')}}">Diseño</a></li>
+            <li><a href="{{route('disenio')}}">Diseño</a></li>
             <li><a href="{{route('contact')}}">Contacto</a></li>
             <li><a href="{{route('cart')}}">FAQ</a></li>
           </ul>
