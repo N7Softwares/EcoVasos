@@ -316,7 +316,7 @@ const generate3D = async (byAprovinng = false) => {
 
     const data = await ajaxPromise({
         type: "POST",
-        url: `/qero/personalizacion_online/${id_tipo == 1 ? 'gerarTransparencia' : 'gerarGabarito'}?v=${unix}`,
+        url: `https://ecovasos.com/qero/personalizacion_online/${id_tipo == 1 ? 'gerarTransparencia' : 'gerarGabarito'}?v=${unix}`,
         data: ajaxData
     });
 
@@ -550,7 +550,7 @@ const selectCurrentColor = ({ currentTarget }) => {
 
         $.ajax({
             method: "POST",
-            url: "/qero/personalizacion_online/img2svg?v=" + unix,
+            url: "https://ecovasos.com/qero/personalizacion_online/img2svg?v=" + unix,
             data: { link, cor_antiga, cor_nova: cor },
             context: document.body,
             success: (result) => {
@@ -736,7 +736,7 @@ const setElementsColor = ({ currentTarget }) => {
 
                 $.ajax({
                     method: "POST",
-                    url: "/qero/personalizacion_online/img2svg?v=" + unix,
+                    url: "https://ecovasos.com/qero/personalizacion_online/img2svg?v=" + unix,
                     data: { link, cor_nova: cor, cor_antiga: corLogoAnterior },
                     context: document.body,
                     success: (result) => {
@@ -855,7 +855,7 @@ const seeMoreArts = async ({ currentTarget }) => {
     }, 100);
 
     $.ajax({
-        url: `/qero/personalizacion_online/getCategoryArts/${id_categoria}/Serigrafia?v=${unix}`,
+        url: `https://ecovasos.com/qero/personalizacion_online/getCategoryArts/${id_categoria}/Serigrafia?v=${unix}`,
         context: document.body,
         success: (result = []) => {
             let delay = 0;
@@ -905,7 +905,7 @@ const attachImageElement = async ({ currentTarget }) => {
 
     $.ajax({
         type: "POST",
-        url: "/qero/personalizacion_online/salvarLogo?v=" + unix,
+        url: "https://ecovasos.com/qero/personalizacion_online/salvarLogo?v=" + unix,
         data: formData,
         cache: false,
         contentType: false,
@@ -922,7 +922,7 @@ const attachImageElement = async ({ currentTarget }) => {
 
             $.ajax({
                 method: "POST",
-                url: "/qero/personalizacion_online/img2svg?v=" + unix,
+                url: "https://ecovasos.com/qero/personalizacion_online/img2svg?v=" + unix,
                 data: {
                     cor: corAtual.cor1,
                     filename: obj.src,
@@ -1177,7 +1177,7 @@ const onApproving = ({ currentTarget }) => {
 
     $.ajax({
         method: "POST",
-        url: "/qero/personalizacion_online/setArte?v=" + unix,
+        url: "https://ecovasos.com/qero/personalizacion_online/setArte?v=" + unix,
         data: {
             medida: fixMedida,
             id_cor,
@@ -1284,7 +1284,7 @@ const fillTemplate = async () => {
         showSpinner();
 
         $.ajax({
-            url: `/qero/personalizacion_online/getArte/${getID || idArtePronta}?v=${unix}`,
+            url: `https://ecovasos.com/qero/personalizacion_online/getArte/${getID || idArtePronta}?v=${unix}`,
             context: document.body,
             success: result => {
                 const cleanHtml = clearHtmlElement(result.html);
@@ -1481,7 +1481,7 @@ const onCallModification = async (template, variables) => {
 
             $.ajax({
                 method: "POST",
-                url: "/qero/personalizacion_online/img2svg?v=" + unix,
+                url: "https://ecovasos.com/qero/personalizacion_online/img2svg?v=" + unix,
                 data: { link, cor_nova },
                 context: document.body,
                 success: (result) => {
