@@ -1,0 +1,440 @@
+/* .register-form{
+  height: 45rem;
+} */
+
+.loginSelector{
+  height: 100%;
+  border-radius: 2rem;
+  background-color: var(--green-fill);
+  width: 100%;
+  position: relative;
+  border: 1px solid var(--green-border);
+}
+
+.loginSelector::after{
+  width: 50%;
+  background-color: var(--white);
+  height: 100%;
+  position: absolute;
+  display: block;
+  content: "";
+  border-radius: 2rem;
+  left: 0%;
+  transform: translateX(0%);
+  transition: transform .3s ease;
+}
+
+.registerSelector::after{
+  transform: translateX(100%);
+}
+
+.registerSelector .loginBtn, .registerBtn{
+  color: var(--transparent-white2);
+}
+
+.registerSelector .registerBtn, .loginBtn{
+  color: var(--dark);
+}
+
+
+
+.loginSelector button{
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  position: relative;
+  z-index: 10;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.loginSelector button:hover{
+  box-shadow: none;
+}
+
+.log-in{
+  background-color: var(--green-fill);
+  min-height: 100vh;
+}
+
+
+.container{
+  grid-column: 2/13;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.container-form{
+  height: 40rem;
+  /* width: 60%; */
+  display: flex;
+  flex-direction: row;
+  border-radius: 2rem;
+  /* padding-right: 2rem; */
+  background-color: var(--white);
+  box-shadow: rgba(87, 87, 87, 0.5) 0px 8px 24px;
+}
+
+.container-form2{
+  border: 1px solid var(--gray-border-buttons);
+  border-radius: 2rem;
+}
+
+.container-login{
+  padding: 2rem 2rem 0;
+  /* margin-left: 3rem; */
+}
+
+.container-login div {
+  margin: .5rem 0;
+}
+
+.image-form img{
+  height: 100%;
+  max-height: 40rem;
+  border-radius: 2rem 0 0 2rem;
+  object-fit: cover;
+}
+
+.form-side{
+  height: 100%;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  justify-content: space-evenly;
+}
+
+.log-in label, .log-in input{
+  color: var(--green-border);
+}
+
+.fill-div > label{
+  padding-left: .75rem;
+  margin-bottom: .3rem;
+}
+
+.fill-div > input{
+  width: 24rem;
+}
+
+.registerNames > .fill-div > input{
+  width: 11.5rem !important;
+}
+
+.login-submit-div{
+  margin-top: 2rem;
+}
+
+.login-submit-div button{
+  width: 100%;
+  font-family: 'Inter';
+}
+
+
+
+.ftp{
+  text-align: center;
+}
+
+.ftp a{
+  color: var(--green-border) !important;
+  font-weight: 600;
+  font-size: .7rem;
+  opacity: .5;
+  cursor: pointer;
+  transition: opacity .2s ease-in;
+}
+
+.ftp:hover a{
+  opacity: 1;
+}
+
+.login-2{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.login-2 > p{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: .5rem;
+}
+
+.login-2 > p::after, .login-2 > p::before{
+  content: "";
+  width: 30%;
+  border-bottom: 1px solid var(--gray-border-buttons);
+  height: 1px;
+  display: block;
+  margin: 0 1rem;
+}
+
+.googleLogin{
+  cursor: pointer;
+  border: 1px solid var(--gray-fill-inactive);
+  padding: .5rem 1.5rem;
+  border-radius: 3rem;
+}
+
+.googleLogin button{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.googleLogin .btn:hover{
+  box-shadow: none;
+}
+
+.googleLogin img{
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.googleLogin p{
+  margin-left: .7rem;
+}
+
+.registerNames > div:nth-child(1) {
+  margin: 0 .3rem 0 0;
+}
+
+.registerNames > div:nth-child(2) {
+  margin: 0 0 0 .3rem;
+}
+
+.registerNames input{
+  min-width: 8rem !important;
+}
+
+
+
+
+
+.footer-login{
+  width: 100%;
+  justify-content: center;
+}
+
+.footer-login a{
+  text-align: center;
+}
+
+.footer-login a img{
+  width: 6.5rem;
+}
+
+
+.footer-login .socials{
+  margin-top: .5rem;
+}
+
+.footer-login .socials div{
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: var(--gray-fill-inactive);
+  margin: 0 .5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color .25s ease-in;
+}
+
+
+.footer-login .socials a i{
+  color: var(--white);
+  font-size: 1.1rem;
+}
+
+.footer-login .socials div:hover{
+  background-color: var(--green-fill);
+}
+
+
+@media screen and (max-width:960px){
+  
+  .div-container{
+    flex-direction: column !important; 
+  }
+
+  .image-form img{
+    width: 100%;
+    height: 10rem;
+    border-radius: 2rem 2rem 0 0;
+  }
+  .image-form{
+    width: 100%;
+  }
+
+  .container-form{
+    height: auto;
+    padding: 0;
+  }
+
+  .footer-login{
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+}
+
+
+@media screen and (max-width:830px){
+
+  .form-side{
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+  }
+
+  .registerNames{
+    flex-direction: column;
+  }
+
+  .registerNames .fill-div:nth-child(1){
+    margin: 0 0 1rem 0;
+  }
+
+  .registerNames .fill-div:nth-child(2){
+    margin: 0 0 0 0;
+  }
+
+  .fill-div > input{
+    width: 20rem;
+  }
+  
+  .registerNames > .fill-div > input{
+    width: 20rem !important;
+  }
+
+  .registerNames > div{
+    margin: inherit;
+  }
+
+}
+
+
+@media screen and (max-width:500px){
+
+  .form-side{
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .container-login{
+    padding: 2rem 1.5rem 0;
+  }
+
+  .fill-div > input{
+    width: 15rem;
+  }
+
+  .registerNames > .fill-div > input{
+    width: 15rem !important;
+  }
+
+}
+
+
+
+
+
+
+/* LOGIN PURCHASE */
+
+
+.loginPurchase #content{
+  padding-top: 6rem; 
+}
+
+.lpSpan{
+  grid-column: 2/13;
+  text-align: center;
+  margin-top: 6rem;
+}
+
+.lpSpan p{
+  font-weight: 100;
+}
+
+.lpSpan p:nth-child(1){
+  font-size: 1.7rem;
+}
+
+.lpSpan p:nth-child(2){
+  font-size: 1.5rem;
+}
+
+.loginPurchase .container-form{
+  box-shadow: none;
+  border: 1px solid var(--gray-border-buttons);
+}
+
+
+.loginPurchase .container{
+  margin-top: 3rem;
+  justify-content: flex-start;
+}
+
+
+@media screen and (max-width: 707px){
+
+  .lpSpan p:nth-child(1){
+    font-size: 1.5rem;
+  }
+  
+  .lpSpan p:nth-child(2){
+    font-size: 1.2rem;
+  }
+
+}
+
+
+
+
+
+
+/* PASSWORD RECOVERY */
+
+
+.lostPassword .form-side, .newPassword .form-side{
+  justify-content: space-between;
+  width: 38rem;
+  padding: 4rem;
+}
+
+.psrInfo, #passwordRecovery, .psrMsg{
+  max-width: 28rem;
+}
+
+.lostPassword .fill-div > input{
+  width: 100%;
+}
+
+.psdChangedMsg{
+  display: flex;
+  flex-direction: column;
+}
+
+
+@media screen and (max-width: 750px) {
+  .lostPassword .container-form{
+    width: 95%;
+  }
+
+  .lostPassword .div-container{
+    width: 100%;
+  }
+
+  .lostPassword .form-side, .newPassword .form-side{
+    width: 33rem;
+  }
+
+  .lostPassword .fill-div > input, .newPassword .fill-div > input{
+    width: 100%;
+  }
+}

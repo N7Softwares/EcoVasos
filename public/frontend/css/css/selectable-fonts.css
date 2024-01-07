@@ -1,0 +1,284 @@
+@font-face {
+  font-family: 'AlfaSlabOne';
+  src: url(../fonts/seleccionable/AlfaSlabOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'BebasNeue';
+  src: url(../fonts/seleccionable/BebasNeue-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'BerkshireSwash';
+  src: url(../fonts/seleccionable/BerkshireSwash-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'BungeeInline';
+  src: url(../fonts/seleccionable/BungeeInline-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'BungeeShade';
+  src: url(../fonts/seleccionable/BungeeShade-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'ChangaOne';
+  src: url(../fonts/seleccionable/ChangaOne-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Modak';
+  src: url(../fonts/seleccionable/Modak-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url(../fonts/seleccionable/Montserrat-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Yikes';
+  src: url(../fonts/seleccionable/YIKES!.TTF);
+}
+
+@font-face {
+  font-family: Forte;
+  src: url(../fonts/seleccionable/Forte.ttf);
+}
+
+@font-face {
+  font-family: 'Whoa';
+  src: url(../fonts/seleccionable/whoa!.ttf);
+}
+
+@font-face {
+  font-family: 'Vanilla Whalle';
+  src: url(../fonts/seleccionable/vanilla-whale.ttf);
+}
+
+@font-face {
+  font-family: 'Transformes Movie';
+  src: url(../fonts/seleccionable/Transformers-Movie.ttf);
+}
+
+@font-face {
+  font-family: 'Top Secret';
+  src: url(../fonts/seleccionable/Top-Secret.ttf);
+}
+
+@font-face {
+  font-family: 'Take Cover';
+  src: url(../fonts/seleccionable/Take-cover.ttf);
+}
+
+@font-face {
+  font-family: 'Strawberry Whipped Cream';
+  src: url(../fonts/seleccionable/Strawberry-Whipped-Cream.ttf);
+}
+
+@font-face {
+  font-family: 'Starjedi';
+  src: url(../fonts/seleccionable/Starjedi.ttf);
+}
+
+@font-face {
+  font-family: 'SimpleRonde';
+  src: url(../fonts/seleccionable/SimpleRonde-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Shagade';
+  src: url(../fonts/seleccionable/shagade.ttf);
+}
+
+@font-face {
+  font-family: 'Shadowed Germanica';
+  src: url(../fonts/seleccionable/Shadowed-Germanica.ttf);
+}
+
+@font-face {
+  font-family: 'Scriptin';
+  src: url(../fonts/seleccionable/SCRIPTIN.ttf);
+}
+
+@font-face {
+  font-family: 'Samurai';
+  src: url(../fonts/seleccionable/samurai.ttf);
+}
+
+@font-face {
+  font-family: 'PW Happy Christmas';
+  src: url(../fonts/seleccionable/PWHappyChristmas.ttf);
+}
+
+@font-face {
+  font-family: 'Plain Germanica';
+  src: url(../fonts/seleccionable/Plain-Germanica.ttf);
+}
+
+@font-face {
+  font-family: 'Old London';
+  src: url(../fonts/seleccionable/OldLondon.ttf);
+}
+
+@font-face {
+  font-family: 'Mexcellent 3d';
+  src: url(../fonts/seleccionable/mexcellent-3d.ttf);
+}
+
+@font-face {
+  font-family: 'Lovely Valentine';
+  src: url(../fonts/seleccionable/Lovely-Valentine.ttf);
+}
+
+@font-face {
+  font-family: 'Liquid Crystal';
+  src: url(../fonts/seleccionable/LiquidCrystal-Normal.otf);
+}
+
+@font-face {
+  font-family: 'Kindergarten';
+  src: url(../fonts/seleccionable/kindergarten.ttf);
+}
+
+@font-face {
+  font-family: 'Karate';
+  src: url(../fonts/seleccionable/Karate.ttf);
+}
+
+@font-face {
+  font-family: 'Hey August';
+  src: url(../fonts/seleccionable/Hey-August.ttf);
+}
+
+@font-face {
+  font-family: 'Halloween Spider';
+  src: url(../fonts/seleccionable/halloween_spider.ttf);
+}
+
+@font-face {
+  font-family: 'Halaney';
+  src: url(../fonts/seleccionable/Halaney-Demo.otf);
+}
+
+@font-face {
+  font-family: 'Gunplay rg';
+  src: url(../fonts/seleccionable/gunplay-rg.ttf);
+}
+
+@font-face {
+  font-family: 'Gunplay 3d';
+  src: url(../fonts/seleccionable/gunplay-3d.ttf);
+}
+
+@font-face {
+  font-family: 'gang of three';
+  src: url(../fonts/seleccionable/gang_of_three.ttf);
+}
+
+@font-face {
+  font-family: 'Fluted Germanica';
+  src: url(../fonts/seleccionable/Fluted-Germanica.ttf);
+}
+
+@font-face {
+  font-family: 'Espen Halloween';
+  src: url(../fonts/seleccionable/EspenHalloween.ttf);
+}
+
+@font-face {
+  font-family: 'Embossed Germanica';
+  src: url(../fonts/seleccionable/Embossed-Germanica.ttf);
+}
+
+@font-face {
+  font-family: 'Ecolier';
+  src: url(../fonts/seleccionable/ecolier.TTF);
+}
+
+@font-face {
+  font-family: 'DSnet Stamped';
+  src: url(../fonts/seleccionable/DSnet-Stamped.ttf);
+}
+
+@font-face {
+  font-family: 'Deuxieme Rang';
+  src: url(../fonts/seleccionable/Deuxieme_Rang.otf);
+}
+
+@font-face {
+  font-family: 'Cursive Standard';
+  src: url(../fonts/seleccionable/Cursive-standard.ttf);
+}
+
+@font-face {
+  font-family: 'Castal Street';
+  src: url(../fonts/seleccionable/Castal-Street.ttf);
+}
+
+@font-face {
+  font-family: 'Austie Bost Blueberry Muffins';
+  src: url(../fonts/seleccionable/Austie-Bost-Blueberry-Muffins.ttf);
+}
+
+@font-face {
+  font-family: 'Arsenale White';
+  src: url(../fonts/seleccionable/Arsenale-White.ttf);
+}
+
+@font-face {
+  font-family: 'aAttack Graffiti';
+  src: url(../fonts/seleccionable/aAttackGraffiti.ttf);
+}
+
+@font-face {
+  font-family: 'Amigos';
+  src: url(../fonts/seleccionable/Amigos.ttf);
+}
+
+@font-face {
+  font-family: 'Baby Chipmunk';
+  src: url(../fonts/seleccionable/Baby-Chipmunk.ttf);
+}
+
+@font-face {
+  font-family: 'Black Rocker';
+  src: url(../fonts/seleccionable/BlackRocker.ttf);
+}
+
+@font-face {
+  font-family: 'Cinzel Decorative';
+  src: url(../fonts/seleccionable/CinzelDecorative-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Franchise';
+  src: url(../fonts/seleccionable/Franchise.ttf);
+}
+
+@font-face {
+  font-family: 'Canvas Black';
+  src: url(../fonts/seleccionable/MADE-Canvas-Black-PERSONAL-USE.otf);
+}
+
+@font-face {
+  font-family: 'Rafflesia Demo';
+  src: url(../fonts/seleccionable/Rafflesia-Demo.ttf);
+}
+
+@font-face {
+  font-family: 'Richela Kids';
+  src: url(../fonts/seleccionable/Richela-Kids-Font.otf);
+}
+
+@font-face {
+  font-family: 'Selphia';
+  src: url(../fonts/seleccionable/Selphia.ttf);
+}
+
+@font-face {
+  font-family: 'BukhariScript';
+  src: url(../fonts/seleccionable/BukhariScript.ttf);
+}
