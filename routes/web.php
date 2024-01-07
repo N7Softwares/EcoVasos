@@ -117,8 +117,10 @@
     Route::get('payment', [PayPalController::class, 'payment'])->name('payment');
     Route::get('cancel', [PayPalController::class, 'cancel'])->name('payment.cancel');
     Route::get('payment/success', [PayPalController::class, 'success'])->name('payment.success');
-
-
+// Diseño (N7 Team)
+Route::get('/disenio', function () {
+    return view('frontend.pages.disenio');
+});
 // Backend section start
 
     Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'admin']], function () {
