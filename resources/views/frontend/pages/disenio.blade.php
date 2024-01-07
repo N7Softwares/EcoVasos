@@ -5,118 +5,34 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Herramienta de personalización Qero Ecovasos</title>
-        <link rel="canonical" href="https://ecovasos.com/qero/serigrafia">
+        <title>Herramienta de personalización de EcoIngenio</title>
         <link rel="shortcut icon" href="/wp-content/uploads/2020/06/favi-con.png">
         <!-- CSS -->
-        <link href="https://ecovasos.com/qero/assets/personalizacion_online/css/slick.css" rel="stylesheet">
+        {{-- <link href="https://ecovasos.com/qero/assets/personalizacion_online/css/slick.css" rel="stylesheet">
         <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
         <link href="https://ecovasos.com/qero/assets/personalizacion_online/css/template.css?v=1704654346" rel="stylesheet">
         <link href="https://ecovasos.com/qero/assets/personalizacion_online/css/resizable.min.css?v=1704654346" rel="stylesheet">
         <link href="https://ecovasos.com/qero/assets/personalizacion_online/css/selectable-fonts.css?v=1704654346" rel="stylesheet">
-        <link href="https://ecovasos.com/qero/assets/personalizacion_online/css/serigrafia.css?v=1704654346" rel="stylesheet">
+        <link href="https://ecovasos.com/qero/assets/personalizacion_online/css/serigrafia.css?v=1704654346" rel="stylesheet"> --}}
+
+
+        <link href="{{ asset('frontend/css/slick.css') }}" rel="stylesheet">
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" data-auto-replace-svg="nest"></script>
+        <link href="{{ asset('frontend/css/template.css') }}" rel="stylesheet">
+        <link href="{{ asset('frontend/css/resizable.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('frontend/css/selectable-fonts.css') }}" rel="stylesheet">
+        <link href="{{ asset('frontend/css/serigrafia.css') }}" rel="stylesheet">
     </head>
     <body>
-        <nav class="navbar nav-new-version">
-            <div class="container" style="position: relative;">
-                <a class="nav-image" href="https://ecovasos.com/qero/">
-                    <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="104.478" height="45" viewBox="0 0 104.478 45">
-                        <g id="logo_qero" data-name="logo qero" transform="translate(162.508 69.994)">
-                            <g id="Grupo_180589" data-name="Grupo 180589" transform="translate(-162.508 -69.994)">
-                                <path id="Caminho_38623" data-name="Caminho 38623" d="M174.333,119.8a1.807,1.807,0,1,1,1.806-1.806,1.808,1.808,0,0,1-1.806,1.806m0-6.03a4.221,4.221,0,1,0,4.221,4.224,4.223,4.223,0,0,0-4.221-4.224" transform="translate(-115.438 -77.212)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38624" data-name="Caminho 38624" d="M279.5,119.2a1.807,1.807,0,1,1,1.809-1.806A1.809,1.809,0,0,1,279.5,119.2m0-6.03a4.221,4.221,0,1,0,4.216,4.224,4.225,4.225,0,0,0-4.216-4.224" transform="translate(-186.814 -76.804)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38625" data-name="Caminho 38625" d="M124.38,117.048a1.472,1.472,0,0,0-1.5-1.506,1.643,1.643,0,0,0-1.742,1.506Zm2.08,3.5a4.318,4.318,0,0,1-3.358,1.575,4.185,4.185,0,1,1,0-8.357c2.292,0,3.734,1.641,3.734,4.179v.77h-5.7a1.841,1.841,0,0,0,1.854,1.541,2.088,2.088,0,0,0,1.752-.967Z" transform="translate(-80.534 -77.212)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38626" data-name="Caminho 38626" d="M152.355,116.544a1.518,1.518,0,0,0-1.213-.606,2.015,2.015,0,0,0,0,4.028,1.589,1.589,0,0,0,1.213-.6l1.621,1.7a4.027,4.027,0,0,1-2.834,1.062,4.186,4.186,0,1,1,0-8.357,4.009,4.009,0,0,1,2.834,1.069Z" transform="translate(-99.559 -77.212)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38627" data-name="Caminho 38627" d="M196.715,114.389h2.649l2.017,5.409h.031l1.872-5.409h2.475l-3.152,7.965h-2.6Z" transform="translate(-133.49 -77.632)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38628" data-name="Caminho 38628" d="M229.713,118.437c-.759,0-2.432.067-2.432,1.15,0,.593.626.869,1.17.869.965,0,1.869-.508,1.869-1.492v-.527Zm.606,2.49h-.033a2.867,2.867,0,0,1-2.522,1.2,2.551,2.551,0,0,1-2.839-2.455c0-2.757,3.346-2.8,5.394-2.8a1.464,1.464,0,0,0-1.574-1.425,2.618,2.618,0,0,0-2,.95l-1.312-1.344a5.128,5.128,0,0,1,3.5-1.281c2.866,0,3.643,1.461,3.643,4.108v4.056h-2.265Z" transform="translate(-152.631 -77.212)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38629" data-name="Caminho 38629" d="M256.494,116.312a1.75,1.75,0,0,0-1.423-.673c-.412,0-.906.183-.906.653,0,1.18,4.15.185,4.15,3.215,0,2.032-1.966,2.62-3.67,2.62a4.413,4.413,0,0,1-3.13-1.078l1.494-1.657a2.117,2.117,0,0,0,1.732.868c.554,0,1.113-.149,1.113-.576,0-1.28-4.142-.194-4.142-3.223,0-1.871,1.67-2.691,3.341-2.691A4.033,4.033,0,0,1,258,114.821Z" transform="translate(-170.673 -77.212)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38630" data-name="Caminho 38630" d="M308.882,116.312a1.758,1.758,0,0,0-1.425-.673c-.408,0-.9.183-.9.653,0,1.18,4.144.185,4.144,3.215,0,2.032-1.966,2.62-3.67,2.62a4.4,4.4,0,0,1-3.128-1.078l1.49-1.657a2.133,2.133,0,0,0,1.737.868c.553,0,1.111-.149,1.111-.576,0-1.28-4.146-.194-4.146-3.223,0-1.871,1.673-2.691,3.344-2.691a4.028,4.028,0,0,1,2.948,1.051Z" transform="translate(-206.224 -77.212)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38631" data-name="Caminho 38631" d="M261.194,45.206a5.219,5.219,0,1,1,5.23-5.214,5.214,5.214,0,0,1-5.23,5.214m0-17.407a12.191,12.191,0,1,0,12.193,12.193A12.186,12.186,0,0,0,261.194,27.8" transform="translate(-169.005 -18.881)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38632" data-name="Caminho 38632" d="M220.787,27.8a5.225,5.225,0,1,0,5.222,5.218,5.217,5.217,0,0,0-5.222-5.218" transform="translate(-146.286 -18.867)" fill="#fff" fill-rule="evenodd"/>
-                                <path id="Caminho_38633" data-name="Caminho 38633" d="M127.188,37.635a4.258,4.258,0,0,0-4.351-4.354,4.739,4.739,0,0,0-5.019,4.354Zm6.006,10.128a12.49,12.49,0,0,1-9.7,4.544c-7.1,0-12.776-4.735-12.776-12.063S116.4,28.171,123.5,28.171c6.624,0,10.785,4.735,10.785,12.073v2.22H117.818a5.3,5.3,0,0,0,5.349,4.442,6.044,6.044,0,0,0,5.061-2.783Z" transform="translate(-75.147 -19.133)" fill="#fff" fill-rule="evenodd"/>
-                                <rect id="Retângulo_161318" data-name="Retângulo 161318" width="7.092" height="22.993" transform="translate(62.738 9.609)" fill="#fff"/>
-                                <path id="Caminho_38634" data-name="Caminho 38634" d="M33.853,16.9A16.935,16.935,0,1,0,22.464,32.861l4.605,5.852,6.1-4.767-4.123-5.255a16.819,16.819,0,0,0,4.81-11.8M16.839,5.15a11.755,11.755,0,0,1,11.507,9.113l.042.179,2.226-.246-3.406,4.244L25.5,17.073l-2.543-2.032,2.68-.3-.065-.234A9.069,9.069,0,0,0,7.985,15L6.916,13.669a.281.281,0,0,0-.383-.042l-1.288,1.03A11.882,11.882,0,0,1,16.839,5.15m0,23.793A11.861,11.861,0,0,1,5.064,18.1l-.014-.17-2.62-.289,4.252-3.4,1.549,1.931,1.856,2.313-2.252-.248.04.265a9.067,9.067,0,0,0,17.979-.41l1.2.962a.268.268,0,0,0,.093.047l.009,0a.276.276,0,0,0,.068.012h0a.271.271,0,0,0,.213-.1l1.209-1.507A11.821,11.821,0,0,1,16.839,28.943" transform="translate(0 0)" fill="#fff" fill-rule="evenodd"/>
-                            </g>
-                        </g>
-                    </svg>
-                </a>
-                <div class="items">
-                    <ul class="ul-container" style="position: relative;">
-                        <li class="item-nav">
-                            <a class="nav-link" href="https://ecovasos.com/qero/personalizacion-en-linea">Personalización</a>
-                        </li>
-                        <li class="item-nav drop-item">
-                            <a class="nav-link">Soluciones</a>
-                            <ul class="drop-nav">
-                                <li>
-                                    <a class="nav-link" href="https://ecovasos.com/qero/como-funciona">Cómo Funciona</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="https://ecovasos.com/qero/nuestros-clientes">Clientes</a>
-                                </li>
-                                <li>
-                                    <a class="nav-link" href="https://ecovasos.com/qero/cafecircular">Café Circular</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="item-nav">
-                            <a class="nav-link" href="https://ecovasos.com/qero/sustentabilidad">Sustentabilidad</a>
-                        </li>
-                        <li class="item-nav compra hide-in-700">
-                            <a class="nav-link" href="https://ecovasos.com/qero/compra">COMPRAR</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="nav-user">
-                    <ul class="ul-container">
-                        <li class="item-nav user hide-in-700">
-                            <a class="nav-link" href="https://ecovasos.com/qero/login">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                                    <defs>
-                                        <style>
-                                            .a {
-                                                fill: none;
-                                            }
-
-                                            .b {
-                                                fill: #fff;
-                                            }
-                                        </style>
-                                    </defs>
-                                    <path class="a" d="M0,0H24V24H0Z"/>
-                                    <path class="b" d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2ZM7.07,18.28c.43-.9,3.05-1.78,4.93-1.78s4.51.88,4.93,1.78a7.925,7.925,0,0,1-9.86,0Zm11.29-1.45c-1.43-1.74-4.9-2.33-6.36-2.33s-4.93.59-6.36,2.33a8,8,0,1,1,12.72,0ZM12,6a3.5,3.5,0,1,0,3.5,3.5A3.491,3.491,0,0,0,12,6Zm0,5a1.5,1.5,0,1,1,1.5-1.5A1.5,1.5,0,0,1,12,11Z" fill="#fff"/>
-                                </svg>
-                                <p>Ingresá</p>
-                            </a>
-                        </li>
-                        <li class="item-nav">
-                            <a class="nav-link mobile-btn" href="https://ecovasos.com/qero/personalizacion-productos">
-                                <svg class="shop-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20.383" viewBox="0 0 20 20.383">
-                                    <path id="shopping_cart_FILL1_wght400_GRAD0_opsz48" d="M8.57,24.383a1.837,1.837,0,1,1,1.3-3.138,1.837,1.837,0,0,1-1.3,3.138Zm10.2,0a1.829,1.829,0,1,1,1.3-.536A1.771,1.771,0,0,1,18.774,24.383ZM6.479,6.015H21.5a.973.973,0,0,1,.893.536,1.014,1.014,0,0,1,0,1.071l-3.444,6.2a2.283,2.283,0,0,1-.727.778,1.751,1.751,0,0,1-.982.293H9.514L8.086,17.546H20.611v1.531H8.315a1.712,1.712,0,0,1-1.543-.714,1.468,1.468,0,0,1,.013-1.607l1.633-3.01L4.54,5.531H2.55V4H5.535Z" transform="translate(-2.55 -4)" fill="#fff"/>
-                                </svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <div class="new-years-message nav">
-            <p>Para mejorar tu experiencia, recomendamos utilizar las versiones más recientes del navegador Google Chrome. No se recomienda usar Safari.</p>
-            <div class="close-message">
-                <i class="fa fa-times"></i>
-            </div>
-        </div>
         <style id="current-styles"></style>
         <div id="spinner">
             <div class="flex content-center align-center flex-column">
-                <img class="mg-btm-20" src="https://ecovasos.com/qero/assets/personalizacion_online/images/media/spinner.png">
+                <img class="mg-btm-20" src="{{ asset('images/spinner.png') }}">
                 <span id="close-spinner" class="color-white fs-12">CERRAR</span>
             </div>
         </div>
         <div id="boxModelo">
-            <div class="logo-mce">
-                <img src="https://ecovasos.com/qero/assets/personalizacion_online/images/qero.png" alt="Eco Vaso"/>
-            </div>
+            
             <div class="fechar-box-modelo">
                 <i class="fas fa-times"></i>
             </div>
@@ -144,7 +60,7 @@
                 <p style="width: 130px;"></p>
             </div>
             <p class="mg-btm-10 fs-14">
-                Revisá el diseño de tu ecovaso. Si estás conforme con el resultado, clickeá las opciones laterales para aprobar el diseño. <br/>
+                Revisá el diseño de tu vaso. Si estás conforme con el resultado, clickeá las opciones laterales para aprobar el diseño. <br/>
                 Si no estás conforme, seguí haciendo modificaciones. Igualmente, antes del pago y de mandar a producción, <br/>siempre existe la posibilidad de volver a cambiar el diseño*. 
             </p>
             <p class="mg-btm-20 fs-10">* Cliqueando en "Diseño aprobado", podes volver a la herramienta de personalización (tendrás que volver a aprobar dichas modificaciones)</p>
@@ -212,13 +128,13 @@
             <div id="footer-aprovacao">
                 <div class="alerta">
                     <p>1. Los colores de impresión pueden cambiar en cada monitor.</p>
-                    <p>2. Por ser un objeto cónico los elementos de la parte superior del ecovaso serán un poco estirados y los que están en la parte inferior un poco aplanados.</p>
+                    <p>2. Por ser un objeto cónico los elementos de la parte superior del vaso serán un poco estirados y los que están en la parte inferior un poco aplanados.</p>
                     <p>3. Superposición de colores pueden sufrir variaciones de 0,5 a 1 mm.</p>
                 </div>
                 <div class="alerta">
-                    <p>4. Los colores claros en ecovasos oscuros pueden oscurecerse.</p>
+                    <p>4. Los colores claros en vasos oscuros pueden oscurecerse.</p>
                     <p>5. Garantice que las imágenes y elementos usados en el diseño sean de su propiedad o que tengan el permiso para su utilización.</p>
-                    <p>6. El diseño no podrá ser reproducido, copiado, publicado o cambiado por terceros sin la autorización de Qero ecovasos.</p>
+                    <p>6. El diseño no podrá ser reproducido, copiado, publicado o cambiado por terceros sin la autorización de EcoIngenio.</p>
                 </div>
             </div>
         </div>
@@ -235,11 +151,11 @@
                     </div>
                     <div class="button open-action flex flex-column content-center align-center" data-content="create-session" data-button-id="cup-colors">
                         <div class="flex">
-                            <img src="https://ecovasos.com/qero/assets/personalizacion_online/images/icons/color-del-fondo.svg" alt="Color del ecovaso">
+                            <img src="https://ecovasos.com/qero/assets/personalizacion_online/images/icons/color-del-fondo.svg" alt="Color del vaso">
                         </div>
                         <div class="flex">
                             <p class="name text fs-12 text-semi-bold text-center">
-                                Color del <br/>ecovaso
+                                Color del <br/>vaso
                             </p>
                         </div>
                     </div>
@@ -309,7 +225,7 @@
                         </div>
                         <div class="flex">
                             <p class="name text fs-12 text-semi-bold text-center">
-                                Ecovaso<sup>®</sup>
+                                Ecoingenio<sup>®</sup>
                                 <br/>3D
                             </p>
                         </div>
@@ -488,9 +404,9 @@
                 </div>
                 <div class="content" data-content="create-session" data-button-id="cup-colors">
                     <p class="fs-14 text-bold mg-btm-10">
-                        Color del ecovaso<sup>®</sup>
+                        Color del vaso<sup>®</sup>
                     </p>
-                    <p class="fs-12 mg-btm-20">Elegí el color de tu ecovaso.
+                    <p class="fs-12 mg-btm-20">Elegí el color de tu vaso.
 			</p>
                     <div class="flex flex-column">
                         <div class="white-band colors mg-btm-20" data-id-select="translucidas">
@@ -579,7 +495,7 @@
                 </div>
                 <div class="content" data-content="create-session" data-button-id="art-colors">
                     <p class="fs-14 text-bold mg-btm-10">Colores del diseño</p>
-                    <p class="fs-12 mg-btm-20">Seleccioná los colores que vas a utilizar en tu ecovaso.
+                    <p class="fs-12 mg-btm-20">Seleccioná los colores que vas a utilizar en tu vaso.
 			</p>
                     <div class="used-art-colors">
                         <p class="fs-12 mg-btm-10">Actuales</p>
@@ -1875,7 +1791,7 @@
                     </p>
                     <p class="fs-12 mg-btm-30">Ejemplo:
 			</p>
-                    <img src="https://ecovasos.com/qero/assets/personalizacion_online/images/media/logo-example.png" alt="">
+                    <img src="{{asset('images/logo-example.png')}}" alt="">
                 </div>
                 <div class="content" data-content="create-session" data-button-id="elements">
                     <p class="fs-14 text-bold mg-btm-10">Agregar elementos</p>
@@ -1885,7 +1801,7 @@
                     </div>
                     <div id="carrousel-elements-session" class="flex flex-column">
                         <div class="flex content-space-between mg-btm-5">
-                            <p class="fs-12">Qero Eco Vaso</p>
+                            <p class="fs-12">EcoIngenio</p>
                             <p class="see-more-icons fs-12 color-purple cursor-pointer" data-id-categoria="29">Ver más</p>
                         </div>
                         <div class="elements-slider mg-btm-10">
@@ -5028,7 +4944,7 @@
                     <div class="button-features top flex content-space-between align-center width-100" style="display: flex !important;">
                         <div class="flex">
                             <p id="product-name" class="text fs-14 text-bold mg-rgt-10">
-                                Ecovaso <span class="size-name">360cc</span>
+                                EcoIngenio <span class="size-name">360cc</span>
                                 <span class="cup-color">Translúcido Branco</span>
                                 <span class="tampa-color"></span>
                                 - <span class="colors-amount">4 colores</span>
@@ -5062,7 +4978,7 @@
                                         <div class="flex">
                                             <hr class="line dashed mg-rgt-5 color-white">
                                             <p class="fs-12 color-white">
-                                                Línea que muestra el área de personalización de tu ecovaso. Tu diseño <strong>debe</strong>
+                                                Línea que muestra el área de personalización de tu vaso. Tu diseño <strong>debe</strong>
                                                 ocupar esta área por completo.
                                             </p>
                                         </div>
@@ -5096,7 +5012,7 @@
                         </div>
                         <div class="print-area template-area measure-360cc" id="gabarito">
                             <div id="medidor">
-                                <img style="height: 100%;" src="https://ecovasos.com/qero/personalizacion-online/svg_medidor/Serigrafia/1/000000">
+                                <img style="height: 100%;" src="{{ asset('images/000000.svg') }}">
                             </div>
                             <div id="linha-mid-y"></div>
                             <div id="linha-mid-x"></div>
@@ -5132,7 +5048,7 @@
                     <div class="mg-btm-30">
                         <p class="text fs-14 text-center">
                             Bienvenido(a) a la herramienta de personalización online <br/>
-                            de Qero Ecovasos. Clickeá en APRENDER para conocer <br/>la herramienta y sus funcionalidades.
+                            de EcoIngenio. Clickeá en APRENDER para conocer <br/>la herramienta y sus funcionalidades.
             
                         </p>
                     </div>
