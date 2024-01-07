@@ -269,14 +269,14 @@
                             <p class="name text fs-12 text-semi-bold">Elementos</p>
                         </div>
                     </div>
-                    <div class="button open-action flex flex-column content-center align-center" data-content="create-session" data-button-id="destaques">
+                    {{-- <div class="button open-action flex flex-column content-center align-center" data-content="create-session" data-button-id="destaques">
                         <div class="flex" style="height: 35px; width: 35px;">
                             <img width="100%" src="https://ecovasos.com/qero/uploads/destaques_icones/18/656893da140be.svg" alt="Celebraciones">
                         </div>
                         <div class="flex">
                             <p class="name text fs-12 text-semi-bold">Celebraciones</p>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="button open-action flex flex-column content-center align-center" data-content="create-session" data-button-id="texts">
                         <div class="flex">
                             <img src="https://ecovasos.com/qero/assets/personalizacion_online/images/icons/textos.svg" alt="Textos">
@@ -293,14 +293,14 @@
                             <p class="name text fs-12 text-semi-bold">Medidor</p>
                         </div>
                     </div>
-                    <div class="button open-action flex flex-column content-center align-center" data-content="create-session" data-button-id="qrcode">
+                    {{-- <div class="button open-action flex flex-column content-center align-center" data-content="create-session" data-button-id="qrcode">
                         <div class="flex">
                             <img width="26" src="https://ecovasos.com/qero/assets/personalizacion_online/images/icons/qrcode.svg" alt="Qrcode">
                         </div>
                         <div class="flex">
                             <p class="name text fs-12 text-semi-bold">QR Code</p>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="second-content">
                     <div class="button open-action flex flex-column content-center align-center copo-3d-transparente">
@@ -5176,5 +5176,5 @@
         <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/common.js?v=1704654346"></script>
         <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/template.js?v=1704654346"></script>
         <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/qrcode.js?v=1704654346"></script>
-        <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/pages/serigrafia.js?v=1704654346"></script>
+        <script src="{{ asset('frontend/js/js/serigrafia2.js') }}"></script>
     </body>
