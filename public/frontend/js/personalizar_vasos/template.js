@@ -6,7 +6,7 @@
 // <reference path="./pages/digital.js" />
 
 // LOADERS
-var loader = "<div class='loader-session flex content-center align-center'> <img src='/qero/assets/personalizacion_online/images/loader.gif'> </div>";
+var loader = "<div class='loader-session flex content-center align-center'> <img src='https://ecovasos.com/qero/assets/personalizacion_online/images/loader.gif'> </div>";
 
 const cursorPosition = { x: 0, y: 0 }
 
@@ -141,7 +141,7 @@ const buscaElementos = () => {
     $("#category-elements-session #icons-list").html('');
 
     $.ajax({
-        url: "/qero/personalizacion_online/getSearchedIcons/"+search+"?v=" + unix,
+        url: "https://ecovasos.com/qero/personalizacion_online/getSearchedIcons/"+search+"?v=" + unix,
         context: document.body,
         success: (result) => {
             let delay = 0;
@@ -337,7 +337,7 @@ const cloneElement = () => {
 
     $.ajax({
         method: "POST",
-        url: "/qero/personalizacion_online/cloneImg?v=" + unix,
+        url: "https://ecovasos.com/qero/personalizacion_online/cloneImg?v=" + unix,
         data: { src },
         context: document.body,
         success: result => {
@@ -575,7 +575,7 @@ const seeMoreIcons = async ({ currentTarget }) => {
     }, 100);
 
     $.ajax({
-        url: `/qero/personalizacion_online/getCategoryIcons/${idCategory}?v=${unix}`,
+        url: `https://ecovasos.com/qero/personalizacion_online/getCategoryIcons/${idCategory}?v=${unix}`,
         context: document.body,
         success: result => {
             let delay = 0;
@@ -809,7 +809,7 @@ const generateQRCode = async () => {
     const color = fillColor.replace('#', '');
 
     const url = await ajaxPromise({
-        url: '/qero/personalizacion_online/salvar_qrcode',
+        url: 'https://ecovasos.com/qero/personalizacion_online/salvar_qrcode',
         type: 'POST',
         data: { color, svg },
         context: document.body
