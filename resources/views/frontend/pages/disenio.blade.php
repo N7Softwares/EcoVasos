@@ -5165,6 +5165,22 @@
         </section>
         <div id="html2canvas"></div>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/slick.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/sliders.js') }}"></script>
+        <script src="https://use.fontawesome.com/b3d9ca4426.js"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/jquery-ui.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/resizable.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/rotatable.min.js') }}"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/html2canvas.js') }}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/common.js') }}"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/template.js') }}"></script>
+        <script src="{{ asset('frontend/js/personalizar_vasos/qrcode.js') }}"></script>
+        <script src="{{ asset('frontend/js/js/serigrafia2.js') }}"></script>
+        <script src="{{ asset('frontend/js/js/serigrafia.js') }}"></script>
+
+        <!-- Scripts antiguos -->
+        <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/slick.min.js"></script>
         <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/pages/sliders.js"></script>
         <script src="https://use.fontawesome.com/b3d9ca4426.js"></script>
@@ -5175,6 +5191,6 @@
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/common.js?v=1704654346"></script>
         <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/template.js?v=1704654346"></script>
-        <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/qrcode.js?v=1704654346"></script>
-        <script src="{{ asset('frontend/js/js/serigrafia2.js') }}"></script>
-    </body>
+        <script src="https://ecovasos.com/qero/assets/personalizacion_online/js/qrcode.js?v=1704654346"></script> -->
+
+</body>
