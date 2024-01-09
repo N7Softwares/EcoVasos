@@ -23,12 +23,17 @@
         <div class="row">
             <div class="col-4 border">
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
-                <label for="background-color">Fondo:</label>
+                <label for="background-color">Color del Vaso:</label>
                 <select id="background-color">
                     <option value="white">Blanco</option>
-                    <option value="red">Rojo</option>
-                    <option value="green">Verde</option>
-                    <option value="blue">Azul</option>
+                    <option value="#00e4f0">Turquesa</option>
+                    <option value="#00f173">Verde</option>
+                    <option value="#ead846">Amarillo</option>
+                    <option value="#f23626">Rojo</option>
+                    <option value="#4186ac">Azul</option>
+                    <option value="#ff4db7">Fucsia</option>
+                    <option value="#ff8c2f">Naranja</option>
+                    <option value="rgba(0, 0, 0, 0)">Transparente</option>
                 </select>
             </div>
             <div class="col-4 border">
