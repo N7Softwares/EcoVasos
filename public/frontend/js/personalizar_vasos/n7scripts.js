@@ -110,7 +110,7 @@ const colorActual = (object)=>{
     const colorActualTD = document.getElementById("color-actual");
     object.on("mousedown",()=>{
         colorActualTD.style.backgroundColor=object.fill;
-        console.log(object.fill);
+        // console.log(object.fill);
     })
 }
 
@@ -181,30 +181,28 @@ downloadButton.addEventListener('click', () => {
 // Funcion para cambiar color a todos los elementos
 const cambiarColorATodos = () => {
     const colorTable = document.getElementById("color-table-globales");
-    
+    const colorActualTD = document.getElementById("color-actual");
+
     // Agregar evento de clic para seleccionar un color de la tabla
     colorTable.addEventListener('click', (e) => {
         if (e.target.tagName === 'TD') {
-            
+
             const selectedColor = e.target.style.backgroundColor;
-            console.log(selectedColor)
+            // console.log(selectedColor)
             
             // Recorre todos los objetos en el lienzo
             canvas.forEachObject(obj => {
                 // Aplica la acción que desees, por ejemplo, cambiar el color
                 obj.set('fill', selectedColor);
             });
-        
+            
+            colorActualTD.style.backgroundColor=selectedColor;
+
             // Renderiza el lienzo después de realizar los cambios
             canvas.renderAll();
 
         }
     });
-
-    
-
-    
-    
 }
 // Ejecutar funcion para cambiar color a todos los elementos
 cambiarColorATodos();

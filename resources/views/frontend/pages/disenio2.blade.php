@@ -23,7 +23,7 @@
         <div class="row">
             <div class="col-4 border">
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
-                <h3>Color del Vaso</h3>
+                <h4>Color del Vaso</h4>
                 <div class="mb-3">
                     <label for="background-color">Translucido:</label>
                     <select id="background-color" class="background-color">
@@ -41,14 +41,14 @@
                 <div class="mb-3">
                     <label for="background-color">Opaco:</label>
                     <select id="" class="background-color">
-                        <option value="#fafafa">Blanco</option>
+                        <option value="white">Blanco</option>
                         <option value="#212121">Negro</option>
                     </select>
                 </div>    
             </div>
             <div class="col-4 border">
                 <!--------------------------- Para seleccionar figura --------------------------->
-                <label for="shape-selector">Seleccionar Figura:</label>
+                <h4>Seleccionar Figura:</h4>
                 <select id="shape-selector">
                     <option value="square">Cuadrado</option>
                     <option value="triangle">Triángulo</option>
@@ -59,7 +59,7 @@
             <div class="col-4 border">
                 <!--------------------------- Para subir figura --------------------------->
 
-                <label for="image-upload">Subir Imagen:</label>
+                <h4>Subir Imagen</h4>
                 <input type="file" id="image-upload" accept="image/png, image/jpeg">
             </div>
             <div class="col-6 border" style="height:60px;">
@@ -85,7 +85,7 @@
                                 <td style="background-color: red; width:30px; height:30px;"></td>
                                 <td style="background-color: blue; width:30px; height:30px;"></td>
                                 <td style="background-color: yellow; width:30px; height:30px;"></td>
-                                <td style="background-color: black; width:30px; height:30px;"></td>
+                                <td style="background-color: green; width:30px; height:30px;"></td>
                             </tr>
                         </table>
                     </div>
