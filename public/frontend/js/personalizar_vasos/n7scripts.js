@@ -6,14 +6,17 @@ const canvas = new fabric.Canvas('canvas');
 let selectedObject;
 
 // Cambiar el color de fondo según la selección del usuario
-const backgroundColorSelect = document.getElementById('background-color');
-backgroundColorSelect.addEventListener('change', () => {
-    const selectedColor = backgroundColorSelect.value;
-    canvas.setBackgroundColor(selectedColor);
-    canvas.renderAll();
-});
+const backgroundColorSelect = document.querySelectorAll('.background-color');
+backgroundColorSelect.forEach(backSelect =>{
+    backSelect.addEventListener('change', () => {
+        const selectedColor = backSelect.value;
+        canvas.setBackgroundColor(selectedColor);
+        canvas.renderAll();
+    });
+})
 
-// Agregar evento de clic para cambiar el color del círculo
+
+// Agregar evento de clic para eliminar un elemento
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Delete') {
         const activeObject = canvas.getActiveObject();
@@ -63,20 +66,20 @@ function drawShape(shape) {
             newShape = new fabric.Rect({
                 width: 50,
                 height: 50,
-                fill: getRandomColor()
+                fill: valorColorActual()
             });
             break;
         case 'triangle':
             newShape = new fabric.Triangle({
                 width: 50,
                 height: 50,
-                fill: getRandomColor()
+                fill: valorColorActual()
             });
             break;
         case 'circle':
             newShape = new fabric.Circle({
                 radius: 25,
-                fill: getRandomColor()
+                fill: valorColorActual()
             });
             break;
         case 'star':
@@ -86,7 +89,7 @@ function drawShape(shape) {
                 y: 25,
                 outerRadius: 25,
                 innerRadius: 10,
-                fill: getRandomColor()
+                fill: valorColorActual()
             });
             break;
         default:
@@ -96,8 +99,26 @@ function drawShape(shape) {
     if (newShape) {
         canvas.add(newShape);
         canvas.renderAll();
+        // Aca se les agrega todas las funciones a los objetos
         addColorPicker(newShape);
+        colorActual(newShape);
     }
+}
+
+// Para obtener el color de los objetos
+const colorActual = (object)=>{
+    const colorActualTD = document.getElementById("color-actual");
+    object.on("mousedown",()=>{
+        colorActualTD.style.backgroundColor=object.fill;
+        // console.log(object.fill);
+    })
+}
+
+// Para leer el color actual en la tabla. <<No confundir con obtener el color de los objetos>>
+const valorColorActual = ()=>{
+    const colorActualTD = document.getElementById("color-actual");
+    colorActualValor = colorActualTD.style.backgroundColor;
+    return colorActualValor;
 }
 
 // Función para generar un color aleatorio
@@ -163,3 +184,32 @@ downloadButton.addEventListener('click', () => {
 
     html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
 });
+
+// Funcion para cambiar color a todos los elementos
+const cambiarColorATodos = () => {
+    const colorTable = document.getElementById("color-table-globales");
+    const colorActualTD = document.getElementById("color-actual");
+
+    // Agregar evento de clic para seleccionar un color de la tabla
+    colorTable.addEventListener('click', (e) => {
+        if (e.target.tagName === 'TD') {
+
+            const selectedColor = e.target.style.backgroundColor;
+            // console.log(selectedColor)
+            
+            // Recorre todos los objetos en el lienzo
+            canvas.forEachObject(obj => {
+                // Aplica la acción que desees, por ejemplo, cambiar el color
+                obj.set('fill', selectedColor);
+            });
+            
+            colorActualTD.style.backgroundColor=selectedColor;
+
+            // Renderiza el lienzo después de realizar los cambios
+            canvas.renderAll();
+
+        }
+    });
+}
+// Ejecutar funcion para cambiar color a todos los elementos
+cambiarColorATodos();
