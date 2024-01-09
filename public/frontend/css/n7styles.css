@@ -5,6 +5,9 @@
 }
 body{
     background:#fafafa;
+    /* Para probar que el color del lienzo sea translucido u opaco */
+    /* background-image: url("https://picsum.photos/id/1025/600/400"); */
+    
 }
 .color-table {
     display: none;

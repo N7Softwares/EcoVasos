@@ -23,18 +23,28 @@
         <div class="row">
             <div class="col-4 border">
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
-                <label for="background-color">Color del Vaso:</label>
-                <select id="background-color">
-                    <option value="white">Blanco</option>
-                    <option value="#00e4f0">Turquesa</option>
-                    <option value="#00f173">Verde</option>
-                    <option value="#ead846">Amarillo</option>
-                    <option value="#f23626">Rojo</option>
-                    <option value="#4186ac">Azul</option>
-                    <option value="#ff4db7">Fucsia</option>
-                    <option value="#ff8c2f">Naranja</option>
-                    <option value="rgba(0, 0, 0, 0)">Transparente</option>
-                </select>
+                <h3>Color del Vaso</h3>
+                <div class="mb-3">
+                    <label for="background-color">Translucido:</label>
+                    <select id="background-color" class="background-color">
+                        
+                        <option value="rgba(0, 228, 240, 0.7)">Turquesa</option>
+                        <option value="rgba(0, 241, 115, 0.7)">Verde</option>
+                        <option value="rgba(234, 216, 70, 0.7)">Amarillo</option>
+                        <option value="rgba(242, 54, 38, 0.7)">Rojo</option>
+                        <option value="rgba(65, 134, 172, 0.7)">Azul</option>
+                        <option value="rgba(255, 77, 183, 0.7)">Fucsia</option>
+                        <option value="rgba(255, 140, 47, 0.7)">Naranja</option>
+                        <!-- <option value="rgba(0, 0, 0, 0)">Transparente</option> -->
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="background-color">Opaco:</label>
+                    <select id="" class="background-color">
+                        <option value="#fafafa">Blanco</option>
+                        <option value="#212121">Negro</option>
+                    </select>
+                </div>    
             </div>
             <div class="col-4 border">
                 <!--------------------------- Para seleccionar figura --------------------------->
@@ -55,28 +65,52 @@
             <div class="col-6 border" style="height:60px;">
                 <button id="download-pdf">Descargar PDF</button>
             </div>
-            <div class="col-6 border d-flex ">
+            <div class="col-6 border ">
+
                 <!---------- color del elemento figura. Solo aparece cuando se hace clic en el elemento ------->
 
                 <div>
+                
+                <div class="mb-3">
+                    <h4 class="text-center">Colores del diseño</h4>
+                    <div class="mb-3">
+                        Colores Actuales
+                        <table style="width:30px;">
+                            <td id="color-actual" style="background-color: white; width:30px; height:30px; border:1px solid #ccc;"></td>
+                        </table>
+                    </div>
+                    <div class="mb-3" id="color-table-globales">
+                        <table class="" >
+                            <tr>
+                                <td style="background-color: red; width:30px; height:30px;"></td>
+                                <td style="background-color: blue; width:30px; height:30px;"></td>
+                                <td style="background-color: yellow; width:30px; height:30px;"></td>
+                                <td style="background-color: black; width:30px; height:30px;"></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
                 Color del elemento
-                </div>
+                
                 <div id="color-table" class="color-table">
-                <table>
-                    <tr>
-                        <td style="background-color: red;"></td>
-                        <td style="background-color: blue;"></td>
-                        <td style="background-color: green;"></td>
-                        <td style="background-color: yellow;"></td>
-                    </tr>
-                    <tr>
-                        <td style="background-color: orange;"></td>
-                        <td style="background-color: pink;"></td>
-                        <td style="background-color: purple;"></td>
-                        <td style="background-color: brown;"></td>
-                    </tr>
-                </table>
+                    <table>
+                        <tr>
+                            <td style="background-color: red;"></td>
+                            <td style="background-color: blue;"></td>
+                            <td style="background-color: green;"></td>
+                            <td style="background-color: yellow;"></td>
+                        </tr>
+                        <tr>
+                            <td style="background-color: orange;"></td>
+                            <td style="background-color: pink;"></td>
+                            <td style="background-color: purple;"></td>
+                            <td style="background-color: brown;"></td>
+                        </tr>
+                    </table>
+                
                 </div>
+
             </div>
         </div>
         
