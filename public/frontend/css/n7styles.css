@@ -1,0 +1,24 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+
+.color-table {
+    display: none;
+    /* position: absolute; */
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 1000;
+}
+
+.color-table td {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#canvas{
+    /* Por alguna razon no me deja poner width y height*/
+    border: 1px solid #121212;
+}
