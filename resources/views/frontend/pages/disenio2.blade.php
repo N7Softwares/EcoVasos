@@ -76,16 +76,17 @@
                     <div class="mb-3">
                         Colores Actuales
                         <table style="width:30px;">
-                            <td id="color-actual" style="background-color: white; width:30px; height:30px; border:1px solid #ccc;"></td>
+                            <td id="color-actual" style="background-color: blue; width:30px; height:30px; border:1px solid #ccc;"></td>
                         </table>
                     </div>
                     <div class="mb-3" id="color-table-globales">
                         <table class="" >
                             <tr>
-                                <td style="background-color: red; width:30px; height:30px;"></td>
-                                <td style="background-color: blue; width:30px; height:30px;"></td>
-                                <td style="background-color: yellow; width:30px; height:30px;"></td>
-                                <td style="background-color: green; width:30px; height:30px;"></td>
+                                <td style="background-color: red;"></td>
+                                <td style="background-color: blue;"></td>
+                                <td style="background-color: yellow;"></td>
+                                <td style="background-color: white;"></td>
+                                <td style="background-color: green; "></td>
                             </tr>
                         </table>
                     </div>

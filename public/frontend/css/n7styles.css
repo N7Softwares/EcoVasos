@@ -17,6 +17,11 @@ body{
     z-index: 1000;
 }
 
+#color-table-globales td{
+    width:30px; 
+    height:30px;
+}
+
 .color-table td {
     width: 20px;
     height: 20px;
