@@ -119,7 +119,7 @@
     Route::get('payment/success', [PayPalController::class, 'success'])->name('payment.success');
 // Diseño (N7 Team)
 Route::get('/disenio', function () {
-    return view('frontend.pages.disenio');
+    return view('frontend.pages.disenio2');
 })->name('disenio');
 // Backend section start
 
