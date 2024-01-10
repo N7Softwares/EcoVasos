@@ -213,3 +213,77 @@ const cambiarColorATodos = () => {
 }
 // Ejecutar funcion para cambiar color a todos los elementos
 cambiarColorATodos();
+
+
+//----------------------- Para la seccion de textos --------------------------
+
+const textEditor = document.getElementById('text-editor');
+const nuevoTextoButton = document.getElementById('nuevo-texto');
+
+// Función para agregar un nuevo objeto Text al lienzo
+function agregarTextoAlCanvas(texto) {
+    const textoPorDefecto = texto || 'Nuevo Texto';
+
+    const newText = new fabric.Text(textoPorDefecto, {
+        left: 50,
+        top: 50,
+        fontSize: 40,
+        fontFamily: 'Arial',
+        fill: valorColorActual(),
+        selectable: true
+    });
+
+    canvas.add(newText);
+    canvas.setActiveObject(newText);
+    canvas.renderAll();
+
+    // Llena automáticamente el textarea con el contenido del nuevo texto
+    textEditor.value = newText.text;
+}
+
+
+// Escucha el evento input del textarea para actualizar dinámicamente el objeto Text
+textEditor.addEventListener('input', function () {
+    const textoActualizado = textEditor.value;
+    const objetoTextSeleccionado = canvas.getActiveObject();
+
+    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+        // Actualiza el texto del objeto Text seleccionado
+        objetoTextSeleccionado.set('text', textoActualizado);
+        canvas.renderAll();
+    }
+});
+
+// Escucha el clic en el botón "Nuevo Texto"
+nuevoTextoButton.addEventListener('click', function () {
+    agregarTextoAlCanvas();
+});
+
+// Escucha el evento de selección de objetos en el lienzo
+canvas.on('selection:created', function (evento) {
+    const objetoSeleccionado = evento.target;
+
+    // Verifica si el objeto seleccionado es un objeto Text
+    if (objetoSeleccionado && objetoSeleccionado.type === 'text') {
+        // Llena el textarea con el texto del objeto Text seleccionado
+        textEditor.value = objetoSeleccionado.text;
+    }
+});
+// Escucha el evento de deselección de objetos en el lienzo
+canvas.on('selection:cleared', function () {
+    // Borra el contenido del textarea cuando no hay elementos seleccionados
+    textEditor.value = '';
+});
+
+// Escucha el evento de eliminación de objetos en el lienzo
+canvas.on('object:removed', function () {
+    const objetosText = canvas.getObjects('text');
+
+    // Si no hay más objetos Text en el lienzo, borra el contenido del textarea
+    if (objetosText.length === 0) {
+        textEditor.value = '';
+    }
+});
+
+// Agregar un texto de ejemplo al inicio
+agregarTextoAlCanvas('Nombre de tu marca acá');

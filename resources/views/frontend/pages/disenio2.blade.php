@@ -62,10 +62,11 @@
                 <h4>Subir Imagen</h4>
                 <input type="file" id="image-upload" accept="image/png, image/jpeg">
             </div>
-            <div class="col-6 border" style="height:60px;">
+            <div class="col-4 border" style="height:60px;">
+            <h4>Descargar como PDF</h4>
                 <button id="download-pdf">Descargar PDF</button>
             </div>
-            <div class="col-6 border ">
+            <div class="col-4 border ">
 
                 <!---------- color del elemento figura. Solo aparece cuando se hace clic en el elemento ------->
 
@@ -113,6 +114,12 @@
                 </div>
 
             </div>
+        </div>
+        <div class="col-4 border border-danger">
+            <h4>Agregar Texto</h4>
+                <textarea id="text-editor" placeholder="Escribe aquí..."></textarea>
+                <button id="nuevo-texto">Nuevo Texto</button>
+
         </div>
         
         <!--------------------------- Elemento Canva --------------------------->
