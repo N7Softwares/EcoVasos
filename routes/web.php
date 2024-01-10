@@ -16,6 +16,9 @@
     use App\Http\Controllers\NotificationController;
     use App\Http\Controllers\HomeController;
     use \UniSharp\LaravelFilemanager\Lfm;
+    use App\Http\Controllers\ImagesCategoryController;
+    use App\Http\Controllers\InspirateController;
+    use App\Http\Controllers\ElementController;
 
     /*
     |--------------------------------------------------------------------------
@@ -204,3 +207,31 @@ Route::get('/disenio', function () {
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         Lfm::routes();
     });
+    
+
+    //--------------------IMAGES CATEGORIES-------------
+    Route::resource('images_categories', ImagesCategoryController::class);
+
+    Route::get('images_categories/create-custom', [ImagesCategoryController::class, 'create'])->name('images_categories.create-custom');
+    
+    Route::post('images_categories/store', [ImagesCategoryController::class, 'store'])->name('images_categories.store');
+    Route::get('images_categories/{image_category}/edit-custom', [ImagesCategoryController::class, 'edit'])->name('images_categories.edit-custom');
+    Route::put('images_categories/{image_category}/update-custom', [ImagesCategoryController::class, 'update'])->name('images_categories.update-custom');
+
+    //----------------------INSPIRATE-----------------------
+
+    Route::resource('inspirate', InspirateController::class);
+
+    Route::get('inspirate/create-custom', [InspirateController::class, 'create'])->name('inspirate.create-custom');
+    Route::get('inspirate/{id}/edit', [InspirateController::class, 'edit'])->name('inspirate.edit');
+    Route::put('inspirate/{id}', [InspirateController::class, 'update'])->name('inspirate.update');
+    Route::delete('inspirate/{id}', [InspirateController::class, 'destroy'])->name('inspirate.destroy');
+
+    //----------------------ELEMENTS-----------------------
+
+    Route::resource('elements', ElementController::class);
+
+    Route::get('elements/create-custom', [ElementController::class, 'create'])->name('elements.create-custom');
+    Route::get('elements/{id}/edit', [ElementController::class, 'edit'])->name('elements.edit');
+    Route::put('elements/{id}', [ElementController::class, 'update'])->name('elements.update');
+    Route::delete('elements/{id}', [ElementController::class, 'destroy'])->name('elements.destroy');
