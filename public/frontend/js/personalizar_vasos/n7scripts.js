@@ -219,7 +219,7 @@ cambiarColorATodos();
 
 const textEditor = document.getElementById('text-editor');
 const nuevoTextoButton = document.getElementById('nuevo-texto');
-
+const fontSizeSelect = document.getElementById('fontSizeSelect');
 // Función para agregar un nuevo objeto Text al lienzo
 function agregarTextoAlCanvas(texto) {
     const textoPorDefecto = texto || 'Nuevo Texto';
@@ -227,7 +227,7 @@ function agregarTextoAlCanvas(texto) {
     const newText = new fabric.Text(textoPorDefecto, {
         left: 50,
         top: 50,
-        fontSize: 40,
+        fontSize: fontSize(),
         fontFamily: 'Arial',
         fill: valorColorActual(),
         selectable: true
@@ -241,6 +241,25 @@ function agregarTextoAlCanvas(texto) {
     textEditor.value = newText.text;
 }
 
+// Definir los valores de tamaño de fuente disponibles
+const valoresTamanosFuente = Array.from({ length: 30 }, (_, index) => (index + 1) * 10);
+
+// Generar las opciones del select
+valoresTamanosFuente.forEach(valor => {
+    const option = document.createElement('option');
+    option.value = valor.toString();
+    option.text = `${valor}px`;
+    if (valor === 40) {
+        option.selected = true;
+    }
+    fontSizeSelect.add(option);
+});
+
+// funcion para cambiar el fontSize de los textos
+const fontSize = ()=>{
+    fontSizeValue = fontSizeSelect.value;
+    return fontSizeValue;
+}
 
 // Escucha el evento input del textarea para actualizar dinámicamente el objeto Text
 textEditor.addEventListener('input', function () {
@@ -259,31 +278,104 @@ nuevoTextoButton.addEventListener('click', function () {
     agregarTextoAlCanvas();
 });
 
-// Escucha el evento de selección de objetos en el lienzo
-canvas.on('selection:created', function (evento) {
-    const objetoSeleccionado = evento.target;
+// Escucha el cambio en el select de fuentes
+const fontSelector = document.getElementById('font-selector');
+fontSelector.addEventListener('change', function () {
+    const objetoTextSeleccionado = canvas.getActiveObject();
+    
+    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+        // Actualiza la fuente del objeto Text seleccionado
+        const nuevaFuente = fontSelector.value;
+        objetoTextSeleccionado.set('fontFamily', nuevaFuente);
+        canvas.renderAll();
+    }
+});
 
+// Función para manejar la actualización de la selección
+const actualizarSeleccion = (objetoSeleccionado) => {
     // Verifica si el objeto seleccionado es un objeto Text
     if (objetoSeleccionado && objetoSeleccionado.type === 'text') {
         // Llena el textarea con el texto del objeto Text seleccionado
         textEditor.value = objetoSeleccionado.text;
+        textEditor.disabled = false;
+        // Habilita el select de fuentes
+        fontSelector.disabled = false;
+        // Habilita el select de fontSize
+        fontSizeSelect.disabled = false;
+
+        // Establece la fuente actual en el select
+        fontSelector.value = objetoSeleccionado.fontFamily || 'Arial';
+
+        // Establece el tamaño de fuente actual en el select
+        const fontSizeValue = objetoSeleccionado.fontSize;
+        fontSizeSelect.value = fontSizeValue.toString();
+    } else {
+        // Si no hay un objeto Text seleccionado, deshabilita los controles
+        textEditor.value = '';
+        textEditor.disabled = true;
+        fontSelector.disabled = true;
+        fontSizeSelect.disabled = true;
     }
+}
+
+// Escucha el evento de selección de objetos en el lienzo
+canvas.on('selection:created', (evento) => {
+    const objetoSeleccionado = evento.target;
+    actualizarSeleccion(objetoSeleccionado);
 });
+
+// Escucha el evento de actualización de selección de objetos en el lienzo
+canvas.on('selection:updated', (evento) => {
+    const objetoSeleccionado = evento.target;
+    actualizarSeleccion(objetoSeleccionado);
+});
+
 // Escucha el evento de deselección de objetos en el lienzo
-canvas.on('selection:cleared', function () {
+canvas.on('selection:cleared',  ()=> {
     // Borra el contenido del textarea cuando no hay elementos seleccionados
     textEditor.value = '';
+    textEditor.disabled = true;
+    // Deshabilita el select de fuentes
+    fontSelector.disabled = true;
+    // Habilita el select de fontSize
+    fontSizeSelect.disabled = true;
+    // Restablece la fuente predeterminada en el select
+    fontSelector.value = 'Arial';
 });
 
 // Escucha el evento de eliminación de objetos en el lienzo
-canvas.on('object:removed', function () {
+canvas.on('object:removed',  () =>{
     const objetosText = canvas.getObjects('text');
 
     // Si no hay más objetos Text en el lienzo, borra el contenido del textarea
     if (objetosText.length === 0) {
         textEditor.value = '';
+        fontSelector.disabled = true;
+        fontSizeSelect.disabled = true;
     }
+});
+
+// Para cambiar el tamaño del texto
+
+// Función para cambiar el tamaño del texto
+const cambiarTamanioTexto = (tamanio) => {
+    const objetoTextSeleccionado = canvas.getActiveObject();
+
+    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+        // Cambia el tamaño del texto del objeto Text seleccionado
+        objetoTextSeleccionado.set('fontSize', tamanio);
+        canvas.renderAll();
+    }
+}
+
+// Escucha el evento change del select para cambiar el tamaño del texto
+
+fontSizeSelect.addEventListener('change', function () {
+    const tamanioSeleccionado = parseInt(fontSizeSelect.value);
+    cambiarTamanioTexto(tamanioSeleccionado);
 });
 
 // Agregar un texto de ejemplo al inicio
 agregarTextoAlCanvas('Nombre de tu marca acá');
+
+
