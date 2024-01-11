@@ -262,12 +262,12 @@
                             </div>
                             <div class="arts-slider mg-btm-10">
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=6734&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=6734&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/32/64c7cb1d8cae7.jpeg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7674&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7674&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/45/64d61d87eadb0.jpg">
                                     </a>
                                 </div>
@@ -282,17 +282,17 @@
                             </div>
                             <div class="arts-slider mg-btm-10">
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7496&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7496&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/39/64d10e83ba6e8.jpg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7499&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7499&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/40/64d113dfb8f01.jpg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7498&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7498&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/41/64d115538fdfa.jpg">
                                     </a>
                                 </div>
@@ -311,17 +311,17 @@
                             </div>
                             <div class="arts-slider mg-btm-10">
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7400&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7400&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/36/64cd415fc95c6.jpg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7391&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7391&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/33/64cd3691b6108.jpg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7394&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7394&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/34/64cd388bbc97b.jpg">
                                     </a>
                                 </div>
@@ -339,12 +339,12 @@
                             </div>
                             <div class="arts-slider mg-btm-10">
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=8718&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=8718&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/46/64fa0aaa33288.jpg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=8720&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=8720&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/47/64fa0c67eddcf.jpg">
                                     </a>
                                 </div>
@@ -358,17 +358,17 @@
                             </div>
                             <div class="arts-slider mg-btm-10">
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=6727&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=6727&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/30/64c7cabd120d3.jpeg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=7403&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=7403&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/37/64cd433933766.jpg">
                                     </a>
                                 </div>
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=6730&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=6730&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/31/64c7cafc11eb9.jpeg">
                                     </a>
                                 </div>
@@ -382,7 +382,7 @@
                             </div>
                             <div class="arts-slider mg-btm-10">
                                 <div class="card">
-                                    <a class="art-selector" href="https://ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=1&toques=4&ap=8725&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
+                                    <a class="art-selector" href="localhost:8000/disenio?id_medida=1&toques=4&ap=8725&quantidade=25&id_produto=1&cookie=1704230316&origem=personalizacion">
                                         <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/48/64fa146b2d15a.jpg">
                                     </a>
                                 </div>
@@ -5093,7 +5093,8 @@
         <script src="{{ asset('frontend/js/personalizar_vasos/template.js') }}"></script>
         <script src="{{ asset('frontend/js/personalizar_vasos/qrcode.js') }}"></script>
         <script src="{{ asset('frontend/js/js/serigrafia2.js') }}"></script>
-        <script src="{{ asset('frontend/js/js/serigrafia.js') }}"></script>
+        <!-- Serigrafia 1 no funciona -->
+        <!-- <script src="{{ asset('frontend/js/js/serigrafia.js') }}"></script> -->
 
         <!-- Scripts antiguos -->
         <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

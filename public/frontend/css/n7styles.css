@@ -1,0 +1,47 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    background:#fafafa;
+    /* Para probar que el color del lienzo sea translucido u opaco */
+    /* background-image: url("https://picsum.photos/id/1025/600/400"); */
+    
+}
+.color-table {
+    display: none;
+    /* position: absolute; */
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 1000;
+}
+
+#color-table-globales td{
+    width:30px; 
+    height:30px;
+}
+
+.color-table td {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#canvas{
+    /* Por alguna razon no me deja poner width y height*/
+    border: 1px solid #121212;
+}
+
+.color-palette {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.color-button {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}

@@ -116,7 +116,17 @@
         </div>
         <div class="row">
             <div class="col-6 border">
-                <button id="download-pdf">Descargar PDF</button>
+                <h4>Medidor</h4>
+                <!-- Botones para agregar/eliminar la imagen -->
+                <button id="agregarBtn" onclick="agregarImagen()">Agregar Imagen</button>
+                <button id="eliminarBtn" onclick="eliminarImagen()" disabled>Eliminar Imagen</button>
+
+                <div id="colorPalette" class="color-palette">
+                    <div class="color-button" style="background-color: #000000" onclick="cambiarColor('#000000')"></div>
+                    <div class="color-button" style="background-color: #F93822" onclick="cambiarColor('rgb(255, 0, 0)')"></div>
+                    <div class="color-button" style="background-color: #FBE122" onclick="cambiarColor('#FBE122')"></div>
+                    <div class="color-button" style="background-color: #0072CE" onclick="cambiarColor('#0072CE')"></div>
+                </div>
             </div>
         </div>
         

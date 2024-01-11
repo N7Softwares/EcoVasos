@@ -1,8 +1,8 @@
-/// <reference path="../jquery-3.5.1.min.js" />
-/// <reference path="../jquery-ui.js" />
-/// <reference path="../html2canvas.js" />
-/// <reference path="../common.js" />
-/// <reference path="../template.js" />
+// <reference path="../jquery-3.5.1.min.js" />
+// <reference path="../personalizar_vasos/jquery-ui.js" />
+/// <reference path="../personalizar_vasos/html2canvas.js" />
+/// <reference path="../personalizar_vasos/common.js" />
+/// <reference path="../personalizar_vasos/template.js" />
 
 let {
     versao,
@@ -874,7 +874,7 @@ const seeMoreArts = async ({ currentTarget }) => {
                     <div class="card mg-btm-10">
                         <a
                             class="art-selector"
-                            href="https://www.ecovasos.com/qero/personalizacion_online/serigrafia?id_medida=${id_medida}&toques=${toques}&ap=${id_arte}&quantidade=${quantidade}&cor_copo=${id_cor}"
+                            href="localhost:8000/disenio?id_medida=${id_medida}&toques=${toques}&ap=${id_arte}&quantidade=${quantidade}&cor_copo=${id_cor}"
                         >
                             <img src="https://www.ecovasos.com/qero/uploads/modelos_arte/${dataArt.id}/${dataArt.arte_plana}">
                         </a>
