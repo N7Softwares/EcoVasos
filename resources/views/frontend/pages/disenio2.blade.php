@@ -119,7 +119,24 @@
             <h4>Agregar Texto</h4>
                 <textarea id="text-editor" placeholder="Escribe aquí..."></textarea>
                 <button id="nuevo-texto">Nuevo Texto</button>
-
+                <!-- Para cambiar el font-family -->
+                <label for="font-selector">Seleccione una fuente:</label>
+                <select id="font-selector">
+                <option value="Arial">Arial</option>
+                <option value="Helvetica">Helvetica</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Inconsolata">Inconsolata</option>
+                
+                </select>
+                <select id="fontSizeSelect">
+                    <option value="1">1px</option>
+                    <option value="10">10px</option>
+                    <option value="20">20px</option>
+                    <option value="30">30px</option>
+                    <option value="40" selected>40px</option>
+                    <option value="50">50px</option>
+                    <option value="80">80px</option>
+                </select>
         </div>
         
         <!--------------------------- Elemento Canva --------------------------->

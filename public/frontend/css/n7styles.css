@@ -9,6 +9,7 @@ body{
     /* background-image: url("https://picsum.photos/id/1025/600/400"); */
     
 }
+/* --------------------------- Colores --------------------------- */
 .color-table {
     display: none;
     /* position: absolute; */
@@ -26,6 +27,16 @@ body{
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+/* --------------------------- Textos --------------------------- */
+
+#fontSizeSelect {
+    font-size: 14px;
+}
+
+#fontSizeSelect option {
+    /* Para disminuir el largo de la lista desplegable del select */
+    font-size: 12px;
 }
 
 #text-editor{
