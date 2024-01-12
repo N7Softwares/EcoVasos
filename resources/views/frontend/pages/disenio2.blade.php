@@ -33,6 +33,7 @@
                     <label for="background-color">Translucido:</label>
                     <select id="background-color" class="background-color">
                         
+                        <option value="rgba(219, 219, 219, 0.7)">Transparente</option>
                         <option value="rgba(0, 228, 240, 0.7)">Turquesa</option>
                         <option value="rgba(0, 241, 115, 0.7)">Verde</option>
                         <option value="rgba(234, 216, 70, 0.7)">Amarillo</option>
@@ -145,13 +146,7 @@
                 
                 </select>
                 <select id="fontSizeSelect">
-                    <option value="1">1px</option>
-                    <option value="10">10px</option>
-                    <option value="20">20px</option>
-                    <option value="30">30px</option>
-                    <option value="40" selected>40px</option>
-                    <option value="50">50px</option>
-                    <option value="80">80px</option>
+                    <!-- El codigo se genera dinamicamente por js -->
                 </select>
                 <div class="bm-3">
                     <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
