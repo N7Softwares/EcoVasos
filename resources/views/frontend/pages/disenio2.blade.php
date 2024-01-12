@@ -12,7 +12,12 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Estilos propios -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+        <!-- Estilos propios -->
     <link rel="stylesheet" href="{{asset('frontend/css/n7styles.css')}}">
 
 </head>
@@ -123,9 +128,20 @@
                 <label for="font-selector">Seleccione una fuente:</label>
                 <select id="font-selector">
                 <option value="Arial">Arial</option>
-                <option value="Helvetica">Helvetica</option>
+                <option value="Arial Black">Arial Black</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Impact">Impact</option>
                 <option value="Times New Roman">Times New Roman</option>
-                <option value="Inconsolata">Inconsolata</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Lato">Lato</option>
+                <option value="Helvetica, sans-serif">Helvetica</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="Courier New, monospace">Courier New</option>
+                <option value="Palatino, serif">Palatino</option>
+                <option value="Verdana, sans-serif">Verdana</option>
+                <option value="Garamond, serif">Garamond</option>
+
                 
                 </select>
                 <select id="fontSizeSelect">
@@ -137,6 +153,11 @@
                     <option value="50">50px</option>
                     <option value="80">80px</option>
                 </select>
+                <div class="bm-3">
+                    <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
+                    <button id="negritaBtn" class="fontStyleBtn" title="Negrita">B</button>
+
+                </div>
         </div>
         
         <!--------------------------- Elemento Canva --------------------------->
