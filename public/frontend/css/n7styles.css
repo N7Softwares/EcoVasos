@@ -44,6 +44,27 @@ body{
     height: 150px;
     padding:5px 10px;
 }
+.fontStyleBtn{
+    padding: 3px 10px;
+    border:1px solid #ccc;
+    background-color:#fff;
+    font-size:1.25rem;
+    margin:10px auto;
+}
+#cursivaBtn{
+    font-style:italic;
+}
+#negritaBtn{
+    font-weight:bold;
+}
+.btnActivated{
+    background-color:lightblue;
+}
+/* .negritaBtnActivated{
+
+}
+.cursivaBtnActivated */
+/* --------------------------- Objeto Canva (Lienzo) --------------------------- */
 
 #canvas{
     /* Por alguna razon no me deja poner width y height*/

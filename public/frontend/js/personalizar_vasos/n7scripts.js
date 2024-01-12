@@ -220,6 +220,9 @@ cambiarColorATodos();
 const textEditor = document.getElementById('text-editor');
 const nuevoTextoButton = document.getElementById('nuevo-texto');
 const fontSizeSelect = document.getElementById('fontSizeSelect');
+const cursivaBtn = document.getElementById("cursivaBtn");
+const negritaBtn = document.getElementById("negritaBtn");
+
 // Función para agregar un nuevo objeto Text al lienzo
 function agregarTextoAlCanvas(texto) {
     const textoPorDefecto = texto || 'Nuevo Texto';
@@ -309,13 +312,21 @@ const actualizarSeleccion = (objetoSeleccionado) => {
         // Establece el tamaño de fuente actual en el select
         const fontSizeValue = objetoSeleccionado.fontSize;
         fontSizeSelect.value = fontSizeValue.toString();
-    } else {
-        // Si no hay un objeto Text seleccionado, deshabilita los controles
-        textEditor.value = '';
-        textEditor.disabled = true;
-        fontSelector.disabled = true;
-        fontSizeSelect.disabled = true;
-    }
+        // Botones para cursiva y negrita
+        cursivaBtn.disabled=false;
+        negritaBtn.disabled=false;
+            // Para agregar y quitar la clase de boton activado a curviaBtn y negritaBtn
+        if(objetoSeleccionado.fontStyle==="italic"){
+            cursivaBtn.classList.add("btnActivated");
+        }else{
+            cursivaBtn.classList.remove("btnActivated");
+        }
+        if(objetoSeleccionado.fontWeight==="bold"){
+            negritaBtn.classList.add("btnActivated");
+        }else{
+            negritaBtn.classList.remove("btnActivated");
+        }
+    } 
 }
 
 // Escucha el evento de selección de objetos en el lienzo
@@ -341,6 +352,12 @@ canvas.on('selection:cleared',  ()=> {
     fontSizeSelect.disabled = true;
     // Restablece la fuente predeterminada en el select
     fontSelector.value = 'Arial';
+    // Botones para cursiva y negrita
+    cursivaBtn.disabled=true;
+    negritaBtn.disabled=true;
+    negritaBtn.classList.remove("btnActivated");
+    cursivaBtn.classList.remove("btnActivated");
+
 });
 
 // Escucha el evento de eliminación de objetos en el lienzo
@@ -375,7 +392,36 @@ fontSizeSelect.addEventListener('change', function () {
     cambiarTamanioTexto(tamanioSeleccionado);
 });
 
+// Para el boton de cursiva 
+cursivaBtn.addEventListener("click",()=>{
+    const objetoTextSeleccionado = canvas.getActiveObject();
+    let fontStyle = objetoTextSeleccionado.fontStyle;
+    if(fontStyle === "normal"){
+        objetoTextSeleccionado.fontStyle="italic";
+        cursivaBtn.classList.add("btnActivated");
+        
+    }else{
+        objetoTextSeleccionado.fontStyle="normal";
+        cursivaBtn.classList.remove("btnActivated");
+    }
+    canvas.renderAll();
+    
+});
+// Para el boton de cursiva 
+negritaBtn.addEventListener("click", () => {
+    const objetoTextSeleccionado = canvas.getActiveObject();
+    let fontWeight = objetoTextSeleccionado.fontWeight; 
+    if (fontWeight === "normal") {
+        objetoTextSeleccionado.fontWeight = "bold";
+        negritaBtn.classList.add("btnActivated");
+    } else {
+        objetoTextSeleccionado.fontWeight = "normal";
+        negritaBtn.classList.remove("btnActivated");
+    }
+    canvas.renderAll();
+});
+
+
+
 // Agregar un texto de ejemplo al inicio
 agregarTextoAlCanvas('Nombre de tu marca acá');
-
-
