@@ -183,32 +183,70 @@ downloadButton.addEventListener('click', () => {
 
     html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
 });
+// componente para crear los rows dentro de crearPaletasColores()
+const rowPaletasColores = (categoria, contenedor) =>{
+    // Crear el elemento div
+    const paletaColor = document.createElement('div');
+
+    // Asignar la clase y el estilo de fondo
+    paletaColor.className = 'paleta-color';
+    paletaColor.style.backgroundColor = categoria;
+    // Agregar el div al contenedor
+    contenedor.appendChild(paletaColor);
+}
+
+// Para crear la paleta de colores en la seccion de "colores"
+const crearPaletaColores = ()=>{
+    const clasicas =["#000000", "#fff", "#f93822", "#fbe122", "#0072ce", "#ed8b00", 
+    "#00b74f", "#87189d", "#ffcd00", "#e35205", "#279989"];
+
+    const deModa = ["#da291c", "#f68d2e", "#5e8ab4", "#e56a54", "#9adbe8", "#006298", 
+    "#c63663", "#0d5257", "#f0e991", "#874b52", "#ecbaa8", "#8f3237", "#c0a392", 
+    "#253746", "#e5e1e6", "#c1c6c8"];
+
+    const metalicas = ["#ac8400", "#d8d7df", "#b87333"];
+
+    // const contenedorPaleta = document.querySelector('.container-paleta-color');
+    const contenedorClasicas = document.querySelector('.colores-clasicos');
+    const contenedorModa = document.querySelector('.colores-deModa');
+    const contenedorMetalicos = document.querySelector('.colores-metalicos');
+
+    clasicas.forEach(clasica =>{
+        rowPaletasColores(clasica, contenedorClasicas);
+    });
+
+    deModa.forEach(moda =>{
+        rowPaletasColores(moda, contenedorModa);
+    });
+
+    metalicas.forEach(metalica =>{
+        rowPaletasColores(metalica, contenedorMetalicos);
+    })
+    
+};
+// Ejecutando funcion para crear paleta de colores
+crearPaletaColores();
 
 // Funcion para cambiar color a todos los elementos
 const cambiarColorATodos = () => {
-    const colorTable = document.getElementById("color-table-globales");
     const colorActualTD = document.getElementById("color-actual");
 
-    // Agregar evento de clic para seleccionar un color de la tabla
-    colorTable.addEventListener('click', (e) => {
-        if (e.target.tagName === 'TD') {
+    const paletaColores = document.querySelectorAll(".paleta-color");
+    paletaColores.forEach(color =>{
+        // Cuando se da click en cualquier color
+        color.addEventListener("click",()=>{
 
-            const selectedColor = e.target.style.backgroundColor;
-            // console.log(selectedColor)
-            
+            const selectedColor = color.style.backgroundColor;
             // Recorre todos los objetos en el lienzo
             canvas.forEachObject(obj => {
-                // Aplica la acción que desees, por ejemplo, cambiar el color
-                obj.set('fill', selectedColor);
-            });
-            
+                    // Aplica la acción que desees, por ejemplo, cambiar el color
+                    
+                    obj.set('fill', selectedColor);
+                });
             colorActualTD.style.backgroundColor=selectedColor;
-
-            // Renderiza el lienzo después de realizar los cambios
             canvas.renderAll();
-
-        }
-    });
+        })
+    })
 }
 // Ejecutar funcion para cambiar color a todos los elementos
 cambiarColorATodos();
