@@ -5,16 +5,15 @@
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
 
-// Cambiar el color de fondo según la selección del usuario
-const backgroundColorSelect = document.querySelectorAll('.background-color');
-backgroundColorSelect.forEach(backSelect =>{
-    backSelect.addEventListener('change', () => {
-        const selectedColor = backSelect.value;
+// Cambiar el color del fondo del lienzo según la selección del usuario
+const optionColor = document.querySelectorAll(".option-color");
+optionColor.forEach(option=>{
+    option.addEventListener("click", ()=>{
+        const selectedColor = option.children[0].children[0].style.background;
         canvas.setBackgroundColor(selectedColor);
         canvas.renderAll();
-    });
+    })
 })
-
 
 // Agregar evento de clic para eliminar un elemento
 document.addEventListener('keydown', (event) => {
