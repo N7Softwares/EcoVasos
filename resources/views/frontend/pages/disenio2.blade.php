@@ -148,7 +148,7 @@
                 </select>
             </div>
             <div class="col-4 border">
-                <!--------------------------- Para subir figura --------------------------->
+                <!--------------------------- Para subir foto --------------------------->
 
                 <h4>Subir Imagen</h4>
                 <input type="file" id="image-upload" accept="image/png, image/jpeg">
@@ -165,22 +165,26 @@
                 
                 <div class="mb-3">
                     <h4 class="text-center">Colores del diseño</h4>
-                    <div class="mb-3">
-                        Colores Actuales
-                        <table style="width:30px;">
-                            <td id="color-actual" style="background-color: blue; width:30px; height:30px; border:1px solid #ccc;"></td>
+                    <div class="">
+                        <h6>Colores Actuales</h6>
+                        <table style="width:20px;">
+                            <td id="color-actual" style="background-color: blue;"></td>
                         </table>
                     </div>
                     <div class="mb-3" id="color-table-globales">
-                        <table class="" >
-                            <tr>
-                                <td style="background-color: red;"></td>
-                                <td style="background-color: blue;"></td>
-                                <td style="background-color: yellow;"></td>
-                                <td style="background-color: white;"></td>
-                                <td style="background-color: green; "></td>
-                            </tr>
-                        </table>
+                        
+                        <div class="container-paleta-color">
+                            <div class="colores-clasicos">
+                                <h6>Clásicas</h6>
+                            </div>
+                            <div class="colores-deModa">
+                                <h6>De Moda</h6>
+                            </div>
+                            <div class="colores-metalicos">
+                                <h6>Metálicas</h6>
+                            </div>
+                        
+                        </div>
                     </div>
                 </div>
 
@@ -206,7 +210,7 @@
 
             </div>
         </div>
-        <div class="col-4 border border-danger">
+        <div class="col-4 border ">
             <h4>Agregar Texto</h4>
                 <textarea id="text-editor" placeholder="Escribe aquí..."></textarea>
                 <button id="nuevo-texto">Nuevo Texto</button>
