@@ -30,27 +30,113 @@
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
                 <h4>Color del Vaso</h4>
                 <div class="mb-3">
-                    <label for="background-color">Translucido:</label>
-                    <select id="background-color" class="background-color">
+                    
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="acordion-btnTranslucido">
+                                    <h6>Translúcido</h6>
+                                    <span>Transparente</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube" 
+                                                style="background:rgba(219, 219, 219, 0.7)"></div>
+                                                <p class="color-title">Transparente</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background:rgba(0, 228, 240, 0.7)"></div>
+                                                <p class="color-title">Turquesa</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background:rgba(0, 241, 115, 0.7)"></div>
+                                                <p class="color-title">Verde</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(234, 216, 70, 0.7)"></div>
+                                                <p class="color-title">Amarillo</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(242, 54, 38, 0.7)"></div>
+                                                <p class="color-title">Rojo</p>
+                                            </div>    
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(65, 134, 172, 0.7)"></div>
+                                                <p class="color-title">Azul</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(255, 77, 183, 0.7)"></div>
+                                                <p class="color-title">Fucsia</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(255, 140, 47, 0.7)"></div>
+                                                <p class="color-title">Naranja</p>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <option value="rgba(0, 228, 240, 0.7)">Turquesa</option>
-                        <option value="rgba(0, 241, 115, 0.7)">Verde</option>
-                        <option value="rgba(234, 216, 70, 0.7)">Amarillo</option>
-                        <option value="rgba(242, 54, 38, 0.7)">Rojo</option>
-                        <option value="rgba(65, 134, 172, 0.7)">Azul</option>
-                        <option value="rgba(255, 77, 183, 0.7)">Fucsia</option>
-                        <option value="rgba(255, 140, 47, 0.7)">Naranja</option>
-                        <!-- <option value="rgba(0, 0, 0, 0)">Transparente</option> -->
-                    </select>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <strong>Opaco</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="option-color">
+                                        <div class="options-container">
+                                            <div class="color-cube" 
+                                            style="background:#fff;"></div>
+                                            <p class="color-title">Blanco</p>
+                                        </div>
+                                    </div>
+                                    <div class="option-color">
+                                        <div class="options-container">
+                                            <div class="color-cube"
+                                            style="background:#212121;"></div>
+                                            <p class="color-title">Negro</p>
+                                    </div>
+                                </div>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="background-color">Opaco:</label>
-                    <select id="" class="background-color">
-                        <option value="white">Blanco</option>
-                        <option value="#212121">Negro</option>
-                    </select>
-                </div>    
-            </div>
+                
+                </div>
             <div class="col-4 border">
                 <!--------------------------- Para seleccionar figura --------------------------->
                 <h4>Seleccionar Figura:</h4>
@@ -145,13 +231,7 @@
                 
                 </select>
                 <select id="fontSizeSelect">
-                    <option value="1">1px</option>
-                    <option value="10">10px</option>
-                    <option value="20">20px</option>
-                    <option value="30">30px</option>
-                    <option value="40" selected>40px</option>
-                    <option value="50">50px</option>
-                    <option value="80">80px</option>
+                    <!-- El codigo se genera dinamicamente por js -->
                 </select>
                 <div class="bm-3">
                     <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
