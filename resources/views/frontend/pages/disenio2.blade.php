@@ -12,7 +12,12 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <!-- Estilos propios -->
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+        <!-- Estilos propios -->
     <link rel="stylesheet" href="{{asset('frontend/css/n7styles.css')}}">
 
 </head>
@@ -25,27 +30,113 @@
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
                 <h4>Color del Vaso</h4>
                 <div class="mb-3">
-                    <label for="background-color">Translucido:</label>
-                    <select id="background-color" class="background-color">
+                    
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="acordion-btnTranslucido">
+                                    <h6>Translúcido</h6>
+                                    <span>Transparente</span>
+                                    </div>
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube" 
+                                                style="background:rgba(219, 219, 219, 0.7)"></div>
+                                                <p class="color-title">Transparente</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background:rgba(0, 228, 240, 0.7)"></div>
+                                                <p class="color-title">Turquesa</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background:rgba(0, 241, 115, 0.7)"></div>
+                                                <p class="color-title">Verde</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(234, 216, 70, 0.7)"></div>
+                                                <p class="color-title">Amarillo</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(242, 54, 38, 0.7)"></div>
+                                                <p class="color-title">Rojo</p>
+                                            </div>    
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(65, 134, 172, 0.7)"></div>
+                                                <p class="color-title">Azul</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(255, 77, 183, 0.7)"></div>
+                                                <p class="color-title">Fucsia</p>
+                                            </div>
+                                        </div>
+                                        <div class="option-color">
+                                            <div class="options-container">
+                                                <div class="color-cube"
+                                                style="background: rgba(255, 140, 47, 0.7)"></div>
+                                                <p class="color-title">Naranja</p>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <option value="rgba(0, 228, 240, 0.7)">Turquesa</option>
-                        <option value="rgba(0, 241, 115, 0.7)">Verde</option>
-                        <option value="rgba(234, 216, 70, 0.7)">Amarillo</option>
-                        <option value="rgba(242, 54, 38, 0.7)">Rojo</option>
-                        <option value="rgba(65, 134, 172, 0.7)">Azul</option>
-                        <option value="rgba(255, 77, 183, 0.7)">Fucsia</option>
-                        <option value="rgba(255, 140, 47, 0.7)">Naranja</option>
-                        <!-- <option value="rgba(0, 0, 0, 0)">Transparente</option> -->
-                    </select>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <strong>Opaco</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="option-color">
+                                        <div class="options-container">
+                                            <div class="color-cube" 
+                                            style="background:#fff;"></div>
+                                            <p class="color-title">Blanco</p>
+                                        </div>
+                                    </div>
+                                    <div class="option-color">
+                                        <div class="options-container">
+                                            <div class="color-cube"
+                                            style="background:#212121;"></div>
+                                            <p class="color-title">Negro</p>
+                                    </div>
+                                </div>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="background-color">Opaco:</label>
-                    <select id="" class="background-color">
-                        <option value="white">Blanco</option>
-                        <option value="#212121">Negro</option>
-                    </select>
-                </div>    
-            </div>
+                
+                </div>
             <div class="col-4 border">
                 <!--------------------------- Para seleccionar figura --------------------------->
                 <h4>Seleccionar Figura:</h4>
@@ -55,12 +146,14 @@
                     <option value="circle">Círculo</option>
                     <option value="star">Estrella</option>
                 </select>
+       
             </div>
             <div class="col-4 border">
-                <!--------------------------- Para subir figura --------------------------->
+                <!--------------------------- Para subir foto --------------------------->
 
                 <h4>Subir Imagen</h4>
                 <input type="file" id="image-upload" accept="image/png, image/jpeg">
+                <input type="color" id="color-picker" value="#000000">
             </div>
             <div class="col-4 border" style="height:60px;">
             <h4>Descargar como PDF</h4>
@@ -74,22 +167,26 @@
                 
                 <div class="mb-3">
                     <h4 class="text-center">Colores del diseño</h4>
-                    <div class="mb-3">
-                        Colores Actuales
-                        <table style="width:30px;">
-                            <td id="color-actual" style="background-color: blue; width:30px; height:30px; border:1px solid #ccc;"></td>
+                    <div class="">
+                        <h6>Colores Actuales</h6>
+                        <table style="width:20px;">
+                            <td id="color-actual" style="background-color: blue;"></td>
                         </table>
                     </div>
                     <div class="mb-3" id="color-table-globales">
-                        <table class="" >
-                            <tr>
-                                <td style="background-color: red;"></td>
-                                <td style="background-color: blue;"></td>
-                                <td style="background-color: yellow;"></td>
-                                <td style="background-color: white;"></td>
-                                <td style="background-color: green; "></td>
-                            </tr>
-                        </table>
+                        
+                        <div class="container-paleta-color">
+                            <div class="colores-clasicos">
+                                <h6>Clásicas</h6>
+                            </div>
+                            <div class="colores-deModa">
+                                <h6>De Moda</h6>
+                            </div>
+                            <div class="colores-metalicos">
+                                <h6>Metálicas</h6>
+                            </div>
+                        
+                        </div>
                     </div>
                 </div>
 
@@ -128,10 +225,15 @@
                 /> --}}
                 
                 <div id="colorPalette" class="color-palette">
-                    <div class="color-button" style="background-color: #000000" onclick="cambiarColor('#000000')"></div>
-                    <div class="color-button" style="background-color: #F93822" onclick="cambiarColor('#F93822')"></div>
-                    <div class="color-button" style="background-color: #FBE122" onclick="cambiarColor('#FBE122')"></div>
-                    <div class="color-button" style="background-color: #0072CE" onclick="cambiarColor('#0072CE')"></div>
+                    <div class="color-button" style="background-color: #000000" onclick="handleColorChange('#000000')"></div>
+                    <div class="color-button" style="background-color: #F93822" onclick="handleColorChange('#F93822')"></div>
+                    <div class="color-button" style="background-color: #FBE122" onclick="handleColorChange('#FBE122')"></div>
+                    <div class="color-button" style="background-color: #0072CE" onclick="handleColorChange('#0072CE')"></div>
+                </div>
+                <div id="svgHidden" style="display: none;">
+                    <?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 457" style="height: 100%; fill: #000000;"><rect class="st-0" x="2.77" y="97.95" width="17.36" height="2"/><rect class="st-0" x="2.77" y="41.57" width="17.36" height="2"/><rect class="st-0" x="2.76" y="168.67" width="17.37" height="2"/><g><path class="st-0" d="M1.28,97.19v-.43l.55-.54c1.33-1.26,1.93-1.93,1.94-2.72,0-.53-.26-1.01-1.03-1.01-.47,0-.86,.24-1.1,.44l-.22-.5c.36-.3,.87-.53,1.47-.53,1.12,0,1.59,.77,1.59,1.51,0,.96-.7,1.74-1.79,2.79l-.41,.38v.02h2.33v.58H1.28Z"/><path class="st-0" d="M8.84,94.54c0,1.77-.66,2.74-1.81,2.74-1.02,0-1.7-.95-1.72-2.67,0-1.74,.75-2.7,1.81-2.7s1.72,.98,1.72,2.63Zm-2.82,.08c0,1.35,.42,2.12,1.06,2.12,.72,0,1.06-.84,1.06-2.17s-.33-2.12-1.06-2.12c-.61,0-1.06,.75-1.06,2.17Z"/><path class="st-0" d="M12.94,94.54c0,1.77-.66,2.74-1.81,2.74-1.02,0-1.7-.95-1.72-2.67,0-1.74,.75-2.7,1.81-2.7s1.72,.98,1.72,2.63Zm-2.82,.08c0,1.35,.42,2.12,1.06,2.12,.72,0,1.06-.84,1.06-2.17s-.33-2.12-1.06-2.12c-.61,0-1.06,.75-1.06,2.17Z"/><path class="st-0" d="M16.57,97.05c-.18,.1-.59,.22-1.11,.22-1.17,0-1.93-.79-1.93-1.97s.82-2.06,2.08-2.06c.42,0,.78,.1,.98,.2l-.16,.54c-.17-.1-.43-.18-.82-.18-.89,0-1.37,.66-1.37,1.46,0,.9,.58,1.45,1.34,1.45,.4,0,.66-.1,.86-.19l.12,.53h0Z"/><path class="st-0" d="M20.11,97.05c-.18,.1-.59,.22-1.11,.22-1.17,0-1.93-.79-1.93-1.97s.82-2.06,2.08-2.06c.42,0,.78,.1,.98,.2l-.16,.54c-.17-.1-.43-.18-.82-.18-.89,0-1.37,.66-1.37,1.46,0,.9,.58,1.45,1.34,1.45,.4,0,.66-.1,.86-.19l.12,.53h0Z"/></g><g><path class="st-0" d="M2.81,163.2h-.02l-.9,.49-.14-.54,1.14-.61h.6v5.2h-.68v-4.54h0Z"/><path class="st-0" d="M8.84,165.08c0,1.77-.66,2.74-1.81,2.74-1.02,0-1.7-.95-1.72-2.67,0-1.74,.75-2.7,1.81-2.7s1.72,.98,1.72,2.63h0Zm-2.82,.08c0,1.35,.42,2.12,1.06,2.12,.72,0,1.06-.84,1.06-2.17s-.33-2.12-1.06-2.12c-.61,0-1.06,.75-1.06,2.17Z"/><path class="st-0" d="M12.94,165.08c0,1.77-.66,2.74-1.81,2.74-1.02,0-1.7-.95-1.72-2.67,0-1.74,.75-2.7,1.81-2.7s1.72,.98,1.72,2.63h0Zm-2.82,.08c0,1.35,.42,2.12,1.06,2.12,.72,0,1.06-.84,1.06-2.17s-.33-2.12-1.06-2.12c-.61,0-1.06,.75-1.06,2.17Z"/><path class="st-0" d="M16.57,167.59c-.18,.1-.59,.23-1.11,.23-1.17,0-1.93-.79-1.93-1.98s.82-2.05,2.08-2.05c.42,0,.78,.1,.98,.2l-.16,.54c-.17-.1-.43-.18-.82-.18-.89,0-1.37,.66-1.37,1.46,0,.9,.58,1.45,1.34,1.45,.4,0,.66-.1,.86-.19l.12,.53h0Z"/><path class="st-0" d="M20.11,167.59c-.18,.1-.59,.23-1.11,.23-1.17,0-1.93-.79-1.93-1.98s.82-2.05,2.08-2.05c.42,0,.78,.1,.98,.2l-.16,.54c-.17-.1-.43-.18-.82-.18-.89,0-1.37,.66-1.37,1.46,0,.9,.58,1.45,1.34,1.45,.4,0,.66-.1,.86-.19l.12,.53h0Z"/></g><g><path class="st-0" d="M1.45,39.38c.2,.13,.66,.33,1.15,.33,.9,0,1.18-.58,1.18-1.01,0-.73-.66-1.04-1.34-1.04h-.39v-.53h.39c.51,0,1.16-.26,1.16-.88,0-.42-.27-.78-.91-.78-.41,0-.82,.18-1.04,.34l-.18-.51c.27-.2,.8-.4,1.36-.4,1.02,0,1.49,.61,1.49,1.24,0,.54-.32,.99-.96,1.22v.02c.64,.13,1.16,.61,1.16,1.33,0,.83-.65,1.56-1.9,1.56-.58,0-1.1-.18-1.35-.35l.19-.54h0Z"/><path class="st-0" d="M8.84,37.53c0,1.77-.66,2.74-1.81,2.74-1.02,0-1.7-.95-1.72-2.67,0-1.74,.75-2.7,1.81-2.7s1.72,.98,1.72,2.63Zm-2.82,.08c0,1.35,.42,2.12,1.06,2.12,.72,0,1.06-.84,1.06-2.17s-.33-2.12-1.06-2.12c-.61,0-1.06,.75-1.06,2.17Z"/><path class="st-0" d="M12.94,37.53c0,1.77-.66,2.74-1.81,2.74-1.02,0-1.7-.95-1.72-2.67,0-1.74,.75-2.7,1.81-2.7s1.72,.98,1.72,2.63Zm-2.82,.08c0,1.35,.42,2.12,1.06,2.12,.72,0,1.06-.84,1.06-2.17s-.33-2.12-1.06-2.12c-.61,0-1.06,.75-1.06,2.17Z"/><path class="st-0" d="M16.57,40.04c-.18,.1-.59,.22-1.11,.22-1.17,0-1.93-.79-1.93-1.97s.82-2.06,2.08-2.06c.42,0,.78,.1,.98,.2l-.16,.54c-.17-.1-.43-.18-.82-.18-.89,0-1.37,.66-1.37,1.46,0,.9,.58,1.45,1.34,1.45,.4,0,.66-.1,.86-.19l.12,.53h0Z"/><path class="st-0" d="M20.11,40.04c-.18,.1-.59,.22-1.11,.22-1.17,0-1.93-.79-1.93-1.97s.82-2.06,2.08-2.06c.42,0,.78,.1,.98,.2l-.16,.54c-.17-.1-.43-.18-.82-.18-.89,0-1.37,.66-1.37,1.46,0,.9,.58,1.45,1.34,1.45,.4,0,.66-.1,.86-.19l.12,.53h0Z"/></g></svg>
+
                 </div>
             </div>
         <div class="col-4 border border-danger">
@@ -142,20 +244,30 @@
                 <label for="font-selector">Seleccione una fuente:</label>
                 <select id="font-selector">
                 <option value="Arial">Arial</option>
-                <option value="Helvetica">Helvetica</option>
+                <option value="Arial Black">Arial Black</option>
+                <option value="Comic Sans MS">Comic Sans MS</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Impact">Impact</option>
                 <option value="Times New Roman">Times New Roman</option>
-                <option value="Inconsolata">Inconsolata</option>
+                <option value="Montserrat">Montserrat</option>
+                <option value="Lato">Lato</option>
+                <option value="Helvetica, sans-serif">Helvetica</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="Courier New, monospace">Courier New</option>
+                <option value="Palatino, serif">Palatino</option>
+                <option value="Verdana, sans-serif">Verdana</option>
+                <option value="Garamond, serif">Garamond</option>
+
                 
                 </select>
                 <select id="fontSizeSelect">
-                    <option value="1">1px</option>
-                    <option value="10">10px</option>
-                    <option value="20">20px</option>
-                    <option value="30">30px</option>
-                    <option value="40" selected>40px</option>
-                    <option value="50">50px</option>
-                    <option value="80">80px</option>
+                    <!-- El codigo se genera dinamicamente por js -->
                 </select>
+                <div class="bm-3">
+                    <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
+                    <button id="negritaBtn" class="fontStyleBtn" title="Negrita">B</button>
+
+                </div>
         </div>
         
         <!--------------------------- Elemento Canva --------------------------->

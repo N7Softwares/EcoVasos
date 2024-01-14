@@ -5,16 +5,15 @@
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
 
-// Cambiar el color de fondo según la selección del usuario
-const backgroundColorSelect = document.querySelectorAll('.background-color');
-backgroundColorSelect.forEach(backSelect =>{
-    backSelect.addEventListener('change', () => {
-        const selectedColor = backSelect.value;
+// Cambiar el color del fondo del lienzo según la selección del usuario
+const optionColor = document.querySelectorAll(".option-color");
+optionColor.forEach(option=>{
+    option.addEventListener("click", ()=>{
+        const selectedColor = option.children[0].children[0].style.background;
         canvas.setBackgroundColor(selectedColor);
         canvas.renderAll();
-    });
+    })
 })
-
 
 // Agregar evento de clic para eliminar un elemento
 document.addEventListener('keydown', (event) => {
@@ -36,6 +35,8 @@ shapeSelector.addEventListener('change', () => {
 
 // Cargar una imagen al lienzo
 const imageUpload = document.getElementById('image-upload');
+const colorPicker = document.getElementById('color-picker'); // Asumiendo que tienes un color picker en tu HTML
+
 imageUpload.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -45,7 +46,7 @@ imageUpload.addEventListener('change', (event) => {
             img.src = e.target.result;
             img.onload = function () {
                 const fabricImage = new fabric.Image(img, {
-                    scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
+                    scaleX: 0.2,
                     scaleY: 0.2,
                 });
                 canvas.add(fabricImage);
@@ -56,6 +57,15 @@ imageUpload.addEventListener('change', (event) => {
         reader.readAsDataURL(file);
     }
 });
+
+function addColorPicker(fabricImage) {
+    colorPicker.addEventListener('input', (event) => {
+        const newColor = event.target.value;
+        fabricImage.set({ fill: newColor });
+        canvas.renderAll();
+    });
+}
+
 
 // Función para dibujar la figura seleccionada en el lienzo
 function drawShape(shape) {
@@ -184,32 +194,70 @@ downloadButton.addEventListener('click', () => {
 
     html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
 });
+// componente para crear los rows dentro de crearPaletasColores()
+const rowPaletasColores = (categoria, contenedor) =>{
+    // Crear el elemento div
+    const paletaColor = document.createElement('div');
+
+    // Asignar la clase y el estilo de fondo
+    paletaColor.className = 'paleta-color';
+    paletaColor.style.backgroundColor = categoria;
+    // Agregar el div al contenedor
+    contenedor.appendChild(paletaColor);
+}
+
+// Para crear la paleta de colores en la seccion de "colores"
+const crearPaletaColores = ()=>{
+    const clasicas =["#000000", "#fff", "#f93822", "#fbe122", "#0072ce", "#ed8b00", 
+    "#00b74f", "#87189d", "#ffcd00", "#e35205", "#279989"];
+
+    const deModa = ["#da291c", "#f68d2e", "#5e8ab4", "#e56a54", "#9adbe8", "#006298", 
+    "#c63663", "#0d5257", "#f0e991", "#874b52", "#ecbaa8", "#8f3237", "#c0a392", 
+    "#253746", "#e5e1e6", "#c1c6c8"];
+
+    const metalicas = ["#ac8400", "#d8d7df", "#b87333"];
+
+    // const contenedorPaleta = document.querySelector('.container-paleta-color');
+    const contenedorClasicas = document.querySelector('.colores-clasicos');
+    const contenedorModa = document.querySelector('.colores-deModa');
+    const contenedorMetalicos = document.querySelector('.colores-metalicos');
+
+    clasicas.forEach(clasica =>{
+        rowPaletasColores(clasica, contenedorClasicas);
+    });
+
+    deModa.forEach(moda =>{
+        rowPaletasColores(moda, contenedorModa);
+    });
+
+    metalicas.forEach(metalica =>{
+        rowPaletasColores(metalica, contenedorMetalicos);
+    })
+    
+};
+// Ejecutando funcion para crear paleta de colores
+crearPaletaColores();
 
 // Funcion para cambiar color a todos los elementos
 const cambiarColorATodos = () => {
-    const colorTable = document.getElementById("color-table-globales");
     const colorActualTD = document.getElementById("color-actual");
 
-    // Agregar evento de clic para seleccionar un color de la tabla
-    colorTable.addEventListener('click', (e) => {
-        if (e.target.tagName === 'TD') {
+    const paletaColores = document.querySelectorAll(".paleta-color");
+    paletaColores.forEach(color =>{
+        // Cuando se da click en cualquier color
+        color.addEventListener("click",()=>{
 
-            const selectedColor = e.target.style.backgroundColor;
-            // console.log(selectedColor)
-            
+            const selectedColor = color.style.backgroundColor;
             // Recorre todos los objetos en el lienzo
             canvas.forEachObject(obj => {
-                // Aplica la acción que desees, por ejemplo, cambiar el color
-                obj.set('fill', selectedColor);
-            });
-            
+                    // Aplica la acción que desees, por ejemplo, cambiar el color
+                    
+                    obj.set('fill', selectedColor);
+                });
             colorActualTD.style.backgroundColor=selectedColor;
-
-            // Renderiza el lienzo después de realizar los cambios
             canvas.renderAll();
-
-        }
-    });
+        })
+    })
 }
 // Ejecutar funcion para cambiar color a todos los elementos
 cambiarColorATodos();
@@ -219,19 +267,20 @@ let imagenAgregada = false;
 let currentImage;
 
 function agregarImagen() {
-    console.log("migaja 1")
-    const imageUrl = "../../../images/000000.svg";
-    console.log("migaja 2")
-    fabric.Image.fromURL(imageUrl, (img) => {
-        console.log("IMAGEN ORIGINAL", img);
+    const svgHidden = document.getElementById("svgHidden");
+    const svgContent = svgHidden.innerHTML;
+
+    fabric.loadSVGFromString(svgContent, (objects, options) => {
+        const img = fabric.util.groupSVGElements(objects, options);
+
         img.set({
             scaleX: 2.2,
             scaleY: 2.2,
             selectable: true,
             lockScalingX: true,
             lockScalingY: true,
-            lockMovementY: true, 
-            left: canvas.width - img.width * 1.7 - 10, 
+            lockMovementY: true,
+            left: canvas.width - img.width * 1.7 - 10,
             top: 0,
         });
 
@@ -244,6 +293,9 @@ function agregarImagen() {
 
         imagenAgregada = true;
         currentImage = img;
+
+        // Habilitar la paleta de colores después de agregar la imagen
+        document.getElementById("colorPalette").classList.remove("disabled");
     });
 }
 
@@ -259,32 +311,14 @@ function eliminarImagen() {
     imagenAgregada = false;
     currentImage = null;
 }
-function cambiarColor(color) {
-    console.log("llega 1");
-    if (imagenAgregada && currentImage) {
-        console.log("llega 2", color);
-
-        currentImage.filters[0] = new fabric.Image.filters.BlendColor({
-            color: color,
-            mode: 'tint',
-            alpha: 1
-        });
-        currentImage.set({
-            scaleX: 6.2,
-            scaleY: 6.2,
-            selectable: true,
-            lockScalingX: true,
-            lockScalingY: true,
-            lockMovementY: true, 
-            left: canvas.width - currentImage.width * 1.7 - 10, 
-            top: 0,
-        });
-        currentImage.applyFilters();
-
-        canvas.renderAll();
-
-        console.log("llega 3", currentImage);
-    }
+function handleColorChange(event) {
+    console.log("COLOR", event);
+    const newColor = event;
+    const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
+    elements.forEach((element) => {
+        element.set("fill", newColor);
+    });
+    canvas.renderAll();
 }
 
 
@@ -294,6 +328,9 @@ function cambiarColor(color) {
 const textEditor = document.getElementById('text-editor');
 const nuevoTextoButton = document.getElementById('nuevo-texto');
 const fontSizeSelect = document.getElementById('fontSizeSelect');
+const cursivaBtn = document.getElementById("cursivaBtn");
+const negritaBtn = document.getElementById("negritaBtn");
+
 // Función para agregar un nuevo objeto Text al lienzo
 function agregarTextoAlCanvas(texto) {
     const textoPorDefecto = texto || 'Nuevo Texto';
@@ -383,13 +420,21 @@ const actualizarSeleccion = (objetoSeleccionado) => {
         // Establece el tamaño de fuente actual en el select
         const fontSizeValue = objetoSeleccionado.fontSize;
         fontSizeSelect.value = fontSizeValue.toString();
-    } else {
-        // Si no hay un objeto Text seleccionado, deshabilita los controles
-        textEditor.value = '';
-        textEditor.disabled = true;
-        fontSelector.disabled = true;
-        fontSizeSelect.disabled = true;
-    }
+        // Botones para cursiva y negrita
+        cursivaBtn.disabled=false;
+        negritaBtn.disabled=false;
+            // Para agregar y quitar la clase de boton activado a curviaBtn y negritaBtn
+        if(objetoSeleccionado.fontStyle==="italic"){
+            cursivaBtn.classList.add("btnActivated");
+        }else{
+            cursivaBtn.classList.remove("btnActivated");
+        }
+        if(objetoSeleccionado.fontWeight==="bold"){
+            negritaBtn.classList.add("btnActivated");
+        }else{
+            negritaBtn.classList.remove("btnActivated");
+        }
+    } 
 }
 
 // Escucha el evento de selección de objetos en el lienzo
@@ -415,6 +460,12 @@ canvas.on('selection:cleared',  ()=> {
     fontSizeSelect.disabled = true;
     // Restablece la fuente predeterminada en el select
     fontSelector.value = 'Arial';
+    // Botones para cursiva y negrita
+    cursivaBtn.disabled=true;
+    negritaBtn.disabled=true;
+    negritaBtn.classList.remove("btnActivated");
+    cursivaBtn.classList.remove("btnActivated");
+
 });
 
 // Escucha el evento de eliminación de objetos en el lienzo
@@ -449,7 +500,36 @@ fontSizeSelect.addEventListener('change', function () {
     cambiarTamanioTexto(tamanioSeleccionado);
 });
 
+// Para el boton de cursiva 
+cursivaBtn.addEventListener("click",()=>{
+    const objetoTextSeleccionado = canvas.getActiveObject();
+    let fontStyle = objetoTextSeleccionado.fontStyle;
+    if(fontStyle === "normal"){
+        objetoTextSeleccionado.fontStyle="italic";
+        cursivaBtn.classList.add("btnActivated");
+        
+    }else{
+        objetoTextSeleccionado.fontStyle="normal";
+        cursivaBtn.classList.remove("btnActivated");
+    }
+    canvas.renderAll();
+    
+});
+// Para el boton de cursiva 
+negritaBtn.addEventListener("click", () => {
+    const objetoTextSeleccionado = canvas.getActiveObject();
+    let fontWeight = objetoTextSeleccionado.fontWeight; 
+    if (fontWeight === "normal") {
+        objetoTextSeleccionado.fontWeight = "bold";
+        negritaBtn.classList.add("btnActivated");
+    } else {
+        objetoTextSeleccionado.fontWeight = "normal";
+        negritaBtn.classList.remove("btnActivated");
+    }
+    canvas.renderAll();
+});
+
+
+
 // Agregar un texto de ejemplo al inicio
 agregarTextoAlCanvas('Nombre de tu marca acá');
-
-

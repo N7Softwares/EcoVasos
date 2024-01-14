@@ -3,6 +3,10 @@
     padding:0;
     box-sizing: border-box;
 }
+:root{
+    --border:#dee2e6;
+    --border2:#777777;
+}
 body{
     background:#fafafa;
     /* Para probar que el color del lienzo sea translucido u opaco */
@@ -17,10 +21,101 @@ body{
     background-color: white;
     z-index: 1000;
 }
+.accordion{
+    width:200px;
+}
+
+.accordion-item {
+    border-top: 1px solid var(--border) !important;
+    margin-bottom:20px;
+    background-color: #fff !important;
+}
+.accordion-item .acordion-btnTranslucido{
+    flex-direction:column;
+}
+.accordion-item .acordion-btnTranslucido span{
+    font-size:.8rem;
+    /* font-weight:bold; */
+}
+
+  /* Cambia el color de fondo de los botones del acordeón cuando están activos */
+.accordion-button:not(.collapsed) {
+    background-color: #fff !important;
+}
+
+.accordion-button{
+    padding:5px 10px;
+}
+.accordion-body .option-color{
+    display:flex;
+    /* border:1px solid var(--border); */
+    justify-content:center;
+    padding:10px 0;
+    cursor:pointer;
+    transition:all .4s ease;
+}
+.accordion-body .option-color:hover{
+    transition:all .4s ease;
+    background: var(--border);
+}
+.option-color .options-container{
+    width:80%;
+    display:flex;
+    /* border:1px solid red; */
+    align-items:center;
+}
+.option-color .options-container p{
+    margin-left:15px;
+}
+
+.accordion-body .option-color .color-title{
+    margin-bottom:0;
+}
+.color-cube{
+    width:20px;
+    height:20px;
+    border:1px solid var(--border2);
+}
+
+
+/* Estilos para el accordion-body */
+.accordion-body {
+    max-height: 200px; /* Altura máxima */
+    overflow-y: auto; /* Habilita el desplazamiento vertical cuando el contenido excede la altura máxima */
+    padding:0;
+}
+
+/* Cuadro donde se muestra el color global de los elementos */
+#color-actual{
+    width:15px !important; 
+    height:20px; 
+    border:1px solid var(--border2);
+}
 
 #color-table-globales td{
     width:30px; 
     height:30px;
+}
+.container-paleta-color{
+    margin-top:20px;
+}
+.container-paleta-color h6{
+    width:100%;
+}
+.container-paleta-color, .colores-clasicos, 
+.colores-deModa, .colores-metalicos{
+    /* development design */
+    margin-bottom:20px;
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+#color-table-globales .paleta-color{
+    height:20px;
+    width:20px;
+    border:1px solid var(--border2);
 }
 
 .color-table td {
@@ -44,6 +139,27 @@ body{
     height: 150px;
     padding:5px 10px;
 }
+.fontStyleBtn{
+    padding: 3px 10px;
+    border:1px solid #ccc;
+    background-color:#fff;
+    font-size:1.25rem;
+    margin:10px auto;
+}
+#cursivaBtn{
+    font-style:italic;
+}
+#negritaBtn{
+    font-weight:bold;
+}
+.btnActivated{
+    background-color:lightblue;
+}
+/* .negritaBtnActivated{
+
+}
+.cursivaBtnActivated */
+/* --------------------------- Objeto Canva (Lienzo) --------------------------- */
 
 #canvas{
     /* Por alguna razon no me deja poner width y height*/
