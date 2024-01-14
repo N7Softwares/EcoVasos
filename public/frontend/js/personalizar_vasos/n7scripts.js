@@ -5,6 +5,10 @@
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
 
+// set background default
+canvas.setBackgroundColor("#fff");
+canvas.renderAll();
+
 // Cambiar el color del fondo del lienzo según la selección del usuario
 const optionColor = document.querySelectorAll(".option-color");
 optionColor.forEach(option=>{
@@ -529,7 +533,71 @@ negritaBtn.addEventListener("click", () => {
     canvas.renderAll();
 });
 
+agregarTextoAlCanvas('Nombre de tu marca acá');
 
+//----------------------- Descargar en PDF --------------------------
 
 // Agregar un texto de ejemplo al inicio
-agregarTextoAlCanvas('Nombre de tu marca acá');
+
+const btnPdf = document.getElementById("download-pdf");
+// // Función para deseleccionar objetos en Fabric.js
+// function deseleccionarObjetos(canvas) {
+//     return new Promise(resolve => {
+//         canvas.discardActiveObject();
+//         canvas.requestRenderAll();
+//         resolve();
+//     });
+// }
+
+// // Función para generar el PDF después de deseleccionar
+// function generarPDF() {
+//     return new Promise(resolve => {
+//         const doc = new jsPDF('p', 'pt', 'letter');
+//         const margin = 10;
+//         const scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
+
+//         doc.html(canvas.getElement(), {
+//             x: margin,
+//             y: margin,
+//             html2canvas: {
+//                 scale: scale,
+//             },
+//             callback: function(doc) {
+//                 doc.save('canvas-content.pdf');
+//                 resolve();
+//             }
+//         });
+//     });
+// }
+
+// // Evento del botón
+// btnPdf.addEventListener("click", async () => {
+
+//     // Desseleccionar objetos y generar el PDF en orden
+//     await deseleccionarObjetos(canvas);
+//     await generarPDF();
+// });
+
+btnPdf.addEventListener("click", () => {
+    // Desseleccionar todos los objetos en el canvas
+    canvas.discardActiveObject();
+    canvas.requestRenderAll();
+
+    // Esperar un segundo antes de crear el PDF
+    setTimeout(() => {
+        const doc = new jsPDF('p', 'pt', 'letter');
+        const margin = 10;
+        const scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
+
+        doc.html(document.querySelector('#canvas'), {
+            x: margin,
+            y: margin,
+            html2canvas: {
+                scale: scale,
+            },
+            callback: function(doc) {
+                doc.save('canvas-content.pdf');
+            }
+        });
+    }, 1000); // 1000 milisegundos (1 segundo) de espera
+});
