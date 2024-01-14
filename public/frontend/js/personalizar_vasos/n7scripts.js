@@ -264,19 +264,192 @@ function cambiarColor(color) {
     if (imagenAgregada && currentImage) {
         console.log("llega 2", color);
 
-        // Cambiar el color en el objeto Fabric.js
-        currentImage.set('fill', color);
-        // currentImage.set('width', 100);
+        currentImage.filters[0] = new fabric.Image.filters.BlendColor({
+            color: color,
+            mode: 'tint',
+            alpha: 1
+        });
+        currentImage.set({
+            scaleX: 6.2,
+            scaleY: 6.2,
+            selectable: true,
+            lockScalingX: true,
+            lockScalingY: true,
+            lockMovementY: true, 
+            left: canvas.width - currentImage.width * 1.7 - 10, 
+            top: 0,
+        });
+        currentImage.applyFilters();
 
-        // Actualizar el atributo 'fill' en el elemento SVG subyacente
-        const svgElement = currentImage.getElement();
-        if (svgElement) {
-            svgElement.setAttribute('fill', color);
-        }
-
-        // Renderizar el lienzo
         canvas.renderAll();
 
         console.log("llega 3", currentImage);
     }
 }
+
+
+
+//----------------------- Para la seccion de textos --------------------------
+
+const textEditor = document.getElementById('text-editor');
+const nuevoTextoButton = document.getElementById('nuevo-texto');
+const fontSizeSelect = document.getElementById('fontSizeSelect');
+// Función para agregar un nuevo objeto Text al lienzo
+function agregarTextoAlCanvas(texto) {
+    const textoPorDefecto = texto || 'Nuevo Texto';
+
+    const newText = new fabric.Text(textoPorDefecto, {
+        left: 50,
+        top: 50,
+        fontSize: fontSize(),
+        fontFamily: 'Arial',
+        fill: valorColorActual(),
+        selectable: true
+    });
+
+    canvas.add(newText);
+    canvas.setActiveObject(newText);
+    canvas.renderAll();
+
+    // Llena automáticamente el textarea con el contenido del nuevo texto
+    textEditor.value = newText.text;
+}
+
+// Definir los valores de tamaño de fuente disponibles
+const valoresTamanosFuente = Array.from({ length: 30 }, (_, index) => (index + 1) * 10);
+
+// Generar las opciones del select
+valoresTamanosFuente.forEach(valor => {
+    const option = document.createElement('option');
+    option.value = valor.toString();
+    option.text = `${valor}px`;
+    if (valor === 40) {
+        option.selected = true;
+    }
+    fontSizeSelect.add(option);
+});
+
+// funcion para cambiar el fontSize de los textos
+const fontSize = ()=>{
+    fontSizeValue = fontSizeSelect.value;
+    return fontSizeValue;
+}
+
+// Escucha el evento input del textarea para actualizar dinámicamente el objeto Text
+textEditor.addEventListener('input', function () {
+    const textoActualizado = textEditor.value;
+    const objetoTextSeleccionado = canvas.getActiveObject();
+
+    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+        // Actualiza el texto del objeto Text seleccionado
+        objetoTextSeleccionado.set('text', textoActualizado);
+        canvas.renderAll();
+    }
+});
+
+// Escucha el clic en el botón "Nuevo Texto"
+nuevoTextoButton.addEventListener('click', function () {
+    agregarTextoAlCanvas();
+});
+
+// Escucha el cambio en el select de fuentes
+const fontSelector = document.getElementById('font-selector');
+fontSelector.addEventListener('change', function () {
+    const objetoTextSeleccionado = canvas.getActiveObject();
+    
+    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+        // Actualiza la fuente del objeto Text seleccionado
+        const nuevaFuente = fontSelector.value;
+        objetoTextSeleccionado.set('fontFamily', nuevaFuente);
+        canvas.renderAll();
+    }
+});
+
+// Función para manejar la actualización de la selección
+const actualizarSeleccion = (objetoSeleccionado) => {
+    // Verifica si el objeto seleccionado es un objeto Text
+    if (objetoSeleccionado && objetoSeleccionado.type === 'text') {
+        // Llena el textarea con el texto del objeto Text seleccionado
+        textEditor.value = objetoSeleccionado.text;
+        textEditor.disabled = false;
+        // Habilita el select de fuentes
+        fontSelector.disabled = false;
+        // Habilita el select de fontSize
+        fontSizeSelect.disabled = false;
+
+        // Establece la fuente actual en el select
+        fontSelector.value = objetoSeleccionado.fontFamily || 'Arial';
+
+        // Establece el tamaño de fuente actual en el select
+        const fontSizeValue = objetoSeleccionado.fontSize;
+        fontSizeSelect.value = fontSizeValue.toString();
+    } else {
+        // Si no hay un objeto Text seleccionado, deshabilita los controles
+        textEditor.value = '';
+        textEditor.disabled = true;
+        fontSelector.disabled = true;
+        fontSizeSelect.disabled = true;
+    }
+}
+
+// Escucha el evento de selección de objetos en el lienzo
+canvas.on('selection:created', (evento) => {
+    const objetoSeleccionado = evento.target;
+    actualizarSeleccion(objetoSeleccionado);
+});
+
+// Escucha el evento de actualización de selección de objetos en el lienzo
+canvas.on('selection:updated', (evento) => {
+    const objetoSeleccionado = evento.target;
+    actualizarSeleccion(objetoSeleccionado);
+});
+
+// Escucha el evento de deselección de objetos en el lienzo
+canvas.on('selection:cleared',  ()=> {
+    // Borra el contenido del textarea cuando no hay elementos seleccionados
+    textEditor.value = '';
+    textEditor.disabled = true;
+    // Deshabilita el select de fuentes
+    fontSelector.disabled = true;
+    // Habilita el select de fontSize
+    fontSizeSelect.disabled = true;
+    // Restablece la fuente predeterminada en el select
+    fontSelector.value = 'Arial';
+});
+
+// Escucha el evento de eliminación de objetos en el lienzo
+canvas.on('object:removed',  () =>{
+    const objetosText = canvas.getObjects('text');
+
+    // Si no hay más objetos Text en el lienzo, borra el contenido del textarea
+    if (objetosText.length === 0) {
+        textEditor.value = '';
+        fontSelector.disabled = true;
+        fontSizeSelect.disabled = true;
+    }
+});
+
+// Para cambiar el tamaño del texto
+
+// Función para cambiar el tamaño del texto
+const cambiarTamanioTexto = (tamanio) => {
+    const objetoTextSeleccionado = canvas.getActiveObject();
+
+    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+        // Cambia el tamaño del texto del objeto Text seleccionado
+        objetoTextSeleccionado.set('fontSize', tamanio);
+        canvas.renderAll();
+    }
+}
+
+// Escucha el evento change del select para cambiar el tamaño del texto
+
+fontSizeSelect.addEventListener('change', function () {
+    const tamanioSeleccionado = parseInt(fontSizeSelect.value);
+    cambiarTamanioTexto(tamanioSeleccionado);
+});
+
+// Agregar un texto de ejemplo al inicio
+agregarTextoAlCanvas('Nombre de tu marca acá');
+
+

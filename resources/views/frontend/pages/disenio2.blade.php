@@ -62,10 +62,11 @@
                 <h4>Subir Imagen</h4>
                 <input type="file" id="image-upload" accept="image/png, image/jpeg">
             </div>
-            <div class="col-6 border" style="height:60px;">
+            <div class="col-4 border" style="height:60px;">
+            <h4>Descargar como PDF</h4>
                 <button id="download-pdf">Descargar PDF</button>
             </div>
-            <div class="col-6 border ">
+            <div class="col-4 border ">
 
                 <!---------- color del elemento figura. Solo aparece cuando se hace clic en el elemento ------->
 
@@ -118,16 +119,43 @@
             <div class="col-6 border">
                 <h4>Medidor</h4>
                 <!-- Botones para agregar/eliminar la imagen -->
-                <button id="agregarBtn" onclick="agregarImagen()">Agregar Imagen</button>
-                <button id="eliminarBtn" onclick="eliminarImagen()" disabled>Eliminar Imagen</button>
-
+                <button id="agregarBtn" onclick="agregarImagen()">Agregar</button>
+                <button id="eliminarBtn" onclick="eliminarImagen()" disabled>Quitar</button>
+                {{-- <img
+                    src="{{asset('images/0000002.svg')}}"
+                    class="img-fluid rounded-top"
+                    alt=""
+                /> --}}
+                
                 <div id="colorPalette" class="color-palette">
                     <div class="color-button" style="background-color: #000000" onclick="cambiarColor('#000000')"></div>
-                    <div class="color-button" style="background-color: #F93822" onclick="cambiarColor('rgb(255, 0, 0)')"></div>
+                    <div class="color-button" style="background-color: #F93822" onclick="cambiarColor('#F93822')"></div>
                     <div class="color-button" style="background-color: #FBE122" onclick="cambiarColor('#FBE122')"></div>
                     <div class="color-button" style="background-color: #0072CE" onclick="cambiarColor('#0072CE')"></div>
                 </div>
             </div>
+        <div class="col-4 border border-danger">
+            <h4>Agregar Texto</h4>
+                <textarea id="text-editor" placeholder="Escribe aquí..."></textarea>
+                <button id="nuevo-texto">Nuevo Texto</button>
+                <!-- Para cambiar el font-family -->
+                <label for="font-selector">Seleccione una fuente:</label>
+                <select id="font-selector">
+                <option value="Arial">Arial</option>
+                <option value="Helvetica">Helvetica</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Inconsolata">Inconsolata</option>
+                
+                </select>
+                <select id="fontSizeSelect">
+                    <option value="1">1px</option>
+                    <option value="10">10px</option>
+                    <option value="20">20px</option>
+                    <option value="30">30px</option>
+                    <option value="40" selected>40px</option>
+                    <option value="50">50px</option>
+                    <option value="80">80px</option>
+                </select>
         </div>
         
         <!--------------------------- Elemento Canva --------------------------->
