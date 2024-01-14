@@ -39,6 +39,8 @@ shapeSelector.addEventListener('change', () => {
 
 // Cargar una imagen al lienzo
 const imageUpload = document.getElementById('image-upload');
+const colorPicker = document.getElementById('color-picker'); // Asumiendo que tienes un color picker en tu HTML
+
 imageUpload.addEventListener('change', (event) => {
     const file = event.target.files[0];
     if (file) {
@@ -48,7 +50,7 @@ imageUpload.addEventListener('change', (event) => {
             img.src = e.target.result;
             img.onload = function () {
                 const fabricImage = new fabric.Image(img, {
-                    scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
+                    scaleX: 0.2,
                     scaleY: 0.2,
                 });
                 canvas.add(fabricImage);
@@ -59,6 +61,15 @@ imageUpload.addEventListener('change', (event) => {
         reader.readAsDataURL(file);
     }
 });
+
+function addColorPicker(fabricImage) {
+    colorPicker.addEventListener('input', (event) => {
+        const newColor = event.target.value;
+        fabricImage.set({ fill: newColor });
+        canvas.renderAll();
+    });
+}
+
 
 // Función para dibujar la figura seleccionada en el lienzo
 function drawShape(shape) {
@@ -254,6 +265,66 @@ const cambiarColorATodos = () => {
 }
 // Ejecutar funcion para cambiar color a todos los elementos
 cambiarColorATodos();
+
+//-----------------------------MEDIDOR---------------------------
+let imagenAgregada = false;
+let currentImage;
+
+function agregarImagen() {
+    const svgHidden = document.getElementById("svgHidden");
+    const svgContent = svgHidden.innerHTML;
+
+    fabric.loadSVGFromString(svgContent, (objects, options) => {
+        const img = fabric.util.groupSVGElements(objects, options);
+
+        img.set({
+            scaleX: 2.2,
+            scaleY: 2.2,
+            selectable: true,
+            lockScalingX: true,
+            lockScalingY: true,
+            lockMovementY: true,
+            left: canvas.width - img.width * 1.7 - 10,
+            top: 0,
+        });
+
+        canvas.add(img);
+        canvas.setActiveObject(img);
+        canvas.renderAll();
+
+        document.getElementById("agregarBtn").disabled = true;
+        document.getElementById("eliminarBtn").disabled = false;
+
+        imagenAgregada = true;
+        currentImage = img;
+
+        // Habilitar la paleta de colores después de agregar la imagen
+        document.getElementById("colorPalette").classList.remove("disabled");
+    });
+}
+
+function eliminarImagen() {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+        canvas.remove(activeObject);
+        canvas.renderAll();
+    }
+    document.getElementById("agregarBtn").disabled = false;
+    document.getElementById("eliminarBtn").disabled = true;
+
+    imagenAgregada = false;
+    currentImage = null;
+}
+function handleColorChange(event) {
+    console.log("COLOR", event);
+    const newColor = event;
+    const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
+    elements.forEach((element) => {
+        element.set("fill", newColor);
+    });
+    canvas.renderAll();
+}
+
 
 
 //----------------------- Para la seccion de textos --------------------------
