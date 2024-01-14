@@ -16,13 +16,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+
         <!-- Estilos propios -->
     <link rel="stylesheet" href="{{asset('frontend/css/n7styles.css')}}">
 
 </head>
 
 <body>
+    <section>
     <div class="container border">
         <!-- Contenido de las opciones -->
         <div class="row">
@@ -151,11 +152,18 @@
                 <!--------------------------- Para subir foto --------------------------->
 
                 <h4>Subir Imagen</h4>
-                <input type="file" id="image-upload" accept="image/png, image/jpeg">
+                 <!-- <label for="image-upload" id="file-label">Seleccionar archivo: -->
+                    <input type="file" id="image-upload" accept="image/png, image/jpeg"S>
+                <!-- </label> -->
             </div>
+                <!--------------------------- Para descargar como pdf --------------------------->
             <div class="col-4 border" style="height:60px;">
-            <h4>Descargar como PDF</h4>
-                <button id="download-pdf">Descargar PDF</button>
+                <h4>Descargar como PDF</h4>
+                <!-- <button id="download-pdf">Descargar PDF</button> -->
+                <button class="button" type="button" id="download-pdf" >
+                <span class="button__text">Descargar PDF</span>
+                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" id="bdd05811-e15d-428c-bb53-8661459f9307" data-name="Layer 2" class="svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
+                </button>
             </div>
             <div class="col-4 border ">
 
@@ -210,50 +218,79 @@
 
             </div>
         </div>
-        <div class="col-4 border ">
+        <div class="col-4 border col-texts">
             <h4>Agregar Texto</h4>
-                <textarea id="text-editor" placeholder="Escribe aquí..."></textarea>
-                <button id="nuevo-texto">Nuevo Texto</button>
+                <button id="nuevo-texto">Agregar Nuevo Texto</button>
+                <textarea id="text-editor" placeholder="Texto"></textarea>
+                <div class="bm-3 btns-fontStyle">
+                <div class="container-fonts">
                 <!-- Para cambiar el font-family -->
-                <label for="font-selector">Seleccione una fuente:</label>
-                <select id="font-selector">
-                <option value="Arial">Arial</option>
-                <option value="Arial Black">Arial Black</option>
-                <option value="Comic Sans MS">Comic Sans MS</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Impact">Impact</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Montserrat">Montserrat</option>
-                <option value="Lato">Lato</option>
-                <option value="Helvetica, sans-serif">Helvetica</option>
-                <option value="Georgia, serif">Georgia</option>
-                <option value="Courier New, monospace">Courier New</option>
-                <option value="Palatino, serif">Palatino</option>
-                <option value="Verdana, sans-serif">Verdana</option>
-                <option value="Garamond, serif">Garamond</option>
-
-                
-                </select>
-                <select id="fontSizeSelect">
-                    <!-- El codigo se genera dinamicamente por js -->
-                </select>
-                <div class="bm-3">
+                    <select id="font-selector">
+                        <option value="Arial">Arial</option>
+                        <option value="Arial Black">Arial Black</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Impact">Impact</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Montserrat">Montserrat</option>
+                        <option value="Lato">Lato</option>
+                        <option value="Helvetica, sans-serif">Helvetica</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="Courier New, monospace">Courier New</option>
+                        <option value="Palatino, serif">Palatino</option>
+                        <option value="Verdana, sans-serif">Verdana</option>
+                        <option value="Garamond, serif">Garamond</option>
+                    </select>
+                    <select id="fontSizeSelect">
+                        <!-- El codigo se genera dinamicamente por js -->
+                    </select>
+                </div>
+                <div class="container-btns">
                     <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
                     <button id="negritaBtn" class="fontStyleBtn" title="Negrita">B</button>
+                </div>
 
                 </div>
+                <div>
+                
+                </div>
+                
         </div>
         
         <!--------------------------- Elemento Canva --------------------------->
-
+        <!-- -->
         <canvas id="canvas" width="1000" height="400"></canvas>
 
         
         
     </div>
+    </section>
+    <section class="border">
+        <div class="container-fluid container-main border border-danger ">
+            <div class="row">
+                <div class="col-3 border">
+                    <div class="sideLeft">
+                    <div class="bloq-side"></div>
+                    <div class="bloq-side"></div>
+                    <div class="bloq-side"></div>
+                    <div class="bloq-side"></div>
+                    <div class="bloq-side"></div>
+                    <div class="bloq-side"></div>
+                    <div class="bloq-side"></div>
+                    </div>
+                </div>
+                <div class="col-6 border">x</div>
+                <div class="col-3 border">x</div>
+            </div>
+        </div>
+    </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+    <!-- jspdf cdn -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js" integrity="sha512-sk0cNQsixYVuaLJRG0a/KRJo9KBkwTDqr+/V94YrifZ6qi8+OO3iJEoHi0LvcTVv1HaBbbIvpx+MCjOuLVnwKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
 
 </body>
