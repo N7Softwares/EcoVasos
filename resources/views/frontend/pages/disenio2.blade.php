@@ -268,19 +268,60 @@
     <section class="border">
         <div class="container-fluid container-main border border-danger ">
             <div class="row">
-                <div class="col-3 border">
-                    <div class="sideLeft">
-                    <div class="bloq-side"></div>
-                    <div class="bloq-side"></div>
-                    <div class="bloq-side"></div>
-                    <div class="bloq-side"></div>
-                    <div class="bloq-side"></div>
-                    <div class="bloq-side"></div>
-                    <div class="bloq-side"></div>
+                <div class="col-3 border bg-white">
+                    <div class="row">
+                        <div class="col-3 sideLeft border border-primary">
+                            <!-- <div class=" border border-success"> -->
+                                <div class="bloq-side">
+                                    <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/layout.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Temas</h6>
+                                </div>
+                                <div class="bloq-side">
+                                    <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/vaso.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Color del Vaso</h6>
+                                </div>
+                                <div class="bloq-side">
+                                    <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/colors.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Color del Diseño</h6>
+                                </div>
+                                <div class="bloq-side">
+                                <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/upload.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Subir Archivo</h6>
+                                </div>
+                                <div class="bloq-side">
+                                <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/elements.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Elementos</h6>
+                                </div>
+                                <div class="bloq-side">
+                                    <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/texts.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Textos</h6>
+                                </div>
+                                <div class="bloq-side">
+                                <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/medidas.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Medidor</h6>
+                                </div>
+                            <!-- </div> -->
+                        </div>
+                        <div class="col-9"></div>
                     </div>
+                    
                 </div>
-                <div class="col-6 border">x</div>
-                <div class="col-3 border">x</div>
+                <div class="col-7 border">x</div>
+                <div class="col-2 bg-white border">x</div>
             </div>
         </div>
     </section>
