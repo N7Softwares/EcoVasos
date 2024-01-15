@@ -76,7 +76,7 @@
                                     </div>
                                     <h6>Temas</h6>
                                 </div>
-                                <div class="bloq-side" data-target="color-vaso">
+                                <div class="bloq-side" data-target="color-vaso" style="background: #f1f1f1;">
                                     <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/vaso.svg')}}" alt="" srcset="">
                                     </div>
@@ -124,8 +124,9 @@
                             <div class="contenido-side" id="temas-content" style="display: none;">
                                 <p>Temas :p</p>
                             </div>
-                            <div class="contenido-side" id="color-vaso-content" style="display: none;">
-                    <!--------------------------- Para cambiar el color del fondo --------------------------->
+                            <div class="contenido-side" id="color-vaso-content" style="display: block;">
+                                <!--------------- Para cambiar el color del fondo --------------------->
+                                
                                 <h4>Color del Vaso</h4>
                                 <div class="mb-3">
 
@@ -235,32 +236,33 @@
                                 </div>
                             </div>
                             <div class="contenido-side" id="color-disenio-content" style="display: none;">
-                <!---------- color de los elementos.------->
-                            
-                            <div class="mb-3">
-                                <h4 class="text-center">Colores del diseño</h4>
-                                <div class="">
-                                    <h6>Colores Actuales</h6>
-                                    <table style="width:20px;">
-                                        <td id="color-actual" style="background-color: blue;"></td>
-                                    </table>
-                                </div>
-                                <div class="mb-3" id="color-table-globales">
-                                    
-                                    <div class="container-paleta-color">
-                                        <div class="colores-clasicos">
-                                            <h6>Clásicas</h6>
+                                <!---------- color de los elementos.------->
+                                <div class="mb-3">
+                                    <h4 class="text-center">Colores del diseño</h4>
+                                    <div class="">
+                                        <h6>Colores Actuales</h6>
+                                        <table style="width:20px;">
+                                            <td id="color-actual" style="background-color: blue;"></td>
+                                        </table>
+                                    </div>
+                                    <div class="mb-3" id="color-table-globales">
+                                        
+                                        <div class="container-paleta-color">
+                                            <div class="colores-clasicos">
+                                                <h6>Clásicas</h6>
+                                            </div>
+                                            <div class="colores-deModa">
+                                                <h6>De Moda</h6>
+                                            </div>
+                                            <div class="colores-metalicos">
+                                                <h6>Metálicas</h6>
+                                            </div>
+                                            <div class="colores-miscelaneos">
+                                                <h6>Misceláneos</h6>
+                                            </div>
                                         </div>
-                                        <div class="colores-deModa">
-                                            <h6>De Moda</h6>
-                                        </div>
-                                        <div class="colores-metalicos">
-                                            <h6>Metálicas</h6>
-                                        </div>
-                                    
                                     </div>
                                 </div>
-                            </div>
                             </div>
                             <div class="contenido-side" id="subir-archivo-content" style="display: none;">
                                 <!--------------------------- Para subir foto --------------------------->
@@ -371,7 +373,11 @@
                                 <td style="background-color: brown;"></td>
                             </tr>
                         </table>
-
+                    </div>
+                    <div class="border img-delete">
+                        <button class="btn btn-dark btn-delete">
+                            <img src="{{asset('frontend/img/personalizacion_vasos/delete.svg')}}" alt="" srcset="">
+                        </button>
                     </div>
                 </div>
             </div>

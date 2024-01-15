@@ -62,7 +62,7 @@ imageUpload.addEventListener('change', (event) => {
     }
 });
 
-function addColorPicker(fabricImage) {
+const addColorPicker = (fabricImage) => {
     colorPicker.addEventListener('input', (event) => {
         const newColor = event.target.value;
         fabricImage.set({ fill: newColor });
@@ -72,7 +72,7 @@ function addColorPicker(fabricImage) {
 
 
 // Función para dibujar la figura seleccionada en el lienzo
-function drawShape(shape) {
+const drawShape = (shape) => {
     let newShape;
 
     switch (shape) {
@@ -114,7 +114,7 @@ function drawShape(shape) {
         canvas.add(newShape);
         canvas.renderAll();
         // Aca se les agrega todas las funciones a los objetos
-        addColorPicker(newShape);
+        addColorPickerShape(newShape);
         colorActual(newShape);
     }
 }
@@ -135,24 +135,14 @@ const valorColorActual = ()=>{
     return colorActualValor;
 }
 
-// Función para generar un color aleatorio
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
 // Función para crear un objeto "estrella" personalizado
-function createStar(options) {
+const createStar = (options) => {
     const star = new fabric.Path('M 0 0 L 10 30 L 40 30 L 15 50 L 25 80 L 0 60 L -25 80 L -15 50 L -40 30 L -10 30 Z', options);
     return star;
 }
 
 // Función para agregar un cuadro de selección de colores al objeto
-function addColorPicker(object) {
+const addColorPickerShape = (object) => {
     object.on('mousedown', (event) => {
         selectedObject = object;
         showColorTable(event);
@@ -160,7 +150,7 @@ function addColorPicker(object) {
 }
 
 // Función para mostrar la tabla de colores
-function showColorTable(event) {
+const showColorTable = (event) => {
     const colorTable = document.getElementById('color-table');
     colorTable.style.left = `${event.clientX}px`;
     colorTable.style.top = `${event.clientY}px`;
@@ -198,6 +188,24 @@ downloadButton.addEventListener('click', () => {
 
     html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
 });
+
+// generar paleta de colores aleatorios
+const generarPaletaDeColores = (cantidad) => {
+    const paleta = [];
+    for (let i = 0; i < cantidad; i++) {
+        const color = generarColorAleatorio();
+        paleta.push(color);
+    }
+    return paleta;
+}
+// Generar color aleatorio
+const generarColorAleatorio = () => {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 // componente para crear los rows dentro de crearPaletasColores()
 const rowPaletasColores = (categoria, contenedor) =>{
     // Crear el elemento div
@@ -225,6 +233,8 @@ const crearPaletaColores = ()=>{
     const contenedorClasicas = document.querySelector('.colores-clasicos');
     const contenedorModa = document.querySelector('.colores-deModa');
     const contenedorMetalicos = document.querySelector('.colores-metalicos');
+    // Para los colores aleatorios
+    const contenedorMiscelaneos = document.querySelector(".colores-miscelaneos");
 
     clasicas.forEach(clasica =>{
         rowPaletasColores(clasica, contenedorClasicas);
@@ -238,6 +248,11 @@ const crearPaletaColores = ()=>{
         rowPaletasColores(metalica, contenedorMetalicos);
     })
     
+    const paletaAleatoria = generarPaletaDeColores(150);
+    // Generando el row de la paleta de colores Miscelaneos
+    paletaAleatoria.forEach(mixto =>{
+        rowPaletasColores(mixto, contenedorMiscelaneos)
+    })
 };
 // Ejecutando funcion para crear paleta de colores
 crearPaletaColores();
@@ -272,7 +287,7 @@ cambiarColorATodos();
 let imagenAgregada = false;
 let currentImage;
 
-function agregarImagen() {
+const agregarImagen = () => {
     const svgHidden = document.getElementById("svgHidden");
     const svgContent = svgHidden.innerHTML;
 
@@ -306,7 +321,7 @@ function agregarImagen() {
     });
 }
 
-function eliminarImagen() {
+const eliminarImagen = () => {
     const activeObject = canvas.getActiveObject();
     if (activeObject) {
         canvas.remove(activeObject);
@@ -318,14 +333,18 @@ function eliminarImagen() {
     imagenAgregada = false;
     currentImage = null;
 }
-function handleColorChange(event) {
-    console.log("COLOR", event);
+const handleColorChange = (event) => {
+    // console.log("COLOR", event);
     const newColor = event;
-    const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
-    elements.forEach((element) => {
-        element.set("fill", newColor);
-    });
-    canvas.renderAll();
+    // El color del medidor cambia solo si se detecta este elemento
+    if(currentImage){
+        const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
+        elements.forEach((element) => {
+            element.set("fill", newColor);
+        });
+        canvas.renderAll();
+    }
+    
 }
 
 
@@ -543,43 +562,6 @@ agregarTextoAlCanvas('Nombre de tu marca acá');
 // Agregar un texto de ejemplo al inicio
 
 const btnPdf = document.getElementById("download-pdf");
-// // Función para deseleccionar objetos en Fabric.js
-// function deseleccionarObjetos(canvas) {
-//     return new Promise(resolve => {
-//         canvas.discardActiveObject();
-//         canvas.requestRenderAll();
-//         resolve();
-//     });
-// }
-
-// // Función para generar el PDF después de deseleccionar
-// function generarPDF() {
-//     return new Promise(resolve => {
-//         const doc = new jsPDF('p', 'pt', 'letter');
-//         const margin = 10;
-//         const scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
-
-//         doc.html(canvas.getElement(), {
-//             x: margin,
-//             y: margin,
-//             html2canvas: {
-//                 scale: scale,
-//             },
-//             callback: function(doc) {
-//                 doc.save('canvas-content.pdf');
-//                 resolve();
-//             }
-//         });
-//     });
-// }
-
-// // Evento del botón
-// btnPdf.addEventListener("click", async () => {
-
-//     // Desseleccionar objetos y generar el PDF en orden
-//     await deseleccionarObjetos(canvas);
-//     await generarPDF();
-// });
 
 btnPdf.addEventListener("click", () => {
     // Desseleccionar todos los objetos en el canvas
@@ -605,6 +587,7 @@ btnPdf.addEventListener("click", () => {
     }, 1000); // 1000 milisegundos (1 segundo) de espera
 });
 
+//----------------------- SideBar Dinamico --------------------------
 
 // Funcion para el sideBar dinamico con las opciones
 const sideBar = () => {
@@ -614,7 +597,10 @@ const sideBar = () => {
     // Obtener los bloq-side y contenidos
     const bloqSideElements = document.querySelectorAll('.bloq-side');
     const contenidoSideElements = document.querySelectorAll('.contenido-side');
-
+    
+    // Estableciendo el boton "color del vaso" como default
+    ultimoBloqClicado = bloqSideElements[1];
+    
     // Agregar evento de clic a cada bloq-side
     bloqSideElements.forEach((bloqSideElement) => {
         bloqSideElement.addEventListener('click', () => {
@@ -636,7 +622,7 @@ const sideBar = () => {
             if (targetContent) {
                 targetContent.style.display = 'block';
                 // Cambiar el estilo del bloqSideElement clicado
-                bloqSideElement.style.background = '#dee2e6';
+                bloqSideElement.style.background = '#f1f1f1';
             }
 
             // Actualizar la referencia al último elemento clicado
@@ -645,5 +631,5 @@ const sideBar = () => {
     });
 };
 
-// Ejecutando funcion del sideBat dinamico
+// Ejecutando funcion del sideBar dinamico
 sideBar();

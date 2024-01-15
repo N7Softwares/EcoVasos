@@ -45,8 +45,26 @@ section{
 
 .sideLeft{
     padding:0;
+    max-height: 600px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+::-webkit-scrollbar {
+    width: 7px;
+}
+/* Estilo para el riel de la barra de desplazamiento en navegadores webkit */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color del riel */
 }
 
+/* Estilo para el mango de la barra de desplazamiento en navegadores webkit */
+::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color del mango */
+}
+
+/* Estilo para el fondo del mango cuando está siendo arrastrado en navegadores webkit */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Color del mango cuando es hover */
+}
 .bloq-side{
     /* border:1px solid var(--border); */
     padding:10px;
@@ -75,9 +93,20 @@ section{
 .bloq-side .img-bloq-side img{
     width:100%;
 }
+/* -------------- contenido-side -------------- */
 
 .contenido-side{
     padding: 20px 0;
+    max-height: 600px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+/* -------------- Right-side -------------- */
+
+.btn-delete{
+    width:50px;
+}
+.btn-delete img{
+    width:100%;
 }
 /* --------------------------- Colores --------------------------- */
 .color-table {
@@ -88,7 +117,9 @@ section{
     z-index: 1000;
 }
 .accordion{
-    width:200px;
+    min-width:150px;
+    width:90%;
+    margin:auto;
 }
 
 .accordion-item {
@@ -169,7 +200,7 @@ section{
     width:100%;
 }
 .container-paleta-color, .colores-clasicos, 
-.colores-deModa, .colores-metalicos{
+.colores-deModa, .colores-metalicos, .colores-miscelaneos{
     /* development design */
     margin-bottom:20px;
 
