@@ -261,26 +261,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            Color del elemento
-                            
-                            <div id="color-table" class="color-table">
-                                <table>
-                                    <tr>
-                                        <td style="background-color: red;"></td>
-                                        <td style="background-color: blue;"></td>
-                                        <td style="background-color: green;"></td>
-                                        <td style="background-color: yellow;"></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="background-color: orange;"></td>
-                                        <td style="background-color: pink;"></td>
-                                        <td style="background-color: purple;"></td>
-                                        <td style="background-color: brown;"></td>
-                                    </tr>
-                                </table>
-                            
-                            </div>
                             </div>
                             <div class="contenido-side" id="subir-archivo-content" style="display: none;">
                                 <!--------------------------- Para subir foto --------------------------->
@@ -333,6 +313,7 @@
                                 </div>
                             </div>
                             <div class="contenido-side" id="medidor-content" style="display: none;">
+                                <!--------------------------- Para agregar medidor --------------------------->
                                 <h4>Medidor</h4>
                                 <!-- Botones para agregar/eliminar la imagen -->
                                 <button id="agregarBtn" onclick="agregarImagen()">Agregar</button>
@@ -369,10 +350,30 @@
 
                         </div>
                 <div class=" col-main border">
-                <!--------------------------- Elemento Canva --------------------------->
+                    <!--------------------------- Elemento Canva --------------------------->
                     <canvas id="canvas" width="800" height="350"></canvas>
                 </div>
-                <div class=" bg-white col-rightSide border">x</div>
+                <div class=" bg-white col-rightSide border">
+                    <h5>Color del Elemento</h5>
+
+                    <div id="color-table" class="color-table">
+                        <table>
+                            <tr>
+                                <td style="background-color: red;"></td>
+                                <td style="background-color: blue;"></td>
+                                <td style="background-color: green;"></td>
+                                <td style="background-color: yellow;"></td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: orange;"></td>
+                                <td style="background-color: pink;"></td>
+                                <td style="background-color: purple;"></td>
+                                <td style="background-color: brown;"></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>

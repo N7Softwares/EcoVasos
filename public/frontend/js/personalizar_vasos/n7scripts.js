@@ -603,8 +603,8 @@ btnPdf.addEventListener("click", () => {
 });
 
 
-
-document.addEventListener('DOMContentLoaded', () => {
+// Funcion para el sideBar dinamico con las opciones
+const sideBar = () => {
     // Almacenar la referencia al último elemento clicado
     let ultimoBloqClicado = null;
 
@@ -640,4 +640,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ultimoBloqClicado = bloqSideElement;
         });
     });
-});
+};
+
+// Ejecutando funcion del sideBat dinamico
+sideBar();

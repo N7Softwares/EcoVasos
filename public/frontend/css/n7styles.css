@@ -36,8 +36,11 @@ section{
 .col-rightSide{
 	width:16%;
     /* border:1px solid red; */
+    padding:20px 10px;
 }
-
+.col-rightSide h4, .col-rightSide h5{
+    text-align:center;
+}
 /* --------------------------- LeftSideBar --------------------------- */
 
 .sideLeft{
@@ -74,7 +77,7 @@ section{
 }
 
 .contenido-side{
-    padding: 30px 0;
+    padding: 20px 0;
 }
 /* --------------------------- Colores --------------------------- */
 .color-table {
