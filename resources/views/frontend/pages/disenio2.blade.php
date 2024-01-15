@@ -65,10 +65,10 @@
     </section>
     <section class="border">
         <div class="container-fluid container-main border ">
-            <div class="row border border-success">
+            <div class="row border ">
                 <div class=" col-sideLeft border bg-white">
                     <div class="row">
-                        <div class="col-3 sideLeft border border-primary">
+                        <div class="col-3 sideLeft border ">
                             <!-- <div class=" border border-success"> -->
                                 <div class="bloq-side" data-target="temas">
                                     <div class="img-bloq-side">
@@ -372,7 +372,7 @@
                 <!--------------------------- Elemento Canva --------------------------->
                     <canvas id="canvas" width="800" height="350"></canvas>
                 </div>
-                <div class=" bg-white col-rightSide border border-danger">x</div>
+                <div class=" bg-white col-rightSide border">x</div>
             </div>
         </div>
     </section>
