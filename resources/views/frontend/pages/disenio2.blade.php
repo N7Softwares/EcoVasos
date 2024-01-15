@@ -155,6 +155,7 @@
                 <h4>Subir Imagen</h4>
                 <input type="file" id="image-upload" accept="image/png, image/jpeg">
                 <input type="color" id="color-picker" value="#000000">
+                
             </div>
                 <!--------------------------- Para descargar como pdf --------------------------->
             <div class="col-4 border" style="height:60px;">

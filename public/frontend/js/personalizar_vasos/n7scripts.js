@@ -53,6 +53,11 @@ imageUpload.addEventListener('change', (event) => {
                     scaleX: 0.2,
                     scaleY: 0.2,
                 });
+
+                // Convertir la imagen a blanco y negro
+                fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
+                fabricImage.applyFilters();
+
                 canvas.add(fabricImage);
                 canvas.renderAll();
                 addColorPicker(fabricImage);
@@ -69,7 +74,6 @@ function addColorPicker(fabricImage) {
         canvas.renderAll();
     });
 }
-
 
 // Función para dibujar la figura seleccionada en el lienzo
 function drawShape(shape) {
