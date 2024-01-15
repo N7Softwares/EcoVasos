@@ -258,6 +258,8 @@ const cambiarColorATodos = () => {
                     
                     obj.set('fill', selectedColor);
                 });
+        // Para cambiar el color en la imagen de MEDIDA
+            handleColorChange(selectedColor);
             colorActualTD.style.backgroundColor=selectedColor;
             canvas.renderAll();
         })
@@ -278,8 +280,9 @@ function agregarImagen() {
         const img = fabric.util.groupSVGElements(objects, options);
 
         img.set({
-            scaleX: 2.2,
-            scaleY: 2.2,
+            // Modifique los scaleX e scaleY para que encajaran con el nuevo alto del lienzo, eran 2.2 antes
+            scaleX: 1.5,
+            scaleY: 1.5,
             selectable: true,
             lockScalingX: true,
             lockScalingY: true,
