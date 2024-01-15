@@ -28,6 +28,9 @@ section{
 
 .col-main{
 	width:62%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
 .col-rightSide{
