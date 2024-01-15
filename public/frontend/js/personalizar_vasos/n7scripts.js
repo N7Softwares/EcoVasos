@@ -530,3 +530,43 @@ btnPdf.addEventListener("click", () => {
         });
     }, 1000); // 1000 milisegundos (1 segundo) de espera
 });
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Almacenar la referencia al último elemento clicado
+    let ultimoBloqClicado = null;
+
+    // Obtener los bloq-side y contenidos
+    const bloqSideElements = document.querySelectorAll('.bloq-side');
+    const contenidoSideElements = document.querySelectorAll('.contenido-side');
+
+    // Agregar evento de clic a cada bloq-side
+    bloqSideElements.forEach((bloqSideElement) => {
+        bloqSideElement.addEventListener('click', () => {
+            // Restaurar el estilo del último elemento clicado
+            if (ultimoBloqClicado) {
+                ultimoBloqClicado.style.background = 'none';
+            }
+
+            // Ocultar todos los contenidos
+            contenidoSideElements.forEach((contenidoSideElement) => {
+                contenidoSideElement.style.display = 'none';
+            });
+
+            // Obtener el data-target del bloq-side clicado
+            const targetId = bloqSideElement.getAttribute('data-target');
+
+            // Mostrar el contenido correspondiente
+            const targetContent = document.getElementById(targetId + '-content');
+            if (targetContent) {
+                targetContent.style.display = 'block';
+                // Cambiar el estilo del bloqSideElement clicado
+                bloqSideElement.style.background = '#dee2e6';
+            }
+
+            // Actualizar la referencia al último elemento clicado
+            ultimoBloqClicado = bloqSideElement;
+        });
+    });
+});

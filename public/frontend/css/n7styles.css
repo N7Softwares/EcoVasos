@@ -20,6 +20,21 @@ body{
 section{
     padding:40px 0;
 }
+
+/* col flexbox para la interfaz de usuario */
+.col-sideLeft{
+	width:22%;
+}
+
+.col-main{
+	width:62%;
+}
+
+.col-rightSide{
+	width:16%;
+    /* border:1px solid red; */
+}
+
 /* --------------------------- LeftSideBar --------------------------- */
 
 .sideLeft{
@@ -27,24 +42,36 @@ section{
 }
 
 .bloq-side{
-    border:1px solid var(--border2);
+    /* border:1px solid var(--border); */
     padding:10px;
     display:flex;
     flex-direction:column;
     align-items:center;
+    justify-content:center !important;
     cursor:pointer;
+    transition:all .4s ease;
 }
+.bloq-side:hover{
+    background:var(--border) !important;
+    transition:all .4s ease;
+}
+
 .bloq-side h6{
     text-align:center;
-    font-size:.9rem;
+    font-size:.8rem;
+    /* font-weight:500; */
 }
 .bloq-side .img-bloq-side{
-    width:50px;
+    width:40px;
     /* height:50px; */
     /* border:1px solid var(--border2); */
 }
 .bloq-side .img-bloq-side img{
     width:100%;
+}
+
+.contenido-side{
+    padding: 30px 0;
 }
 /* --------------------------- Colores --------------------------- */
 .color-table {
@@ -194,10 +221,10 @@ section{
     justify-content:space-around;
     gap:5px;
 }
-.container-fonts{
+/* .container-fonts{
     display:flex;
     align-items:end;
-}
+} */
 .fontStyleBtn{
     padding: 3px 10px;
     border:none;
