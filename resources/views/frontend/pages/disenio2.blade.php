@@ -8,7 +8,7 @@
     <!-- Para usar la biblioteca fabricjs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
     <!-- Para descargar como pdf, **no funciona** -->
-    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
+    <!-- <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> -->
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="temas-content" style="display: none;">
-                                <p>Temas :p</p>
+                                <p>>>>>Temas</p>
                             </div>
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">
                                 <!--------------- Para cambiar el color del fondo --------------------->
@@ -326,8 +326,10 @@
                                 <!--------------------------- Para agregar medidor --------------------------->
                                 <h4>Medidor</h4>
                                 <!-- Botones para agregar/eliminar la imagen -->
-                                <button id="agregarBtn" onclick="agregarImagen()">Agregar</button>
-                                <button id="eliminarBtn" onclick="eliminarImagen()" disabled>Quitar</button>
+                                <div class="d-flex flex-column gap-2">
+                                    <button id="agregarBtn" onclick="agregarImagen()" class="btn-general">Agregar</button>
+                                    <button id="eliminarBtn" onclick="eliminarImagen()" class="btn-general btn-red" disabled>Quitar</button>
+                                </div>
                                 {{-- <img
                                     src="{{asset('images/0000002.svg')}}"
                                     class="img-fluid rounded-top"
@@ -397,7 +399,9 @@
     </script>
     <!-- jspdf cdn -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js" integrity="sha512-sk0cNQsixYVuaLJRG0a/KRJo9KBkwTDqr+/V94YrifZ6qi8+OO3iJEoHi0LvcTVv1HaBbbIvpx+MCjOuLVnwKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.3.2/html2canvas.js" integrity="sha512-sk0cNQsixYVuaLJRG0a/KRJo9KBkwTDqr+/V94YrifZ6qi8+OO3iJEoHi0LvcTVv1HaBbbIvpx+MCjOuLVnwKg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.js" integrity="sha512-VTufZOUx+Gc0N4JkluA0ZkVs2x4wfDI3p60gRWpHT761kMQ+hiNlYI+8MGXbLO48ymPKAeRa1wsEm3BIaxSEvw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.js" integrity="sha512-oa6kn7l/guSfv94d8YmJLcn/s3Km4mm/t4RqFqyorSMXkKlg6pFM6HmLXsJvOP/Cl/dv/N5xW7zuaA+paSc55Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
 
