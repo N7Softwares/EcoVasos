@@ -10,6 +10,15 @@
     --green-fill: #5e9d5e;
     --green-border: #386F3B;
     --shadow: 1px 5px 10px rgb(0 0 0 / 15%);
+
+    --primary-color: #007BFF;
+    --secondary-color: #6C757D;
+    --success-color: #28A745;
+    --danger-color: #DC3545;
+    --warning-color: #FFC107;
+    --info-color: #17A2B8;
+    --light-color: #F8F9FA;
+    --dark-color: #343A40;
 }
 body{
     background:#fafafa;
@@ -241,9 +250,6 @@ section{
     flex-direction: column;
 }
 .msg-switch{
-    /* color:var(--border2); */
-    /* font-weight:bold; */
-    /* font-size:.8em; */
     text-align:center;
 }
 /* The switch - the box around the slider */
@@ -296,13 +302,22 @@ section{
     transform: translateX(0.9em); /* Ajusta la posición X según tus necesidades */
 }
 /* --------------------------- Textos --------------------------- */
-#nuevo-texto{
+#nuevo-texto, .btn-general{
     background:var(--green-fill);
     color:#fff;
     padding:5px 0;
     border:1px solid var(--green-border);
     font-weight: 600;
     transition: all .4s ease;
+}
+.btn-general.btn-red{
+    background: var(--danger-color);
+}
+/* Estilo específico para botones deshabilitados */
+.btn-general[disabled],
+.btn-general.btn-red[disabled] {
+  background-color: #6C757D; /* Color gris para botones deshabilitados, ajusta según sea necesario */
+  color: #8C8C8C; /* Color del texto para botones deshabilitados, ajusta según sea necesario */
 }
 #nuevo-texto:hover{
     background:var(--green-border);

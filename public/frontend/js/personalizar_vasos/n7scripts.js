@@ -188,21 +188,21 @@ canvas.on('selection:cleared', () => {
 });
 
 // Para descargar el contenido del lienzo en forma de pdf
-const downloadButton = document.getElementById('download-pdf');
-downloadButton.addEventListener('click', () => {
-    const pdfOptions = {
-        jsPDF: {
-            unit: 'mm',
-            format: 'a4',
-            orientation: 'portrait'
-        },
-        html2canvas: {
-            scale: 2
-        },
-    };
+// const downloadButton = document.getElementById('download-pdf');
+// downloadButton.addEventListener('click', () => {
+//     const pdfOptions = {
+//         jsPDF: {
+//             unit: 'mm',
+//             format: 'a4',
+//             orientation: 'portrait'
+//         },
+//         html2canvas: {
+//             scale: 2
+//         },
+//     };
 
-    html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
-});
+//     html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
+// });
 
 // generar paleta de colores aleatorios
 const generarPaletaDeColores = (cantidad) => {
@@ -324,8 +324,15 @@ const cambiarColorATodos = () => {
 
             // Si scopeColorCheck está activo significa que los colores se cambian individualmente
             if (scopeColorCheck.checked) {
-                const activeObject = canvas.getActiveObject();
-
+                const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
+                // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
+                if(activeObject.type === "group"){
+                // Para cambiar el color en la imagen de MEDIDA
+                    handleColorChange(selectedColor);
+            
+                }else{
+                    activeObject.set('fill', selectedColor);
+                }
                 // Verifica si el objeto seleccionado es una imagen
                 if (activeObject && activeObject.type === 'image') {
                     // Cambia el color de la imagen directamente
@@ -336,6 +343,14 @@ const cambiarColorATodos = () => {
                     activeObject.set('fill', selectedColor);
                 }
             } else {
+                // Recorre todos los objetos en el lienzo
+                canvas.forEachObject(obj => {
+                // Aplica la acción que desees, por ejemplo, cambiar el color
+            
+                obj.set('fill', selectedColor);
+                handleColorChange(selectedColor);
+
+                });
                 // Recorre todos los objetos en el lienzo
                 canvas.forEachObject(obj => {
                     // Verifica si el objeto es una imagen
@@ -349,10 +364,7 @@ const cambiarColorATodos = () => {
                     }
                 });
             }
-
-            // Para cambiar el color en la imagen de MEDIDA
-            handleColorChange(selectedColor);
-            colorActualTD.style.backgroundColor = selectedColor;
+            colorActualTD.style.backgroundColor=selectedColor;
             canvas.renderAll();
         });
     });
@@ -672,37 +684,64 @@ negritaBtn.addEventListener("click", () => {
     }
     canvas.renderAll();
 });
+// Agregar un texto de ejemplo al inicio
 
 agregarTextoAlCanvas('Nombre de tu marca acá');
 
 //----------------------- Descargar en PDF --------------------------
 
-// Agregar un texto de ejemplo al inicio
-
 const btnPdf = document.getElementById("download-pdf");
 
-btnPdf.addEventListener("click", () => {
-    // Desseleccionar todos los objetos en el canvas
+// btnPdf.addEventListener("click", () => {
+    // Deseleccionar todos los objetos en el canvas
+//     canvas.discardActiveObject();
+//     canvas.requestRenderAll();
+
+//     // Esperar un segundo antes de crear el PDF
+//     setTimeout(() => {
+//         const doc = new jsPDF('p', 'pt', 'letter');
+//         const margin = 10;
+//         const scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
+
+//         doc.html(document.querySelector('#canvas'), {
+//             x: margin,
+//             y: margin,
+//             html2canvas: {
+//                 scale: scale,
+//             },
+//             callback: function(doc) {
+//                 doc.save('canvas-content.pdf');
+//             }
+//         });
+//     }, 1000); // 1000 milisegundos (1 segundo) de espera
+// });
+
+btnPdf.addEventListener('click', () => {
+    let canva = document.getElementById("canvas");
+    let width = canva.width;
+    let height = canva.height;
+    let pdf;
+
+    // establecer la orientación
+    if (width > height) {
+        pdf = new jsPDF('l', 'px', [width, height]);
+    } else {
+        pdf = new jsPDF('p', 'px', [height, width]);
+    }
+
+    // Deseleccionar todos los objetos en el canvas
     canvas.discardActiveObject();
     canvas.requestRenderAll();
-
-    // Esperar un segundo antes de crear el PDF
+    
     setTimeout(() => {
-        const doc = new jsPDF('p', 'pt', 'letter');
-        const margin = 10;
-        const scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
+        // luego obtenemos las dimensiones del propio archivo 'pdf'
+        width = pdf.internal.pageSize.getWidth();
+        height = pdf.internal.pageSize.getHeight();
+        pdf.addImage(canva, 'PNG', 0, 0, width, height);
+        pdf.save("vaso-personalizado.pdf");
+    }, 500); // 1000 milisegundos (1 segundo) de espera
 
-        doc.html(document.querySelector('#canvas'), {
-            x: margin,
-            y: margin,
-            html2canvas: {
-                scale: scale,
-            },
-            callback: function(doc) {
-                doc.save('canvas-content.pdf');
-            }
-        });
-    }, 1000); // 1000 milisegundos (1 segundo) de espera
+    
 });
 
 //----------------------- SideBar Dinamico --------------------------
