@@ -4,6 +4,8 @@
 
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
+// --------------- btn-delete ------------------
+const btnDelete = document.getElementById("btn-delete");
 
 // set background default
 canvas.setBackgroundColor("#fff");
@@ -23,13 +25,43 @@ optionColor.forEach(option=>{
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Delete') {
         const activeObject = canvas.getActiveObject();
-        if (activeObject) {
+        // Verifica si el activeObject es un array
+        if(activeObject.type === "activeSelection"){
+            // Para eliminar multiples elementos seleccionados 
+            activeObject._objects.forEach(element =>{
+                // Eliminar el elemento
+                canvas.remove(element);
+                // Desseleccionar todos los objetos en el canvas
+                canvas.discardActiveObject();
+                canvas.requestRenderAll();
+            })
+        }else{
+            // Eliminar un unico elemento
             canvas.remove(activeObject);
         }
         canvas.renderAll();
     }
 });
-
+// para eliminar con el boton btnDelete
+btnDelete.addEventListener("click", ()=>{
+    const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            // Verifica si el activeObject es un array
+            if(activeObject.type === "activeSelection"){
+                // Para eliminar multiples elementos seleccionados 
+                activeObject._objects.forEach(element =>{
+                    canvas.remove(element);
+                    // Desseleccionar todos los objetos en el canvas
+                    canvas.discardActiveObject();
+                    canvas.requestRenderAll();
+                })
+            }else{
+                // Eliminar un unico elemento
+                canvas.remove(activeObject);
+            }
+        }
+        canvas.renderAll();
+})
 // Cambiar la figura en el lienzo según la selección del usuario
 const shapeSelector = document.getElementById('shape-selector');
 shapeSelector.addEventListener('change', () => {
@@ -67,7 +99,7 @@ imageUpload.addEventListener('change', (event) => {
     }
 });
 
-function addColorPicker(fabricImage) {
+const addColorPicker = (fabricImage) => {
     colorPicker.addEventListener('input', (event) => {
         const newColor = event.target.value;
         fabricImage.set({ fill: newColor });
@@ -76,7 +108,7 @@ function addColorPicker(fabricImage) {
 }
 
 // Función para dibujar la figura seleccionada en el lienzo
-function drawShape(shape) {
+const drawShape = (shape) => {
     let newShape;
 
     switch (shape) {
@@ -118,7 +150,7 @@ function drawShape(shape) {
         canvas.add(newShape);
         canvas.renderAll();
         // Aca se les agrega todas las funciones a los objetos
-        addColorPicker(newShape);
+        // addColorPickerShape(newShape);
         colorActual(newShape);
     }
 }
@@ -139,46 +171,12 @@ const valorColorActual = ()=>{
     return colorActualValor;
 }
 
-// Función para generar un color aleatorio
-function getRandomColor() {
-    const letters = '0123456789ABCDEF';
-    let color = '#';
-    for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
-
 // Función para crear un objeto "estrella" personalizado
-function createStar(options) {
+const createStar = (options) => {
     const star = new fabric.Path('M 0 0 L 10 30 L 40 30 L 15 50 L 25 80 L 0 60 L -25 80 L -15 50 L -40 30 L -10 30 Z', options);
     return star;
 }
 
-// Función para agregar un cuadro de selección de colores al objeto
-function addColorPicker(object) {
-    object.on('mousedown', (event) => {
-        selectedObject = object;
-        showColorTable(event);
-    });
-}
-
-// Función para mostrar la tabla de colores
-function showColorTable(event) {
-    const colorTable = document.getElementById('color-table');
-    colorTable.style.left = `${event.clientX}px`;
-    colorTable.style.top = `${event.clientY}px`;
-    colorTable.style.display = 'block';
-
-    // Agregar evento de clic para seleccionar un color de la tabla
-    colorTable.addEventListener('click', (e) => {
-        if (e.target.tagName === 'TD') {
-            const selectedColor = e.target.style.backgroundColor;
-            selectedObject.set('fill', selectedColor);
-            canvas.renderAll();
-        }
-    });
-}
 
 // Función para ocultar la tabla de colores cuando se deselecciona el objeto
 canvas.on('selection:cleared', () => {
@@ -202,6 +200,24 @@ downloadButton.addEventListener('click', () => {
 
     html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
 });
+
+// generar paleta de colores aleatorios
+const generarPaletaDeColores = (cantidad) => {
+    const paleta = [];
+    for (let i = 0; i < cantidad; i++) {
+        const color = generarColorAleatorio();
+        paleta.push(color);
+    }
+    return paleta;
+}
+// Generar color aleatorio
+const generarColorAleatorio = () => {
+    const r = Math.floor(Math.random() * 256);
+    const g = Math.floor(Math.random() * 256);
+    const b = Math.floor(Math.random() * 256);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 // componente para crear los rows dentro de crearPaletasColores()
 const rowPaletasColores = (categoria, contenedor) =>{
     // Crear el elemento div
@@ -229,6 +245,8 @@ const crearPaletaColores = ()=>{
     const contenedorClasicas = document.querySelector('.colores-clasicos');
     const contenedorModa = document.querySelector('.colores-deModa');
     const contenedorMetalicos = document.querySelector('.colores-metalicos');
+    // Para los colores aleatorios
+    const contenedorMiscelaneos = document.querySelector(".colores-miscelaneos");
 
     clasicas.forEach(clasica =>{
         rowPaletasColores(clasica, contenedorClasicas);
@@ -242,6 +260,11 @@ const crearPaletaColores = ()=>{
         rowPaletasColores(metalica, contenedorMetalicos);
     })
     
+    const paletaAleatoria = generarPaletaDeColores(150);
+    // Generando el row de la paleta de colores Miscelaneos
+    paletaAleatoria.forEach(mixto =>{
+        rowPaletasColores(mixto, contenedorMiscelaneos)
+    })
 };
 // Ejecutando funcion para crear paleta de colores
 crearPaletaColores();
@@ -251,17 +274,32 @@ const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
 
     const paletaColores = document.querySelectorAll(".paleta-color");
+    
+    const scopeColorCheck = document.getElementById("scopeColor");
+
     paletaColores.forEach(color =>{
         // Cuando se da click en cualquier color
         color.addEventListener("click",()=>{
 
             const selectedColor = color.style.backgroundColor;
-            // Recorre todos los objetos en el lienzo
-            canvas.forEachObject(obj => {
+            // si scopeColorCheck esta activo significa que los colores se cambian individualmente
+            if(scopeColorCheck.checked){
+                const activeObject = canvas.getActiveObject();
+                activeObject.set('fill', selectedColor);
+            }else{
+                // Recorre todos los objetos en el lienzo
+                canvas.forEachObject(obj => {
                     // Aplica la acción que desees, por ejemplo, cambiar el color
-                    
+                
                     obj.set('fill', selectedColor);
                 });
+            }
+
+            
+            
+            
+        // Para cambiar el color en la imagen de MEDIDA
+            handleColorChange(selectedColor);
             colorActualTD.style.backgroundColor=selectedColor;
             canvas.renderAll();
         })
@@ -274,7 +312,7 @@ cambiarColorATodos();
 let imagenAgregada = false;
 let currentImage;
 
-function agregarImagen() {
+const agregarImagen = () => {
     const svgHidden = document.getElementById("svgHidden");
     const svgContent = svgHidden.innerHTML;
 
@@ -282,8 +320,9 @@ function agregarImagen() {
         const img = fabric.util.groupSVGElements(objects, options);
 
         img.set({
-            scaleX: 2.2,
-            scaleY: 2.2,
+            // Modifique los scaleX e scaleY para que encajaran con el nuevo alto del lienzo, eran 2.2 antes
+            scaleX: 1.5,
+            scaleY: 1.5,
             selectable: true,
             lockScalingX: true,
             lockScalingY: true,
@@ -307,7 +346,7 @@ function agregarImagen() {
     });
 }
 
-function eliminarImagen() {
+const eliminarImagen = () => {
     const activeObject = canvas.getActiveObject();
     if (activeObject) {
         canvas.remove(activeObject);
@@ -319,14 +358,18 @@ function eliminarImagen() {
     imagenAgregada = false;
     currentImage = null;
 }
-function handleColorChange(event) {
-    console.log("COLOR", event);
+const handleColorChange = (event) => {
+    // console.log("COLOR", event);
     const newColor = event;
-    const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
-    elements.forEach((element) => {
-        element.set("fill", newColor);
-    });
-    canvas.renderAll();
+    // El color del medidor cambia solo si se detecta este elemento
+    if(currentImage){
+        const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
+        elements.forEach((element) => {
+            element.set("fill", newColor);
+        });
+        canvas.renderAll();
+    }
+    
 }
 
 
@@ -338,6 +381,7 @@ const nuevoTextoButton = document.getElementById('nuevo-texto');
 const fontSizeSelect = document.getElementById('fontSizeSelect');
 const cursivaBtn = document.getElementById("cursivaBtn");
 const negritaBtn = document.getElementById("negritaBtn");
+
 
 // Función para agregar un nuevo objeto Text al lienzo
 function agregarTextoAlCanvas(texto) {
@@ -355,9 +399,12 @@ function agregarTextoAlCanvas(texto) {
     canvas.add(newText);
     canvas.setActiveObject(newText);
     canvas.renderAll();
-
+    // Aca se les agrega todas las funciones a los objetos
+    // addColorPickerShape(newText);
+    colorActual(newText);
     // Llena automáticamente el textarea con el contenido del nuevo texto
     textEditor.value = newText.text;
+    
 }
 
 // Definir los valores de tamaño de fuente disponibles
@@ -442,7 +489,11 @@ const actualizarSeleccion = (objetoSeleccionado) => {
         }else{
             negritaBtn.classList.remove("btnActivated");
         }
+
+        
     } 
+    // --------- Btn Delete --------
+    btnDelete.disabled=false;
 }
 
 // Escucha el evento de selección de objetos en el lienzo
@@ -473,6 +524,10 @@ canvas.on('selection:cleared',  ()=> {
     negritaBtn.disabled=true;
     negritaBtn.classList.remove("btnActivated");
     cursivaBtn.classList.remove("btnActivated");
+
+    // btn delete
+    // --------------- btn-delete ------------------
+    btnDelete.disabled=true;
 
 });
 
@@ -544,43 +599,6 @@ agregarTextoAlCanvas('Nombre de tu marca acá');
 // Agregar un texto de ejemplo al inicio
 
 const btnPdf = document.getElementById("download-pdf");
-// // Función para deseleccionar objetos en Fabric.js
-// function deseleccionarObjetos(canvas) {
-//     return new Promise(resolve => {
-//         canvas.discardActiveObject();
-//         canvas.requestRenderAll();
-//         resolve();
-//     });
-// }
-
-// // Función para generar el PDF después de deseleccionar
-// function generarPDF() {
-//     return new Promise(resolve => {
-//         const doc = new jsPDF('p', 'pt', 'letter');
-//         const margin = 10;
-//         const scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
-
-//         doc.html(canvas.getElement(), {
-//             x: margin,
-//             y: margin,
-//             html2canvas: {
-//                 scale: scale,
-//             },
-//             callback: function(doc) {
-//                 doc.save('canvas-content.pdf');
-//                 resolve();
-//             }
-//         });
-//     });
-// }
-
-// // Evento del botón
-// btnPdf.addEventListener("click", async () => {
-
-//     // Desseleccionar objetos y generar el PDF en orden
-//     await deseleccionarObjetos(canvas);
-//     await generarPDF();
-// });
 
 btnPdf.addEventListener("click", () => {
     // Desseleccionar todos los objetos en el canvas
@@ -605,3 +623,67 @@ btnPdf.addEventListener("click", () => {
         });
     }, 1000); // 1000 milisegundos (1 segundo) de espera
 });
+
+//----------------------- SideBar Dinamico --------------------------
+
+// Funcion para el sideBar dinamico con las opciones
+const sideBar = () => {
+    // Almacenar la referencia al último elemento clicado
+    let ultimoBloqClicado = null;
+
+    // Obtener los bloq-side y contenidos
+    const bloqSideElements = document.querySelectorAll('.bloq-side');
+    const contenidoSideElements = document.querySelectorAll('.contenido-side');
+    
+    // Estableciendo el boton "color del vaso" como default
+    ultimoBloqClicado = bloqSideElements[1];
+    
+    // Agregar evento de clic a cada bloq-side
+    bloqSideElements.forEach((bloqSideElement) => {
+        bloqSideElement.addEventListener('click', () => {
+            // Restaurar el estilo del último elemento clicado
+            if (ultimoBloqClicado) {
+                ultimoBloqClicado.style.background = 'none';
+            }
+
+            // Ocultar todos los contenidos
+            contenidoSideElements.forEach((contenidoSideElement) => {
+                contenidoSideElement.style.display = 'none';
+            });
+
+            // Obtener el data-target del bloq-side clicado
+            const targetId = bloqSideElement.getAttribute('data-target');
+
+            // Mostrar el contenido correspondiente
+            const targetContent = document.getElementById(targetId + '-content');
+            if (targetContent) {
+                targetContent.style.display = 'block';
+                // Cambiar el estilo del bloqSideElement clicado
+                bloqSideElement.style.background = '#f1f1f1';
+            }
+
+            // Actualizar la referencia al último elemento clicado
+            ultimoBloqClicado = bloqSideElement;
+        });
+    });
+};
+
+// Ejecutando funcion del sideBar dinamico
+sideBar();
+
+// codigo para el check de los colores
+const checkValue = ()=>{
+    const scopeColorCheck = document.getElementById("scopeColor");
+    const msgSwitch = document.querySelector(".msg-switch");
+
+    scopeColorCheck.addEventListener(("change"), ()=>{
+        // console.log(scopeColorCheck.checked);
+        if(scopeColorCheck.checked){
+            msgSwitch.textContent="Colores Individuales";
+        }else{
+            msgSwitch.textContent="Colores Globales";
+        }
+    })
+}
+// Ejecutando la funcion para el check de los colores
+checkValue();
