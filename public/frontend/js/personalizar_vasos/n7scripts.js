@@ -304,6 +304,7 @@ const cambiarColorATodos = () => {
                     console.log("migaja 6");
                     // file.filters.push(filter);
                     file.filters[0].matrix= colorMatrix;
+                    
                     console.log("FABRIC IMAGEN 5", file);
                     file.applyFilters();
                     console.log("migaja 7");
