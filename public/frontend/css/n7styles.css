@@ -104,11 +104,19 @@ section{
 
 .btn-delete{
     width:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 7px;
+    border:1px solid var(--gray) !important;
+    background-color:#fff;
+    font-size:1.25rem;
+    box-shadow: var(--shadow);
 }
 .btn-delete img{
     width:100%;
 }
-/* --------------------------- Colores --------------------------- */
+/* --------------------------- Colores del vaso --------------------------- */
 .color-table {
     display: none;
     /* position: absolute; */
@@ -142,6 +150,8 @@ section{
 
 .accordion-button{
     padding:5px 10px;
+    box-shadow: var(--shadow);
+
 }
 .accordion-body .option-color{
     display:flex;
@@ -168,6 +178,9 @@ section{
 .accordion-body .option-color .color-title{
     margin-bottom:0;
 }
+
+/* ------------------------------- Colores del Diseño -------------------------------- */
+
 .color-cube{
     width:20px;
     height:20px;
@@ -220,6 +233,67 @@ section{
     width: 20px;
     height: 20px;
     cursor: pointer;
+}
+
+/* Switch para cambiar entre modo individual y global*/
+.container-msg-switch{
+    display:flex;
+    flex-direction: column;
+}
+.msg-switch{
+    /* color:var(--border2); */
+    /* font-weight:bold; */
+    /* font-size:.8em; */
+    text-align:center;
+}
+/* The switch - the box around the slider */
+.switch {
+    font-size: 16px; /* Ajusta el tamaño de la fuente según tus necesidades */
+    position: relative;
+    display: inline-block;
+    width: 2.5em; /* Ajusta el ancho según tus necesidades */
+    height: 1.5em; /* Ajusta la altura según tus necesidades */
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cc1100;
+    transition: .4s;
+    border-radius: 8px; /* Ajusta el radio de la esquina según tus necesidades */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.1em; /* Ajusta la altura según tus necesidades */
+    width: 1.1em; /* Ajusta el ancho según tus necesidades */
+    border-radius: 6px; /* Ajusta el radio de la esquina según tus necesidades */
+    left: 0.2em; /* Ajusta la posición izquierda según tus necesidades */
+    bottom: 0.2em; /* Ajusta la posición inferior según tus necesidades */
+    transform: rotate(270deg);
+    background-color: rgb(255, 255, 255);
+    transition: .4s;
+}
+
+.switch input:checked + .slider {
+    background-color: #21cc4c;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(0.9em); /* Ajusta la posición X según tus necesidades */
 }
 /* --------------------------- Textos --------------------------- */
 #nuevo-texto{
