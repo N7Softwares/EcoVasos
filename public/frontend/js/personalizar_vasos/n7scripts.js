@@ -75,6 +75,7 @@ const colorPicker = document.getElementById('color-picker'); // Asumiendo que ti
 
 imageUpload.addEventListener('change', (event) => {
     const file = event.target.files[0];
+    console.log("FABRIC IMAGEN 2", file);
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
@@ -100,9 +101,11 @@ imageUpload.addEventListener('change', (event) => {
 });
 
 const addColorPicker = (fabricImage) => {
+    console.log("FABRIC IMAGEN 3", fabricImage);
     colorPicker.addEventListener('input', (event) => {
         const newColor = event.target.value;
         fabricImage.set({ fill: newColor });
+        console.log("FABRIC IMAGEN 4", fabricImage);
         canvas.renderAll();
     });
 }
@@ -269,21 +272,58 @@ const crearPaletaColores = ()=>{
 // Ejecutando funcion para crear paleta de colores
 crearPaletaColores();
 
+
+// Ejecutar funcion para cambiar color a todos los elementos
+
 // Funcion para cambiar color a todos los elementos
 const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
-
     const paletaColores = document.querySelectorAll(".paleta-color");
-    
     const scopeColorCheck = document.getElementById("scopeColor");
 
-    paletaColores.forEach(color =>{
-        // Cuando se da click en cualquier color
-        color.addEventListener("click",()=>{
+    const addColorPickerToImage = (file, color) => {
+        console.log("migaja 0", color.style.backgroundColor);
+        const colorMatrix = rgbToMatrix(color.style.backgroundColor);
+        console.log("color de la matrix", colorMatrix);
+        if (file) {
+            console.log("migaja 1");
 
+                console.log("migaja 3");
+
+
+                console.log("migaja 4");
+                    console.log("migaja 5");
+                    // const filter = file.filters.ColorMatrix({
+                    //     matrix: [
+                    //         color[0] / 255, 0, 0, 0, 0,  // Rojo
+                    //         0, color[1] / 255, 0, 0, 0,  // Verde
+                    //         0, 0, color[2] / 255, 0, 0,  // Azul
+                    //         0, 0, 0, 1, 0  // Alpha
+                    //     ]
+                    // });
+                    console.log("migaja 6");
+                    // file.filters.push(filter);
+                    file.filters[0].matrix= colorMatrix;
+                    
+                    console.log("FABRIC IMAGEN 5", file);
+                    file.applyFilters();
+                    console.log("migaja 7");
+                    canvas.add(file);
+                    canvas.renderAll();
+                    addColorPicker(file);
+                    console.log("migaja 8");
+      
+            // reader.readAsDataURL(file);
+        }
+    };
+
+    paletaColores.forEach(color => {
+        // Cuando se da click en cualquier color
+        color.addEventListener("click", () => {
             const selectedColor = color.style.backgroundColor;
-            // si scopeColorCheck esta activo significa que los colores se cambian individualmente
-            if(scopeColorCheck.checked){
+
+            // Si scopeColorCheck está activo significa que los colores se cambian individualmente
+            if (scopeColorCheck.checked) {
                 const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
                 // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
@@ -293,26 +333,73 @@ const cambiarColorATodos = () => {
                 }else{
                     activeObject.set('fill', selectedColor);
                 }
-
-            }else{
+                // Verifica si el objeto seleccionado es una imagen
+                if (activeObject && activeObject.type === 'image') {
+                    // Cambia el color de la imagen directamente
+                    activeObject.set({ fill: selectedColor });
+                    addColorPickerToImage(activeObject, color);
+                } else {
+                    // Si no es una imagen, cambia el color normalmente
+                    activeObject.set('fill', selectedColor);
+                }
+            } else {
                 // Recorre todos los objetos en el lienzo
                 canvas.forEachObject(obj => {
-                    // Aplica la acción que desees, por ejemplo, cambiar el color
-                
-                    obj.set('fill', selectedColor);
-                    handleColorChange(selectedColor);
+                // Aplica la acción que desees, por ejemplo, cambiar el color
+            
+                obj.set('fill', selectedColor);
+                handleColorChange(selectedColor);
 
                 });
+                // Recorre todos los objetos en el lienzo
+                canvas.forEachObject(obj => {
+                    // Verifica si el objeto es una imagen
+                    if (obj.type === 'image') {
+                        // Cambia el color de la imagen directamente
+                        obj.set({ fill: selectedColor });
+                        addColorPickerToImage(obj, color);
+                    } else {
+                        // Si no es una imagen, cambia el color normalmente
+                        obj.set('fill', selectedColor);
+                    }
+                });
             }
-
-            // Estableciendo el color actual
             colorActualTD.style.backgroundColor=selectedColor;
             canvas.renderAll();
-        })
-    })
+        });
+    });
 }
+const rgbToMatrix = (color) => {
+    // Parsear el color RGB
+    const match = color.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+    if (!match) {
+        throw new Error('Formato de color no válido');
+    }
+
+    // Obtener los componentes de color
+    const red = parseInt(match[1]);
+    const green = parseInt(match[2]);
+    const blue = parseInt(match[3]);
+
+    // Normalizar los componentes a valores entre 0 y 1
+    const normalizedRed = red / 255;
+    const normalizedGreen = green / 255;
+    const normalizedBlue = blue / 255;
+
+    // Construir la matriz de filtro
+    const matrix = [
+        normalizedRed, 0, 0, 0, 0,
+        0, normalizedGreen, 0, 0, 0,
+        0, 0, normalizedBlue, 0, 0,
+        0, 0, 0, 1, 0
+    ];
+
+    return matrix;
+};
 // Ejecutar funcion para cambiar color a todos los elementos
 cambiarColorATodos();
+
+
 
 //-----------------------------MEDIDOR---------------------------
 let imagenAgregada = false;

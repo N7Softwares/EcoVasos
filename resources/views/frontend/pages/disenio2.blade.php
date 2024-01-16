@@ -275,7 +275,7 @@
                             <div class="contenido-side" id="subir-archivo-content" style="display: none;">
                                 <!--------------------------- Para subir foto --------------------------->
                                 <h4>Subir Imagen</h4>
-                                <input type="file" id="image-upload" accept="image/png, image/jpeg"S>
+                                <input type="file" id="image-upload" accept="image/png, image/jpeg">
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
                                 <!--------------------------- Para seleccionar figura --------------------------->
@@ -336,12 +336,12 @@
                                     alt=""
                                 /> --}}
                                 
-                                <div id="colorPalette" class="color-palette">
+                                {{-- <div id="colorPalette" class="color-palette">
                                     <div class="color-button" style="background-color: #000000" onclick="handleColorChange('#000000')"></div>
                                     <div class="color-button" style="background-color: #F93822" onclick="handleColorChange('#F93822')"></div>
                                     <div class="color-button" style="background-color: #FBE122" onclick="handleColorChange('#FBE122')"></div>
                                     <div class="color-button" style="background-color: #0072CE" onclick="handleColorChange('#0072CE')"></div>
-                                </div>
+                                </div> --}}
                                 <div id="svgHidden" style="display: none;">
                                 <!-- <'?'xml version="1.0"?> -->
 
