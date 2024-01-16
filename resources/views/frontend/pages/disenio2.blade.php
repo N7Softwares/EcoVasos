@@ -240,6 +240,14 @@
                                 <div class="mb-3">
                                     <h4 class="text-center">Colores del diseño</h4>
                                     <div class="">
+                                        <div class="mb-2 container-msg-switch">
+                                        <h6 class="msg-switch">Colores Globales</h6>
+                                        <label class="switch">
+                                            <input type="checkbox" id="scopeColor">
+                                            <span class="slider"></span>
+                                        </label>
+                                        </div>
+                                        
                                         <h6>Colores Actuales</h6>
                                         <table style="width:20px;">
                                             <td id="color-actual" style="background-color: blue;"></td>
@@ -356,9 +364,14 @@
                     <canvas id="canvas" width="800" height="350"></canvas>
                 </div>
                 <div class=" bg-white col-rightSide border">
-                    <h5>Color del Elemento</h5>
-
+                    <div class="img-delete">
+                        <button class="btn btn-delete" id="btn-delete">
+                            <img src="{{asset('frontend/img/personalizacion_vasos/delete.svg')}}" alt="" srcset="">
+                        </button>
+                    </div>    
+                    
                     <div id="color-table" class="color-table">
+                        <h6>Color del Elemento</h6>
                         <table>
                             <tr>
                                 <td style="background-color: red;"></td>
@@ -374,11 +387,7 @@
                             </tr>
                         </table>
                     </div>
-                    <div class="border img-delete">
-                        <button class="btn btn-dark btn-delete">
-                            <img src="{{asset('frontend/img/personalizacion_vasos/delete.svg')}}" alt="" srcset="">
-                        </button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

@@ -4,6 +4,8 @@
 
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
+// --------------- btn-delete ------------------
+const btnDelete = document.getElementById("btn-delete");
 
 // set background default
 canvas.setBackgroundColor("#fff");
@@ -23,13 +25,43 @@ optionColor.forEach(option=>{
 document.addEventListener('keydown', (event) => {
     if (event.key === 'Delete') {
         const activeObject = canvas.getActiveObject();
-        if (activeObject) {
+        // Verifica si el activeObject es un array
+        if(activeObject.type === "activeSelection"){
+            // Para eliminar multiples elementos seleccionados 
+            activeObject._objects.forEach(element =>{
+                // Eliminar el elemento
+                canvas.remove(element);
+                // Desseleccionar todos los objetos en el canvas
+                canvas.discardActiveObject();
+                canvas.requestRenderAll();
+            })
+        }else{
+            // Eliminar un unico elemento
             canvas.remove(activeObject);
         }
         canvas.renderAll();
     }
 });
-
+// para eliminar con el boton btnDelete
+btnDelete.addEventListener("click", ()=>{
+    const activeObject = canvas.getActiveObject();
+        if (activeObject) {
+            // Verifica si el activeObject es un array
+            if(activeObject.type === "activeSelection"){
+                // Para eliminar multiples elementos seleccionados 
+                activeObject._objects.forEach(element =>{
+                    canvas.remove(element);
+                    // Desseleccionar todos los objetos en el canvas
+                    canvas.discardActiveObject();
+                    canvas.requestRenderAll();
+                })
+            }else{
+                // Eliminar un unico elemento
+                canvas.remove(activeObject);
+            }
+        }
+        canvas.renderAll();
+})
 // Cambiar la figura en el lienzo según la selección del usuario
 const shapeSelector = document.getElementById('shape-selector');
 shapeSelector.addEventListener('change', () => {
@@ -114,7 +146,7 @@ const drawShape = (shape) => {
         canvas.add(newShape);
         canvas.renderAll();
         // Aca se les agrega todas las funciones a los objetos
-        addColorPickerShape(newShape);
+        // addColorPickerShape(newShape);
         colorActual(newShape);
     }
 }
@@ -141,30 +173,6 @@ const createStar = (options) => {
     return star;
 }
 
-// Función para agregar un cuadro de selección de colores al objeto
-const addColorPickerShape = (object) => {
-    object.on('mousedown', (event) => {
-        selectedObject = object;
-        showColorTable(event);
-    });
-}
-
-// Función para mostrar la tabla de colores
-const showColorTable = (event) => {
-    const colorTable = document.getElementById('color-table');
-    colorTable.style.left = `${event.clientX}px`;
-    colorTable.style.top = `${event.clientY}px`;
-    colorTable.style.display = 'block';
-
-    // Agregar evento de clic para seleccionar un color de la tabla
-    colorTable.addEventListener('click', (e) => {
-        if (e.target.tagName === 'TD') {
-            const selectedColor = e.target.style.backgroundColor;
-            selectedObject.set('fill', selectedColor);
-            canvas.renderAll();
-        }
-    });
-}
 
 // Función para ocultar la tabla de colores cuando se deselecciona el objeto
 canvas.on('selection:cleared', () => {
@@ -262,17 +270,30 @@ const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
 
     const paletaColores = document.querySelectorAll(".paleta-color");
+    
+    const scopeColorCheck = document.getElementById("scopeColor");
+
     paletaColores.forEach(color =>{
         // Cuando se da click en cualquier color
         color.addEventListener("click",()=>{
 
             const selectedColor = color.style.backgroundColor;
-            // Recorre todos los objetos en el lienzo
-            canvas.forEachObject(obj => {
+            // si scopeColorCheck esta activo significa que los colores se cambian individualmente
+            if(scopeColorCheck.checked){
+                const activeObject = canvas.getActiveObject();
+                activeObject.set('fill', selectedColor);
+            }else{
+                // Recorre todos los objetos en el lienzo
+                canvas.forEachObject(obj => {
                     // Aplica la acción que desees, por ejemplo, cambiar el color
-                    
+                
                     obj.set('fill', selectedColor);
                 });
+            }
+
+            
+            
+            
         // Para cambiar el color en la imagen de MEDIDA
             handleColorChange(selectedColor);
             colorActualTD.style.backgroundColor=selectedColor;
@@ -357,6 +378,7 @@ const fontSizeSelect = document.getElementById('fontSizeSelect');
 const cursivaBtn = document.getElementById("cursivaBtn");
 const negritaBtn = document.getElementById("negritaBtn");
 
+
 // Función para agregar un nuevo objeto Text al lienzo
 function agregarTextoAlCanvas(texto) {
     const textoPorDefecto = texto || 'Nuevo Texto';
@@ -373,9 +395,12 @@ function agregarTextoAlCanvas(texto) {
     canvas.add(newText);
     canvas.setActiveObject(newText);
     canvas.renderAll();
-
+    // Aca se les agrega todas las funciones a los objetos
+    // addColorPickerShape(newText);
+    colorActual(newText);
     // Llena automáticamente el textarea con el contenido del nuevo texto
     textEditor.value = newText.text;
+    
 }
 
 // Definir los valores de tamaño de fuente disponibles
@@ -460,7 +485,11 @@ const actualizarSeleccion = (objetoSeleccionado) => {
         }else{
             negritaBtn.classList.remove("btnActivated");
         }
+
+        
     } 
+    // --------- Btn Delete --------
+    btnDelete.disabled=false;
 }
 
 // Escucha el evento de selección de objetos en el lienzo
@@ -491,6 +520,10 @@ canvas.on('selection:cleared',  ()=> {
     negritaBtn.disabled=true;
     negritaBtn.classList.remove("btnActivated");
     cursivaBtn.classList.remove("btnActivated");
+
+    // btn delete
+    // --------------- btn-delete ------------------
+    btnDelete.disabled=true;
 
 });
 
@@ -633,3 +666,20 @@ const sideBar = () => {
 
 // Ejecutando funcion del sideBar dinamico
 sideBar();
+
+// codigo para el check de los colores
+const checkValue = ()=>{
+    const scopeColorCheck = document.getElementById("scopeColor");
+    const msgSwitch = document.querySelector(".msg-switch");
+
+    scopeColorCheck.addEventListener(("change"), ()=>{
+        // console.log(scopeColorCheck.checked);
+        if(scopeColorCheck.checked){
+            msgSwitch.textContent="Colores Individuales";
+        }else{
+            msgSwitch.textContent="Colores Globales";
+        }
+    })
+}
+// Ejecutando la funcion para el check de los colores
+checkValue();
