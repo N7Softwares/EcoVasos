@@ -122,7 +122,7 @@
                         </div>
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="temas-content" style="display: none;">
-                                <p>Temas :p</p>
+                                <p>Temas</p>
                             </div>
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">
                                 <!--------------- Para cambiar el color del fondo --------------------->
@@ -275,7 +275,7 @@
                             <div class="contenido-side" id="subir-archivo-content" style="display: none;">
                                 <!--------------------------- Para subir foto --------------------------->
                                 <h4>Subir Imagen</h4>
-                                <input type="file" id="image-upload" accept="image/png, image/jpeg"S>
+                                <input type="file" id="image-upload" accept="image/png, image/jpeg">
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
                                 <!--------------------------- Para seleccionar figura --------------------------->

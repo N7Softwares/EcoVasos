@@ -272,42 +272,78 @@ crearPaletaColores();
 // Funcion para cambiar color a todos los elementos
 const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
-
     const paletaColores = document.querySelectorAll(".paleta-color");
-    
-    const scopeColorCheck = document.getElementById("scopeColor");
 
-    paletaColores.forEach(color =>{
+    paletaColores.forEach(color => {
         // Cuando se da click en cualquier color
-        color.addEventListener("click",()=>{
-
+        color.addEventListener("click", () => {
             const selectedColor = color.style.backgroundColor;
+
             // si scopeColorCheck esta activo significa que los colores se cambian individualmente
-            if(scopeColorCheck.checked){
-                const activeObject = canvas.getActiveObject();
-                activeObject.set('fill', selectedColor);
-            }else{
-                // Recorre todos los objetos en el lienzo
-                canvas.forEachObject(obj => {
-                    // Aplica la acción que desees, por ejemplo, cambiar el color
-                
-                    obj.set('fill', selectedColor);
-                });
+            if (scopeColorCheck.checked) {
+                cambiarColorImagenSeleccionada(selectedColor);
+            } else {
+                cambiarColorATodos(selectedColor);
             }
 
-            
-            
-            
-        // Para cambiar el color en la imagen de MEDIDA
+            // Para cambiar el color en la imagen de MEDIDA
             handleColorChange(selectedColor);
-            colorActualTD.style.backgroundColor=selectedColor;
-            canvas.renderAll();
-        })
-    })
-}
-// Ejecutar funcion para cambiar color a todos los elementos
-cambiarColorATodos();
+            colorActualTD.style.backgroundColor = selectedColor;
+        });
+    });
+};
 
+// Ejecutar funcion para cambiar color a todos los elementos
+
+
+function cambiarColorImagenSeleccionada(selectedColor) {
+    const activeObject = canvas.getActiveObject();
+    if (activeObject) {
+        activeObject.set('fill', selectedColor);
+        canvas.renderAll();
+    }
+}
+
+function cambiarColorATodos(selectedColor) {
+    const scopeColorCheck = document.getElementById("scopeColor");
+
+    // Recorre todos los objetos en el lienzo
+    canvas.forEachObject(obj => {
+        // Aplica la acción que desees, por ejemplo, cambiar el color
+        obj.set('fill', selectedColor);
+    });
+
+    // También cambia el color de la imagen seleccionada, si hay alguna
+    cambiarColorImagenSeleccionada(selectedColor);
+
+    canvas.renderAll();
+}
+
+
+// Funcion para cambiar color a todos los elementos
+const cambiarColorATodoss = () => {
+    const colorActualTD = document.getElementById("color-actual");
+    const paletaColores = document.querySelectorAll(".paleta-color");
+
+    paletaColores.forEach(color => {
+        // Cuando se da click en cualquier color
+        color.addEventListener("click", () => {
+            const selectedColor = color.style.backgroundColor;
+
+            // si scopeColorCheck esta activo significa que los colores se cambian individualmente
+            if (scopeColorCheck.checked) {
+                cambiarColorImagenSeleccionada(selectedColor);
+            } else {
+                cambiarColorATodos(selectedColor);
+            }
+
+            // Para cambiar el color en la imagen de MEDIDA
+            handleColorChange(selectedColor);
+            colorActualTD.style.backgroundColor = selectedColor;
+        });
+    });
+};
+cambiarColorATodos();
 //-----------------------------MEDIDOR---------------------------
 let imagenAgregada = false;
 let currentImage;
