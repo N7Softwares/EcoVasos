@@ -4,8 +4,12 @@
 
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
-// --------------- btn-delete ------------------
+// --------------- colRight sideBar ------------------
 const btnDelete = document.getElementById("btn-delete");
+const copyPasteBtn = document.getElementById("duplicateButton");
+const mirrorBtn = document.getElementById("mirrorHorizontalButton");
+// Botón de voltear verticalmente
+const flipVertBtn = document.getElementById("flipVerticalButton");
 
 // set background default
 canvas.setBackgroundColor("#fff");
@@ -172,30 +176,6 @@ const createStar = (options) => {
     const star = new fabric.Path('M 0 0 L 10 30 L 40 30 L 15 50 L 25 80 L 0 60 L -25 80 L -15 50 L -40 30 L -10 30 Z', options);
     return star;
 }
-
-
-// Función para ocultar la tabla de colores cuando se deselecciona el objeto
-canvas.on('selection:cleared', () => {
-    const colorTable = document.getElementById('color-table');
-    colorTable.style.display = 'none';
-});
-
-// Para descargar el contenido del lienzo en forma de pdf
-// const downloadButton = document.getElementById('download-pdf');
-// downloadButton.addEventListener('click', () => {
-//     const pdfOptions = {
-//         jsPDF: {
-//             unit: 'mm',
-//             format: 'a4',
-//             orientation: 'portrait'
-//         },
-//         html2canvas: {
-//             scale: 2
-//         },
-//     };
-
-//     html2pdf().from(canvas.getElement(), pdfOptions).save('lienzo.pdf');
-// });
 
 // generar paleta de colores aleatorios
 const generarPaletaDeColores = (cantidad) => {
@@ -494,8 +474,11 @@ const actualizarSeleccion = (objetoSeleccionado) => {
 
         
     } 
-    // --------- Btn Delete --------
+    // --------- Btn colRight --------
     btnDelete.disabled=false;
+    copyPasteBtn.disabled=false;
+    mirrorBtn.disabled=false;
+    flipVertBtn.disabled=false;
 }
 
 // Escucha el evento de selección de objetos en el lienzo
@@ -527,9 +510,16 @@ canvas.on('selection:cleared',  ()=> {
     negritaBtn.classList.remove("btnActivated");
     cursivaBtn.classList.remove("btnActivated");
 
-    // btn delete
+    // colRight sideBar
     // --------------- btn-delete ------------------
     btnDelete.disabled=true;
+    // --------------- btn-duplicated ------------------
+    copyPasteBtn.disabled=true;
+    // --------------- btn-mirror ------------------
+    mirrorBtn.disabled=true;
+    // --------------- btn-giroVertical ------------------
+    flipVertBtn.disabled=true;
+
 
 });
 
@@ -601,30 +591,6 @@ agregarTextoAlCanvas('Nombre de tu marca acá');
 
 const btnPdf = document.getElementById("download-pdf");
 
-// btnPdf.addEventListener("click", () => {
-    // Deseleccionar todos los objetos en el canvas
-//     canvas.discardActiveObject();
-//     canvas.requestRenderAll();
-
-//     // Esperar un segundo antes de crear el PDF
-//     setTimeout(() => {
-//         const doc = new jsPDF('p', 'pt', 'letter');
-//         const margin = 10;
-//         const scale = (doc.internal.pageSize.width - margin * 2) / document.body.clientWidth;
-
-//         doc.html(document.querySelector('#canvas'), {
-//             x: margin,
-//             y: margin,
-//             html2canvas: {
-//                 scale: scale,
-//             },
-//             callback: function(doc) {
-//                 doc.save('canvas-content.pdf');
-//             }
-//         });
-//     }, 1000); // 1000 milisegundos (1 segundo) de espera
-// });
-
 btnPdf.addEventListener('click', () => {
     let canva = document.getElementById("canvas");
     let width = canva.width;
@@ -648,7 +614,7 @@ btnPdf.addEventListener('click', () => {
         height = pdf.internal.pageSize.getHeight();
         pdf.addImage(canva, 'PNG', 0, 0, width, height);
         pdf.save("vaso-personalizado.pdf");
-    }, 500); // 1000 milisegundos (1 segundo) de espera
+    }, 500); // 500 milisegundos (0.5 segundo) de espera
 
     
 });
@@ -716,3 +682,73 @@ const checkValue = ()=>{
 }
 // Ejecutando la funcion para el check de los colores
 checkValue();
+
+// ------------- Right COl sideBar ---------------
+
+let _clipboard = null; // Variable para el portapapeles
+
+const CopyAndPaste = () => {
+    const activeObject = canvas.getActiveObject();
+
+    if (!activeObject) {
+        // console.log("Selecciona un objeto para copiar.");
+        return;
+    }
+
+    // Copiar y Pegar
+    activeObject.clone(function (clonedObj) {
+        canvas.discardActiveObject();
+        clonedObj.set({
+            left: clonedObj.left + 10,
+            top: clonedObj.top + 10,
+            evented: true,
+        });
+
+        if (clonedObj.type === 'activeSelection') {
+            // Selección activa necesita una referencia al canvas.
+            clonedObj.canvas = canvas;
+            clonedObj.forEachObject(function (obj) {
+                canvas.add(obj);
+            });
+            // Para solucionar la falta de selección
+            clonedObj.setCoords();
+        } else {
+            canvas.add(clonedObj);
+        }
+
+        _clipboard = clonedObj; // Actualizar el portapapeles
+        canvas.setActiveObject(clonedObj);
+        canvas.requestRenderAll();
+        // console.log("Objeto copiado y pegado.");
+    });
+}
+// Funcion para girar horizontalmente los elementos
+const modoEspejo = () => {
+    let activeObject = canvas.getActiveObject();
+
+    if (activeObject) {
+        activeObject.set('flipX', !activeObject.flipX); // Cambia el estado del espejo horizontal
+        canvas.renderAll();
+    } else {
+        console.log("Selecciona un objeto para aplicar el espejo horizontal.");
+    }
+}
+// Funcion para girar verticalmente los elementos
+const giroVertical = () => {
+    let activeObject = canvas.getActiveObject();
+
+    if (activeObject) {
+        // Voltea verticalmente el objeto
+        activeObject.set({ scaleY: -1 * activeObject.scaleY });
+        canvas.renderAll();
+    } else {
+        console.log("Selecciona un objeto para voltear verticalmente.");
+    }
+}
+
+flipVertBtn.addEventListener('click', giroVertical);
+// Asigna la función al evento click del botón
+copyPasteBtn.addEventListener('click', CopyAndPaste);
+// Botón de espejo horizontal
+mirrorBtn.addEventListener('click', modoEspejo);
+
