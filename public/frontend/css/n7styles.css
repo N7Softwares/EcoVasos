@@ -45,11 +45,12 @@ section{
 .col-rightSide{
 	width:16%;
     /* border:1px solid red; */
-    padding:20px 10px;
+    padding: 20px 10px;
+    display:flex;
+    flex-direction: column;
+    gap:50px;
 }
-.col-rightSide h4, .col-rightSide h5{
-    text-align:center;
-}
+
 /* --------------------------- LeftSideBar --------------------------- */
 
 .sideLeft{
@@ -110,20 +111,33 @@ section{
     overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
 }
 /* -------------- Right-side -------------- */
-
-.btn-delete{
-    width:50px;
+.col-rightSide h4, .col-rightSide h5{
+    text-align:center;
+}
+.col-rightOpciones{
+    display: flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+.btn-rightOptions{
+    width:40px;
+    height:50px;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding: 7px;
+    padding: 2px;
     border:1px solid var(--gray) !important;
     background-color:#fff;
     font-size:1.25rem;
     box-shadow: var(--shadow);
+    transition:all .4s ease;
 }
-.btn-delete img{
+.btn-rightOptions img{
     width:100%;
+}
+.btn-rightOptions:hover{
+    background: var(--gray);
+    transition:all .4s ease;
 }
 /* --------------------------- Colores del vaso --------------------------- */
 .color-table {
@@ -398,7 +412,7 @@ section{
 #download-pdf {
     background: var(--green-fill);
     border: 1px solid var(--gree-border);
-
+    box-shadow:var(--shadow);
 }
 
 .button {
