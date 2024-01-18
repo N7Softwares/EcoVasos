@@ -11,6 +11,10 @@ const mirrorBtn = document.getElementById("mirrorHorizontalButton");
 // Botón de voltear verticalmente
 const flipVertBtn = document.getElementById("flipVerticalButton");
 
+const canvaLienzo = document.getElementById("canvas");
+// canvaLienzo.style.width="1000px";
+// canvaLienzo.style.height="400px";
+
 // set background default
 canvas.setBackgroundColor("#fff");
 canvas.renderAll();
@@ -394,8 +398,8 @@ const agregarImagen = () => {
 
         img.set({
             // Modifique los scaleX e scaleY para que encajaran con el nuevo alto del lienzo, eran 2.2 antes
-            scaleX: 1.5,
-            scaleY: 1.5,
+            scaleX: 1.75,
+            scaleY: 1.75,
             selectable: true,
             lockScalingX: true,
             lockScalingY: true,
