@@ -33,22 +33,29 @@ section{
 /* col flexbox para la interfaz de usuario */
 .col-sideLeft{
 	width:22%;
+    border-radius:7px;
 }
 
 .col-main{
-	width:62%;
+	/* width:62%; */
+	width:78%;
     display:flex;
-    justify-content:center;
-    align-items:center;
+    flex-direction:column;
+    /* justify-content:center; */
+    /* align-items:center; */
+    gap:30px;
 }
 
 .col-rightSide{
-	width:16%;
+	/* width:16%; */
+	width:100%;
     /* border:1px solid red; */
     padding: 20px 10px;
     display:flex;
-    flex-direction: column;
+    justify-content:space-evenly;
+    /* flex-direction: column; */
     gap:50px;
+    border-radius:7px;
 }
 
 /* --------------------------- LeftSideBar --------------------------- */
@@ -86,7 +93,7 @@ section{
     transition:all .4s ease;
 }
 .bloq-side:hover{
-    background:var(--border) !important;
+    background:var(--gray) !important;
     transition:all .4s ease;
 }
 
@@ -118,6 +125,8 @@ section{
     display: flex;
     flex-wrap:wrap;
     gap:10px;
+    /* varsion horizontal */
+    justify-content:center;
 }
 .btn-rightOptions{
     width:40px;
@@ -186,7 +195,7 @@ section{
 }
 .accordion-body .option-color:hover{
     transition:all .4s ease;
-    background: var(--border);
+    background: var(--gray);
 }
 .option-color .options-container{
     width:80%;

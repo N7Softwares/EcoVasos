@@ -64,12 +64,12 @@
         
     </div>
     </section>
-    <section class="border">
-        <div class="container-fluid container-main border ">
-            <div class="row border ">
+    <section class="">
+        <div class="container-fluid container-main ">
+            <div class="row ">
                 <div class=" col-sideLeft border bg-white">
                     <div class="row">
-                        <div class="col-3 sideLeft border ">
+                        <div class="col-3 sideLeft ">
                             <!-- <div class=" border border-success"> -->
                                 <div class="bloq-side" data-target="temas">
                                     <div class="img-bloq-side">
@@ -362,12 +362,9 @@
                         </div>
 
                         </div>
-                <div class=" col-main border">
-                    <!--------------------------- Elemento Canva --------------------------->
-                    <canvas id="canvas" width="800" height="350"></canvas>
-                </div>
+                <div class=" col-main">
                 <div class=" bg-white col-rightSide border">
-                    <div>
+                    <div class="right-functions">
                         <h5>Modificar Texto y Elementos</h5>
                         <div class="col-rightOpciones">
                             <button class="btn btn-rightOptions" id="btn-delete" title="Borrar Elemento">
@@ -384,7 +381,7 @@
                             </button>
                         </div>  
                     </div>  
-                    <div class="mt-3 mb-3">
+                    <div class="right-functions">
                         <!--------------------------- Para descargar como pdf --------------------------->
                         <h5>Descargar como PDF</h5>
                                 <button class="button" type="button" id="download-pdf" >
@@ -393,6 +390,10 @@
                                 </button>
                     </div>
                 </div>
+                    <!--------------------------- Elemento Canva --------------------------->
+                    <canvas id="canvas" width="1000" height="400"></canvas>
+                </div>
+                
             </div>
         </div>
     </section>
