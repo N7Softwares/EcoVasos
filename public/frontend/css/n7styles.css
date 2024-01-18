@@ -497,3 +497,37 @@ section{
     cursor: pointer;
     border: 1px solid #ccc;
 }
+
+/*-------------------------- GALERIA ----------------------------*/
+
+/* Estilos CSS en tu archivo de estilos o en línea */
+.galeria {
+    display: flex;
+    overflow: hidden;
+}
+
+.galeria-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease;
+}
+
+.galeria-prev {
+    position: absolute;
+    top: 26%;
+    left: 6.5%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.galeria-next {
+    position: absolute;
+    top: 26%;
+    left: 20.5%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}

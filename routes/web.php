@@ -19,7 +19,7 @@
     use App\Http\Controllers\ImagesCategoryController;
     use App\Http\Controllers\InspirateController;
     use App\Http\Controllers\ElementController;
-
+    use App\Http\Controllers\DisenioController;
     /*
     |--------------------------------------------------------------------------
     | Web Routes
@@ -124,6 +124,7 @@
 Route::get('/disenio', function () {
     return view('frontend.pages.disenio2');
 })->name('disenio');
+Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
 // Backend section start
 
     Route::group(['prefix' => '/admin', 'middleware' => ['auth', 'admin']], function () {
