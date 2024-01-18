@@ -116,6 +116,7 @@ section{
     padding: 20px 0;
     max-height: 600px;
     overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    overflow-x: hidden !important;
 }
 /* -------------- Right-side -------------- */
 .col-rightSide h4, .col-rightSide h5{
@@ -505,4 +506,78 @@ section{
     height: 30px;
     cursor: pointer;
     border: 1px solid #ccc;
+}
+
+/*-------------------------- GALERIA ----------------------------*/
+
+/* Estilos CSS en tu archivo de estilos o en línea */
+/* .galeria {
+    display: flex;
+    transition: transform 0.5s ease;
+        
+}
+
+.galeria-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease;
+
+}
+
+.galeria-prev {
+    position: absolute;
+    top: 26%;
+    left: 6.5%;
+    color: #cc1100;
+    transform: translateY(-50%);
+    font-size: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 99;
+}
+.galeria-next {
+    position: absolute;
+    top: 26%;
+    color: #cc1100;
+    left: 20.5%;
+    transform: translateY(-50%);
+    font-size: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 99;
+} */
+.galeria-container {
+    position: relative;
+}
+
+.galeria {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.galeria-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease;
+}
+
+.galeria-prev,
+.galeria-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 44px;
+    color: #cc1100;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.galeria-prev {
+    left: 0;
+}
+
+.galeria-next {
+    right: 0;
 }

@@ -911,3 +911,35 @@ copyPasteBtn.addEventListener('click', CopyAndPaste);
 // Botón de espejo horizontal
 mirrorBtn.addEventListener('click', modoEspejo);
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    const galeriaContainers = document.querySelectorAll('.galeria-container');
+
+    galeriaContainers.forEach(function(container) {
+        const galeria = container.querySelector('.galeria');
+        const galeriaItems = container.querySelectorAll('.galeria-item');
+        const galeriaPrev = container.querySelector('.galeria-prev');
+        const galeriaNext = container.querySelector('.galeria-next');
+
+        let currentIndex = 0;
+
+        galeriaPrev.addEventListener('click', function() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                actualizarGaleria();
+            }
+        });
+
+        galeriaNext.addEventListener('click', function() {
+            if (currentIndex < galeriaItems.length - 1) {
+                currentIndex++;
+                actualizarGaleria();
+            }
+        });
+
+        function actualizarGaleria() {
+            const translateXValue = -currentIndex * 150 + 'px'; // Ancho de cada imagen
+            galeria.style.transform = 'translateX(' + translateXValue + ')';
+        }
+    });
+});

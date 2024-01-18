@@ -23,6 +23,7 @@
 </head>
 
 <body>
+
     <section>
     <div class="container border">
         <!-- Contenido de las opciones -->
@@ -122,12 +123,29 @@
                         </div>
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="temas-content" style="display: none;">
-                                <p>>>>>Temas</p>
+                                <h4 class="text-center">Temas</h4>
+                                @foreach ($inspirates->groupBy('category.image_type') as $categoria => $imagenes)
+                                    <div class="galeria-container px-3">
+                                        <h6 class="mt-3">{{ $categoria }}</h6>
+                                        <div class="galeria">
+                               
+                                                @foreach ($imagenes as $inspirate)
+                                                    <div class="galeria-item d-flex align-self-center">
+                                                        <img width="130" class="mx-2" src="{{ asset($inspirate->url) }}" alt="Inspiración">
+                                                    </div>
+                                                @endforeach
+                                  
+                                        </div>
+                                        <button class="galeria-prev">&#8249;</button>
+                                        <button class="galeria-next">&#8250;</button>
+                                    </div>
+                                @endforeach
+                                
                             </div>
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">
                                 <!--------------- Para cambiar el color del fondo --------------------->
                                 
-                                <h4>Color del Vaso</h4>
+                                <h4 class="text-center">Color del Vaso</h4>
                                 <div class="mb-3">
 
                                     <div class="accordion" id="accordionExample">
@@ -267,12 +285,12 @@
                             </div>
                             <div class="contenido-side" id="subir-archivo-content" style="display: none;">
                                 <!--------------------------- Para subir foto --------------------------->
-                                <h4>Subir Imagen</h4>
+                                <h4 class="text-center">Subir Imagen</h4>
                                 <input type="file" id="image-upload" accept="image/png, image/jpeg">
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
                                 <!--------------------------- Para seleccionar figura --------------------------->
-                                <h4>Seleccionar Figura:</h4>
+                                <h4 class="text-center">Seleccionar Figura:</h4>
                                 <select id="shape-selector">
                                     <option value="square">Cuadrado</option>
                                     <option value="triangle">Triángulo</option>
@@ -282,7 +300,7 @@
                             </div>
                             <div class="contenido-side" id="textos-content" style="display: none;">
                                 <div class="col-texts">
-                                    <h4>Agregar Texto</h4>
+                                    <h4 class="text-center">Agregar Texto</h4>
                                     <button id="nuevo-texto">Agregar Nuevo Texto</button>
                                     <textarea id="text-editor" placeholder="Texto"></textarea>
                                         <div class="container-fonts">
@@ -317,7 +335,7 @@
                             </div>
                             <div class="contenido-side" id="medidor-content" style="display: none;">
                                 <!--------------------------- Para agregar medidor --------------------------->
-                                <h4>Medidor</h4>
+                                <h4 class="text-center">Medidor</h4>
                                 <!-- Botones para agregar/eliminar la imagen -->
                                 <div class="d-flex flex-column gap-2">
                                     <button id="agregarBtn" onclick="agregarImagen()" class="btn-general">Agregar</button>
