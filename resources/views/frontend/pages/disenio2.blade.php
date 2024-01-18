@@ -124,17 +124,22 @@
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="temas-content" style="display: none;">
                                 <h4 class="text-center">Temas</h4>
-
-                                <div class="galeria px-3">
-                                    @foreach ($inspirates as $index => $inspirate)
-                                        <div class="galeria-item d-flex align-self-center" data-index="{{ $index }}">
-                                            <img width="100" class="mx-1" src="{{ asset($inspirate->url) }}" alt="Inspiración">
+                                @foreach ($inspirates->groupBy('category.image_type') as $categoria => $imagenes)
+                                    <div class="galeria-container px-3">
+                                        <h6 class="mt-3">{{ $categoria }}</h6>
+                                        <div class="galeria">
+                               
+                                                @foreach ($imagenes as $inspirate)
+                                                    <div class="galeria-item d-flex align-self-center">
+                                                        <img width="130" class="mx-2" src="{{ asset($inspirate->url) }}" alt="Inspiración">
+                                                    </div>
+                                                @endforeach
+                                  
                                         </div>
-                                    @endforeach
-                                </div>
-                                
-                                <button class="galeria-prev">&#8249;</button>
-                                <button class="galeria-next">&#8250;</button>
+                                        <button class="galeria-prev">&#8249;</button>
+                                        <button class="galeria-next">&#8250;</button>
+                                    </div>
+                                @endforeach
                                 
                             </div>
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">

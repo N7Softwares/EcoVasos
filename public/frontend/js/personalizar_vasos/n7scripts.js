@@ -849,30 +849,33 @@ mirrorBtn.addEventListener('click', modoEspejo);
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    const galeria = document.querySelector('.galeria');
-    const galeriaItems = document.querySelectorAll('.galeria-item');
-    const galeriaPrev = document.querySelector('.galeria-prev');
-    const galeriaNext = document.querySelector('.galeria-next');
+    const galeriaContainers = document.querySelectorAll('.galeria-container');
 
-    let currentIndex = 0;
+    galeriaContainers.forEach(function(container) {
+        const galeria = container.querySelector('.galeria');
+        const galeriaItems = container.querySelectorAll('.galeria-item');
+        const galeriaPrev = container.querySelector('.galeria-prev');
+        const galeriaNext = container.querySelector('.galeria-next');
 
-    galeriaPrev.addEventListener('click', function() {
-        currentIndex = (currentIndex - 1 + galeriaItems.length) % galeriaItems.length;
-        actualizarGaleria();
-    });
+        let currentIndex = 0;
 
-    galeriaNext.addEventListener('click', function() {
-        currentIndex = (currentIndex + 1) % galeriaItems.length;
-        actualizarGaleria();
-    });
-
-    function actualizarGaleria() {
-        galeriaItems.forEach((item, index) => {
-            if (index === currentIndex) {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = 'none';
+        galeriaPrev.addEventListener('click', function() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                actualizarGaleria();
             }
         });
-    }
+
+        galeriaNext.addEventListener('click', function() {
+            if (currentIndex < galeriaItems.length - 1) {
+                currentIndex++;
+                actualizarGaleria();
+            }
+        });
+
+        function actualizarGaleria() {
+            const translateXValue = -currentIndex * 150 + 'px'; // Ancho de cada imagen
+            galeria.style.transform = 'translateX(' + translateXValue + ')';
+        }
+    });
 });
