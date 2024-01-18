@@ -93,6 +93,8 @@ imageUpload.addEventListener('change', (event) => {
                 const fabricImage = new fabric.Image(img, {
                     scaleX: 0.2,
                     scaleY: 0.2,
+                    dataTarget:"subir-archivo"
+
                 });
 
                 // Convertir la imagen a blanco y negro
@@ -127,20 +129,25 @@ const drawShape = (shape) => {
             newShape = new fabric.Rect({
                 width: 50,
                 height: 50,
-                fill: valorColorActual()
+                fill: valorColorActual(),
+                dataTarget: 'elementos'
+
             });
             break;
         case 'triangle':
             newShape = new fabric.Triangle({
                 width: 50,
                 height: 50,
-                fill: valorColorActual()
+                fill: valorColorActual(),
+                dataTarget: 'elementos'
             });
             break;
         case 'circle':
             newShape = new fabric.Circle({
                 radius: 25,
-                fill: valorColorActual()
+                fill: valorColorActual(),
+                dataTarget: 'elementos'
+
             });
             break;
         case 'star':
@@ -150,7 +157,8 @@ const drawShape = (shape) => {
                 y: 25,
                 outerRadius: 25,
                 innerRadius: 10,
-                fill: valorColorActual()
+                fill: valorColorActual(),
+                dataTarget: 'elementos'
             });
             break;
         default:
@@ -406,6 +414,7 @@ const agregarImagen = () => {
             lockMovementY: true,
             left: canvas.width - img.width * 1.7 - 10,
             top: 0,
+            dataTarget:"medidor"
         });
 
         canvas.add(img);
@@ -449,6 +458,95 @@ const handleColorChange = (event) => {
     
 }
 
+//----------------------- SideBar Dinamico --------------------------
+let ultimoBloqClicado;
+// Funcion para el sideBar dinamico con las opciones
+const sideBar = () => {
+    // Almacenar la referencia al último elemento clicado
+    ultimoBloqClicado = null;
+
+    // Obtener los bloq-side y contenidos
+    const bloqSideElements = document.querySelectorAll('.bloq-side');
+    const contenidoSideElements = document.querySelectorAll('.contenido-side');
+    
+    // Estableciendo el boton "color del vaso" como default
+    ultimoBloqClicado = bloqSideElements[1];
+    
+    // Agregar evento de clic a cada bloq-side
+    bloqSideElements.forEach((bloqSideElement) => {
+        bloqSideElement.addEventListener('click', () => {
+            // Restaurar el estilo del último elemento clicado
+            if (ultimoBloqClicado) {
+                ultimoBloqClicado.style.background = 'none';
+            }
+
+            // Ocultar todos los contenidos
+            contenidoSideElements.forEach((contenidoSideElement) => {
+                contenidoSideElement.style.display = 'none';
+            });
+
+            // Obtener el data-target del bloq-side clicado
+            const targetId = bloqSideElement.getAttribute('data-target');
+
+            // Mostrar el contenido correspondiente
+            const targetContent = document.getElementById(targetId + '-content');
+            if (targetContent) {
+                targetContent.style.display = 'block';
+                // Cambiar el estilo del bloqSideElement clicado
+                bloqSideElement.style.background = '#f1f1f1';
+            }
+
+            // Actualizar la referencia al último elemento clicado
+            ultimoBloqClicado = bloqSideElement;
+        });
+    });
+};
+
+// Ejecutando funcion del sideBar dinamico
+sideBar();
+
+// Para mostrar el contenido en base los elementos seleccionados
+
+const ocultarContenidos = () => {
+    const contenidoSideElements = document.querySelectorAll('.contenido-side');
+    contenidoSideElements.forEach((contenido) => {
+        contenido.style.display = 'none';
+    });
+};
+
+const cambiarFondoBloqSide = (bloqSide, background) => {
+    bloqSide.style.background = background;
+};
+
+const mostrarContenido = (idContenido, dataTarget) => {
+    let colorActivo = false;
+
+    const bloqSideElements = document.querySelectorAll('.bloq-side');
+    bloqSideElements.forEach((bloqSide) => {
+        const bloqDataTarget = bloqSide.getAttribute('data-target');
+
+        if (bloqDataTarget === 'color-disenio' && bloqSide.style.background === 'rgb(241, 241, 241)') {
+            colorActivo = true;
+        }
+
+        if (bloqDataTarget === dataTarget && !colorActivo) {
+            cambiarFondoBloqSide(bloqSide, '#f1f1f1');
+            ultimoBloqClicado = bloqSide;
+        } else if (!colorActivo) {
+            cambiarFondoBloqSide(bloqSide, 'none');
+        }
+    });
+
+    if (!colorActivo) {
+        ocultarContenidos();
+
+        const targetContent = document.getElementById(idContenido);
+        if (targetContent) {
+            targetContent.style.display = 'block';
+        }
+    }
+};
+
 
 
 //----------------------- Para la seccion de textos --------------------------
@@ -470,7 +568,8 @@ function agregarTextoAlCanvas(texto) {
         fontSize: fontSize(),
         fontFamily: 'Arial',
         fill: valorColorActual(),
-        selectable: true
+        selectable: true,
+        dataTarget: 'textos'
     });
 
     canvas.add(newText);
@@ -574,6 +673,16 @@ const actualizarSeleccion = (objetoSeleccionado) => {
     copyPasteBtn.disabled=false;
     mirrorBtn.disabled=false;
     flipVertBtn.disabled=false;
+
+    // ------------------ Para mostrar el contenido del sidebar en base al elemento clicado -------------------
+    // Verifica que no se hayan seleccionado varios elementos a la vez
+    if(objetoSeleccionado.type!== "activeSelection"){
+        // Obtiene el data-target del objeto fabric
+        const dataTarget = objetoSeleccionado.dataTarget;
+
+        // Muestra el contenido de #textos-content y cambia el fondo de bloq-side
+        mostrarContenido(`${dataTarget}-content`, dataTarget);
+    }
 }
 
 // Escucha el evento de selección de objetos en el lienzo
@@ -714,52 +823,7 @@ btnPdf.addEventListener('click', () => {
     
 });
 
-//----------------------- SideBar Dinamico --------------------------
 
-// Funcion para el sideBar dinamico con las opciones
-const sideBar = () => {
-    // Almacenar la referencia al último elemento clicado
-    let ultimoBloqClicado = null;
-
-    // Obtener los bloq-side y contenidos
-    const bloqSideElements = document.querySelectorAll('.bloq-side');
-    const contenidoSideElements = document.querySelectorAll('.contenido-side');
-    
-    // Estableciendo el boton "color del vaso" como default
-    ultimoBloqClicado = bloqSideElements[1];
-    
-    // Agregar evento de clic a cada bloq-side
-    bloqSideElements.forEach((bloqSideElement) => {
-        bloqSideElement.addEventListener('click', () => {
-            // Restaurar el estilo del último elemento clicado
-            if (ultimoBloqClicado) {
-                ultimoBloqClicado.style.background = 'none';
-            }
-
-            // Ocultar todos los contenidos
-            contenidoSideElements.forEach((contenidoSideElement) => {
-                contenidoSideElement.style.display = 'none';
-            });
-
-            // Obtener el data-target del bloq-side clicado
-            const targetId = bloqSideElement.getAttribute('data-target');
-
-            // Mostrar el contenido correspondiente
-            const targetContent = document.getElementById(targetId + '-content');
-            if (targetContent) {
-                targetContent.style.display = 'block';
-                // Cambiar el estilo del bloqSideElement clicado
-                bloqSideElement.style.background = '#f1f1f1';
-            }
-
-            // Actualizar la referencia al último elemento clicado
-            ultimoBloqClicado = bloqSideElement;
-        });
-    });
-};
-
-// Ejecutando funcion del sideBar dinamico
-sideBar();
 
 // codigo para el check de los colores
 const checkValue = ()=>{
