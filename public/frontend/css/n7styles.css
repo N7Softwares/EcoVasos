@@ -29,7 +29,9 @@ body{
 section{
     padding:40px 0;
 }
-
+.size-texts{
+    font-size: 12px;
+}
 /* col flexbox para la interfaz de usuario */
 .col-sideLeft{
 	width:22%;
@@ -622,3 +624,100 @@ section{
     cursor: pointer;
   }
   
+
+/*-------------------------HOVER DE BOTON-------------------*/
+
+.btn3d {
+    --color: #00A97F;
+    --color2: rgb(10, 25, 30);
+    padding: 0.4em 1.75em;
+    background-color: transparent;
+    border-radius: 6px;
+    border: .3px solid var(--color);
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 17px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+   }
+   
+   .btn3d::after, .btn3d::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: var(--color);
+   }
+   
+   .btn3d::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .btn3d:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .btn3d:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+   }
+   
+   .btn3d:hover {
+    color: var(--color2);
+   }
+   
+   .btn3d:active {
+    filter: brightness(.7);
+    transform: scale(.98);
+   }
+
+   /*------------------------------UPLOAD IMAGE-------------------------------------*/
+
+   .upload-image {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    background-color: #00A97F;
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    user-select: none;
+    gap: 0.75rem;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+  }
+  
+  .upload-image:hover {
+    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+  }
+  
+  .upload-image:focus,.upload-image:active {
+    opacity: .85;
+    box-shadow: none;
+  }
+  
+  .upload-image svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .bold-text{
+    font-weight: bold;
+  }
