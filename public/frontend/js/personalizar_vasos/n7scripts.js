@@ -971,16 +971,20 @@ var span = document.getElementsByClassName('close')[0];
 // Agregar evento de clic al botón para mostrar el modal
 btn.onclick = function() {
   modal.style.display = 'block';
+  canvas.renderAll();
 };
 
 // Agregar evento de clic al botón de cerrar para ocultar el modal
 span.onclick = function() {
   modal.style.display = 'none';
+  canvas.renderAll();
 };
 
 // Cerrar el modal si el usuario hace clic fuera del contenido
 window.onclick = function(event) {
   if (event.target == modal) {
     modal.style.display = 'none';
+    canvas.renderAll();
   }
 };
+
