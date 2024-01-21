@@ -943,3 +943,44 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 });
+
+
+// var ctx = canvas.getContext('2d');
+// var miimagen = new Image();
+
+
+// function cargarImagen(url) {
+//     miimagen.src = url;
+
+//     miimagen.onload = function () {
+//         // Limpiar el lienzo antes de cargar la nueva imagen
+//         ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+//         // Dibujar la nueva imagen en el lienzo
+//         ctx.drawImage(miimagen, 0, 0);
+//     }
+// }
+// onclick="cargarImagen('{{ asset($inspirate->url) }}')"
+
+
+// Obtener referencias a elementos del DOM
+var modal = document.getElementById('myModal');
+var btn = document.getElementById('ver3DBtn');
+var span = document.getElementsByClassName('close')[0];
+
+// Agregar evento de clic al botón para mostrar el modal
+btn.onclick = function() {
+  modal.style.display = 'block';
+};
+
+// Agregar evento de clic al botón de cerrar para ocultar el modal
+span.onclick = function() {
+  modal.style.display = 'none';
+};
+
+// Cerrar el modal si el usuario hace clic fuera del contenido
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = 'none';
+  }
+};
