@@ -124,14 +124,14 @@
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="temas-content" style="display: none;">
                                 <h4 class="text-center">Temas</h4>
-                                @foreach ($inspirates->groupBy('category.image_type') as $categoria => $imagenes)
+                                @foreach ($array['inspirates']->groupBy('category.image_type') as $categoria => $imagenes)
                                     <div class="galeria-container px-3">
                                         <h6 class="mt-3">{{ $categoria }}</h6>
                                         <div class="galeria">
                                
                                                 @foreach ($imagenes as $inspirate)
-                                                    <div class="galeria-item d-flex align-self-center">
-                                                        <img width="130" class="mx-2" src="{{ asset($inspirate->url) }}" alt="Inspiración">
+                                                    <div class="galeria-item d-flex align-self-center" >
+                                                        <img width="130" class="mx-2" src="{{ asset($inspirate->url) }}" alt="Inspiración" >
                                                     </div>
                                                 @endforeach
                                   
@@ -297,6 +297,25 @@
                                     <option value="circle">Círculo</option>
                                     <option value="star">Estrella</option>
                                 </select>
+
+                                <h4 class="text-center mt-4">Elementos</h4>
+
+                                @foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
+                                    <div class="galeria-container px-3">
+                                        <h6 class="mt-3">{{ $categoria }}</h6>
+                                        <div class="galeria">
+                            
+                                                @foreach ($imagenes as $element)
+                                                    <div class="galeria-item d-flex align-self-center">
+                                                        <img width="130" class="mx-2" src="{{ asset($element->url) }}" alt="Inspiración">
+                                                    </div>
+                                                @endforeach
+                                
+                                        </div>
+                                        <button class="galeria-prev">&#8249;</button>
+                                        <button class="galeria-next">&#8250;</button>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="contenido-side" id="textos-content" style="display: none;">
                                 <div class="col-texts">
@@ -393,15 +412,22 @@
                                     <span class="button__text">Descargar PDF</span>
                                     <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" id="bdd05811-e15d-428c-bb53-8661459f9307" data-name="Layer 2" class="svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
                                 </button>
+                                <button id="ver3DBtn">Ver 3D</button>
                     </div>
                 </div>
                     <!--------------------------- Elemento Canva --------------------------->
                     <canvas id="canvas" width="1000" height="400"></canvas>
+
                 </div>
-                
+                <div id="myModal" class="modal">
+                    <span class="close">&times;</span>
+                    <div id="container3D"></div>
+                </div>
             </div>
         </div>
     </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
@@ -412,6 +438,7 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.esm.js" integrity="sha512-oa6kn7l/guSfv94d8YmJLcn/s3Km4mm/t4RqFqyorSMXkKlg6pFM6HmLXsJvOP/Cl/dv/N5xW7zuaA+paSc55Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
 
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
+    <script type="module" src="{{asset('js/main3d.js')}}"></script>
 
 </body>
 
