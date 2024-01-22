@@ -92,7 +92,7 @@
                                 <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/upload.svg')}}" alt="" srcset="">
                                     </div>
-                                    <h6>Subir Archivo</h6>
+                                    <h6>Subir Imagen</h6>
                                 </div>
                                 <div class="bloq-side" data-target="elementos">
                                 <div class="img-bloq-side">
@@ -246,7 +246,36 @@
                             <div class="contenido-side" id="subir-archivo-content" style="display: none;">
                                 <!--------------------------- Para subir foto --------------------------->
                                 <h4 class="text-center">Subir Imagen</h4>
-                                <input type="file" id="image-upload" accept="image/png, image/jpeg">
+                                <div class="size-texts px-3">
+                                    <p>Agregá tu logo, ilustracciones y outros elementos do seu computador.
+                                    </p>
+                                    <p class="bold-text">Formatos aceptados: JPG e PNG</p>
+                                    <p>1. Elementos con dos o más cores pasan a un color único.</p>
+
+                                    <p>2. razados muy finos pueden perder su detalle.</p>
+
+                                    <p>3. Utilizá siempre imagenes en alta resolución para garantizar buena calidad en el elemento.</p>
+
+                                    <p class="bold-text">4. No utilice el QR Code generado por Instagram.</p>
+
+                                    <p>Se recomienda que el imagen tenga una resolución de por lo menos 300 DPI.</p>
+
+                                    <p>Elemplo:</p>
+
+                                    <div class="text-center">
+                                        <img width="130" class="mx-2 my-2" src="{{ asset('images/logo-example.png') }}" alt="Inspiración">
+                                        <!-- Agrega un evento onclick al botón para ejecutar la función de clic -->
+                                        <button class="upload-image" onclick="document.getElementById('image-upload').click()">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 3H12H8C6.34315 3 5 4.34315 5 6V18C5 19.6569 6.34315 21 8 21H11M13.5 3L19 8.625M13.5 3V7.625C13.5 8.17728 13.9477 8.625 14.5 8.625H19M19 8.625V11.8125" stroke="#fffffff" stroke-width="2"></path>
+                                                <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                            <!-- Oculta el input para que no sea visible -->
+                                            <input type="file" id="image-upload" accept="image/png, image/jpeg" style="display: none;">
+                                            Subir imagen
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
                                 <!--------------------------- Para seleccionar figura --------------------------->
@@ -347,35 +376,47 @@
 
                         </div>
                 <div class=" col-main">
-                <div class=" bg-white col-rightSide border">
-                    <div class="right-functions">
-                        <h5>Modificar Texto y Elementos</h5>
-                        <div class="col-rightOpciones">
-                            <button class="btn btn-rightOptions" id="btn-delete" title="Borrar Elemento">
-                                <img src="{{asset('frontend/img/personalizacion_vasos/delete.svg')}}" alt="" srcset="">
-                            </button>
-                            <button class="btn btn-rightOptions" id="duplicateButton" title="Duplicar Elemento">
-                                <img src="{{asset('frontend/img/personalizacion_vasos/copy-paste.svg')}}" alt="" srcset="">
-                            </button>
-                            <button class="btn btn-rightOptions" id="mirrorHorizontalButton" title="Girar Horizontalmente">
-                                <img src="{{asset('frontend/img/personalizacion_vasos/mirror.svg')}}" alt="" srcset="">
-                            </button>
-                            <button class="btn btn-rightOptions" id="flipVerticalButton" title="Girar Verticalmente">
-                                <img src="{{asset('frontend/img/personalizacion_vasos/flip-v.svg')}}" alt="" srcset="">
-                            </button>
-                        </div>  
-                    </div>  
-                    <div class="right-functions">
-                        <!--------------------------- Para descargar como pdf --------------------------->
-                        <h5>Descargar como PDF</h5>
-                                <button class="button" type="button" id="download-pdf" >
-                                    <span class="button__text">Descargar PDF</span>
-                                    <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" id="bdd05811-e15d-428c-bb53-8661459f9307" data-name="Layer 2" class="svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
+                    <div class=" bg-white col-rightSide border">
+                        <div class="right-functions">
+                            <h5>Modificar Texto y Elementos</h5>
+                            <div class="col-rightOpciones">
+                                <button class="btn btn-rightOptions" id="btn-delete" title="Borrar Elemento">
+                                    <img src="{{asset('frontend/img/personalizacion_vasos/delete.svg')}}" alt="" srcset="">
                                 </button>
-                                <button id="ver3DBtn">Ver 3D</button>
+                                <button class="btn btn-rightOptions" id="duplicateButton" title="Duplicar Elemento">
+                                    <img src="{{asset('frontend/img/personalizacion_vasos/copy-paste.svg')}}" alt="" srcset="">
+                                </button>
+                                <button class="btn btn-rightOptions" id="mirrorHorizontalButton" title="Girar Horizontalmente">
+                                    <img src="{{asset('frontend/img/personalizacion_vasos/mirror.svg')}}" alt="" srcset="">
+                                </button>
+                                <button class="btn btn-rightOptions" id="flipVerticalButton" title="Girar Verticalmente">
+                                    <img src="{{asset('frontend/img/personalizacion_vasos/flip-v.svg')}}" alt="" srcset="">
+                                </button>
+                            </div>  
+                        </div>  
+                        <div class="right-functions">
+                            <!--------------------------- Para descargar como pdf --------------------------->
+                            
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col text-center">
+                                        <h5>Descargar en PDF</h5>
+                                        <button class="button" type="button" id="download-pdf" >
+                                            <span class="button__text">Descargar PDF</span>
+                                            <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" id="bdd05811-e15d-428c-bb53-8661459f9307" data-name="Layer 2" class="svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
+                                        </button>
+                                    </div>
+                                    <div class="col text-center">
+                                        <h5>Ver mi vaso en 3D</h5>
+                                        <button class="btn3d" id="ver3DBtn"> Ver 3D
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
                     <!--------------------------- Elemento Canva --------------------------->
+                
                     <canvas id="canvas" width="1000" height="400"></canvas>
 
                 </div>
