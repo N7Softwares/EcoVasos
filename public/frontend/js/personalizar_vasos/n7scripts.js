@@ -866,12 +866,18 @@ const CopyAndPaste = () => {
         if (clonedObj.type === 'activeSelection') {
             // Selección activa necesita una referencia al canvas.
             clonedObj.canvas = canvas;
-            clonedObj.forEachObject(function (obj) {
+
+            clonedObj.forEachObject(function (obj, index) {
+                // Copiar propiedades personalizadas para cada objeto en la selección activa
+                obj.dataTarget = activeObject.getObjects()[index].dataTarget;
                 canvas.add(obj);
             });
+
             // Para solucionar la falta de selección
             clonedObj.setCoords();
         } else {
+            // Copiar propiedades personalizadas para un solo objeto
+            clonedObj.dataTarget = activeObject.dataTarget;
             canvas.add(clonedObj);
         }
 
@@ -881,6 +887,8 @@ const CopyAndPaste = () => {
         // console.log("Objeto copiado y pegado.");
     });
 }
+
+
 // Funcion para girar horizontalmente los elementos
 const modoEspejo = () => {
     let activeObject = canvas.getActiveObject();
@@ -964,27 +972,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 // Obtener referencias a elementos del DOM
-var modal = document.getElementById('myModal');
-var btn = document.getElementById('ver3DBtn');
-var span = document.getElementsByClassName('close')[0];
+let modal = document.getElementById('myModal');
+let btn = document.getElementById('ver3DBtn');
+let span = document.getElementsByClassName('close')[0];
 
 // Agregar evento de clic al botón para mostrar el modal
-btn.onclick = function() {
-  modal.style.display = 'block';
-  canvas.renderAll();
+btn.onclick = function () {
+    modal.style.display = 'block';
+    canvas.renderAll();
 };
 
 // Agregar evento de clic al botón de cerrar para ocultar el modal
-span.onclick = function() {
-  modal.style.display = 'none';
-  canvas.renderAll();
+span.onclick = function () {
+    modal.style.display = 'none';
+    canvas.renderAll();
 };
 
 // Cerrar el modal si el usuario hace clic fuera del contenido
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = 'none';
-    canvas.renderAll();
-  }
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+        canvas.renderAll();
+    }
 };
 

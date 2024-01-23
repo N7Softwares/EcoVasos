@@ -24,31 +24,31 @@
 
 <body>
 
-    <section>
+    <!-- <section>
     <div class="container border">
         <!-- Contenido de las opciones -->
-        <div class="row">
-            <div class="col-4 border">
+        <!-- <div class="row"> -->
+            <!-- <div class="col-4 border"> -->
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
                 
-            </div>
-            <div class="col-4 border">
+            <!-- </div> -->
+            <!-- <div class="col-4 border"> -->
                 <!--------------------------- Para seleccionar figura --------------------------->
                 
-            </div>
-            <div class="col-4 border">
+            <!-- </div> -->
+            <!-- <div class="col-4 border"> -->
                 <!--------------------------- Para subir foto --------------------------->
 
-            </div>
-            <div class="col-4 border">
+            <!-- </div> -->
+            <!-- <div class="col-4 border"> -->
                 <!--------------------------- Para descargar como pdf --------------------------->
                 
-            </div>
-            <div class="col-4 border ">
+            <!-- </div> -->
+            <!-- <div class="col-4 border "> -->
 
                 <!---------- color del elemento figura. Solo aparece cuando se hace clic en el elemento ------->
 
-                
+<!--                 
         </div>
         <div class="row">
             <div class="col-6 border">
@@ -56,14 +56,14 @@
             </div>
         <div class="col-4 border ">
 
-        </div>
+        </div> -->
         
         <!--------------------------- Elemento Canva --------------------------->
 
         
         
-    </div>
-    </section>
+    <!-- </div>
+    </section> -->
     <section class="">
         <div class="container-fluid container-main ">
             <div class="row ">
