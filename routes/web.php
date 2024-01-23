@@ -20,6 +20,7 @@
     use App\Http\Controllers\InspirateController;
     use App\Http\Controllers\ElementController;
     use App\Http\Controllers\DisenioController;
+    use App\Http\Controllers\ColorController;
     /*
     |--------------------------------------------------------------------------
     | Web Routes
@@ -236,3 +237,12 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
     Route::get('elements/{id}/edit', [ElementController::class, 'edit'])->name('elements.edit');
     Route::put('elements/{id}', [ElementController::class, 'update'])->name('elements.update');
     Route::delete('elements/{id}', [ElementController::class, 'destroy'])->name('elements.destroy');
+
+    //----------------------COLORS-VASO-DESIGN-----------------------
+    Route::resource('colors', ColorController::class);
+    
+    Route::get('colors/create-custom', [ColorController::class, 'create'])->name('colors.create-custom');
+    Route::get('colors/{id}/edit', [ColorController::class, 'edit'])->name('colors.edit');
+    Route::put('colors/{id}', [ColorController::class, 'update'])->name('colors.update');
+    Route::delete('colors/{id}', [ColorController::class, 'destroy'])->name('colors.destroy');
+    
