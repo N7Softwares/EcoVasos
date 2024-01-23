@@ -151,6 +151,12 @@ section{
     background: var(--gray);
     transition:all .4s ease;
 }
+
+.right-functions.vaso3D-section{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
 /* --------------------------- Colores del vaso --------------------------- */
 .color-table {
     display: none;
@@ -632,7 +638,8 @@ section{
 /*-------------------------HOVER DE BOTON-------------------*/
 
 .btn3d {
-    --color: #00A97F;
+    --previusColor: #00A97F;
+    --color: var(--green-fill);
     --color2: rgb(10, 25, 30);
     padding: 0.4em 1.75em;
     background-color: transparent;
@@ -679,7 +686,8 @@ section{
    }
    
    .btn3d:hover {
-    color: var(--color2);
+    /* color: var(--color2); */
+    color: var(--light-color);
    }
    
    .btn3d:active {
