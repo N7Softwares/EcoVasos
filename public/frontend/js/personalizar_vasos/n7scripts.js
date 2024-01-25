@@ -4,6 +4,7 @@
 
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
+let selectedColorGlobal;
 // --------------- colRight sideBar ------------------
 const btnDelete = document.getElementById("btn-delete");
 const copyPasteBtn = document.getElementById("duplicateButton");
@@ -78,47 +79,119 @@ shapeSelector.addEventListener('change', () => {
 });
 
 // Cargar una imagen al lienzo
-const imageUpload = document.getElementById('image-upload');
+// const imageUpload = document.getElementById('image-upload');
+document.getElementById('image-upload').addEventListener('change', handleFileSelect);
 const colorPicker = document.getElementById('color-picker'); // Asumiendo que tienes un color picker en tu HTML
 
-imageUpload.addEventListener('change', (event) => {
+
+function handleFileSelect(event) {
+    console.log("IMAGEN subida", event);
     const file = event.target.files[0];
-    console.log("FABRIC IMAGEN 2", file);
+
     if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            const img = new Image();
-            img.src = e.target.result;
-            img.onload = function () {
-                const fabricImage = new fabric.Image(img, {
-                    scaleX: 0.2,
-                    scaleY: 0.2,
-                    dataTarget:"subir-archivo"
-
-                });
-
-                // Convertir la imagen a blanco y negro
-                fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
-                fabricImage.applyFilters();
-
-                canvas.add(fabricImage);
+      if (file.type === 'image/svg+xml') {
+        console.log("ES SVG")
+        console.log("va por 1")
+        // Si es SVG, manejar como antes
+        handleSvgFile(file);
+      } else {
+        console.log("NO ES SVG")
+        console.log("va por 2")
+        
+        
+       
+            const file = event.target.files[0];
+            console.log("FABRIC IMAGEN 2", file);
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const img = new Image();
+                    img.src = e.target.result;
+                    img.onload = function () {
+                        const fabricImage = new fabric.Image(img, {
+                            scaleX: 0.2,
+                            scaleY: 0.2,
+                            dataTarget:"subir-archivo"
+        
+                        });
+        
+                        // Convertir la imagen a blanco y negro
+                        fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
+                        fabricImage.applyFilters();
+        
+                        canvas.add(fabricImage);
+                        canvas.renderAll();
+                        addColorPicker(fabricImage);
+                    };
+                };
+                reader.readAsDataURL(file);
+            }
+   
+        
+        const addColorPicker = (fabricImage) => {
+            console.log("FABRIC IMAGEN 3", fabricImage);
+            colorPicker.addEventListener('input', (event) => {
+                const newColor = event.target.value;
+                fabricImage.set({ fill: newColor });
+                console.log("FABRIC IMAGEN 4", fabricImage);
                 canvas.renderAll();
-                addColorPicker(fabricImage);
-            };
-        };
-        reader.readAsDataURL(file);
+            });
+        }
+      }
     }
-});
+  }
 
-const addColorPicker = (fabricImage) => {
-    console.log("FABRIC IMAGEN 3", fabricImage);
-    colorPicker.addEventListener('input', (event) => {
-        const newColor = event.target.value;
-        fabricImage.set({ fill: newColor });
-        console.log("FABRIC IMAGEN 4", fabricImage);
+  function handleSvgFile(file) {
+    console.log("va por A1")
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      console.log("va por A2")
+      const svgString = e.target.result;
+      console.log("SVG STRINGGGG", svgString)
+      // Convertir SVG a objeto HTML
+      const parser = new DOMParser();
+      const xmlDoc = parser.parseFromString(svgString, 'text/xml');
+      console.log("va por A3 xmlDoccc", xmlDoc)
+      // Modificar color del objeto HTML
+    
+      if (selectedColorGlobal !== undefined) {
+        const paths = xmlDoc.querySelectorAll('path');
+        paths.forEach((path) => {
+          path.setAttribute('fill', selectedColorGlobal);
+        });
+        console.log("va por A4 PATH", paths)
+      }
+   
+      // Convertir objeto HTML modificado a SVG y luego a fabric.js
+      const modifiedSVGString = new XMLSerializer().serializeToString(xmlDoc);
+      fabric.loadSVGFromString(modifiedSVGString, function (objects, options) {
+        const svgObjects = fabric.util.groupSVGElements(objects, options);
+
+        svgObjects.set({
+            scaleX: 0.2,
+            scaleY: 0.2,
+            dataTarget: "svg"
+        });
+
+        console.log("va por A5")
+
+        // Elimina objetos existentes en el lienzo con el mismo dataTarget
+        const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
+        existingObjects.forEach(obj => canvas.remove(obj));
+
+        // Agrega el nuevo objeto al lienzo
+        canvas.add(svgObjects);
         canvas.renderAll();
-    });
+      });
+    };
+
+    reader.readAsText(file);
 }
+
+
+
+
 
 // Función para dibujar la figura seleccionada en el lienzo
 const drawShape = (shape) => {
@@ -274,6 +347,7 @@ const cambiarColorATodos = () => {
     const scopeColorCheck = document.getElementById("scopeColor");
 
     const addColorPickerToImage = (file, color) => {
+        console.log("fileeee", file);
         console.log("migaja 0", color.style.backgroundColor);
         const colorMatrix = rgbToMatrix(color.style.backgroundColor);
         console.log("color de la matrix", colorMatrix);
@@ -312,7 +386,7 @@ const cambiarColorATodos = () => {
     paletaColores.forEach(color => {
         // Cuando se da click en cualquier color
         color.addEventListener("click", () => {
-            const selectedColor = color.style.backgroundColor;
+            selectedColorGlobal = color.style.backgroundColor;
 
             // Si scopeColorCheck está activo significa que los colores se cambian individualmente
             if (scopeColorCheck.checked) {
@@ -320,27 +394,27 @@ const cambiarColorATodos = () => {
                 // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
                 // Para cambiar el color en la imagen de MEDIDA
-                    handleColorChange(selectedColor);
+                    handleColorChange(selectedColorGlobal);
             
                 }else{
-                    activeObject.set('fill', selectedColor);
+                    activeObject.set('fill', selectedColorGlobal);
                 }
                 // Verifica si el objeto seleccionado es una imagen
                 if (activeObject && activeObject.type === 'image') {
                     // Cambia el color de la imagen directamente
-                    activeObject.set({ fill: selectedColor });
+                    activeObject.set({ fill: selectedColorGlobal });
                     addColorPickerToImage(activeObject, color);
                 } else {
                     // Si no es una imagen, cambia el color normalmente
-                    activeObject.set('fill', selectedColor);
+                    activeObject.set('fill', selectedColorGlobal);
                 }
             } else {
                 // Recorre todos los objetos en el lienzo
                 canvas.forEachObject(obj => {
                 // Aplica la acción que desees, por ejemplo, cambiar el color
             
-                obj.set('fill', selectedColor);
-                handleColorChange(selectedColor);
+                obj.set('fill', selectedColorGlobal);
+                handleColorChange(selectedColorGlobal);
 
                 });
                 // Recorre todos los objetos en el lienzo
@@ -348,15 +422,15 @@ const cambiarColorATodos = () => {
                     // Verifica si el objeto es una imagen
                     if (obj.type === 'image') {
                         // Cambia el color de la imagen directamente
-                        obj.set({ fill: selectedColor });
+                        obj.set({ fill: selectedColorGlobal });
                         addColorPickerToImage(obj, color);
                     } else {
                         // Si no es una imagen, cambia el color normalmente
-                        obj.set('fill', selectedColor);
+                        obj.set('fill', selectedColorGlobal);
                     }
                 });
             }
-            colorActualTD.style.backgroundColor=selectedColor;
+            colorActualTD.style.backgroundColor=selectedColorGlobal;
             canvas.renderAll();
         });
     });
@@ -455,6 +529,51 @@ const handleColorChange = (event) => {
         });
         canvas.renderAll();
     }
+    //  // Obtén el objeto activo o el primer objeto del canvas
+    //  const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
+    //  console.log("VIENE a cambiar el color", activeObject);
+ 
+    //  // Convierte el objeto en un elemento HTML
+    //  const svgString = activeObject.toSVG();
+    //  console.log("svg stringgg", svgString);
+    //  const parser = new DOMParser();
+    //    const xmlDoc = parser.parseFromString(svgString, 'text/xml');
+    //    console.log("va por A3 xmlDoccc", xmlDoc)
+    //    // Modificar color del objeto HTML
+     
+    //    if (selectedColorGlobal !== undefined) {
+    //      const paths = xmlDoc.querySelectorAll('path');
+    //      paths.forEach((path) => {
+    //        path.setAttribute('fill', selectedColorGlobal);
+    //      });
+    //      console.log("va por A4 PATH", paths)
+    //    }
+    
+    //    // Convertir objeto HTML modificado a SVG y luego a fabric.js
+    //    const modifiedSVGString = new XMLSerializer().serializeToString(xmlDoc);
+    //    fabric.loadSVGFromString(modifiedSVGString, function (objects, options) {
+    //      const svgObjects = fabric.util.groupSVGElements(objects, options);
+ 
+    //      svgObjects.set({
+    //          scaleX: 0.2,
+    //          scaleY: 0.2,
+    //          dataTarget: "svg"
+    //      });
+ 
+    //      console.log("va por A5")
+ 
+    //      // Elimina objetos existentes en el lienzo con el mismo dataTarget
+    //      const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
+    //      existingObjects.forEach(obj => canvas.remove(obj));
+ 
+    //      // Agrega el nuevo objeto al lienzo
+    //      canvas.add(svgObjects);
+    //      canvas.renderAll();
+    //  });
+    // console.log("VIENE a cambiar el color")
+    handleFileSelect({
+        target: { files: [document.getElementById('image-upload').files[0]] },
+    });
     
 }
 
@@ -956,22 +1075,31 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-// var ctx = canvas.getContext('2d');
-// var miimagen = new Image();
+var ctx = canvas.getContext('2d');
+var miimagen = new Image();
 
 
-// function cargarImagen(url) {
-//     miimagen.src = url;
+function cargarImagen(url) {
+    const fabricImage = new fabric.Image();
+    fabricImage.setSrc(url, function() {
+        fabricImage.set({
+            scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
+            scaleY: 0.2,
+            dataTarget: "galeria"
+        });
 
-//     miimagen.onload = function () {
-//         // Limpiar el lienzo antes de cargar la nueva imagen
-//         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Convertir la imagen a blanco y negro
+        fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
+        fabricImage.applyFilters();
 
-//         // Dibujar la nueva imagen en el lienzo
-//         ctx.drawImage(miimagen, 0, 0);
-//     }
-// }
-// onclick="cargarImagen('{{ asset($inspirate->url) }}')"
+        // Agregar la imagen al lienzo
+        canvas.add(fabricImage);
+        canvas.renderAll();
+        addColorPicker(fabricImage);
+    });
+}
+
+
 
 
 // Obtener referencias a elementos del DOM

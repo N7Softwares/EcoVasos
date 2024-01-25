@@ -129,7 +129,7 @@
                                         <div class="galeria">
                                                 @foreach ($imagenes as $inspirate)
                                                     <div class="galeria-item d-flex align-self-center" >
-                                                        <img width="130" class="mx-2" src="{{ asset($inspirate->url) }}" alt="Inspiración" >
+                                                        <img width="130" class="mx-2 zoomable-image" src="{{ asset($inspirate->url) }}" alt="Inspiración" onclick="cargarImagen('{{ asset($inspirate->url) }}')">
                                                     </div>
                                                 @endforeach
                                         </div>
@@ -277,7 +277,7 @@
                                                 <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                             <!-- Oculta el input para que no sea visible -->
-                                            <input type="file" id="image-upload" accept="image/png, image/jpeg" style="display: none;">
+                                            <input type="file" id="image-upload" accept=".svg, image/png, image/jpeg" style="display: none;">
                                             Subir imagen
                                         </button>
                                     </div>
@@ -302,7 +302,7 @@
                             
                                                 @foreach ($imagenes as $element)
                                                     <div class="galeria-item d-flex align-self-center">
-                                                        <img width="130" class="mx-2" src="{{ asset($element->url) }}" alt="Inspiración">
+                                                        <img width="130" class="mx-2 zoomable-image" src="{{ asset($element->url) }}" alt="Inspiración" onclick="cargarImagen('{{ asset($element->url) }}')">
                                                     </div>
                                                 @endforeach
                                 

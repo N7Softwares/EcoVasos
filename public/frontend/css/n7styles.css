@@ -733,3 +733,13 @@ section{
   .bold-text{
     font-weight: bold;
   }
+
+.zoomable-image {
+    cursor: pointer;
+    width: 130px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.zoomable-image:hover {
+    transform: scale(1.1); 
+}
