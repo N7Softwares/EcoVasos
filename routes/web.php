@@ -21,6 +21,7 @@
     use App\Http\Controllers\ElementController;
     use App\Http\Controllers\DisenioController;
     use App\Http\Controllers\ColorController;
+    use App\Http\Controllers\TipografiaController;
     /*
     |--------------------------------------------------------------------------
     | Web Routes
@@ -246,3 +247,11 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
     Route::put('colors/{id}', [ColorController::class, 'update'])->name('colors.update');
     Route::delete('colors/{id}', [ColorController::class, 'destroy'])->name('colors.destroy');
     
+    //----------------------TIPOGRAFIAS-----------------------
+    Route::resource('tipografias', TipografiaController::class);
+
+    // Rutas adicionales
+    Route::get('tipografias/create-custom', [TipografiaController::class, 'create'])->name('tipografias.create-custom');
+    Route::get('tipografias/{id}/edit', [TipografiaController::class, 'edit'])->name('tipografias.edit');
+    Route::put('tipografias/{id}', [TipografiaController::class, 'update'])->name('tipografias.update');
+    Route::delete('tipografias/{id}', [TipografiaController::class, 'destroy'])->name('tipografias.destroy');           
