@@ -7,8 +7,6 @@
     <title>Personalizacion de Vasos - EcoIngenio</title>
     <!-- Para usar la biblioteca fabricjs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
-    <!-- Para descargar como pdf, **no funciona** -->
-    <!-- <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> -->
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -20,50 +18,58 @@
         <!-- Estilos propios -->
     <link rel="stylesheet" href="{{asset('frontend/css/n7styles.css')}}">
 
+    <!-- Importar tipografías -->
+    @foreach($array['tipografias'] as $tipografia)
+        <style>
+            @font-face {
+                font-family: '{{ $tipografia->name }}';
+                src: url('{{ asset($tipografia->file_path) }}');
+            }
+        </style>
+    @endforeach
+
 </head>
 
 <body>
 
     <!-- <section>
     <div class="container border">
-        <!-- Contenido de las opciones -->
-        <!-- <div class="row"> -->
-            <!-- <div class="col-4 border"> -->
+        Contenido de las opciones
+        <div class="row">
+            <div class="col-4 border"> -->
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
                 
-            <!-- </div> -->
-            <!-- <div class="col-4 border"> -->
+            <!-- </div>
+            <div class="col-4 border"> -->
                 <!--------------------------- Para seleccionar figura --------------------------->
                 
-            <!-- </div> -->
-            <!-- <div class="col-4 border"> -->
+            <!-- </div>
+            <div class="col-4 border"> -->
                 <!--------------------------- Para subir foto --------------------------->
 
-            <!-- </div> -->
-            <!-- <div class="col-4 border"> -->
+            <!-- </div>
+            <div class="col-4 border"> -->
                 <!--------------------------- Para descargar como pdf --------------------------->
                 
-            <!-- </div> -->
-            <!-- <div class="col-4 border "> -->
+            <!-- </div> 
+            <div class="col-4 border "> -->
 
                 <!---------- color del elemento figura. Solo aparece cuando se hace clic en el elemento ------->
 
-<!--                 
-        </div>
+                
+        <!-- </div>
         <div class="row">
             <div class="col-6 border">
                 
             </div>
         <div class="col-4 border ">
 
-        </div> -->
+        </div>
         
-        <!--------------------------- Elemento Canva --------------------------->
-
-        
-        
-    <!-- </div>
+    </div>
     </section> -->
+    
+                    <!--------------------------- Version Oficial --------------------------->
     <section class="">
         <div class="container-fluid container-main ">
             <div class="row ">
@@ -328,6 +334,11 @@
                                                 <option value="Palatino, serif">Palatino</option>
                                                 <option value="Verdana, sans-serif">Verdana</option>
                                                 <option value="Garamond, serif">Garamond</option>
+                                                @foreach($array['tipografias'] as $tipografia)
+                                                    <option value="{{ $tipografia->name }}">
+                                                        {{ $tipografia->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                             <select id="fontSizeSelect">
                                                 <!-- El codigo se genera dinamicamente por js -->

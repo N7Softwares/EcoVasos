@@ -629,7 +629,10 @@ fontSelector.addEventListener('change', function () {
         // Actualiza la fuente del objeto Text seleccionado
         const nuevaFuente = fontSelector.value;
         objetoTextSeleccionado.set('fontFamily', nuevaFuente);
-        canvas.renderAll();
+        // Añade un pequeño retraso antes de renderizar el canvas
+        setTimeout(function() {
+            canvas.renderAll();
+        }, 50); // Puedes ajustar el valor del retraso según sea necesario
     }
 });
 
