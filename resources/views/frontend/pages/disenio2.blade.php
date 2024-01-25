@@ -7,8 +7,6 @@
     <title>Personalizacion de Vasos - EcoIngenio</title>
     <!-- Para usar la biblioteca fabricjs -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.3.1/fabric.min.js"></script>
-    <!-- Para descargar como pdf, **no funciona** -->
-    <!-- <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script> -->
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -20,36 +18,46 @@
         <!-- Estilos propios -->
     <link rel="stylesheet" href="{{asset('frontend/css/n7styles.css')}}">
 
+    <!-- Importar tipografías -->
+    @foreach($array['tipografias'] as $tipografia)
+        <style>
+            @font-face {
+                font-family: '{{ $tipografia->name }}';
+                src: url('{{ asset($tipografia->file_path) }}');
+            }
+        </style>
+    @endforeach
+
 </head>
 
 <body>
 
-    <section>
+    <!-- <section>
     <div class="container border">
-        <!-- Contenido de las opciones -->
+        Contenido de las opciones
         <div class="row">
-            <div class="col-4 border">
+            <div class="col-4 border"> -->
                 <!--------------------------- Para cambiar el color del fondo --------------------------->
                 
-            </div>
-            <div class="col-4 border">
+            <!-- </div>
+            <div class="col-4 border"> -->
                 <!--------------------------- Para seleccionar figura --------------------------->
                 
-            </div>
-            <div class="col-4 border">
+            <!-- </div>
+            <div class="col-4 border"> -->
                 <!--------------------------- Para subir foto --------------------------->
 
-            </div>
-            <div class="col-4 border">
+            <!-- </div>
+            <div class="col-4 border"> -->
                 <!--------------------------- Para descargar como pdf --------------------------->
                 
-            </div>
-            <div class="col-4 border ">
+            <!-- </div> 
+            <div class="col-4 border "> -->
 
                 <!---------- color del elemento figura. Solo aparece cuando se hace clic en el elemento ------->
 
                 
-        </div>
+        <!-- </div>
         <div class="row">
             <div class="col-6 border">
                 
@@ -58,19 +66,16 @@
 
         </div>
         
-        <!--------------------------- Elemento Canva --------------------------->
-
-        
-        
     </div>
-    </section>
+    </section> -->
+    
+                    <!--------------------------- Version Oficial --------------------------->
     <section class="">
         <div class="container-fluid container-main ">
             <div class="row ">
                 <div class=" col-sideLeft border bg-white">
                     <div class="row">
                         <div class="col-3 sideLeft ">
-                            <!-- <div class=" border border-success"> -->
                                 <div class="bloq-side" data-target="temas">
                                     <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/layout.svg')}}" alt="" srcset="">
@@ -113,13 +118,7 @@
                                     </div>
                                     <h6>Medidor</h6>
                                 </div>
-                                <!-- <div class="bloq-side" data-target="pdf">
-                                    <div class="img-bloq-side">
-                                        <img src="{{asset('frontend/img/personalizacion_vasos/pdf.svg')}}" alt="" srcset="">
-                                    </div>
-                                    <h6>Descargar PDF</h6>
-                                </div> -->
-                            <!-- </div> -->
+                                
                         </div>
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="temas-content" style="display: none;">
@@ -128,13 +127,11 @@
                                     <div class="galeria-container px-3">
                                         <h6 class="mt-3">{{ $categoria }}</h6>
                                         <div class="galeria">
-                               
                                                 @foreach ($imagenes as $inspirate)
                                                     <div class="galeria-item d-flex align-self-center" >
                                                         <img width="130" class="mx-2 zoomable-image" src="{{ asset($inspirate->url) }}" alt="Inspiración" onclick="cargarImagen('{{ asset($inspirate->url) }}')">
                                                     </div>
                                                 @endforeach
-                                  
                                         </div>
                                         <button class="galeria-prev">&#8249;</button>
                                         <button class="galeria-next">&#8250;</button>
@@ -155,62 +152,24 @@
                                                     data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                                     aria-expanded="true" aria-controls="collapseOne">
                                                     <div class="acordion-btnTranslucido">
-                                                        <h6>Translúcido</h6>
-                                                        <span>Transparente</span>
+                                                        <h6>Cromáticos</h6>
+                                                        <!-- <span>Transparente</span> -->
                                                     </div>
                                                 </button>
                                             </h2>
                                             <div id="collapseOne" class="accordion-collapse collapse"
                                                 aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background:rgb(236, 236, 236)"></div>
-                                                            <p class="color-title">Transparente</p>
+                
+                                                    @foreach($array['colors'] as $color)
+                                                        <div class="option-color">
+                                                            <div class="options-container">
+                                                                <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
+                                                                <p class="color-title">{{ $color->name }}</p>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background:rgb(173, 221, 230)"></div>
-                                                            <p class="color-title">Turquesa</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background:rgb(173, 235, 173)"></div>
-                                                            <p class="color-title">Verde</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background: rgb(249, 240, 157)"></div>
-                                                            <p class="color-title">Amarillo</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background: rgb(247, 190, 184)"></div>
-                                                            <p class="color-title">Rojo</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background: rgb(173, 196, 223)"></div>
-                                                            <p class="color-title">Azul</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background: rgb(255, 193, 229)"></div>
-                                                            <p class="color-title">Fucsia</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background: rgb(255, 223, 186)"></div>
-                                                            <p class="color-title">Naranja</p>
-                                                        </div>
-                                                    </div>
+                                                    @endforeach
+                                                    
 
                                                 </div>
                                             </div>
@@ -221,7 +180,7 @@
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseTwo"
                                                     aria-expanded="false" aria-controls="collapseTwo">
-                                                    <strong>Opaco</strong>
+                                                    <strong>Monocromáticos</strong>
                                                 </button>
                                             </h2>
                                             <div id="collapseTwo" class="accordion-collapse collapse"
@@ -267,6 +226,13 @@
                                     <div class="mb-3" id="color-table-globales">
                                         
                                         <div class="container-paleta-color">
+                                            <div class="colores-bd">
+                                                <h6>Colores de la Base de Datos</h6>
+                                                @foreach($array['colors'] as $color)
+                                                    <div class="paleta-color" 
+                                                    style="background-color: {{ $color->hex_code }}"></div>
+                                                @endforeach
+                                            </div>
                                             <div class="colores-clasicos">
                                                 <h6>Clásicas</h6>
                                             </div>
@@ -368,6 +334,11 @@
                                                 <option value="Palatino, serif">Palatino</option>
                                                 <option value="Verdana, sans-serif">Verdana</option>
                                                 <option value="Garamond, serif">Garamond</option>
+                                                @foreach($array['tipografias'] as $tipografia)
+                                                    <option value="{{ $tipografia->name }}">
+                                                        {{ $tipografia->name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                             <select id="fontSizeSelect">
                                                 <!-- El codigo se genera dinamicamente por js -->
@@ -437,22 +408,17 @@
                         <div class="right-functions">
                             <!--------------------------- Para descargar como pdf --------------------------->
                             
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col text-center">
-                                        <h5>Descargar en PDF</h5>
-                                        <button class="button" type="button" id="download-pdf" >
-                                            <span class="button__text">Descargar PDF</span>
-                                            <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" id="bdd05811-e15d-428c-bb53-8661459f9307" data-name="Layer 2" class="svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
-                                        </button>
-                                    </div>
-                                    <div class="col text-center">
-                                        <h5>Ver mi vaso en 3D</h5>
-                                        <button class="btn3d" id="ver3DBtn"> Ver 3D
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
+                            <h5>Descargar en PDF</h5>
+                            <button class="button" type="button" id="download-pdf" >
+                                <span class="button__text">Descargar PDF</span>
+                                <span class="button__icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35 35" id="bdd05811-e15d-428c-bb53-8661459f9307" data-name="Layer 2" class="svg"><path d="M17.5,22.131a1.249,1.249,0,0,1-1.25-1.25V2.187a1.25,1.25,0,0,1,2.5,0V20.881A1.25,1.25,0,0,1,17.5,22.131Z"></path><path d="M17.5,22.693a3.189,3.189,0,0,1-2.262-.936L8.487,15.006a1.249,1.249,0,0,1,1.767-1.767l6.751,6.751a.7.7,0,0,0,.99,0l6.751-6.751a1.25,1.25,0,0,1,1.768,1.767l-6.752,6.751A3.191,3.191,0,0,1,17.5,22.693Z"></path><path d="M31.436,34.063H3.564A3.318,3.318,0,0,1,.25,30.749V22.011a1.25,1.25,0,0,1,2.5,0v8.738a.815.815,0,0,0,.814.814H31.436a.815.815,0,0,0,.814-.814V22.011a1.25,1.25,0,1,1,2.5,0v8.738A3.318,3.318,0,0,1,31.436,34.063Z"></path></svg></span>
+                            </button>
+                                        
+                        </div>
+                        <div class="right-functions vaso3D-section">
+                            <!--------------------------- Para Visualizar Modelo 3D --------------------------->
+                            <h5>Visualizar Vaso en 3D</h5>
+                            <button class="btn3d" id="ver3DBtn">Ver 3D</button>
                         </div>
                     </div>
                     <!--------------------------- Elemento Canva --------------------------->

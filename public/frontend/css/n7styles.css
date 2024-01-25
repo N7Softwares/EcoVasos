@@ -27,7 +27,7 @@ body{
     
 }
 section{
-    padding:40px 0;
+    padding:20px 0;
 }
 .size-texts{
     font-size: 12px;
@@ -151,6 +151,12 @@ section{
     background: var(--gray);
     transition:all .4s ease;
 }
+
+.right-functions.vaso3D-section{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
 /* --------------------------- Colores del vaso --------------------------- */
 .color-table {
     display: none;
@@ -248,7 +254,8 @@ section{
     width:100%;
 }
 .container-paleta-color, .colores-clasicos, 
-.colores-deModa, .colores-metalicos, .colores-miscelaneos{
+.colores-deModa, .colores-metalicos, 
+.colores-miscelaneos, .colores-bd{
     /* development design */
     margin-bottom:20px;
 
@@ -257,7 +264,7 @@ section{
     gap:5px;
 }
 
-#color-table-globales .paleta-color{
+.paleta-color{
     height:20px;
     width:20px;
     border:1px solid var(--border2);
@@ -336,6 +343,9 @@ section{
     font-weight: 600;
     transition: all .4s ease;
 }
+#ver3DBtn.btn-general{
+    width:100%;
+}
 .btn-general.btn-red{
     background: var(--danger-color);
 }
@@ -345,7 +355,7 @@ section{
   background-color: #6C757D; /* Color gris para botones deshabilitados, ajusta según sea necesario */
   color: #8C8C8C; /* Color del texto para botones deshabilitados, ajusta según sea necesario */
 }
-#nuevo-texto:hover{
+#nuevo-texto:hover, .btn-general:hover{
     background:var(--green-border);
     transition: all .4s ease;
 }
@@ -628,7 +638,8 @@ section{
 /*-------------------------HOVER DE BOTON-------------------*/
 
 .btn3d {
-    --color: #00A97F;
+    --previusColor: #00A97F;
+    --color: var(--green-fill);
     --color2: rgb(10, 25, 30);
     padding: 0.4em 1.75em;
     background-color: transparent;
@@ -675,7 +686,8 @@ section{
    }
    
    .btn3d:hover {
-    color: var(--color2);
+    /* color: var(--color2); */
+    color: var(--light-color);
    }
    
    .btn3d:active {
