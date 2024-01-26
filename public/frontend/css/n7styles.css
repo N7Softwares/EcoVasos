@@ -352,6 +352,13 @@ section{
 .btn-general.btn-red{
     background: var(--danger-color);
 }
+#btn-medidas{
+    width:100%;
+    border-radius:0;
+}
+#btn-medidas:hover{
+    color:#fafafa;
+}
 /* Estilo específico para botones deshabilitados */
 .btn-general[disabled],
 .btn-general.btn-red[disabled] {
@@ -501,6 +508,37 @@ section{
     border: 1px solid #146c54;
 }
 
+/* --------------------------- Medidor --------------------------- */
+
+#medidor-content{
+    height:600px;
+}
+/* #select-medidas option{
+    border:1px solid red !important;
+    height:200px !important;
+    font-size:.8rem !important;
+} */
+.nice-select{
+    width:90%;
+}
+.nice-select ul{
+    border:1px solid var(--gray);
+    /* height:300px; */
+    color:#000 !important;
+    display:flex !important; 
+    flex-direction:column !important;
+    overflow-y: auto; /* Habilita el desplazamiento vertical cuando el contenido excede la altura máxima */
+    width:200px;
+}
+.nice-select ul li{
+    border:1px solid var(--gray);
+    font-size:.9rem;
+    width:90% !important;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
 /* --------------------------- Objeto Canva (Lienzo) --------------------------- */
 
 #canvas{
