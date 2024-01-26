@@ -25,8 +25,8 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="image">Imagen:</label>
-                <input type="file" class="form-control-file" name="image" accept="image/*">
+                <label for="image">Imagen (Solo subir imagenes SVG):</label>
+                <input type="file" class="form-control-file" name="image" accept=".svg">
             </div>
 
             <div class="form-group">
