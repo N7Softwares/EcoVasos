@@ -17,6 +17,7 @@ use DB;
 use Hash;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 class FrontendController extends Controller
 {
    
@@ -351,6 +352,7 @@ class FrontendController extends Controller
     }
     public function loginSubmit(Request $request){
         $data= $request->all();
+        Log::info('mensajeeeeeeee',['data'=>$data]);
         if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'],'status'=>'active'])){
             Session::put('user',$data['email']);
             request()->session()->flash('success','Successfully login');

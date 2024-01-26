@@ -15,20 +15,20 @@ class ElementController extends Controller
     {
         $elements = Element::all();
 
-        return view('elements.index', compact('elements'));
+        return view('backend.elements.index', compact('elements'));
     }
 
     public function show($id)
     {
         $elements = Element::findOrFail($id);
 
-        return view('elements.show', compact('elements'));
+        return view('backend.elements.show', compact('elements'));
     }
     public function create()
     {
         $categories = ImagesCategory::all();
 
-        return view('elements.create', compact('categories'));
+        return view('backend.elements.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class ElementController extends Controller
         $elements = Element::findOrFail($id);
         $categories = ImagesCategory::all();
 
-        return view('elements.edit', compact('elements', 'categories'));
+        return view('backend.elements.edit', compact('elements', 'categories'));
     }
 
     public function update(Request $request, $id)

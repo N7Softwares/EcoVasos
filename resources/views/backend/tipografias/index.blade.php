@@ -1,6 +1,8 @@
-@extends('layouts.app') <!-- Ajusta esto según tu estructura de plantilla principal -->
+@extends('backend.layouts.master')
 
-@section('content')
+@section('main-content')
+
+<div class="card">
     <div class="container">
         <h2>Lista de Tipografías</h2>
         <!-- Botón para crear un nuevo registro -->
@@ -40,4 +42,6 @@
         
 
     </div>
+</div>
+
 @endsection

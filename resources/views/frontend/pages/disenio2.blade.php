@@ -1,3 +1,10 @@
+@extends('frontend.layouts.master')
+
+@section('title','EcoIngenio || Nosotros')
+
+@section('main-content')
+
+<div id="main" class="mt-5">
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,7 +77,7 @@
     </section> -->
     
                     <!--------------------------- Version Oficial --------------------------->
-    <section class="">
+    <section class="padding-top-disenio">
         <div class="container-fluid container-main ">
             <div class="row ">
                 <div class=" col-sideLeft border bg-white">
@@ -450,3 +457,7 @@
 </body>
 
 </html>
+</div>
+
+	
+@endsection

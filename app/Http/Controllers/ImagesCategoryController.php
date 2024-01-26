@@ -13,19 +13,19 @@ class ImagesCategoryController extends Controller
     {
         $categories = ImagesCategory::all();
 
-        return view('images_categories.index', compact('categories'));
+        return view('backend.images_categories.index', compact('categories'));
     }
 
     public function create()
     {
-        return view('images_categories.create');
+        return view('backend.images_categories.create');
     }
 
     public function show()
     {
         $categories = ImagesCategory::all();
 
-        return view('images_categories.create', compact('categories'));
+        return view('backend.images_categories.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -44,7 +44,7 @@ class ImagesCategoryController extends Controller
     {
         $category = ImagesCategory::findOrFail($id);
 
-        return view('images_categories.edit', compact('category'));
+        return view('backend.images_categories.edit', compact('category'));
     }
 
     public function update(Request $request, $id)

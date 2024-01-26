@@ -193,6 +193,42 @@
         </a>
       </li>
 
+ <!-- Divider -->
+
+    <hr class="sidebar-divider d-none d-md-block">
+      <!-- Heading -->
+    <div class="sidebar-heading">
+        Herramienta de vasos
+    </div>
+    <li class="nav-item">
+      <a class="nav-link" href="{{ route('images_categories.index') }}">
+          <i class="fas fa-angle-double-up"></i>
+          <span>Categorías de Imagenes</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('inspirate.index')}}">
+          <i class="fas fa-paint-roller"></i>
+          <span>Temas</span></a>
+    </li>
+ 
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('elements.index')}}">
+            <i class="fas fa-list-ul"></i>
+            <span>Elementos</span></a>
+    </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="{{route('colors.index')}}">
+            <i class="fas fa-palette"></i>
+            <span>Colores</span></a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('tipografias.index')}}">
+            <i class="fas fa-signature"></i>
+            <span>Tipografías</span></a>
+    </li>
+
+
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
@@ -217,7 +253,9 @@
             <i class="fas fa-cog"></i>
             <span>Ajustes</span></a>
     </li>
+    
 
+   
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>
