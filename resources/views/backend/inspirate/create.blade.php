@@ -30,8 +30,8 @@
             @csrf
 
             <div class="form-group">
-                <label for="image">Imagen:</label>
-                <input type="file" class="form-control-file" name="image" accept="image/*" required>
+                <label for="image">Imagen (Solo subir imagenes SVG):</label>
+                <input type="file" class="form-control-file" name="image" accept=".svg" required>
             </div>
 
             <div class="form-group">
