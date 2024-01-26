@@ -1,6 +1,8 @@
-@extends('layouts.app') <!-- Ajusta esto según tu estructura de plantilla principal -->
+@extends('backend.layouts.master')
 
-@section('content')
+@section('main-content')
+
+<div class="card">
     <div class="container">
         <h2>Editar Tipografía</h2>
 
@@ -27,4 +29,6 @@
         <!-- Botón para volver a la lista de tipografías -->
         <a href="{{ route('tipografias.index') }}" class="btn btn-secondary mt-2">Volver a la Lista</a>
     </div>
+</div>
+
 @endsection

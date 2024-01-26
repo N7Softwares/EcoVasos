@@ -1,8 +1,10 @@
 <!-- resources/views/colors_vaso/index.blade.php -->
 
-@extends('layouts.app') <!-- Asegúrate de que la vista extienda tu layout principal si lo tienes -->
+@extends('backend.layouts.master')
 
-@section('content')
+@section('main-content')
+
+<div class="card">
 <div class="container">
 
     <h1>Lista de Colores</h1>
@@ -54,4 +56,7 @@
     </div>
 
 </div>
+</div>
+
 @endsection
+

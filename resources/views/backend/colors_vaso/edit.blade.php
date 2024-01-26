@@ -1,6 +1,8 @@
-@extends('layouts.app')
+@extends('backend.layouts.master')
 
-@section('content')
+@section('main-content')
+
+<div class="card">
 <div class="container">
     <h1>Editar Color</h1>
 
@@ -85,4 +87,7 @@
             updateColorPreview('{{ $color->rgb_code }}');
         });
     </script>
+</div>
+
 @endsection
+

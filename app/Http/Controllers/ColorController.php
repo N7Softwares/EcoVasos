@@ -14,7 +14,7 @@ class ColorController extends Controller
     public function index()
     {
         $colors = Color::all(); // Obtener todos los colores
-        return view('colors_vaso.index', compact('colors'));
+        return view('backend.colors_vaso.index', compact('colors'));
     }
 
     /**
@@ -22,7 +22,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('colors_vaso.create');
+        return view('backend.colors_vaso.create');
     }
 
     /**
@@ -51,7 +51,7 @@ class ColorController extends Controller
     public function edit(string $id)
     {
         $color = Color::find($id); // Obtener el color por ID
-        return view('colors_vaso.edit', compact('color'));
+        return view('backend.colors_vaso.edit', compact('color'));
     }
 
     /**

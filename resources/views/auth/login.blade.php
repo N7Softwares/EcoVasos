@@ -26,7 +26,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">¡Bienvenidos al panel de EcoIngenio!</h1>
                   </div>
-                  <form class="user"  method="POST" action="{{ route('login') }}">
+                  <form class="user"  method="POST" action="{{ route('login.submit') }}">
                     @csrf
                     <div class="form-group">
                       <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Introducir la dirección de correo electrónico..."  required autocomplete="email" autofocus>

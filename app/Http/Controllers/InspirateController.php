@@ -15,20 +15,20 @@ class InspirateController extends Controller
     {
         $inspirates = Inspirate::all();
 
-        return view('inspirate.index', compact('inspirates'));
+        return view('backend.inspirate.index', compact('inspirates'));
     }
 
     public function show($id)
     {
         $inspirate = Inspirate::findOrFail($id);
 
-        return view('inspirate.show', compact('inspirate'));
+        return view('backend.inspirate.show', compact('inspirate'));
     }
     public function create()
     {
         $categories = ImagesCategory::all();
 
-        return view('inspirate.create', compact('categories'));
+        return view('backend.inspirate.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -54,7 +54,7 @@ class InspirateController extends Controller
         $inspirate = Inspirate::findOrFail($id);
         $categories = ImagesCategory::all();
 
-        return view('inspirate.edit', compact('inspirate', 'categories'));
+        return view('backend.inspirate.edit', compact('inspirate', 'categories'));
     }
 
     public function update(Request $request, $id)

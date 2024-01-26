@@ -15,7 +15,7 @@ class TipografiaController extends Controller
     public function index()
     {
         $tipografias = Tipografia::all();
-        return view('tipografias.index', compact('tipografias'));
+        return view('backend.tipografias.index', compact('tipografias'));
     }
 
     /**
@@ -23,7 +23,7 @@ class TipografiaController extends Controller
      */
     public function create()
     {
-        return view('tipografias.create');
+        return view('backend.tipografias.create');
     }
 
     /**
@@ -84,7 +84,7 @@ class TipografiaController extends Controller
         $tipografia = Tipografia::findOrFail($id);
 
         // Mostrar el formulario de edición con los detalles actuales de la tipografía
-        return view('tipografias.edit', compact('tipografia'));
+        return view('backend.tipografias.edit', compact('tipografia'));
     }
 
     /**

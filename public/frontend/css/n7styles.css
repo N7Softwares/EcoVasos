@@ -26,6 +26,9 @@ body{
     /* background-image: url("https://picsum.photos/id/1025/600/400"); */
     
 }
+.padding-top-disenio{
+    padding-top: 2% !important;
+}
 section{
     padding:20px 0;
 }

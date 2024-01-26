@@ -1,8 +1,10 @@
 <!-- resources/views/colors_vaso/create.blade.php -->
 
-@extends('layouts.app')
+@extends('backend.layouts.master')
 
-@section('content')
+@section('main-content')
+
+<div class="card">
 <div class="container">
 
     @if ($errors->any())
@@ -101,4 +103,7 @@
     });
     </script>
 
+</div>
+
 @endsection
+
