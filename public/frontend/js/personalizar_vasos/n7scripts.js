@@ -144,7 +144,7 @@ function handleFileSelect(event) {
     // });
 }
   function handleSvgFile(file) {
-    console.log("va por A1")
+    console.log("va por A1", file)
     const reader = new FileReader();
 
     reader.onload = function (e) {
@@ -382,7 +382,7 @@ const cambiarColorATodos = () => {
                         canvas.add(file);
                     }
                     canvas.renderAll();
-                    addColorPicker(file);
+                    handleSvgFile(file);
                     console.log("migaja 8");
       
             // reader.readAsDataURL(file);
@@ -402,6 +402,7 @@ const cambiarColorATodos = () => {
                 console.log("Tipo de objeto completo", activeObject);
                 // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
+                    console.log("va por el 1 lok")
                 // Para cambiar el color en la imagen de MEDIDA
                     handleColorChange(selectedColorGlobal);
                     // Nueva funcion para cambiar color al svg de medidas
@@ -409,6 +410,7 @@ const cambiarColorATodos = () => {
 
             
                 }else{
+                    console.log("va por el 2 lok")
                     activeObject.set('fill', selectedColorGlobal);
                 }
                 // Verifica si el objeto seleccionado es una imagen
