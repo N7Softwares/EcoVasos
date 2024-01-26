@@ -395,6 +395,9 @@ const cambiarColorATodos = () => {
                 if(activeObject.type === "group"){
                 // Para cambiar el color en la imagen de MEDIDA
                     handleColorChange(selectedColorGlobal);
+                    // Nueva funcion para cambiar color al svg de medidas
+                    cambiarColorMedidor(selectedColorGlobal);
+
             
                 }else{
                     activeObject.set('fill', selectedColorGlobal);
@@ -413,8 +416,10 @@ const cambiarColorATodos = () => {
                 canvas.forEachObject(obj => {
                 // Aplica la acción que desees, por ejemplo, cambiar el color
             
-                obj.set('fill', selectedColorGlobal);
-                handleColorChange(selectedColorGlobal);
+                    obj.set('fill', selectedColorGlobal);
+                    handleColorChange(selectedColorGlobal);
+                    // Nueva funcion para cambiar color al svg de medidas
+                    cambiarColorMedidor(selectedColorGlobal);
 
                 });
                 // Recorre todos los objetos en el lienzo
@@ -609,6 +614,11 @@ const agregarMedidas = (svgName) => {
                     dataTarget: "medidor"
                 });
 
+                // Establece el color de relleno del grupo y de todos los elementos dentro del grupo
+                group.forEachObject(objeto => {
+                    objeto.set({ fill: valorColorActual() });
+                });
+
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
                 canvas.setActiveObject(group);
@@ -622,7 +632,7 @@ const agregarMedidas = (svgName) => {
                     left: 10,
                     top: canvas.height - 30,
                     fontSize: 20,
-                    fill: 'black',
+                    fill: valorColorActual(),
                     dataTarget:"medidor"
                 });
 
@@ -633,7 +643,30 @@ const agregarMedidas = (svgName) => {
             console.error('Error al cargar el archivo SVG:', error);
         });
 }
+// Cambiar color SVG medidores
+const cambiarColorMedidor = (color) =>{
+    // Obtén todos los objetos en el lienzo
+    const objetosEnLienzo = canvas.getObjects();
 
+    // Filtra los objetos que son de tipo "group"
+    const grupos = objetosEnLienzo.filter(objeto => objeto.type === "group");
+
+    // Itera sobre cada grupo
+    grupos.forEach(grupo => {
+        // Obtiene todos los elementos dentro del grupo
+        const elementosEnGrupo = grupo.getObjects();
+
+        // Itera sobre cada elemento dentro del grupo y cambia su color de relleno
+        elementosEnGrupo.forEach(elemento => {
+            // Cambia el color de relleno del elemento (ajusta el color según tus necesidades)
+            elemento.set({ fill: color });
+        });
+
+        // Actualiza el grupo en el lienzo después de cambiar los colores
+        canvas.requestRenderAll();
+    });
+
+}
 
 // Manejar el color del medidor
 const handleColorChange = (event) => {
