@@ -1,10 +1,10 @@
-@extends('frontend.layouts.master')
+{{-- @extends('frontend.layouts.master')
 
-@section('title','EcoIngenio || Nosotros')
+@section('title','EcoIngenio || Diseño')
 
 @section('main-content')
 
-<div id="main" class="mt-5">
+<div id="main" class="mt-5"> --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -468,7 +468,7 @@
 </body>
 
 </html>
-</div>
+{{-- </div>
 
 	
-@endsection
+@endsection --}}
