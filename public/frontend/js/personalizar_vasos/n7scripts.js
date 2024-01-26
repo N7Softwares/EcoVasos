@@ -5,6 +5,7 @@
 const canvas = new fabric.Canvas('canvas');
 let selectedObject;
 let selectedColorGlobal;
+let validador = false;
 // --------------- colRight sideBar ------------------
 const btnDelete = document.getElementById("btn-delete");
 const copyPasteBtn = document.getElementById("duplicateButton");
@@ -118,8 +119,9 @@ function handleFileSelect(event) {
                         // Convertir la imagen a blanco y negro
                         fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
                         fabricImage.applyFilters();
-        
-                        canvas.add(fabricImage);
+                        if(validador === false){
+                            canvas.add(fabricImage);
+                        }
                         canvas.renderAll();
                         addColorPicker(fabricImage);
                     };
@@ -128,19 +130,19 @@ function handleFileSelect(event) {
             }
    
         
-        const addColorPicker = (fabricImage) => {
-            console.log("FABRIC IMAGEN 3", fabricImage);
-            colorPicker.addEventListener('input', (event) => {
-                const newColor = event.target.value;
-                fabricImage.set({ fill: newColor });
-                console.log("FABRIC IMAGEN 4", fabricImage);
-                canvas.renderAll();
-            });
-        }
+        
       }
     }
   }
-
+  const addColorPicker = (fabricImage) => {
+    console.log("FABRIC IMAGEN 3", fabricImage);
+    // colorPicker.addEventListener('input', (event) => {
+    //     const newColor = event.target.value;
+    //     fabricImage.set({ fill: newColor });
+    //     console.log("FABRIC IMAGEN 4", fabricImage);
+    //     canvas.renderAll();
+    // });
+}
   function handleSvgFile(file) {
     console.log("va por A1")
     const reader = new FileReader();
@@ -181,7 +183,9 @@ function handleFileSelect(event) {
         existingObjects.forEach(obj => canvas.remove(obj));
 
         // Agrega el nuevo objeto al lienzo
-        canvas.add(svgObjects);
+        if(validador === false){
+            canvas.add(svgObjects);
+        }
         canvas.renderAll();
       });
     };
@@ -374,7 +378,9 @@ const cambiarColorATodos = () => {
                     console.log("FABRIC IMAGEN 5", file);
                     file.applyFilters();
                     console.log("migaja 7");
-                    canvas.add(file);
+                    if(validador === false){
+                        canvas.add(file);
+                    }
                     canvas.renderAll();
                     addColorPicker(file);
                     console.log("migaja 8");
@@ -387,10 +393,13 @@ const cambiarColorATodos = () => {
         // Cuando se da click en cualquier color
         color.addEventListener("click", () => {
             selectedColorGlobal = color.style.backgroundColor;
-
+            validador = true;
             // Si scopeColorCheck está activo significa que los colores se cambian individualmente
             if (scopeColorCheck.checked) {
                 const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
+                
+                console.log("Tipo de objeto", activeObject.type);
+                console.log("Tipo de objeto completo", activeObject);
                 // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
                 // Para cambiar el color en la imagen de MEDIDA
@@ -730,6 +739,7 @@ const handleColorChange = (event) => {
 
 //----------------------- SideBar Dinamico --------------------------
 let ultimoBloqClicado;
+
 // Funcion para el sideBar dinamico con las opciones
 const sideBar = () => {
     // Almacenar la referencia al último elemento clicado
