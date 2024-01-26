@@ -518,6 +518,124 @@ const eliminarImagen = () => {
     imagenAgregada = false;
     currentImage = null;
 }
+
+const selectMedidas = document.getElementById("select-medidas");
+// Objetos con los svgs
+const arrayValores = [
+    {
+        svg: `240cc`,  // Aquí podrías agregar el contenido SVG
+        width: 185,
+        height: 60
+    },
+    {
+        svg:`500cc`,
+        width:220,
+        height:85
+    },
+    {
+        svg:`750cc`,
+        width:240,
+        height:95
+    },
+    {
+        svg:`400cc_copa`,
+        width:40,
+        height:40
+    }
+];
+
+// Este objeto voy a utilizar para manejar los valores de width y height del pdf y el modelo 3d
+const MedidasCentral = {
+    // objeto donde se guardan los valores, se definen por defecto pero se pueden actualizar
+    medidasActuales: {
+        svg:`500cc`,
+        width:220,
+        height:85
+    },
+
+    actualizarMedidas:  (svgName, width, height) => {
+        this.medidasActuales = { svg: svgName, width: width, height: height };
+    },
+
+    obtenerMedidasActuales: ()=> {
+        return this.medidasActuales;
+    }
+};
+
+
+
+document.getElementById("btn-medidas").addEventListener("click",()=>{
+    const svgName = selectMedidas.value;
+
+    // Busca entre todos los objetos del canvas aquellos que tienen dataTarget igual a "medidor"
+    const objetosMedidores = canvas.getObjects().filter(objeto => objeto.dataTarget === "medidor");
+    objetosMedidores.forEach(objeto => {
+        // Eliminar el medidor anterior, si existe
+        canvas.remove(objeto);
+    });
+
+    agregarMedidas(svgName);
+
+    
+     // Obtén las medidas actuales y almacénalas en el objeto central
+    const medidasObjeto = arrayValores.find(objeto => objeto.svg === svgName);
+    if (medidasObjeto) {
+        MedidasCentral.actualizarMedidas(svgName, medidasObjeto.width, medidasObjeto.height);
+    }
+
+})
+
+const agregarMedidas = (svgName) => {
+    // Ruta relativa al archivo SVG
+    const svgFilePath = `/frontend/img/personalizacion_vasos/medidas/${svgName}.svg`;
+
+    // Carga el contenido del archivo SVG utilizando una petición HTTP (puedes ajustar esto según tu entorno)
+    fetch(svgFilePath)
+        .then(response => response.text())
+        .then(svgContent => {
+            // Utiliza Fabric.js para cargar el SVG y agregarlo al lienzo
+            fabric.loadSVGFromString(svgContent, (objects, options) => {
+                const group = new fabric.Group(objects, options);
+
+                // Ajusta la escala y la posición del grupo
+                group.set({
+                    // scaleX: 1,  // Ajusta según sea necesario
+                    // scaleY: 1,  // Ajusta según sea necesario
+                    left: canvas.width - (group.width + 30),
+                    top: 0,
+                    lockScalingX: true,
+                    lockScalingY: true,
+                    lockMovementY: true,
+                    dataTarget: "medidor"
+                });
+
+                // Agrega el objeto SVG al lienzo
+                canvas.add(group);
+                canvas.setActiveObject(group);
+                canvas.renderAll();
+
+                // Obtener medidas del vaso
+                let width = MedidasCentral.obtenerMedidasActuales().width;
+                let height= MedidasCentral.obtenerMedidasActuales().height;
+                // Agrega un elemento de texto con las dimensiones en la esquina inferior izquierda
+                const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
+                    left: 10,
+                    top: canvas.height - 30,
+                    fontSize: 20,
+                    fill: 'black',
+                    dataTarget:"medidor"
+                });
+
+                canvas.add(textoMedidas);
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar el archivo SVG:', error);
+        });
+}
+
+
+// Manejar el color del medidor
 const handleColorChange = (event) => {
     // console.log("COLOR", event);
     const newColor = event;
