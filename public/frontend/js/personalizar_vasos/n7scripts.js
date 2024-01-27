@@ -838,6 +838,10 @@ const nuevoTextoButton = document.getElementById('nuevo-texto');
 const fontSizeSelect = document.getElementById('fontSizeSelect');
 const cursivaBtn = document.getElementById("cursivaBtn");
 const negritaBtn = document.getElementById("negritaBtn");
+// acordeones de fontFamily y fontsize
+const fontAcordion = document.querySelector(".btn-accn-1")
+const fontSizeAcordion = document.querySelector(".btn-accn-2")
+const fontSizeOptions = document.getElementById('fontSizeOptions');
 
 
 // Función para agregar un nuevo objeto Text al lienzo
@@ -847,7 +851,7 @@ function agregarTextoAlCanvas(texto) {
     const newText = new fabric.Text(textoPorDefecto, {
         left: 50,
         top: 50,
-        fontSize: fontSize(),
+        fontSize: 40,
         fontFamily: 'Arial',
         fill: valorColorActual(),
         selectable: true,
@@ -868,15 +872,30 @@ function agregarTextoAlCanvas(texto) {
 // Definir los valores de tamaño de fuente disponibles
 const valoresTamanosFuente = Array.from({ length: 30 }, (_, index) => (index + 1) * 10);
 
-// Generar las opciones del select
+// Generar las opciones del acordeón
 valoresTamanosFuente.forEach(valor => {
-    const option = document.createElement('option');
-    option.value = valor.toString();
-    option.text = `${valor}px`;
-    if (valor === 40) {
-        option.selected = true;
-    }
-    fontSizeSelect.add(option);
+    // Crear el contenedor del item
+    const itemContainer = document.createElement('div');
+    itemContainer.classList.add('option-color', 'option-fontSize');
+    itemContainer.setAttribute('value', valor.toString());
+
+    // Crear el contenedor de opciones
+    const optionsContainer = document.createElement('div');
+    optionsContainer.classList.add('options-container');
+
+    // Crear el párrafo con el tamaño de fuente
+    const paragraph = document.createElement('p');
+    paragraph.classList.add('color-title');
+    paragraph.textContent = `${valor}px`;
+
+    // Agregar el párrafo al contenedor de opciones
+    optionsContainer.appendChild(paragraph);
+
+    // Agregar el contenedor de opciones al contenedor del item
+    itemContainer.appendChild(optionsContainer);
+
+    // Agregar el contenedor del item al accordion-body
+    fontSizeOptions.appendChild(itemContainer);
 });
 
 // funcion para cambiar el fontSize de los textos
@@ -903,20 +922,43 @@ nuevoTextoButton.addEventListener('click', function () {
 });
 
 // Escucha el cambio en el select de fuentes
-const fontSelector = document.getElementById('font-selector');
-fontSelector.addEventListener('change', function () {
-    const objetoTextSeleccionado = canvas.getActiveObject();
-    
-    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
-        // Actualiza la fuente del objeto Text seleccionado
-        const nuevaFuente = fontSelector.value;
-        objetoTextSeleccionado.set('fontFamily', nuevaFuente);
-        // Añade un pequeño retraso antes de renderizar el canvas
-        setTimeout(function() {
-            canvas.renderAll();
-        }, 50); // Puedes ajustar el valor del retraso según sea necesario
-    }
+const fontSelector = document.querySelectorAll(".option-fuentes");
+
+fontSelector.forEach(fuente => {
+    fuente.addEventListener("click", () => {
+        // Utiliza getAttribute para obtener el valor del atributo value
+        const fontValue = fuente.getAttribute("value");
+
+        const objetoTextSeleccionado = canvas.getActiveObject();
+
+        if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+            // Actualiza la fuente del objeto Text seleccionado
+            objetoTextSeleccionado.set('fontFamily', fontValue);
+            // Estableciendo el texto del boton de del acordeon
+            fontAcordion.textContent=fontValue;
+            // Añade un pequeño retraso antes de renderizar el canvas
+            setTimeout(function () {
+                canvas.renderAll();
+            }, 50); // Puedes ajustar el valor del retraso según sea necesario
+        }
+    });
 });
+
+// Obtiene ambos botones por su clase
+const cerrarAcordeonesFonts = ()=>{
+    let btnAcordeon1 = document.querySelector('.btn-accn-1');
+    let btnAcordeon2 = document.querySelector('.btn-accn-2');
+
+    // Cierra el primer acordeón si está abierto
+    if (!btnAcordeon1.classList.contains('collapsed')) {
+        btnAcordeon1.click();
+    }
+
+    // Cierra el segundo acordeón si está abierto
+    if (!btnAcordeon2.classList.contains('collapsed')) {
+        btnAcordeon2.click();
+    }
+}
 
 // Función para manejar la actualización de la selección
 const actualizarSeleccion = (objetoSeleccionado) => {
@@ -926,16 +968,16 @@ const actualizarSeleccion = (objetoSeleccionado) => {
         textEditor.value = objetoSeleccionado.text;
         textEditor.disabled = false;
         // Habilita el select de fuentes
-        fontSelector.disabled = false;
+        fontAcordion.classList.remove("disabled");
         // Habilita el select de fontSize
-        fontSizeSelect.disabled = false;
-
+        fontSizeAcordion.classList.remove("disabled");
         // Establece la fuente actual en el select
-        fontSelector.value = objetoSeleccionado.fontFamily || 'Arial';
+        fontAcordion.textContent= objetoSeleccionado.fontFamily || 'Arial';;
+
 
         // Establece el tamaño de fuente actual en el select
         const fontSizeValue = objetoSeleccionado.fontSize;
-        fontSizeSelect.value = fontSizeValue.toString();
+        fontSizeAcordion.textContent = `${fontSizeValue}px`;
         // Botones para cursiva y negrita
         cursivaBtn.disabled=false;
         negritaBtn.disabled=false;
@@ -987,12 +1029,19 @@ canvas.on('selection:cleared',  ()=> {
     // Borra el contenido del textarea cuando no hay elementos seleccionados
     textEditor.value = '';
     textEditor.disabled = true;
-    // Deshabilita el select de fuentes
-    fontSelector.disabled = true;
-    // Habilita el select de fontSize
-    fontSizeSelect.disabled = true;
+    // deshabilita el select de fuentes
+    fontAcordion.classList.add("disabled");
+
+    // Deshabilita el select de fontSize
+    fontSizeAcordion.classList.add("disabled");
+
     // Restablece la fuente predeterminada en el select
-    fontSelector.value = 'Arial';
+    fontAcordion.textContent="Arial";
+    fontSizeAcordion.textContent="40px";
+
+    // cerrar ambos acordeones de fuentes
+    cerrarAcordeonesFonts();
+    
     // Botones para cursiva y negrita
     cursivaBtn.disabled=true;
     negritaBtn.disabled=true;
@@ -1033,15 +1082,22 @@ const cambiarTamanioTexto = (tamanio) => {
     if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
         // Cambia el tamaño del texto del objeto Text seleccionado
         objetoTextSeleccionado.set('fontSize', tamanio);
-        canvas.renderAll();
+        fontSizeAcordion.textContent=`${tamanio}px`;
+
+        setTimeout(function () {
+            canvas.renderAll();
+        }, 50);
     }
 }
 
-// Escucha el evento change del select para cambiar el tamaño del texto
+// Contenido del fontSizeOptions. Este contenido se genera dinamicamente, por lo que debe estar en esta posicion
+const fontSizeInnerOptions = document.querySelectorAll('.option-fontSize');
 
-fontSizeSelect.addEventListener('change', function () {
-    const tamanioSeleccionado = parseInt(fontSizeSelect.value);
-    cambiarTamanioTexto(tamanioSeleccionado);
+fontSizeInnerOptions.forEach((option, index) => {
+    option.addEventListener('click', () => {
+        const tamanioSeleccionado = (index + 1) * 10;
+        cambiarTamanioTexto(tamanioSeleccionado);
+    });
 });
 
 // Para el boton de cursiva 
@@ -1290,3 +1346,11 @@ window.onclick = function (event) {
     }
 };
 
+// Para solucionar el error de deseleccionar elementos
+canvas.on('mouse:down', function(options) {
+    if (options.target === null) {
+        // No se ha hecho clic en un objeto específico, deselecciona todo
+        canvas.discardActiveObject();
+        canvas.renderAll();
+    }
+});

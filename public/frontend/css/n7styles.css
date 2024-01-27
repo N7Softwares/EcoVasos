@@ -199,7 +199,7 @@ section{
 }
 .accordion-body .option-color{
     display:flex;
-    /* border:1px solid var(--border); */
+    border:1px solid var(--gray);
     justify-content:center;
     padding:10px 0;
     cursor:pointer;
@@ -222,7 +222,11 @@ section{
 .accordion-body .option-color .color-title{
     margin-bottom:0;
 }
-
+/* CSS para dar estilo a los elementos desactivados*/
+.accordion-button.disabled {
+    pointer-events: none; /* Evita que el elemento sea clickeable */
+    opacity: 0.3; /* Puedes ajustar la opacidad según tus necesidades */
+}
 /* ------------------------------- Colores del Diseño -------------------------------- */
 
 .color-cube{
