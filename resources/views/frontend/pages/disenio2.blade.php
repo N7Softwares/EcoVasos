@@ -324,37 +324,145 @@
                                     <h4 class="text-center">Agregar Texto</h4>
                                     <button id="nuevo-texto">Agregar Nuevo Texto</button>
                                     <textarea id="text-editor" placeholder="Texto"></textarea>
-                                        <div class="container-fonts">
-                                            <!-- Para cambiar el font-family -->
-                                            <select id="font-selector">
-                                                <option value="Arial">Arial</option>
-                                                <option value="Arial Black">Arial Black</option>
-                                                <option value="Comic Sans MS">Comic Sans MS</option>
-                                                <option value="Courier New">Courier New</option>
-                                                <option value="Impact">Impact</option>
-                                                <option value="Times New Roman">Times New Roman</option>
-                                                <option value="Montserrat">Montserrat</option>
-                                                <option value="Lato">Lato</option>
-                                                <option value="Helvetica, sans-serif">Helvetica</option>
-                                                <option value="Georgia, serif">Georgia</option>
-                                                <option value="Courier New, monospace">Courier New</option>
-                                                <option value="Palatino, serif">Palatino</option>
-                                                <option value="Verdana, sans-serif">Verdana</option>
-                                                <option value="Garamond, serif">Garamond</option>
-                                                @foreach($array['tipografias'] as $tipografia)
-                                                    <option value="{{ $tipografia->name }}">
-                                                        {{ $tipografia->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <select id="fontSizeSelect">
-                                                <!-- El codigo se genera dinamicamente por js -->
-                                            </select>
+                                    <div class="container-fonts">
+                                        <!-- Para cambiar el font-family -->
+                                        <!-- Acordeon de fuentes -->
+                                        <div class="accordion" id="accordionExample2">
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingThree">
+                                                    <button class="accordion-button btn-accn-1 collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                        aria-expanded="false" aria-controls="collapseThree">
+                                                        Arial
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseThree" class="accordion-collapse collapse"
+                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
+                                                    <div class="accordion-body">
+                                                        <!-- Primer ítem -->
+                                                        <div class="option-color option-fuentes" value="Arial">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Arial</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Segundo ítem -->
+                                                        <div class="option-color option-fuentes" value="Arial Black">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Arial Black</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Tercer ítem -->
+                                                        <div class="option-color option-fuentes" value="Comic Sans MS">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Comic Sans MS</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Cuarto ítem -->
+                                                        <div class="option-color option-fuentes" value="Courier New">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Courier New</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Quinto ítem -->
+                                                        <div class="option-color option-fuentes" value="Impact">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Impact</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Sexto ítem -->
+                                                        <div class="option-color option-fuentes"
+                                                            value="Times New Roman">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Times New Roman</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Séptimo ítem -->
+                                                        <div class="option-color option-fuentes" value="Montserrat">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Montserrat</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Octavo ítem -->
+                                                        <div class="option-color option-fuentes" value="Lato">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Lato</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Noveno ítem -->
+                                                        <div class="option-color option-fuentes"
+                                                            value="Helvetica, sans-serif">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Helvetica</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Décimo ítem -->
+                                                        <div class="option-color option-fuentes" value="Georgia, serif">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Georgia</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Undécimo ítem -->
+                                                        <div class="option-color option-fuentes"
+                                                            value="Courier New, monospace">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Courier New</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Duodécimo ítem -->
+                                                        <div class="option-color option-fuentes"
+                                                            value="Palatino, serif">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Palatino</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Decimotercero ítem -->
+                                                        <div class="option-color option-fuentes"
+                                                            value="Verdana, sans-serif">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Verdana</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- Decimocuarto ítem -->
+                                                        <div class="option-color option-fuentes"
+                                                            value="Garamond, serif">
+                                                            <div class="options-container">
+                                                                <p class="color-title">Garamond</p>
+                                                            </div>
+                                                        </div>
+                                                        <!-- ... Tipografias traidas de la base de datos -->
+                                                        @foreach($array['tipografias'] as $tipografia)
+                                                        <div class="option-color option-fuentes"
+                                                            value="{{ $tipografia->name }}">
+                                                            <div class="options-container">
+                                                                <p class="color-title">{{ $tipografia->name }}</p>
+                                                            </div>
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="accordion-item">
+                                                <h2 class="accordion-header" id="headingFour">
+                                                    <button class="accordion-button btn-accn-2 collapsed" type="button"
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                        aria-expanded="false" aria-controls="collapseFour">
+                                                        40px
+                                                    </button>
+                                                </h2>
+                                                <div id="collapseFour" class="accordion-collapse collapse"
+                                                    aria-labelledby="headingFour" data-bs-parent="#accordionExample2">
+                                                    <!-- id en accordion-body -->
+                                                    <div class="accordion-body" id="fontSizeOptions">
+                                                        <!-- Contenido generado dinámicamente se agregará aca por JavaScript -->
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="container-btns">
-                                            <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
-                                            <button id="negritaBtn" class="fontStyleBtn" title="Negrita">B</button>
-                                        </div>
+                                    </div>
+                                    <div class="container-btns">
+                                        <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
+                                        <button id="negritaBtn" class="fontStyleBtn" title="Negrita">B</button>
+                                    </div>
                                     <div>
                                     </div>
                                 </div>
