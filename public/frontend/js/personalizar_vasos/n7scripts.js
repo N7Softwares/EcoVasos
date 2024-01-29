@@ -538,56 +538,6 @@ cambiarColorATodos();
 
 
 //-----------------------------MEDIDOR---------------------------
-let imagenAgregada = false;
-let currentImage;
-
-const agregarImagen = () => {
-    const svgHidden = document.getElementById("svgHidden");
-    const svgContent = svgHidden.innerHTML;
-
-    fabric.loadSVGFromString(svgContent, (objects, options) => {
-        const img = fabric.util.groupSVGElements(objects, options);
-
-        img.set({
-            // Modifique los scaleX e scaleY para que encajaran con el nuevo alto del lienzo, eran 2.2 antes
-            scaleX: 1.75,
-            scaleY: 1.75,
-            selectable: true,
-            lockScalingX: true,
-            lockScalingY: true,
-            lockMovementY: true,
-            left: canvas.width - img.width * 1.7 - 10,
-            top: 0,
-            dataTarget:"medidor"
-        });
-
-        canvas.add(img);
-        canvas.setActiveObject(img);
-        canvas.renderAll();
-
-        document.getElementById("agregarBtn").disabled = true;
-        document.getElementById("eliminarBtn").disabled = false;
-
-        imagenAgregada = true;
-        currentImage = img;
-
-        // Habilitar la paleta de colores después de agregar la imagen
-        document.getElementById("colorPalette").classList.remove("disabled");
-    });
-}
-
-const eliminarImagen = () => {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-        canvas.remove(activeObject);
-        canvas.renderAll();
-    }
-    document.getElementById("agregarBtn").disabled = false;
-    document.getElementById("eliminarBtn").disabled = true;
-
-    imagenAgregada = false;
-    currentImage = null;
-}
 
 const selectMedidas = document.getElementById("select-medidas");
 // Objetos con los svgs
@@ -737,14 +687,7 @@ const cambiarColorMedidor = (color) =>{
 const handleColorChange = (event) => {
     // console.log("COLOR", event);
     const newColor = event;
-    // El color del medidor cambia solo si se detecta este elemento
-    if(currentImage){
-        const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
-        elements.forEach((element) => {
-            element.set("fill", newColor);
-        });
-        canvas.renderAll();
-    }
+    
     //  // Obtén el objeto activo o el primer objeto del canvas
     //  const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
     //  console.log("VIENE a cambiar el color", activeObject);
@@ -892,6 +835,10 @@ const nuevoTextoButton = document.getElementById('nuevo-texto');
 const fontSizeSelect = document.getElementById('fontSizeSelect');
 const cursivaBtn = document.getElementById("cursivaBtn");
 const negritaBtn = document.getElementById("negritaBtn");
+// acordeones de fontFamily y fontsize
+const fontAcordion = document.querySelector(".btn-accn-1")
+const fontSizeAcordion = document.querySelector(".btn-accn-2")
+const fontSizeOptions = document.getElementById('fontSizeOptions');
 
 
 // Función para agregar un nuevo objeto Text al lienzo
@@ -901,7 +848,7 @@ function agregarTextoAlCanvas(texto) {
     const newText = new fabric.Text(textoPorDefecto, {
         left: 50,
         top: 50,
-        fontSize: fontSize(),
+        fontSize: 40,
         fontFamily: 'Arial',
         fill: valorColorActual(),
         selectable: true,
@@ -922,15 +869,30 @@ function agregarTextoAlCanvas(texto) {
 // Definir los valores de tamaño de fuente disponibles
 const valoresTamanosFuente = Array.from({ length: 30 }, (_, index) => (index + 1) * 10);
 
-// Generar las opciones del select
+// Generar las opciones del acordeón
 valoresTamanosFuente.forEach(valor => {
-    const option = document.createElement('option');
-    option.value = valor.toString();
-    option.text = `${valor}px`;
-    if (valor === 40) {
-        option.selected = true;
-    }
-    fontSizeSelect.add(option);
+    // Crear el contenedor del item
+    const itemContainer = document.createElement('div');
+    itemContainer.classList.add('option-color', 'option-fontSize');
+    itemContainer.setAttribute('value', valor.toString());
+
+    // Crear el contenedor de opciones
+    const optionsContainer = document.createElement('div');
+    optionsContainer.classList.add('options-container');
+
+    // Crear el párrafo con el tamaño de fuente
+    const paragraph = document.createElement('p');
+    paragraph.classList.add('color-title');
+    paragraph.textContent = `${valor}px`;
+
+    // Agregar el párrafo al contenedor de opciones
+    optionsContainer.appendChild(paragraph);
+
+    // Agregar el contenedor de opciones al contenedor del item
+    itemContainer.appendChild(optionsContainer);
+
+    // Agregar el contenedor del item al accordion-body
+    fontSizeOptions.appendChild(itemContainer);
 });
 
 // funcion para cambiar el fontSize de los textos
@@ -957,20 +919,43 @@ nuevoTextoButton.addEventListener('click', function () {
 });
 
 // Escucha el cambio en el select de fuentes
-const fontSelector = document.getElementById('font-selector');
-fontSelector.addEventListener('change', function () {
-    const objetoTextSeleccionado = canvas.getActiveObject();
-    
-    if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
-        // Actualiza la fuente del objeto Text seleccionado
-        const nuevaFuente = fontSelector.value;
-        objetoTextSeleccionado.set('fontFamily', nuevaFuente);
-        // Añade un pequeño retraso antes de renderizar el canvas
-        setTimeout(function() {
-            canvas.renderAll();
-        }, 50); // Puedes ajustar el valor del retraso según sea necesario
-    }
+const fontSelector = document.querySelectorAll(".option-fuentes");
+
+fontSelector.forEach(fuente => {
+    fuente.addEventListener("click", () => {
+        // Utiliza getAttribute para obtener el valor del atributo value
+        const fontValue = fuente.getAttribute("value");
+
+        const objetoTextSeleccionado = canvas.getActiveObject();
+
+        if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+            // Actualiza la fuente del objeto Text seleccionado
+            objetoTextSeleccionado.set('fontFamily', fontValue);
+            // Estableciendo el texto del boton de del acordeon
+            fontAcordion.textContent=fontValue;
+            // Añade un pequeño retraso antes de renderizar el canvas
+            setTimeout(function () {
+                canvas.renderAll();
+            }, 50); // Puedes ajustar el valor del retraso según sea necesario
+        }
+    });
 });
+
+// Obtiene ambos botones por su clase
+const cerrarAcordeonesFonts = ()=>{
+    let btnAcordeon1 = document.querySelector('.btn-accn-1');
+    let btnAcordeon2 = document.querySelector('.btn-accn-2');
+
+    // Cierra el primer acordeón si está abierto
+    if (!btnAcordeon1.classList.contains('collapsed')) {
+        btnAcordeon1.click();
+    }
+
+    // Cierra el segundo acordeón si está abierto
+    if (!btnAcordeon2.classList.contains('collapsed')) {
+        btnAcordeon2.click();
+    }
+}
 
 // Función para manejar la actualización de la selección
 const actualizarSeleccion = (objetoSeleccionado) => {
@@ -980,16 +965,16 @@ const actualizarSeleccion = (objetoSeleccionado) => {
         textEditor.value = objetoSeleccionado.text;
         textEditor.disabled = false;
         // Habilita el select de fuentes
-        fontSelector.disabled = false;
+        fontAcordion.classList.remove("disabled");
         // Habilita el select de fontSize
-        fontSizeSelect.disabled = false;
-
+        fontSizeAcordion.classList.remove("disabled");
         // Establece la fuente actual en el select
-        fontSelector.value = objetoSeleccionado.fontFamily || 'Arial';
+        fontAcordion.textContent= objetoSeleccionado.fontFamily || 'Arial';;
+
 
         // Establece el tamaño de fuente actual en el select
         const fontSizeValue = objetoSeleccionado.fontSize;
-        fontSizeSelect.value = fontSizeValue.toString();
+        fontSizeAcordion.textContent = `${fontSizeValue}px`;
         // Botones para cursiva y negrita
         cursivaBtn.disabled=false;
         negritaBtn.disabled=false;
@@ -1041,12 +1026,19 @@ canvas.on('selection:cleared',  ()=> {
     // Borra el contenido del textarea cuando no hay elementos seleccionados
     textEditor.value = '';
     textEditor.disabled = true;
-    // Deshabilita el select de fuentes
-    fontSelector.disabled = true;
-    // Habilita el select de fontSize
-    fontSizeSelect.disabled = true;
+    // deshabilita el select de fuentes
+    fontAcordion.classList.add("disabled");
+
+    // Deshabilita el select de fontSize
+    fontSizeAcordion.classList.add("disabled");
+
     // Restablece la fuente predeterminada en el select
-    fontSelector.value = 'Arial';
+    fontAcordion.textContent="Arial";
+    fontSizeAcordion.textContent="40px";
+
+    // cerrar ambos acordeones de fuentes
+    cerrarAcordeonesFonts();
+    
     // Botones para cursiva y negrita
     cursivaBtn.disabled=true;
     negritaBtn.disabled=true;
@@ -1087,15 +1079,22 @@ const cambiarTamanioTexto = (tamanio) => {
     if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
         // Cambia el tamaño del texto del objeto Text seleccionado
         objetoTextSeleccionado.set('fontSize', tamanio);
-        canvas.renderAll();
+        fontSizeAcordion.textContent=`${tamanio}px`;
+
+        setTimeout(function () {
+            canvas.renderAll();
+        }, 50);
     }
 }
 
-// Escucha el evento change del select para cambiar el tamaño del texto
+// Contenido del fontSizeOptions. Este contenido se genera dinamicamente, por lo que debe estar en esta posicion
+const fontSizeInnerOptions = document.querySelectorAll('.option-fontSize');
 
-fontSizeSelect.addEventListener('change', function () {
-    const tamanioSeleccionado = parseInt(fontSizeSelect.value);
-    cambiarTamanioTexto(tamanioSeleccionado);
+fontSizeInnerOptions.forEach((option, index) => {
+    option.addEventListener('click', () => {
+        const tamanioSeleccionado = (index + 1) * 10;
+        cambiarTamanioTexto(tamanioSeleccionado);
+    });
 });
 
 // Para el boton de cursiva 
@@ -1297,19 +1296,48 @@ var miimagen = new Image();
 
 
 function cargarImagen(url) {
-    console.log("IMAGEEEE URL PARA CARGAR AL LIENZO", url);
     validador = false;
-    const fabricImage = new fabric.Image();
-    fabricImage.setSrc(url, function() {
-        fabricImage.set({
-            scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
-            scaleY: 0.2,
-            dataTarget: "galeria"
-        });
+    // Intento de galeano, funciona pero solo sube imagenes svg
+    fetch(url)
+        .then(response => response.text())
+        .then(svgContent => {
+            // Utiliza Fabric.js para cargar el SVG y agregarlo al lienzo
+            fabric.loadSVGFromString(svgContent, (objects, options) => {
+                const group = new fabric.Group(objects, options);
 
-        // Convertir la imagen a blanco y negro
-        fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
-        fabricImage.applyFilters();
+                // Ajusta la escala y la posición del grupo
+                group.set({
+                    scaleX:0.2,
+                    scaleY:0.2,
+                    top: 0,
+                    dataTarget: "elementos"
+                });
+
+                // Establece el color de relleno del grupo y de todos los elementos dentro del grupo
+                group.forEachObject(objeto => {
+                    objeto.set({ fill: valorColorActual() });
+                });
+
+                // Agrega el objeto SVG al lienzo
+                canvas.add(group);
+                canvas.setActiveObject(group);
+                canvas.renderAll();
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar el archivo SVG:', error);
+        });
+    // const fabricImage = new fabric.Image();
+    // fabricImage.setSrc(url, function() {
+    //     fabricImage.set({
+    //         scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
+    //         scaleY: 0.2,
+    //         dataTarget: "elementos"
+    //     });
+
+    //     // Convertir la imagen a blanco y negro
+    //     fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
+    //     fabricImage.applyFilters();
 
         // Agregar la imagen al lienzo
         if(validador === false){
@@ -1317,7 +1345,7 @@ function cargarImagen(url) {
         }
         canvas.renderAll();
         addColorPicker(fabricImage);
-    });
+
 }
 
 
@@ -1348,3 +1376,11 @@ window.onclick = function (event) {
     }
 };
 
+// Para solucionar el error de deseleccionar elementos
+canvas.on('mouse:down', function(options) {
+    if (options.target === null) {
+        // No se ha hecho clic en un objeto específico, deselecciona todo
+        canvas.discardActiveObject();
+        canvas.renderAll();
+    }
+});
