@@ -484,56 +484,6 @@ cambiarColorATodos();
 
 
 //-----------------------------MEDIDOR---------------------------
-let imagenAgregada = false;
-let currentImage;
-
-const agregarImagen = () => {
-    const svgHidden = document.getElementById("svgHidden");
-    const svgContent = svgHidden.innerHTML;
-
-    fabric.loadSVGFromString(svgContent, (objects, options) => {
-        const img = fabric.util.groupSVGElements(objects, options);
-
-        img.set({
-            // Modifique los scaleX e scaleY para que encajaran con el nuevo alto del lienzo, eran 2.2 antes
-            scaleX: 1.75,
-            scaleY: 1.75,
-            selectable: true,
-            lockScalingX: true,
-            lockScalingY: true,
-            lockMovementY: true,
-            left: canvas.width - img.width * 1.7 - 10,
-            top: 0,
-            dataTarget:"medidor"
-        });
-
-        canvas.add(img);
-        canvas.setActiveObject(img);
-        canvas.renderAll();
-
-        document.getElementById("agregarBtn").disabled = true;
-        document.getElementById("eliminarBtn").disabled = false;
-
-        imagenAgregada = true;
-        currentImage = img;
-
-        // Habilitar la paleta de colores después de agregar la imagen
-        document.getElementById("colorPalette").classList.remove("disabled");
-    });
-}
-
-const eliminarImagen = () => {
-    const activeObject = canvas.getActiveObject();
-    if (activeObject) {
-        canvas.remove(activeObject);
-        canvas.renderAll();
-    }
-    document.getElementById("agregarBtn").disabled = false;
-    document.getElementById("eliminarBtn").disabled = true;
-
-    imagenAgregada = false;
-    currentImage = null;
-}
 
 const selectMedidas = document.getElementById("select-medidas");
 // Objetos con los svgs
@@ -683,14 +633,7 @@ const cambiarColorMedidor = (color) =>{
 const handleColorChange = (event) => {
     // console.log("COLOR", event);
     const newColor = event;
-    // El color del medidor cambia solo si se detecta este elemento
-    if(currentImage){
-        const elements = currentImage.getObjects(); // Obtener objetos dentro de la imagen
-        elements.forEach((element) => {
-            element.set("fill", newColor);
-        });
-        canvas.renderAll();
-    }
+    
     //  // Obtén el objeto activo o el primer objeto del canvas
     //  const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
     //  console.log("VIENE a cambiar el color", activeObject);
@@ -1304,7 +1247,7 @@ function cargarImagen(url) {
         fabricImage.set({
             scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
             scaleY: 0.2,
-            dataTarget: "galeria"
+            dataTarget: "elementos"
         });
 
         // Convertir la imagen a blanco y negro
