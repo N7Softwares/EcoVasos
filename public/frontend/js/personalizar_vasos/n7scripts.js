@@ -1242,23 +1242,54 @@ var miimagen = new Image();
 
 
 function cargarImagen(url) {
-    const fabricImage = new fabric.Image();
-    fabricImage.setSrc(url, function() {
-        fabricImage.set({
-            scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
-            scaleY: 0.2,
-            dataTarget: "elementos"
+    
+    // Intento de galeano, funciona pero solo sube imagenes svg
+    fetch(url)
+        .then(response => response.text())
+        .then(svgContent => {
+            // Utiliza Fabric.js para cargar el SVG y agregarlo al lienzo
+            fabric.loadSVGFromString(svgContent, (objects, options) => {
+                const group = new fabric.Group(objects, options);
+
+                // Ajusta la escala y la posición del grupo
+                group.set({
+                    scaleX:0.2,
+                    scaleY:0.2,
+                    top: 0,
+                    dataTarget: "elementos"
+                });
+
+                // Establece el color de relleno del grupo y de todos los elementos dentro del grupo
+                group.forEachObject(objeto => {
+                    objeto.set({ fill: valorColorActual() });
+                });
+
+                // Agrega el objeto SVG al lienzo
+                canvas.add(group);
+                canvas.setActiveObject(group);
+                canvas.renderAll();
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar el archivo SVG:', error);
         });
+    // const fabricImage = new fabric.Image();
+    // fabricImage.setSrc(url, function() {
+    //     fabricImage.set({
+    //         scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
+    //         scaleY: 0.2,
+    //         dataTarget: "elementos"
+    //     });
 
-        // Convertir la imagen a blanco y negro
-        fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
-        fabricImage.applyFilters();
+    //     // Convertir la imagen a blanco y negro
+    //     fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
+    //     fabricImage.applyFilters();
 
-        // Agregar la imagen al lienzo
-        canvas.add(fabricImage);
-        canvas.renderAll();
-        addColorPicker(fabricImage);
-    });
+    //     // Agregar la imagen al lienzo
+    //     canvas.add(fabricImage);
+    //     canvas.renderAll();
+    //     addColorPicker(fabricImage);
+    // });
 }
 
 
