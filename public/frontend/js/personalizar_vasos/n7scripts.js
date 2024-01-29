@@ -392,11 +392,9 @@ const cambiarColorATodos = () => {
                     console.log("FABRIC IMAGEN 5", file);
                     file.applyFilters();
                     console.log("migaja 7");
-                    if(validador === false){
-                        canvas.add(file);
-                    }
+                    canvas.add(file);
                     canvas.renderAll();
-                    handleSvgFile(file);
+                    addColorPicker(file);
                     console.log("migaja 8");
       
             // reader.readAsDataURL(file);
@@ -407,76 +405,31 @@ const cambiarColorATodos = () => {
         // Cuando se da click en cualquier color
         color.addEventListener("click", () => {
             selectedColorGlobal = color.style.backgroundColor;
-            
+
             // Si scopeColorCheck está activo significa que los colores se cambian individualmente
             if (scopeColorCheck.checked) {
                 const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
+                // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
+                if(activeObject.type === "group"){
+                // Para cambiar el color en la imagen de MEDIDA
+                    handleColorChange(selectedColorGlobal);
+                    // Nueva funcion para cambiar color al svg de medidas
+                    cambiarColorMedidor(selectedColorGlobal);
 
-                if (activeObject && activeObject instanceof fabric.Image) {
-                    const imagenURL = activeObject.getSrc();
-                    
-                    console.log('URL de la imagen:', imagenURL);
-
-                    fetch(imagenURL)
-                    .then(response => {
-                        console.log("RESPUESTAAA", response)
-                        // Verificar si la solicitud fue exitosa
-                        if (!response.ok) {
-                            throw new Error(`No se pudo obtener el archivo. Código de estado: ${response.status}`);
-                        }
-                        // Convertir la respuesta a un blob (objeto binario)
-                        return response.blob();
-                    })
-                    .then(blob => {
-                        // Crear un objeto FileReader para leer el contenido del blob
-                        const reader = new FileReader();
-                        reader.onload = function () {
-                            // El contenido del archivo se encuentra en reader.result
-                            const fileContent = reader.result;
-                            console.log('Contenido del archivo:', fileContent);
             
-                            // Ahora puedes manipular el contenido del archivo según tus necesidades
-                        };
-                        // Leer el blob como ArrayBuffer
-                        reader.readAsArrayBuffer(blob);
-                    })
-                    .catch(error => {
-                        console.error('Error al obtener el archivo:', error);
-                    });
-
-                    const fabricImage = new fabric.Image();
-                    fabricImage.setSrc(imagenURL, function() {
-                        console.log("IMAGEN FINAL: ", fabricImage);
-                        const activeObjectFinal = fabricImage;
-
-
-                        console.log("Tipo de objeto", activeObjectFinal.type);
-                        console.log("Tipo de objeto completo", activeObjectFinal);
-                        // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
-                        if(activeObjectFinal.type === "group"){
-                            console.log("va por el 1 lok")
-                        // Para cambiar el color en la imagen de MEDIDA
-                            handleColorChange(selectedColorGlobal);
-                            // Nueva funcion para cambiar color al svg de medidas
-                            cambiarColorMedidor(selectedColorGlobal);
-        
-                    
-                        }else if (activeObjectFinal && activeObjectFinal.type === 'image'){
-                            console.log("va por el 2 lok")
-                            activeObjectFinal.set({ fill: selectedColorGlobal });
-                            addColorPickerToImage(activeObjectFinal, color);
-                        } else {
-                            console.log("va por el 3 lok")
-                            // Si no es una imagen, cambia el color normalmente
-                            activeObjectFinal.set('fill', selectedColorGlobal);
-                        }
-                    });
-                } else {
-                    console.log('No hay una imagen seleccionada.');
+                }else{
+                    activeObject.set('fill', selectedColorGlobal);
                 }
-
+                // Verifica si el objeto seleccionado es una imagen
+                if (activeObject && activeObject.type === 'image') {
+                    // Cambia el color de la imagen directamente
+                    activeObject.set({ fill: selectedColorGlobal });
+                    addColorPickerToImage(activeObject, color);
+                } else {
+                    // Si no es una imagen, cambia el color normalmente
+                    activeObject.set('fill', selectedColorGlobal);
+                }
             } else {
-                validador = true;
                 // Recorre todos los objetos en el lienzo
                 canvas.forEachObject(obj => {
                 // Aplica la acción que desees, por ejemplo, cambiar el color
