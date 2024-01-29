@@ -82,13 +82,18 @@ shapeSelector.addEventListener('change', () => {
 // Cargar una imagen al lienzo
 // const imageUpload = document.getElementById('image-upload');
 document.getElementById('image-upload').addEventListener('change', handleFileSelect);
+
 const colorPicker = document.getElementById('color-picker'); // Asumiendo que tienes un color picker en tu HTML
 
-
+function handleFileSelectPreview(event) {
+    validador = true;
+    return event;
+}
 function handleFileSelect(event) {
-    console.log("IMAGEN subida", event);
-    const file = event.target.files[0];
+    validador = false;
 
+    const file = event.target.files[0];
+    const input = document.getElementById('image-upload');
     if (file) {
       if (file.type === 'image/svg+xml') {
         console.log("ES SVG")
@@ -119,9 +124,17 @@ function handleFileSelect(event) {
                         // Convertir la imagen a blanco y negro
                         fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
                         fabricImage.applyFilters();
+                        console.log("INPUT", input.files);
+                        console.log("validator: ", validador);
+  
                         if(validador === false){
                             canvas.add(fabricImage);
                         }
+        
+                        // if((input.files && input.files[0]) && validador === false){
+                        //     canvas.add(fabricImage);
+                        // }
+                  
                         canvas.renderAll();
                         addColorPicker(fabricImage);
                     };
@@ -132,6 +145,7 @@ function handleFileSelect(event) {
         
         
       }
+      validador_2 = false;
     }
   }
   const addColorPicker = (fabricImage) => {
@@ -177,13 +191,13 @@ function handleFileSelect(event) {
         });
 
         console.log("va por A5")
-
-        // Elimina objetos existentes en el lienzo con el mismo dataTarget
-        const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
-        existingObjects.forEach(obj => canvas.remove(obj));
-
-        // Agrega el nuevo objeto al lienzo
         if(validador === false){
+            // Elimina objetos existentes en el lienzo con el mismo dataTarget
+            const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
+            existingObjects.forEach(obj => canvas.remove(obj));
+
+            // Agrega el nuevo objeto al lienzo
+        
             canvas.add(svgObjects);
         }
         canvas.renderAll();
@@ -393,36 +407,76 @@ const cambiarColorATodos = () => {
         // Cuando se da click en cualquier color
         color.addEventListener("click", () => {
             selectedColorGlobal = color.style.backgroundColor;
-            validador = true;
+            
             // Si scopeColorCheck está activo significa que los colores se cambian individualmente
             if (scopeColorCheck.checked) {
                 const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
-                
-                console.log("Tipo de objeto", activeObject.type);
-                console.log("Tipo de objeto completo", activeObject);
-                // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
-                if(activeObject.type === "group"){
-                    console.log("va por el 1 lok")
-                // Para cambiar el color en la imagen de MEDIDA
-                    handleColorChange(selectedColorGlobal);
-                    // Nueva funcion para cambiar color al svg de medidas
-                    cambiarColorMedidor(selectedColorGlobal);
 
+                if (activeObject && activeObject instanceof fabric.Image) {
+                    const imagenURL = activeObject.getSrc();
+                    
+                    console.log('URL de la imagen:', imagenURL);
+
+                    fetch(imagenURL)
+                    .then(response => {
+                        console.log("RESPUESTAAA", response)
+                        // Verificar si la solicitud fue exitosa
+                        if (!response.ok) {
+                            throw new Error(`No se pudo obtener el archivo. Código de estado: ${response.status}`);
+                        }
+                        // Convertir la respuesta a un blob (objeto binario)
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        // Crear un objeto FileReader para leer el contenido del blob
+                        const reader = new FileReader();
+                        reader.onload = function () {
+                            // El contenido del archivo se encuentra en reader.result
+                            const fileContent = reader.result;
+                            console.log('Contenido del archivo:', fileContent);
             
-                }else{
-                    console.log("va por el 2 lok")
-                    activeObject.set('fill', selectedColorGlobal);
-                }
-                // Verifica si el objeto seleccionado es una imagen
-                if (activeObject && activeObject.type === 'image') {
-                    // Cambia el color de la imagen directamente
-                    activeObject.set({ fill: selectedColorGlobal });
-                    addColorPickerToImage(activeObject, color);
+                            // Ahora puedes manipular el contenido del archivo según tus necesidades
+                        };
+                        // Leer el blob como ArrayBuffer
+                        reader.readAsArrayBuffer(blob);
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener el archivo:', error);
+                    });
+
+                    const fabricImage = new fabric.Image();
+                    fabricImage.setSrc(imagenURL, function() {
+                        console.log("IMAGEN FINAL: ", fabricImage);
+                        const activeObjectFinal = fabricImage;
+
+
+                        console.log("Tipo de objeto", activeObjectFinal.type);
+                        console.log("Tipo de objeto completo", activeObjectFinal);
+                        // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
+                        if(activeObjectFinal.type === "group"){
+                            console.log("va por el 1 lok")
+                        // Para cambiar el color en la imagen de MEDIDA
+                            handleColorChange(selectedColorGlobal);
+                            // Nueva funcion para cambiar color al svg de medidas
+                            cambiarColorMedidor(selectedColorGlobal);
+        
+                    
+                        }else if (activeObjectFinal && activeObjectFinal.type === 'image'){
+                            console.log("va por el 2 lok")
+                            activeObjectFinal.set({ fill: selectedColorGlobal });
+                            addColorPickerToImage(activeObjectFinal, color);
+                        } else {
+                            console.log("va por el 3 lok")
+                            // Si no es una imagen, cambia el color normalmente
+                            activeObjectFinal.set('fill', selectedColorGlobal);
+                        }
+                    });
                 } else {
-                    // Si no es una imagen, cambia el color normalmente
-                    activeObject.set('fill', selectedColorGlobal);
+                    console.log('No hay una imagen seleccionada.');
                 }
+
             } else {
+                validador = true;
                 // Recorre todos los objetos en el lienzo
                 canvas.forEachObject(obj => {
                 // Aplica la acción que desees, por ejemplo, cambiar el color
@@ -733,10 +787,10 @@ const handleColorChange = (event) => {
     //      canvas.renderAll();
     //  });
     // console.log("VIENE a cambiar el color")
-    handleFileSelect({
+    handleFileSelectPreview({
         target: { files: [document.getElementById('image-upload').files[0]] },
     });
-    
+    validador = false;
 }
 
 //----------------------- SideBar Dinamico --------------------------
@@ -1243,6 +1297,8 @@ var miimagen = new Image();
 
 
 function cargarImagen(url) {
+    console.log("IMAGEEEE URL PARA CARGAR AL LIENZO", url);
+    validador = false;
     const fabricImage = new fabric.Image();
     fabricImage.setSrc(url, function() {
         fabricImage.set({
@@ -1256,7 +1312,9 @@ function cargarImagen(url) {
         fabricImage.applyFilters();
 
         // Agregar la imagen al lienzo
-        canvas.add(fabricImage);
+        if(validador === false){
+            canvas.add(fabricImage);
+        }
         canvas.renderAll();
         addColorPicker(fabricImage);
     });
