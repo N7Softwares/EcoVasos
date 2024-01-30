@@ -82,13 +82,18 @@ shapeSelector.addEventListener('change', () => {
 // Cargar una imagen al lienzo
 // const imageUpload = document.getElementById('image-upload');
 document.getElementById('image-upload').addEventListener('change', handleFileSelect);
+
 const colorPicker = document.getElementById('color-picker'); // Asumiendo que tienes un color picker en tu HTML
 
-
+function handleFileSelectPreview(event) {
+    validador = true;
+    return event;
+}
 function handleFileSelect(event) {
-    console.log("IMAGEN subida", event);
-    const file = event.target.files[0];
+    validador = false;
 
+    const file = event.target.files[0];
+    const input = document.getElementById('image-upload');
     if (file) {
       if (file.type === 'image/svg+xml') {
         console.log("ES SVG")
@@ -119,9 +124,17 @@ function handleFileSelect(event) {
                         // Convertir la imagen a blanco y negro
                         fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
                         fabricImage.applyFilters();
+                        console.log("INPUT", input.files);
+                        console.log("validator: ", validador);
+  
                         if(validador === false){
                             canvas.add(fabricImage);
                         }
+        
+                        // if((input.files && input.files[0]) && validador === false){
+                        //     canvas.add(fabricImage);
+                        // }
+                  
                         canvas.renderAll();
                         addColorPicker(fabricImage);
                     };
@@ -132,6 +145,7 @@ function handleFileSelect(event) {
         
         
       }
+      validador_2 = false;
     }
   }
   const addColorPicker = (fabricImage) => {
@@ -177,13 +191,13 @@ function handleFileSelect(event) {
         });
 
         console.log("va por A5")
-
-        // Elimina objetos existentes en el lienzo con el mismo dataTarget
-        const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
-        existingObjects.forEach(obj => canvas.remove(obj));
-
-        // Agrega el nuevo objeto al lienzo
         if(validador === false){
+            // Elimina objetos existentes en el lienzo con el mismo dataTarget
+            const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
+            existingObjects.forEach(obj => canvas.remove(obj));
+
+            // Agrega el nuevo objeto al lienzo
+        
             canvas.add(svgObjects);
         }
         canvas.renderAll();
@@ -378,11 +392,9 @@ const cambiarColorATodos = () => {
                     console.log("FABRIC IMAGEN 5", file);
                     file.applyFilters();
                     console.log("migaja 7");
-                    if(validador === false){
-                        canvas.add(file);
-                    }
+                    canvas.add(file);
                     canvas.renderAll();
-                    handleSvgFile(file);
+                    addColorPicker(file);
                     console.log("migaja 8");
       
             // reader.readAsDataURL(file);
@@ -393,16 +405,12 @@ const cambiarColorATodos = () => {
         // Cuando se da click en cualquier color
         color.addEventListener("click", () => {
             selectedColorGlobal = color.style.backgroundColor;
-            validador = true;
+
             // Si scopeColorCheck está activo significa que los colores se cambian individualmente
             if (scopeColorCheck.checked) {
                 const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
-                
-                console.log("Tipo de objeto", activeObject.type);
-                console.log("Tipo de objeto completo", activeObject);
                 // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
-                    console.log("va por el 1 lok")
                 // Para cambiar el color en la imagen de MEDIDA
                     handleColorChange(selectedColorGlobal);
                     // Nueva funcion para cambiar color al svg de medidas
@@ -410,7 +418,6 @@ const cambiarColorATodos = () => {
 
             
                 }else{
-                    console.log("va por el 2 lok")
                     activeObject.set('fill', selectedColorGlobal);
                 }
                 // Verifica si el objeto seleccionado es una imagen
@@ -676,10 +683,10 @@ const handleColorChange = (event) => {
     //      canvas.renderAll();
     //  });
     // console.log("VIENE a cambiar el color")
-    handleFileSelect({
+    handleFileSelectPreview({
         target: { files: [document.getElementById('image-upload').files[0]] },
     });
-    
+    validador = false;
 }
 
 //----------------------- SideBar Dinamico --------------------------
@@ -1242,7 +1249,7 @@ var miimagen = new Image();
 
 
 function cargarImagen(url) {
-    
+    validador = false;
     // Intento de galeano, funciona pero solo sube imagenes svg
     fetch(url)
         .then(response => response.text())
@@ -1285,11 +1292,13 @@ function cargarImagen(url) {
     //     fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
     //     fabricImage.applyFilters();
 
-    //     // Agregar la imagen al lienzo
-    //     canvas.add(fabricImage);
-    //     canvas.renderAll();
-    //     addColorPicker(fabricImage);
-    // });
+        // Agregar la imagen al lienzo
+        if(validador === false){
+            canvas.add(fabricImage);
+        }
+        canvas.renderAll();
+        addColorPicker(fabricImage);
+
 }
 
 
