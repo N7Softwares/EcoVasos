@@ -22,7 +22,8 @@ canvas.setBackgroundColor("#fff");
 canvas.renderAll();
 
 // Cambiar el color del fondo del lienzo según la selección del usuario
-const optionColor = document.querySelectorAll(".option-color");
+const optionColor = document.querySelectorAll("#accordionExample .option-color");
+
 optionColor.forEach(option=>{
     option.addEventListener("click", ()=>{
         const selectedColor = option.children[0].children[0].style.background;
@@ -96,18 +97,18 @@ function handleFileSelect(event) {
     const input = document.getElementById('image-upload');
     if (file) {
       if (file.type === 'image/svg+xml') {
-        console.log("ES SVG")
-        console.log("va por 1")
+        // console.log("ES SVG")
+        // console.log("va por 1")
         // Si es SVG, manejar como antes
         handleSvgFile(file);
       } else {
-        console.log("NO ES SVG")
-        console.log("va por 2")
+        // console.log("NO ES SVG")
+        // console.log("va por 2")
         
         
        
             const file = event.target.files[0];
-            console.log("FABRIC IMAGEN 2", file);
+            // console.log("FABRIC IMAGEN 2", file);
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
@@ -124,8 +125,8 @@ function handleFileSelect(event) {
                         // Convertir la imagen a blanco y negro
                         fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
                         fabricImage.applyFilters();
-                        console.log("INPUT", input.files);
-                        console.log("validator: ", validador);
+                        // console.log("INPUT", input.files);
+                        // console.log("validator: ", validador);
   
                         if(validador === false){
                             canvas.add(fabricImage);
@@ -158,17 +159,17 @@ function handleFileSelect(event) {
     // });
 }
   function handleSvgFile(file) {
-    console.log("va por A1", file)
+    // console.log("va por A1", file)
     const reader = new FileReader();
 
     reader.onload = function (e) {
-      console.log("va por A2")
+    //   console.log("va por A2")
       const svgString = e.target.result;
-      console.log("SVG STRINGGGG", svgString)
+    //   console.log("SVG STRINGGGG", svgString)
       // Convertir SVG a objeto HTML
       const parser = new DOMParser();
       const xmlDoc = parser.parseFromString(svgString, 'text/xml');
-      console.log("va por A3 xmlDoccc", xmlDoc)
+    //   console.log("va por A3 xmlDoccc", xmlDoc)
       // Modificar color del objeto HTML
     
       if (selectedColorGlobal !== undefined) {
@@ -176,7 +177,7 @@ function handleFileSelect(event) {
         paths.forEach((path) => {
           path.setAttribute('fill', selectedColorGlobal);
         });
-        console.log("va por A4 PATH", paths)
+        // console.log("va por A4 PATH", paths)
       }
    
       // Convertir objeto HTML modificado a SVG y luego a fabric.js
@@ -190,7 +191,7 @@ function handleFileSelect(event) {
             dataTarget: "svg"
         });
 
-        console.log("va por A5")
+        // console.log("va por A5")
         if(validador === false){
             // Elimina objetos existentes en el lienzo con el mismo dataTarget
             const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
@@ -412,10 +413,10 @@ const cambiarColorATodos = () => {
                 // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
                 // Para cambiar el color en la imagen de MEDIDA
-                    handleColorChange(selectedColorGlobal);
+                    // handleColorChange(selectedColorGlobal);
                     // Nueva funcion para cambiar color al svg de medidas
-                    cambiarColorMedidor(selectedColorGlobal);
-
+                    // cambiarColorSvg(selectedColorGlobal);
+                    cambiarColorUnicoSvg(selectedColorGlobal)
             
                 }else{
                     activeObject.set('fill', selectedColorGlobal);
@@ -435,9 +436,9 @@ const cambiarColorATodos = () => {
                 // Aplica la acción que desees, por ejemplo, cambiar el color
             
                     obj.set('fill', selectedColorGlobal);
-                    handleColorChange(selectedColorGlobal);
+                    // handleColorChange(selectedColorGlobal);
                     // Nueva funcion para cambiar color al svg de medidas
-                    cambiarColorMedidor(selectedColorGlobal);
+                    cambiarColorSvg(selectedColorGlobal);
 
                 });
                 // Recorre todos los objetos en el lienzo
@@ -611,8 +612,8 @@ const agregarMedidas = (svgName) => {
             console.error('Error al cargar el archivo SVG:', error);
         });
 }
-// Cambiar color SVG medidores
-const cambiarColorMedidor = (color) =>{
+// Cambiar color a todos los SVG
+const cambiarColorSvg = (color) =>{
     // Obtén todos los objetos en el lienzo
     const objetosEnLienzo = canvas.getObjects();
 
@@ -635,6 +636,27 @@ const cambiarColorMedidor = (color) =>{
     });
 
 }
+// cambiar color individual a svg
+const cambiarColorUnicoSvg = (color) => {
+    // Obtén el objeto actualmente seleccionado en el lienzo
+    const objetoSeleccionado = canvas.getActiveObject();
+
+    // Verifica si el objeto seleccionado es de tipo "group"
+    if (objetoSeleccionado && objetoSeleccionado.type === "group") {
+        // Obtiene todos los elementos dentro del grupo
+        const elementosEnGrupo = objetoSeleccionado.getObjects();
+
+        // Itera sobre cada elemento dentro del grupo y cambia su color de relleno
+        elementosEnGrupo.forEach(elemento => {
+            // Cambia el color de relleno del elemento (ajusta el color según tus necesidades)
+            elemento.set({ fill: color });
+        });
+
+        // Actualiza el grupo en el lienzo después de cambiar los colores
+        objetoSeleccionado.setCoords();  // Asegura que las coordenadas del grupo se actualicen correctamente
+        canvas.renderAll();
+    }
+};
 
 // Manejar el color del medidor
 const handleColorChange = (event) => {
@@ -887,7 +909,7 @@ fontSelector.forEach(fuente => {
             // Estableciendo el texto del boton de del acordeon
             fontAcordion.textContent=fontValue;
             // Añade un pequeño retraso antes de renderizar el canvas
-            setTimeout(function () {
+            setTimeout( () => {
                 canvas.renderAll();
             }, 50); // Puedes ajustar el valor del retraso según sea necesario
         }
@@ -1018,8 +1040,19 @@ canvas.on('object:removed',  () =>{
     // Si no hay más objetos Text en el lienzo, borra el contenido del textarea
     if (objetosText.length === 0) {
         textEditor.value = '';
-        fontSelector.disabled = true;
-        fontSizeSelect.disabled = true;
+        // deshabilita el select de fuentes
+        fontAcordion.classList.add("disabled");
+
+        // Deshabilita el select de fontSize
+        fontSizeAcordion.classList.add("disabled");
+
+        // Restablece la fuente predeterminada en el select
+        fontAcordion.textContent="Arial";
+        fontSizeAcordion.textContent="40px";
+
+        // cerrar ambos acordeones de fuentes
+        cerrarAcordeonesFonts();
+        // fontSizeSelect.disabled = true;
     }
 });
 
@@ -1293,11 +1326,11 @@ function cargarImagen(url) {
     //     fabricImage.applyFilters();
 
         // Agregar la imagen al lienzo
-        if(validador === false){
-            canvas.add(fabricImage);
-        }
-        canvas.renderAll();
-        addColorPicker(fabricImage);
+        // if(validador === false){
+        //     canvas.add(fabricImage);
+        // }
+        // canvas.renderAll();
+        // addColorPicker(fabricImage);
 
 }
 
