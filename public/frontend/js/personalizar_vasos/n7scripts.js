@@ -97,18 +97,14 @@ function handleFileSelect(event) {
     const input = document.getElementById('image-upload');
     if (file) {
         if (file.type === 'image/svg+xml') {
-            // console.log("ES SVG")
-            // console.log("va por 1")
-            // Si es SVG, manejar como antes
+            
             handleSvgFile(file);
         } else {
-            // console.log("NO ES SVG")
-            // console.log("va por 2")
+            
 
 
 
             const file = event.target.files[0];
-            console.log("FABRIC IMAGEN 2", file);
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
@@ -160,25 +156,20 @@ const addColorPicker = (fabricImage) => {
 }
 
 function handleSvgFile(file) {
-    // console.log("va por A1", file)
     const reader = new FileReader();
 
     reader.onload = function (e) {
-        //   console.log("va por A2")
         const svgString = e.target.result;
-        //   console.log("SVG STRINGGGG", svgString)
-        // Convertir SVG a objeto HTML
+        
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(svgString, 'text/xml');
-        //   console.log("va por A3 xmlDoccc", xmlDoc)
-        // Modificar color del objeto HTML
+        
 
         if (selectedColorGlobal !== undefined) {
             const paths = xmlDoc.querySelectorAll('path');
             paths.forEach((path) => {
                 path.setAttribute('fill', selectedColorGlobal);
             });
-            // console.log("va por A4 PATH", paths)
         }
 
         // Convertir objeto HTML modificado a SVG y luego a fabric.js
@@ -360,40 +351,13 @@ const cambiarColorATodos = () => {
         // console.log("fileeee", file);
         // console.log("migaja 0", color.style.backgroundColor);
         const colorMatrix = rgbToMatrix(color.style.backgroundColor);
-        // console.log("color de la matrix", colorMatrix);
         if (file) {
-            // console.log("migaja 1");
-
-
-                // console.log("migaja 3");
-
-
-                // console.log("migaja 4");
-                    // console.log("migaja 5");
-
-                    // const filter = file.filters.ColorMatrix({
-                    //     matrix: [
-                    //         color[0] / 255, 0, 0, 0, 0,  // Rojo
-                    //         0, color[1] / 255, 0, 0, 0,  // Verde
-                    //         0, 0, color[2] / 255, 0, 0,  // Azul
-                    //         0, 0, 0, 1, 0  // Alpha
-                    //     ]
-                    // });
-                    // console.log("migaja 6");
-                    // file.filters.push(filter);
-                    file.filters[0].matrix= colorMatrix;
+            file.filters[0].matrix= colorMatrix;
                     
-                    // console.log("FABRIC IMAGEN 5", file);
-                    file.applyFilters();
+            file.applyFilters();
 
-                    // console.log("migaja 7");
-                    canvas.add(file);
-                    canvas.renderAll();
-                    addColorPicker(file);
-                    // console.log("migaja 8");
+            canvas.renderAll();
 
-      
-            // reader.readAsDataURL(file);
         }
     };
 
@@ -408,9 +372,7 @@ const cambiarColorATodos = () => {
                 // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
                 // Para cambiar el color en la imagen de MEDIDA
-                    // handleColorChange(selectedColorGlobal);
-                    // Nueva funcion para cambiar color al svg de medidas
-                    // cambiarColorSvg(selectedColorGlobal);
+                    // Nueva funcion para cambiar color de los svg
                     cambiarColorUnicoSvg(selectedColorGlobal)
             
                 }else{
@@ -431,7 +393,6 @@ const cambiarColorATodos = () => {
                 // Aplica la acción que desees, por ejemplo, cambiar el color
             
                     obj.set('fill', selectedColorGlobal);
-                    // handleColorChange(selectedColorGlobal);
                     // Nueva funcion para cambiar color al svg de medidas
                     cambiarColorSvg(selectedColorGlobal);
 
