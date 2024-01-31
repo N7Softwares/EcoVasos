@@ -121,7 +121,9 @@ if (objToRender === "glass") {
 function animate() {
   requestAnimationFrame(animate);
   //Here we could add some code to update the scene, adding some automatic movement
-
+  if (object && objToRender === "glass") {
+    object.rotation.y -= 0.005; 
+  }
   //Make the eye move
   if (object && objToRender === "eye") {
     //I've played with the constants here until it looked good 
