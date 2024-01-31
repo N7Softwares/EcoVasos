@@ -108,7 +108,7 @@ function handleFileSelect(event) {
         
        
             const file = event.target.files[0];
-            // console.log("FABRIC IMAGEN 2", file);
+            console.log("FABRIC IMAGEN 2", file);
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
@@ -366,18 +366,18 @@ const cambiarColorATodos = () => {
     const scopeColorCheck = document.getElementById("scopeColor");
 
     const addColorPickerToImage = (file, color) => {
-        console.log("fileeee", file);
-        console.log("migaja 0", color.style.backgroundColor);
+        // console.log("fileeee", file);
+        // console.log("migaja 0", color.style.backgroundColor);
         const colorMatrix = rgbToMatrix(color.style.backgroundColor);
-        console.log("color de la matrix", colorMatrix);
+        // console.log("color de la matrix", colorMatrix);
         if (file) {
-            console.log("migaja 1");
+            // console.log("migaja 1");
 
-                console.log("migaja 3");
+            //     console.log("migaja 3");
 
 
-                console.log("migaja 4");
-                    console.log("migaja 5");
+            //     console.log("migaja 4");
+            //         console.log("migaja 5");
                     // const filter = file.filters.ColorMatrix({
                     //     matrix: [
                     //         color[0] / 255, 0, 0, 0, 0,  // Rojo
@@ -393,9 +393,9 @@ const cambiarColorATodos = () => {
                     console.log("FABRIC IMAGEN 5", file);
                     file.applyFilters();
                     console.log("migaja 7");
-                    canvas.add(file);
+      
                     canvas.renderAll();
-                    addColorPicker(file);
+                    // addColorPicker(file);
                     console.log("migaja 8");
       
             // reader.readAsDataURL(file);
