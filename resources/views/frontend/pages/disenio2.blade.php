@@ -332,7 +332,7 @@
                                                 <h2 class="accordion-header" id="headingThree">
                                                     <button class="accordion-button btn-accn-1 collapsed" type="button"
                                                         data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                        aria-expanded="false" aria-controls="collapseThree">
+                                                        aria-expanded="false" aria-controls="collapseThree" value="Arial">
                                                         Arial
                                                     </button>
                                                 </h2>
