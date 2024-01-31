@@ -96,17 +96,17 @@ function handleFileSelect(event) {
     const file = event.target.files[0];
     const input = document.getElementById('image-upload');
     if (file) {
-      if (file.type === 'image/svg+xml') {
-        // console.log("ES SVG")
-        // console.log("va por 1")
-        // Si es SVG, manejar como antes
-        handleSvgFile(file);
-      } else {
-        // console.log("NO ES SVG")
-        // console.log("va por 2")
-        
-        
-       
+        if (file.type === 'image/svg+xml') {
+            // console.log("ES SVG")
+            // console.log("va por 1")
+            // Si es SVG, manejar como antes
+            handleSvgFile(file);
+        } else {
+            // console.log("NO ES SVG")
+            // console.log("va por 2")
+
+
+
             const file = event.target.files[0];
             // console.log("FABRIC IMAGEN 2", file);
             if (file) {
@@ -118,39 +118,39 @@ function handleFileSelect(event) {
                         const fabricImage = new fabric.Image(img, {
                             scaleX: 0.2,
                             scaleY: 0.2,
-                            dataTarget:"subir-archivo"
-        
+                            dataTarget: "subir-archivo"
+
                         });
-        
+
                         // Convertir la imagen a blanco y negro
                         fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
                         fabricImage.applyFilters();
                         // console.log("INPUT", input.files);
                         // console.log("validator: ", validador);
-  
-                        if(validador === false){
+
+                        if (validador === false) {
                             canvas.add(fabricImage);
                         }
-        
+
                         // if((input.files && input.files[0]) && validador === false){
                         //     canvas.add(fabricImage);
                         // }
-                  
+
                         canvas.renderAll();
                         addColorPicker(fabricImage);
                     };
                 };
                 reader.readAsDataURL(file);
             }
-   
-        
-        
-      }
-      validador_2 = false;
+
+
+
+        }
+        validador_2 = false;
     }
-  }
-  const addColorPicker = (fabricImage) => {
-    console.log("FABRIC IMAGEN 3", fabricImage);
+}
+const addColorPicker = (fabricImage) => {
+    // console.log("FABRIC IMAGEN 3", fabricImage);
     // colorPicker.addEventListener('input', (event) => {
     //     const newColor = event.target.value;
     //     fabricImage.set({ fill: newColor });
@@ -158,56 +158,47 @@ function handleFileSelect(event) {
     //     canvas.renderAll();
     // });
 }
-  function handleSvgFile(file) {
+
+function handleSvgFile(file) {
     // console.log("va por A1", file)
     const reader = new FileReader();
 
     reader.onload = function (e) {
-    //   console.log("va por A2")
-      const svgString = e.target.result;
-    //   console.log("SVG STRINGGGG", svgString)
-      // Convertir SVG a objeto HTML
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(svgString, 'text/xml');
-    //   console.log("va por A3 xmlDoccc", xmlDoc)
-      // Modificar color del objeto HTML
-    
-      if (selectedColorGlobal !== undefined) {
-        const paths = xmlDoc.querySelectorAll('path');
-        paths.forEach((path) => {
-          path.setAttribute('fill', selectedColorGlobal);
-        });
-        // console.log("va por A4 PATH", paths)
-      }
-   
-      // Convertir objeto HTML modificado a SVG y luego a fabric.js
-      const modifiedSVGString = new XMLSerializer().serializeToString(xmlDoc);
-      fabric.loadSVGFromString(modifiedSVGString, function (objects, options) {
-        const svgObjects = fabric.util.groupSVGElements(objects, options);
+        //   console.log("va por A2")
+        const svgString = e.target.result;
+        //   console.log("SVG STRINGGGG", svgString)
+        // Convertir SVG a objeto HTML
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(svgString, 'text/xml');
+        //   console.log("va por A3 xmlDoccc", xmlDoc)
+        // Modificar color del objeto HTML
 
-        svgObjects.set({
-            scaleX: 0.2,
-            scaleY: 0.2,
-            dataTarget: "svg"
-        });
-
-        // console.log("va por A5")
-        if(validador === false){
-            // Elimina objetos existentes en el lienzo con el mismo dataTarget
-            const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
-            existingObjects.forEach(obj => canvas.remove(obj));
-
-            // Agrega el nuevo objeto al lienzo
-        
-            canvas.add(svgObjects);
+        if (selectedColorGlobal !== undefined) {
+            const paths = xmlDoc.querySelectorAll('path');
+            paths.forEach((path) => {
+                path.setAttribute('fill', selectedColorGlobal);
+            });
+            // console.log("va por A4 PATH", paths)
         }
-        canvas.renderAll();
-      });
+
+        // Convertir objeto HTML modificado a SVG y luego a fabric.js
+        const modifiedSVGString = new XMLSerializer().serializeToString(xmlDoc);
+        fabric.loadSVGFromString(modifiedSVGString, function (objects, options) {
+            const svgObjects = fabric.util.groupSVGElements(objects, options);
+
+            svgObjects.set({
+                scaleX: 0.2,
+                scaleY: 0.2,
+                dataTarget: "subir-archivo"
+            });
+
+            canvas.add(svgObjects);
+            canvas.renderAll();
+        });
     };
 
     reader.readAsText(file);
 }
-
 
 
 
@@ -366,18 +357,18 @@ const cambiarColorATodos = () => {
     const scopeColorCheck = document.getElementById("scopeColor");
 
     const addColorPickerToImage = (file, color) => {
-        console.log("fileeee", file);
-        console.log("migaja 0", color.style.backgroundColor);
+        // console.log("fileeee", file);
+        // console.log("migaja 0", color.style.backgroundColor);
         const colorMatrix = rgbToMatrix(color.style.backgroundColor);
-        console.log("color de la matrix", colorMatrix);
+        // console.log("color de la matrix", colorMatrix);
         if (file) {
-            console.log("migaja 1");
+            // console.log("migaja 1");
 
-                console.log("migaja 3");
+                // console.log("migaja 3");
 
 
-                console.log("migaja 4");
-                    console.log("migaja 5");
+                // console.log("migaja 4");
+                    // console.log("migaja 5");
                     // const filter = file.filters.ColorMatrix({
                     //     matrix: [
                     //         color[0] / 255, 0, 0, 0, 0,  // Rojo
@@ -386,17 +377,17 @@ const cambiarColorATodos = () => {
                     //         0, 0, 0, 1, 0  // Alpha
                     //     ]
                     // });
-                    console.log("migaja 6");
+                    // console.log("migaja 6");
                     // file.filters.push(filter);
                     file.filters[0].matrix= colorMatrix;
                     
-                    console.log("FABRIC IMAGEN 5", file);
+                    // console.log("FABRIC IMAGEN 5", file);
                     file.applyFilters();
-                    console.log("migaja 7");
+                    // console.log("migaja 7");
                     canvas.add(file);
                     canvas.renderAll();
                     addColorPicker(file);
-                    console.log("migaja 8");
+                    // console.log("migaja 8");
       
             // reader.readAsDataURL(file);
         }
