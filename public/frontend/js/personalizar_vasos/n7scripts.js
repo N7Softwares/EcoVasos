@@ -853,6 +853,9 @@ nuevoTextoButton.addEventListener('click', function () {
 const fontSelector = document.querySelectorAll(".option-fuentes");
 
 fontSelector.forEach(fuente => {
+    const fontFamily = fuente.getAttribute("value");
+    fuente.style.fontFamily = fontFamily;
+
     fuente.addEventListener("click", () => {
         // Utiliza getAttribute para obtener el valor del atributo value
         const fontValue = fuente.getAttribute("value");
@@ -864,6 +867,9 @@ fontSelector.forEach(fuente => {
             objetoTextSeleccionado.set('fontFamily', fontValue);
             // Estableciendo el texto del boton de del acordeon
             fontAcordion.textContent=fontValue;
+            fontAcordion.setAttribute("value", fontValue);
+            // ejecutamos la funcion para que fontAcordion tenga el fontFamily nuevo
+            aplicarFontFamily()
             // Añade un pequeño retraso antes de renderizar el canvas
             setTimeout( () => {
                 canvas.renderAll();
@@ -888,6 +894,18 @@ const cerrarAcordeonesFonts = ()=>{
     }
 }
 
+// Función para aplicar el fontFamily a fontAcordion
+const aplicarFontFamily = () => {
+    // Obtenemos el fontFamily de fontAcordion
+    const fontFamilyFontAcordion = fontAcordion.getAttribute("value");
+
+    // Aplicamos el font-family a fontAcordion
+    fontAcordion.style.fontFamily = fontFamilyFontAcordion;
+};
+
+// Ejecutamos la función al cargar la página (puedes ajustar esto según tus necesidades)
+aplicarFontFamily();
+
 // Función para manejar la actualización de la selección
 const actualizarSeleccion = (objetoSeleccionado) => {
     // Verifica si el objeto seleccionado es un objeto Text
@@ -900,7 +918,11 @@ const actualizarSeleccion = (objetoSeleccionado) => {
         // Habilita el select de fontSize
         fontSizeAcordion.classList.remove("disabled");
         // Establece la fuente actual en el select
-        fontAcordion.textContent= objetoSeleccionado.fontFamily || 'Arial';;
+        fontAcordion.textContent= objetoSeleccionado.fontFamily || 'Arial';
+        // Establece el valor del atributo 'value'
+        fontAcordion.setAttribute("value", objetoSeleccionado.fontFamily || 'Arial');
+        // ejecutamos la funcion para que fontAcordion tenga el fontFamily nuevo
+        aplicarFontFamily()
 
 
         // Establece el tamaño de fuente actual en el select
@@ -965,6 +987,10 @@ canvas.on('selection:cleared',  ()=> {
 
     // Restablece la fuente predeterminada en el select
     fontAcordion.textContent="Arial";
+    // Establece el valor predeterminado del atributo 'value'
+    fontAcordion.setAttribute("value", 'Arial');
+    // ejecutamos la funcion para que fontAcordion tenga el fontFamily nuevo
+    aplicarFontFamily()
     fontSizeAcordion.textContent="40px";
 
     // cerrar ambos acordeones de fuentes
@@ -1004,6 +1030,10 @@ canvas.on('object:removed',  () =>{
 
         // Restablece la fuente predeterminada en el select
         fontAcordion.textContent="Arial";
+        // Establece el valor predeterminado del atributo 'value'
+        fontAcordion.setAttribute("value", 'Arial');
+        // ejecutamos la funcion para que fontAcordion tenga el fontFamily nuevo
+        aplicarFontFamily()
         fontSizeAcordion.textContent="40px";
 
         // cerrar ambos acordeones de fuentes
