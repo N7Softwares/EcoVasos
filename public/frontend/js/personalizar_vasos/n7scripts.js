@@ -73,12 +73,7 @@ btnDelete.addEventListener("click", ()=>{
         }
         canvas.renderAll();
 })
-// Cambiar la figura en el lienzo según la selección del usuario
-const shapeSelector = document.getElementById('shape-selector');
-shapeSelector.addEventListener('change', () => {
-    const selectedShape = shapeSelector.value;
-    drawShape(selectedShape);
-});
+
 
 // Cargar una imagen al lienzo
 // const imageUpload = document.getElementById('image-upload');
@@ -192,62 +187,6 @@ function handleSvgFile(file) {
 }
 
 
-
-
-// Función para dibujar la figura seleccionada en el lienzo
-const drawShape = (shape) => {
-    let newShape;
-
-    switch (shape) {
-        case 'square':
-            newShape = new fabric.Rect({
-                width: 50,
-                height: 50,
-                fill: valorColorActual(),
-                dataTarget: 'elementos'
-
-            });
-            break;
-        case 'triangle':
-            newShape = new fabric.Triangle({
-                width: 50,
-                height: 50,
-                fill: valorColorActual(),
-                dataTarget: 'elementos'
-            });
-            break;
-        case 'circle':
-            newShape = new fabric.Circle({
-                radius: 25,
-                fill: valorColorActual(),
-                dataTarget: 'elementos'
-
-            });
-            break;
-        case 'star':
-            // Fabric.js no tiene un objeto "estrella" incorporado, pero puedes crear uno personalizado
-            newShape = createStar({
-                x: 25,
-                y: 25,
-                outerRadius: 25,
-                innerRadius: 10,
-                fill: valorColorActual(),
-                dataTarget: 'elementos'
-            });
-            break;
-        default:
-            break;
-    }
-
-    if (newShape) {
-        canvas.add(newShape);
-        canvas.renderAll();
-        // Aca se les agrega todas las funciones a los objetos
-        // addColorPickerShape(newShape);
-        colorActual(newShape);
-    }
-}
-
 // Para obtener el color de los objetos
 const colorActual = (object)=>{
     const colorActualTD = document.getElementById("color-actual");
@@ -262,12 +201,6 @@ const valorColorActual = ()=>{
     const colorActualTD = document.getElementById("color-actual");
     colorActualValor = colorActualTD.style.backgroundColor;
     return colorActualValor;
-}
-
-// Función para crear un objeto "estrella" personalizado
-const createStar = (options) => {
-    const star = new fabric.Path('M 0 0 L 10 30 L 40 30 L 15 50 L 25 80 L 0 60 L -25 80 L -15 50 L -40 30 L -10 30 Z', options);
-    return star;
 }
 
 // generar paleta de colores aleatorios
@@ -1359,3 +1292,21 @@ canvas.on('mouse:down', function(options) {
         canvas.renderAll();
     }
 });
+
+
+// --------- Modal para la advertencia en responsive mobile ---------
+// Definir la función que se ejecutará al cargar la página
+const verificarAnchoPantalla = () => {
+    // Detectar el ancho de la pantalla
+    const anchoPantalla = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+
+    // Comprobar si el ancho de la pantalla es mayor a 600px
+    if (anchoPantalla < 700) {
+        // Mostrar un mensaje de alerta
+        alert("Se recomienda utilizar la herramienta de personalización de EcoIngenio en un ordenador o en una pantalla de mayor tamaño.");
+    }
+};
+
+// Asociar la función al evento de carga de la página
+window.addEventListener("load", verificarAnchoPantalla);
+

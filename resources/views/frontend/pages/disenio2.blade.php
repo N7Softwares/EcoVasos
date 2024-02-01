@@ -291,14 +291,7 @@
                                 </div>
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
-                                <!--------------------------- Para seleccionar figura --------------------------->
-                                <h4 class="text-center">Seleccionar Figura:</h4>
-                                <select id="shape-selector">
-                                    <option value="square">Cuadrado</option>
-                                    <option value="triangle">Triángulo</option>
-                                    <option value="circle">Círculo</option>
-                                    <option value="star">Estrella</option>
-                                </select>
+                                <!--------------------------- Elementos --------------------------->
 
                                 <h4 class="text-center mt-4">Elementos</h4>
 
@@ -320,6 +313,7 @@
                                 @endforeach
                             </div>
                             <div class="contenido-side" id="textos-content" style="display: none;">
+                                <!--------------------------- Textos --------------------------->
                                 <div class="col-texts">
                                     <h4 class="text-center">Agregar Texto</h4>
                                     <button id="nuevo-texto">Agregar Nuevo Texto</button>
@@ -555,6 +549,7 @@
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
                 </div>
+                
             </div>
         </div>
     </section>
