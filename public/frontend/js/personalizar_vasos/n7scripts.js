@@ -855,9 +855,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fontSelector.forEach(fuente => {
         const fontFamily = fuente.getAttribute("value");
-        console.log(fontFamily);
         fuente.children[0].children[0].style.fontFamily = fontFamily;
-    
     
         fuente.addEventListener("click", () => {
             // Utiliza getAttribute para obtener el valor del atributo value
