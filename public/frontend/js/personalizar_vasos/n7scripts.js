@@ -851,32 +851,37 @@ nuevoTextoButton.addEventListener('click', function () {
 
 // Escucha el cambio en el select de fuentes
 const fontSelector = document.querySelectorAll(".option-fuentes");
+document.addEventListener("DOMContentLoaded", () => {
 
-fontSelector.forEach(fuente => {
-    const fontFamily = fuente.getAttribute("value");
-    fuente.style.fontFamily = fontFamily;
-
-    fuente.addEventListener("click", () => {
-        // Utiliza getAttribute para obtener el valor del atributo value
-        const fontValue = fuente.getAttribute("value");
-
-        const objetoTextSeleccionado = canvas.getActiveObject();
-
-        if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
-            // Actualiza la fuente del objeto Text seleccionado
-            objetoTextSeleccionado.set('fontFamily', fontValue);
-            // Estableciendo el texto del boton de del acordeon
-            fontAcordion.textContent=fontValue;
-            fontAcordion.setAttribute("value", fontValue);
-            // ejecutamos la funcion para que fontAcordion tenga el fontFamily nuevo
-            aplicarFontFamily()
-            // Añade un pequeño retraso antes de renderizar el canvas
-            setTimeout( () => {
-                canvas.renderAll();
-            }, 50); // Puedes ajustar el valor del retraso según sea necesario
-        }
+    fontSelector.forEach(fuente => {
+        const fontFamily = fuente.getAttribute("value");
+        console.log(fontFamily);
+        fuente.children[0].children[0].style.fontFamily = fontFamily;
+    
+    
+        fuente.addEventListener("click", () => {
+            // Utiliza getAttribute para obtener el valor del atributo value
+            const fontValue = fuente.getAttribute("value");
+    
+            const objetoTextSeleccionado = canvas.getActiveObject();
+    
+            if (objetoTextSeleccionado && objetoTextSeleccionado.type === 'text') {
+                // Actualiza la fuente del objeto Text seleccionado
+                objetoTextSeleccionado.set('fontFamily', fontValue);
+                // Estableciendo el texto del boton de del acordeon
+                fontAcordion.textContent=fontValue;
+                fontAcordion.setAttribute("value", fontValue);
+                // ejecutamos la funcion para que fontAcordion tenga el fontFamily nuevo
+                aplicarFontFamily()
+                // Añade un pequeño retraso antes de renderizar el canvas
+                setTimeout( () => {
+                    canvas.renderAll();
+                }, 50); // Puedes ajustar el valor del retraso según sea necesario
+            }
+        });
     });
-});
+})
+
 
 // Obtiene ambos botones por su clase
 const cerrarAcordeonesFonts = ()=>{
