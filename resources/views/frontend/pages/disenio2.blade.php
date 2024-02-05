@@ -561,10 +561,10 @@
 
                 </div>
                 <div id="myModal" class="modal">
-                    {{-- <div>
+                    <div>
                         <button id="vasoBtn">Vaso</button>
                         <button id="copaBtn">Copa</button>
-                    </div> --}}
+                    </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
                 </div>
