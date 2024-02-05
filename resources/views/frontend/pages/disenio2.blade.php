@@ -34,7 +34,6 @@
             }
         </style>
     @endforeach
-
 </head>
 
 <body>
@@ -77,18 +76,25 @@
     </section> -->
     
                     <!--------------------------- Version Oficial --------------------------->
+    <div class="burger-menu">
+        {{-- <button id="burger-btn">&#9776;</button> --}}
+        <input type="checkbox" id="burger-btn" name="check-toggle" hidden="">
+        <label for="burger-btn" class="toggle">
+            <div class="toggle__circle"></div>
+        </label>
+    </div>
     <section class="padding-top-disenio">
         <div class="container-fluid container-main ">
             <div class="row ">
                 <div class=" col-sideLeft border bg-white">
                     <div class="row">
                         <div class="col-3 sideLeft ">
-                                <div class="bloq-side" data-target="temas">
+                                {{-- <div class="bloq-side" data-target="temas">
                                     <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/layout.svg')}}" alt="" srcset="">
                                     </div>
                                     <h6>Temas</h6>
-                                </div>
+                                </div> --}}
                                 <div class="bloq-side" data-target="color-vaso" style="background: #f1f1f1;">
                                     <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/vaso.svg')}}" alt="" srcset="">
@@ -170,19 +176,33 @@
                 
                                                     @foreach($array['colors'] as $color)
                                                         <div class="option-color">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
                                                                 <p class="color-title">{{ $color->name }}</p>
                                                             </div>
                                                         </div>
                                                     @endforeach
-                                                    
+                                                    <div class="pt-2 pb-2">
+                                                        <span>Monocromáticos</span>
+                                                    </div>
+                                                    <div class="option-color">
+                                                        <div class="options-container-personalized">
+                                                            <div class="color-cube" style="background:#fff;"></div>
+                                                            <p class="color-title">Blanco</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="option-color">
+                                                        <div class="options-container-personalized">
+                                                            <div class="color-cube" style="background:#212121;"></div>
+                                                            <p class="color-title">Negro</p>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                             </div>
                                         </div>
                                     <!------------------------ Acordeon de colores opacos ----------------------->
-                                        <div class="accordion-item">
+                                        {{-- <div class="accordion-item">
                                             <h2 class="accordion-header" id="headingTwo">
                                                 <button class="accordion-button collapsed" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseTwo"
@@ -193,21 +213,10 @@
                                             <div id="collapseTwo" class="accordion-collapse collapse"
                                                 aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background:#fff;"></div>
-                                                            <p class="color-title">Blanco</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container">
-                                                            <div class="color-cube" style="background:#212121;"></div>
-                                                            <p class="color-title">Negro</p>
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                     </div>
                                 </div>
@@ -291,7 +300,14 @@
                                 </div>
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
-                                <!--------------------------- Elementos --------------------------->
+                                <!--------------------------- Para seleccionar figura --------------------------->
+                                <h4 class="text-center">Seleccionar Figura:</h4>
+                                <select id="shape-selector">
+                                    <option value="square">Cuadrado</option>
+                                    <option value="triangle">Triángulo</option>
+                                    <option value="circle">Círculo</option>
+                                    <option value="star">Estrella</option>
+                                </select>
 
                                 <h4 class="text-center mt-4">Elementos</h4>
 
@@ -313,7 +329,6 @@
                                 @endforeach
                             </div>
                             <div class="contenido-side" id="textos-content" style="display: none;">
-                                <!--------------------------- Textos --------------------------->
                                 <div class="col-texts">
                                     <h4 class="text-center">Agregar Texto</h4>
                                     <button id="nuevo-texto">Agregar Nuevo Texto</button>
@@ -335,91 +350,91 @@
                                                     <div class="accordion-body">
                                                         <!-- Primer ítem -->
                                                         <div class="option-color option-fuentes" value="Arial">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Arial</p>
                                                             </div>
                                                         </div>
                                                         <!-- Segundo ítem -->
                                                         <div class="option-color option-fuentes" value="Arial Black">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Arial Black</p>
                                                             </div>
                                                         </div>
                                                         <!-- Tercer ítem -->
                                                         <div class="option-color option-fuentes" value="Comic Sans MS">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Comic Sans MS</p>
                                                             </div>
                                                         </div>
                                                         <!-- Cuarto ítem -->
                                                         <div class="option-color option-fuentes" value="Courier New">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Courier New</p>
                                                             </div>
                                                         </div>
                                                         <!-- Quinto ítem -->
                                                         <div class="option-color option-fuentes" value="Impact">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Impact</p>
                                                             </div>
                                                         </div>
                                                         <!-- Sexto ítem -->
                                                         <div class="option-color option-fuentes"
                                                             value="Times New Roman">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Times New Roman</p>
                                                             </div>
                                                         </div>
                                                         <!-- Séptimo ítem -->
                                                         <div class="option-color option-fuentes" value="Montserrat">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Montserrat</p>
                                                             </div>
                                                         </div>
                                                         <!-- Octavo ítem -->
                                                         <div class="option-color option-fuentes" value="Lato">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Lato</p>
                                                             </div>
                                                         </div>
                                                         <!-- Noveno ítem -->
                                                         <div class="option-color option-fuentes"
                                                             value="Helvetica, sans-serif">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Helvetica</p>
                                                             </div>
                                                         </div>
                                                         <!-- Décimo ítem -->
                                                         <div class="option-color option-fuentes" value="Georgia, serif">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Georgia</p>
                                                             </div>
                                                         </div>
                                                         <!-- Undécimo ítem -->
                                                         <div class="option-color option-fuentes"
                                                             value="Courier New, monospace">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Courier New</p>
                                                             </div>
                                                         </div>
                                                         <!-- Duodécimo ítem -->
                                                         <div class="option-color option-fuentes"
                                                             value="Palatino, serif">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Palatino</p>
                                                             </div>
                                                         </div>
                                                         <!-- Decimotercero ítem -->
                                                         <div class="option-color option-fuentes"
                                                             value="Verdana, sans-serif">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Verdana</p>
                                                             </div>
                                                         </div>
                                                         <!-- Decimocuarto ítem -->
                                                         <div class="option-color option-fuentes"
                                                             value="Garamond, serif">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">Garamond</p>
                                                             </div>
                                                         </div>
@@ -427,7 +442,7 @@
                                                         @foreach($array['tipografias'] as $tipografia)
                                                         <div class="option-color option-fuentes"
                                                             value="{{ $tipografia->name }}">
-                                                            <div class="options-container">
+                                                            <div class="options-container-personalized">
                                                                 <p class="color-title">{{ $tipografia->name }}</p>
                                                             </div>
                                                         </div>
@@ -546,10 +561,13 @@
 
                 </div>
                 <div id="myModal" class="modal">
+                    {{-- <div>
+                        <button id="vasoBtn">Vaso</button>
+                        <button id="copaBtn">Copa</button>
+                    </div> --}}
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
                 </div>
-                
             </div>
         </div>
     </section>

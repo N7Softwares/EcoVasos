@@ -227,13 +227,13 @@ section{
     transition:all .4s ease;
     background: var(--gray);
 }
-.option-color .options-container{
+.option-color .options-container-personalized{
     width:80%;
     display:flex;
     /* border:1px solid red; */
     align-items:center;
 }
-.option-color .options-container p{
+.option-color .options-container-personalized p{
     margin-left:15px;
 }
 
@@ -808,4 +808,88 @@ section{
 
 .zoomable-image:hover {
     transform: scale(1.1); 
+}
+
+/*-----------------------BOTON DE MOVIL SWITCH-------------------------*/
+.toggle {
+    --bg-toggle: #252524;
+    --bg-circle: #B7C13E;
+    width: 120px;
+    height: 60px;
+    background-color: var(--bg-toggle);
+    box-shadow: 0 .3rem 5rem 0 rgba(125, 125, 125, 0.25);
+    border-radius: 4rem;
+    display: flex;
+    align-items: center;
+    padding: 0 .3rem;
+    transition: background-color 400ms;
+  }
+  
+  .toggle__circle {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: var(--bg-circle);
+    border-radius: 50%;
+    position: relative;
+    transition: margin 400ms ease-in-out, background-color 1000ms;
+  }
+  
+  .toggle__circle::after,
+  .toggle__circle::before {
+    content: '';
+    position: absolute;
+    background-color: var(--bg-toggle);
+    bottom: 118%;
+    transform-origin: bottom left;
+  }
+  
+  .toggle__circle::before {
+    width: 15px;
+    height: 25px;
+    left: 32%;
+    border-radius: 0% 100% 0% 100% / 0% 27% 73% 100%;
+    transform: translateX(-70%) rotate(-2deg);
+  }
+  
+  .toggle__circle::after {
+    width: 25px;
+    height: 30px;
+    left: 48%;
+    border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+    transform: rotate(-20deg);
+  }
+  
+  #burger-btn:checked + .toggle > .toggle__circle {
+    margin-left: calc(120px - (.3rem * 2) - 50px);
+  }
+  
+  #burger-btn:checked + .toggle {
+    --bg-toggle: #B7C13E;
+    --bg-circle: #252524;
+  }
+
+
+.burger-menu {
+    display: none;
+}
+
+.show-menu {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    .col-sideLeft {
+        display: none;
+    }
+
+    .burger-menu {
+        display: block;
+        position: absolute;
+        top: 10%;
+        z-index: 7;
+    }
+
+    .show-menu {
+        display: block;
+    }
 }
