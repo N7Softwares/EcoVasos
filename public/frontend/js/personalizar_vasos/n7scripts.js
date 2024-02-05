@@ -2,7 +2,27 @@
 //    Scripts para el Canva y Fabric.js
 // ----------------------------------------------
 
-const canvas = new fabric.Canvas('canvas');
+const canvas = new fabric.Canvas('canvas', {
+    width: 1000,
+    height: 400,
+    padding: 50, // Puedes ajustar este valor según tus necesidades
+  });
+
+canvas.on('object:moving', function(options) {
+const padding = canvas.padding;
+const obj = options.target;
+
+// Limitar movimiento hacia arriba
+if (obj.top < padding) {
+    obj.top = padding;
+}
+
+// Limitar movimiento hacia abajo
+if (obj.top + obj.height * obj.scaleY > canvas.height - padding) {
+    obj.top = canvas.height - obj.height * obj.scaleY - padding;
+}
+});
+
 let selectedObject;
 let selectedColorGlobal;
 let validador = false;

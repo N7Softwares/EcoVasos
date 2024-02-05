@@ -1,200 +1,109 @@
 {
-  "accessors": [
-    {
-      "bufferView": 1,
-      "componentType": 5126,
-      "count": 34416,
-      "max": [
-        0.8448303937911987,
-        3.4156687259674072,
-        0.8385812044143677
-      ],
-      "min": [
-        -0.8411744832992554,
-        -1.0963819026947021,
-        -0.8289686441421509
-      ],
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 1,
-      "byteOffset": 412992,
-      "componentType": 5126,
-      "count": 34416,
-      "max": [
-        0.9996882677078247,
-        0.9752874374389648,
-        0.9991047382354736
-      ],
-      "min": [
-        -0.9987106323242188,
-        -0.9999400973320007,
-        -0.999666690826416
-      ],
-      "type": "VEC3"
-    },
-    {
-      "bufferView": 0,
-      "componentType": 5125,
-      "count": 206208,
-      "type": "SCALAR"
-    }
-  ],
-  "asset": {
-    "extras": {
-      "author": "RaZoR._ (https://sketchfab.com/RaZoR._)",
-      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
-      "source": "https://sketchfab.com/3d-models/model-glass-wine-c307863bc5de4a528b9b3bbf23b0924c",
-      "title": "[Model] Glass Wine"
-    },
-    "generator": "Sketchfab-15.17.0",
-    "version": "2.0"
-  },
-  "bufferViews": [
-    {
-      "buffer": 0,
-      "byteLength": 824832,
-      "name": "floatBufferViews",
-      "target": 34963
-    },
-    {
-      "buffer": 0,
-      "byteLength": 825984,
-      "byteOffset": 824832,
-      "byteStride": 12,
-      "name": "floatBufferViews",
-      "target": 34962
-    }
-  ],
-  "buffers": [
-    {
-      "byteLength": 1650816,
-      "uri": "scene.bin"
-    }
-  ],
-  "materials": [
-    {
-      "doubleSided": true,
-      "name": "Material.002",
-      "pbrMetallicRoughness": {
-        "baseColorFactor": [
-          0.8,
-          0.8,
-          0.8,
-          1.0
-        ],
-        "metallicFactor": 0.0,
-        "roughnessFactor": 0.0
-      }
-    }
-  ],
-  "meshes": [
-    {
-      "name": "Object_0",
-      "primitives": [
-        {
-          "attributes": {
-            "NORMAL": 1,
-            "POSITION": 0
-          },
-          "indices": 2,
-          "material": 0,
-          "mode": 4
-        }
-      ]
-    }
-  ],
-  "nodes": [
-    {
-      "children": [
-        1
-      ],
-      "matrix": [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        2.220446049250313e-16,
-        -1.0,
-        0.0,
-        0.0,
-        1.0,
-        2.220446049250313e-16,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "name": "Sketchfab_model"
-    },
-    {
-      "children": [
-        2
-      ],
-      "name": "root"
-    },
-    {
-      "children": [
-        3
-      ],
-      "matrix": [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        2.220446049250313e-16,
-        1.0,
-        0.0,
-        0.0,
-        -1.0,
-        2.220446049250313e-16,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0
-      ],
-      "name": "GLTF_SceneRootNode"
-    },
-    {
-      "children": [
-        4
-      ],
-      "matrix": [
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        1.0,
-        0.0,
-        0.0,
-        0.960090696811676,
-        0.0,
-        1.0
-      ],
-      "name": "GlassWine_1"
-    },
-    {
-      "mesh": 0,
-      "name": "Object_4"
-    }
-  ],
-  "scene": 0,
-  "scenes": [
-    {
-      "name": "Sketchfab_Scene",
-      "nodes": [
-        0
-      ]
-    }
-  ]
+	"asset":{
+		"generator":"Khronos glTF Blender I/O v4.0.44",
+		"version":"2.0"
+	},
+	"scene":0,
+	"scenes":[
+		{
+			"name":"Scene",
+			"nodes":[
+				0
+			]
+		}
+	],
+	"nodes":[
+		{
+			"mesh":0,
+			"name":"C\u00edrculo",
+			"translation":[
+				-0.429999977350235,
+				0,
+				0
+			]
+		}
+	],
+	"meshes":[
+		{
+			"name":"C\u00edrculo",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":0,
+						"NORMAL":1,
+						"TEXCOORD_0":2
+					},
+					"indices":3
+				}
+			]
+		}
+	],
+	"accessors":[
+		{
+			"bufferView":0,
+			"componentType":5126,
+			"count":576,
+			"max":[
+				1.4299999475479126,
+				4.129794120788574,
+				1
+			],
+			"min":[
+				-0.5700000524520874,
+				0,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":1,
+			"componentType":5126,
+			"count":576,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":2,
+			"componentType":5126,
+			"count":576,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":3,
+			"componentType":5123,
+			"count":960,
+			"type":"SCALAR"
+		}
+	],
+	"bufferViews":[
+		{
+			"buffer":0,
+			"byteLength":6912,
+			"byteOffset":0,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":6912,
+			"byteOffset":6912,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":4608,
+			"byteOffset":13824,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":1920,
+			"byteOffset":18432,
+			"target":34963
+		}
+	],
+	"buffers":[
+		{
+			"byteLength":20352,
+			"uri":"copa.bin"
+		}
+	]
 }
