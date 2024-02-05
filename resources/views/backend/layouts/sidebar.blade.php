@@ -205,11 +205,11 @@
           <i class="fas fa-angle-double-up"></i>
           <span>Categorías de Imagenes</span></a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
       <a class="nav-link" href="{{route('inspirate.index')}}">
           <i class="fas fa-paint-roller"></i>
           <span>Temas</span></a>
-    </li>
+    </li> --}}
  
       <li class="nav-item">
         <a class="nav-link" href="{{route('elements.index')}}">
