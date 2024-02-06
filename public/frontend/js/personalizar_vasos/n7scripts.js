@@ -5,7 +5,7 @@
 const canvas = new fabric.Canvas('canvas', {
     width: 1000,
     height: 400,
-    padding: 50, // Puedes ajustar este valor según tus necesidades
+    padding: 30, // Puedes ajustar este valor según tus necesidades
     renderOnAddRemove: false,  // Evita renderizado redundante al agregar o quitar objetos
     enableRetinaScaling: true,  // Habilita el escalado de retina para pantallas de alta densidad
     webgl: true,
@@ -523,10 +523,10 @@ const agregarMedidas = (svgName) => {
 
                 // Ajusta la escala y la posición del grupo
                 group.set({
-                    // scaleX: 1,  // Ajusta según sea necesario
-                    // scaleY: 1,  // Ajusta según sea necesario
+                    // scaleX: 1.1,  // Ajusta según sea necesario
+                    // scaleY: 1.1,  // Ajusta según sea necesario
                     left: canvas.width - 60,
-                    top: 50,
+                    top: canvas.padding,
                     lockScalingX: true,
                     lockScalingY: true,
                     lockMovementY: true,
