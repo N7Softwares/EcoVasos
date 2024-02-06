@@ -34,15 +34,22 @@ fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
     const svgImg = fabric.util.groupSVGElements(objects, options);
     
     svgImg.set({
-        scaleX: 0.05,
-        scaleY: 0.05,
-        left: 930,
-        top: 335,
-        selectable: false,
-        evented: false,
-        hoverCursor: 'default',
+        scaleX: 0.07,
+        scaleY: 0.07,
+        left: 848,
+        top: 263,
+        // selectable: false,
+        // evented: false,
+        // hoverCursor: 'default',
+        dataTarget:"color-disenio"
     });
+    const elementosEnGrupo = svgImg.getObjects();
 
+    // Itera sobre cada elemento dentro del grupo y cambia su color de relleno
+    elementosEnGrupo.forEach(elemento => {
+        // Cambia el color de relleno del elemento (ajusta el color según tus necesidades)
+        elemento.set({ fill: "rgb(0, 183, 79)" });
+    });
     canvas.add(svgImg);
 });
 
@@ -534,21 +541,22 @@ const agregarMedidas = (svgName) => {
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
                 canvas.setActiveObject(group);
-                canvas.renderAll();
+                // canvas.renderAll();
 
                 // Obtener medidas del vaso
                 let width = MedidasCentral.obtenerMedidasActuales().width;
                 let height= MedidasCentral.obtenerMedidasActuales().height;
                 // Agrega un elemento de texto con las dimensiones en la esquina inferior izquierda
-                // const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
-                //     left: 10,
-                //     top: canvas.height - 30,
-                //     fontSize: 20,
-                //     fill: valorColorActual(),
-                //     dataTarget:"medidor"
-                // });
+                const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
+                    left: 10,
+                    top: canvas.height - canvas.padding - 30,
+                    fontSize: 20,
+                    fill: valorColorActual(),
+                    dataTarget:"medidor"
+                });
 
-                // canvas.add(textoMedidas);
+                canvas.add(textoMedidas);
+                canvas.renderAll();
             });
         })
         .catch(error => {
@@ -1089,7 +1097,7 @@ negritaBtn.addEventListener("click", () => {
 });
 // Agregar un texto de ejemplo al inicio
 
-agregarTextoAlCanvas('Nombre de tu marca acá');
+agregarTextoAlCanvas('Inserta tu texto aquí');
 
 //----------------------- Descargar en PDF --------------------------
 
