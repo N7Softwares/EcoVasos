@@ -744,11 +744,11 @@
 
                     <div id="canvas-container" style="position: relative;">
                         <div class="container" style="max-width: 1000px">
-                            <div class="row text-center">
+                            <div class="row text-center mb-1">
                                 <div class="col-3 lado-1">Frente</div>
-                                <div class="col-3 lado-2">Lateral</div>
+                                <div class="col-3 lado-2">Lateral Derecho</div>
                                 <div class="col-3 lado-3">Contrafrente</div>
-                                <div class="col-3 lado-4">Lateral 2</div>
+                                <div class="col-3 lado-4">Lateral Izquierdo</div>
                             </div>
                             <div class="row">
                                 <div class="col-8 pl-0">
