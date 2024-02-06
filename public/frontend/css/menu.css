@@ -45,6 +45,7 @@
     flex-direction: row;
     align-content: center;
     height: -webkit-fill-available;
+    margin-bottom: 0px;
   }
   
   #site-nav ul li{
