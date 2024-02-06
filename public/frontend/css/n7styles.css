@@ -893,3 +893,25 @@ section{
         display: block;
     }
 }
+
+/*-------------------COLOR ORIENTACION -----------------------*/
+
+.lado-1 {
+    background-color: #3498db; /* Azul para Frente */
+    color: #fff; /* Texto en color blanco */
+}
+
+.lado-2 {
+    background-color: #2ecc71; /* Verde para Lateral */
+    color: #fff;
+}
+
+.lado-3 {
+    background-color: #e74c3c; /* Rojo para Contrafrente */
+    color: #fff;
+}
+
+.lado-4 {
+    background-color: #f39c12; /* Naranja para Lateral 2 */
+    color: #fff;
+}

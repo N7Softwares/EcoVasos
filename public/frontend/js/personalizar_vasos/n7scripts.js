@@ -6,6 +6,9 @@ const canvas = new fabric.Canvas('canvas', {
     width: 1000,
     height: 400,
     padding: 50, // Puedes ajustar este valor según tus necesidades
+    renderOnAddRemove: false,  // Evita renderizado redundante al agregar o quitar objetos
+    enableRetinaScaling: true,  // Habilita el escalado de retina para pantallas de alta densidad
+    webgl: true,
   });
 
 canvas.on('object:moving', function(options) {
@@ -21,7 +24,38 @@ if (obj.top < padding) {
 if (obj.top + obj.height * obj.scaleY > canvas.height - padding) {
     obj.top = canvas.height - obj.height * obj.scaleY - padding;
 }
+
 });
+
+const svgContainerBrand = document.getElementById('svg-container-brand');
+const svgContentBrand = svgContainerBrand.innerHTML;
+
+fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
+    const svgImg = fabric.util.groupSVGElements(objects, options);
+    
+    svgImg.set({
+        scaleX: 0.05,
+        scaleY: 0.05,
+        left: 930,
+        top: 335,
+        selectable: false,
+        evented: false,
+        hoverCursor: 'default',
+    });
+
+    canvas.add(svgImg);
+});
+
+
+fabric.Object.prototype.objectCaching = false;
+fabric.Object.prototype.statefullCache = false;
+fabric.Object.prototype.transparentCorners = false;
+fabric.Object.prototype.cornerStrokeColor = '#aaaaaa';
+fabric.Object.prototype.cornerSize = 12;
+fabric.Object.prototype.cornersize = 12;
+
+// Resto de tu código...
+
 
 let selectedObject;
 let selectedColorGlobal;
@@ -484,8 +518,8 @@ const agregarMedidas = (svgName) => {
                 group.set({
                     // scaleX: 1,  // Ajusta según sea necesario
                     // scaleY: 1,  // Ajusta según sea necesario
-                    left: canvas.width - (group.width + 30),
-                    top: 0,
+                    left: canvas.width - 60,
+                    top: 50,
                     lockScalingX: true,
                     lockScalingY: true,
                     lockMovementY: true,
@@ -506,15 +540,15 @@ const agregarMedidas = (svgName) => {
                 let width = MedidasCentral.obtenerMedidasActuales().width;
                 let height= MedidasCentral.obtenerMedidasActuales().height;
                 // Agrega un elemento de texto con las dimensiones en la esquina inferior izquierda
-                const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
-                    left: 10,
-                    top: canvas.height - 30,
-                    fontSize: 20,
-                    fill: valorColorActual(),
-                    dataTarget:"medidor"
-                });
+                // const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
+                //     left: 10,
+                //     top: canvas.height - 30,
+                //     fontSize: 20,
+                //     fill: valorColorActual(),
+                //     dataTarget:"medidor"
+                // });
 
-                canvas.add(textoMedidas);
+                // canvas.add(textoMedidas);
             });
         })
         .catch(error => {
