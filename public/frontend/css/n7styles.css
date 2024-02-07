@@ -904,3 +904,23 @@ section{
     font-size:1.2rem;
 }
 
+/*-----------------------BUTTONS MODAL 3D-----------------------*/
+.option-btn {
+    background-color: #f2f2f2;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8%;
+}
+
+.option-btn.active {
+    background-color: #B7C13E;
+    color: white;
+}

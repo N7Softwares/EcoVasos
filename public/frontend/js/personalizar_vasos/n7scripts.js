@@ -1380,3 +1380,10 @@ document.addEventListener('DOMContentLoaded', function () {
         colSideLeft.classList.toggle('show-menu');
     });
 });
+function selectOption(btn) {
+    var btns = document.getElementsByClassName("option-btn");
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].classList.remove("active");
+    }
+    btn.classList.add("active");
+}

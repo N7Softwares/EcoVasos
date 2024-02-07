@@ -761,13 +761,14 @@
 
                 </div>
                 <div id="myModal" class="modal">
-                    {{-- <div>
-                        <button id="vasoBtn">Vaso</button>
-                        <button id="copaBtn">Copa</button>
-                    </div> --}}
+                    <div class="d-flex justify-content-center">
+                        <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
+                        <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
+                    </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
                 </div>
+                
             </div>
         </div>
     </section>
