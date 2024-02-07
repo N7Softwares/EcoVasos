@@ -34,18 +34,7 @@ document.getElementById("copaBtn").addEventListener("click", function () {
   cambiarObjeto('cup_glass');
 });
 
-function updateCanvasTexture() {
-  canvasTexture = new THREE.CanvasTexture(canvas3d);
-  canvasTexture.needsUpdate = true;
 
-  // Desvincular la textura anterior (si existe)
-  if (canvasMesh.material.map) {
-    canvasMesh.material.map.dispose();
-  }
-
-  // Asignar la nueva textura al material
-  canvasMesh.material.map = canvasTexture;
-}
 
 
 
@@ -155,6 +144,19 @@ const cambiarObjeto = function(objeto) {
           // canvasMesh.rotation.x = Math.PI / 220; // Rotar el cilindro para que sea perpendicular al vaso
           canvasMesh.position.set(0, 0, 0); // Ajusta la posición según sea necesario
           canvas.on('after:render', updateCanvasTexture);
+
+          function updateCanvasTexture() {
+            canvasTexture = new THREE.CanvasTexture(canvas3d);
+            canvasTexture.needsUpdate = true;
+          
+            // Desvincular la textura anterior (si existe)
+            if (canvasMesh.material.map) {
+              canvasMesh.material.map.dispose();
+            }
+          
+            // Asignar la nueva textura al material
+            canvasMesh.material.map = canvasTexture;
+          }
           // Agregar el lienzo al objeto del vaso
           object.add(canvasMesh);
       
@@ -200,6 +202,22 @@ const cambiarObjeto = function(objeto) {
           const cupCanvasMesh = new THREE.Mesh(canvasGeometry, canvasMaterial);
           // cupCanvasMesh.rotation.x = Math.PI / 180; // Rotar el cilindro para que sea perpendicular a la copa
           cupCanvasMesh.position.set(0, 4, 0); // Ajustar la posición según sea necesario
+
+          canvas.on('after:render', updateCanvasTextureCup);
+
+          function updateCanvasTextureCup() {
+            canvasTexture = new THREE.CanvasTexture(canvas3d);
+            canvasTexture.needsUpdate = true;
+          
+            // Desvincular la textura anterior (si existe)
+            if (cupCanvasMesh.material.map) {
+              cupCanvasMesh.material.map.dispose();
+            }
+          
+            // Asignar la nueva textura al material
+            cupCanvasMesh.material.map = canvasTexture;
+          }
+
           object.add(cupCanvasMesh);
 
           // Añadir el objeto de la copa al escenario
