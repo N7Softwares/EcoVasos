@@ -297,6 +297,28 @@
                                             Subir imagen
                                         </button>
                                     </div>
+                                    <div id="root">
+                                        <div class="grid-base">
+                                            <div class="grid-main">
+                                                <div class="grid-canvas">
+                                                    <div class="grid-canvas-inner">
+                                                        <div class="browse-btn-wrapper">
+                                                            <div><input type="file" accept="image/png,image/jpeg,image/jpg" multiple="" name="file"
+                                                                    style="display: none;">
+                                                                <div class="files-dropzone-list"><button class="btn-wrap">
+                                                                        <div class="browse-icon"><img src="./static/media/upload.b31c79f5.svg"></div>
+                                                                        <div class="browse-text">Drag and drop file here</div>
+                                                                        <div class="browse-separter">OR</div>
+                                                                        <div class="browse-btn btn">Browse File</div>
+                                                                    </button></div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="reduceSvg" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
@@ -785,7 +807,9 @@
 
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
-
+    <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
+    <script src="{{asset('js/scope/2.3a3362a2.chunk.js')}}"></script>
+    <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script>
 </body>
 
 </html>
