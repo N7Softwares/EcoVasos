@@ -297,6 +297,7 @@
                                             Subir imagen
                                         </button>
                                     </div>
+                                    <button id="agregarSvgToLienz">Agregar SVG al lienzo</button>
                                     <div id="root">
                                         <div class="grid-base">
                                             <div class="grid-main">
@@ -313,6 +314,7 @@
                                                                     </button></div>
                                                             </div>
                                                         </div>
+                                                        
                                                         <div id="reduceSvg" style="display: none;"></div>
                                                     </div>
                                                 </div>

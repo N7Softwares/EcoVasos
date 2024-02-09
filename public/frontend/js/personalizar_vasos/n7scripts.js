@@ -1387,3 +1387,14 @@ function selectOption(btn) {
     }
     btn.classList.add("active");
 }
+
+document.getElementById('agregarSvgToLienz').addEventListener('click', function() {
+    var svgElement = document.getElementById('svgContent');
+    if(svgElement) {
+        var svgString = new XMLSerializer().serializeToString(svgElement);
+        fabric.loadSVGFromString(svgString, function(objects, options) {
+            var obj = fabric.util.groupSVGElements(objects, options);
+            canvas.add(obj).renderAll();
+        });
+    }
+});
