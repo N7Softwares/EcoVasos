@@ -1402,7 +1402,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const loadSVGToFabric = (svgElement) => {
     // Obtener el contenido SVG como cadena
     let svgString = new XMLSerializer().serializeToString(svgElement);
-
     // Crear objeto SVG desde la cadena
     fabric.loadSVGFromString(svgString, function (objects, options) {
         let group = new fabric.Group(objects, {

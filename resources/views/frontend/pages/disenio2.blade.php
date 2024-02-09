@@ -271,7 +271,7 @@
                                 <div class="size-texts px-3">
                                     <p>Agregá tu logo, ilustracciones y outros elementos do seu computador.
                                     </p>
-                                    <p class="bold-text">Formatos aceptados: JPG e PNG</p>
+                                    <p class="bold-text">Formatos aceptados: JPG, PNG y SVG</p>
                                     <p>1. Elementos con dos o más cores pasan a un color único.</p>
 
                                     <p>2. razados muy finos pueden perder su detalle.</p>
