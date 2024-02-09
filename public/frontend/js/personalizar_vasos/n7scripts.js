@@ -1381,20 +1381,41 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 function selectOption(btn) {
-    var btns = document.getElementsByClassName("option-btn");
-    for (var i = 0; i < btns.length; i++) {
+    let btns = document.getElementsByClassName("option-btn");
+    for (let i = 0; i < btns.length; i++) {
         btns[i].classList.remove("active");
     }
     btn.classList.add("active");
 }
 
-document.getElementById('agregarSvgToLienz').addEventListener('click', function() {
-    var svgElement = document.getElementById('svgContent');
-    if(svgElement) {
-        var svgString = new XMLSerializer().serializeToString(svgElement);
-        fabric.loadSVGFromString(svgString, function(objects, options) {
-            var obj = fabric.util.groupSVGElements(objects, options);
-            canvas.add(obj).renderAll();
-        });
-    }
+document.addEventListener("DOMContentLoaded", () => {
+
+    document.getElementById('reduceSvg').addEventListener('click', ()=> {
+        let svgElement = document.getElementById('svgContent');
+        if(svgElement) {
+            loadSVGToFabric(svgElement);
+        }
+    });
+
 });
+
+const loadSVGToFabric = (svgElement) => {
+    // Obtener el contenido SVG como cadena
+    let svgString = new XMLSerializer().serializeToString(svgElement);
+
+    // Crear objeto SVG desde la cadena
+    fabric.loadSVGFromString(svgString, function (objects, options) {
+        let group = new fabric.Group(objects, {
+            left: 100,
+            top: 100,
+            selectable: true,
+            dataTarget: "subir-archivo",
+            scaleY:0.3,
+            scaleX:0.3
+        });
+
+        // Añadir el grupo al lienzo
+        canvas.add(group);
+        canvas.renderAll();
+    });
+}

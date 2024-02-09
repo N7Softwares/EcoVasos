@@ -293,11 +293,11 @@
                                                 <path d="M17 15V18M17 21V18M17 18H14M17 18H20" stroke="#fffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                                             </svg>
                                             <!-- Oculta el input para que no sea visible -->
-                                            <input type="file" id="image-upload" accept=".svg, image/png, image/jpeg" style="display: none;">
-                                            Subir imagen
+                                            <input type="file" id="image-upload" accept=".svg" style="display: none;">
+                                            Subir SVG
                                         </button>
                                     </div>
-                                    <button id="agregarSvgToLienz">Agregar SVG al lienzo</button>
+                                    <!-- <button id="agregarSvgToLienz">Agregar SVG al lienzo</button> -->
                                     <div id="root">
                                         <div class="grid-base">
                                             <div class="grid-main">
@@ -308,9 +308,9 @@
                                                                     style="display: none;">
                                                                 <div class="files-dropzone-list"><button class="btn-wrap">
                                                                         <div class="browse-icon"><img src="./static/media/upload.b31c79f5.svg"></div>
-                                                                        <div class="browse-text">Drag and drop file here</div>
-                                                                        <div class="browse-separter">OR</div>
-                                                                        <div class="browse-btn btn">Browse File</div>
+                                                                        <div class="browse-text">Arrastre las imagenes acá</div>
+                                                                        <div class="browse-separter">o</div>
+                                                                        <div class="browse-btn btn">Elegir archivo</div>
                                                                     </button></div>
                                                             </div>
                                                         </div>
