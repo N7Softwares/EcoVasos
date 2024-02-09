@@ -325,15 +325,8 @@
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
                                 <!--------------------------- Para seleccionar figura --------------------------->
-                                <h4 class="text-center">Seleccionar Figura:</h4>
-                                <select id="shape-selector">
-                                    <option value="square">Cuadrado</option>
-                                    <option value="triangle">Triángulo</option>
-                                    <option value="circle">Círculo</option>
-                                    <option value="star">Estrella</option>
-                                </select>
-
-                                <h4 class="text-center mt-4">Elementos</h4>
+                                
+                                <h4 class="text-center">Elementos</h4>
 
                                 @foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
                                     <div class="galeria-container px-3">
