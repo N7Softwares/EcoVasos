@@ -932,13 +932,14 @@ subir-archivo-content{
     overflow-x:auto;
 }
 #reduceSvg{
-    width:180px !important;
+    width:150px !important;
     /* display:block; */
     /* border:1px solid red; */
     padding:20px 0 !important;
     height:fit-content;
     z-index:2 !important;
     cursor:pointer;
+    margin:auto;
 }
 #reduceSvg svg{
     width:100% !important;
