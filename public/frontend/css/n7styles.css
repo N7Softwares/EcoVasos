@@ -963,13 +963,25 @@ subir-archivo-content{
 
 .btn-wrap{
     max-width:180px;
-    background-color: var(--green-fill) !important;
+    background-color:#fff !important;
     color:#fff !important;
     padding: 15px;
     border-radius:10px;
-    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    border: #fff !important;
 }
 .browse-btn{
+    display: flex;
     color:#fff !important;
     background:var(--green-border);
+}
+.browse-btn:hover{
+    display: flex;
+    color:#fff !important;
+    background:#B7C13E !important;
+}
+.browse-text{
+    display: none;
+}
+.files-dropzone-list{
+    text-align: center !important;
 }

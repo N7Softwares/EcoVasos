@@ -284,8 +284,8 @@
 
                                     <p>Elemplo:</p>
 
-                                    <div class="text-center">
-                                        <img width="130" class="mx-2 my-2" src="{{ asset('images/logo-example.png') }}" alt="Inspiración">
+                                    <div class="text-center d-none">
+                                        
                                         <!-- Agrega un evento onclick al botón para ejecutar la función de clic -->
                                         <button class="upload-image" onclick="document.getElementById('image-upload').click()">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
@@ -297,6 +297,10 @@
                                             Subir SVG
                                         </button>
                                     </div>
+                                    <div class="text-center">
+                                        <img width="130" class="mx-2 my-2" src="{{ asset('images/logo-example.png') }}" alt="Inspiración">
+                                        <p class="bold-text">Una vez cargada la imagen, dar clic para agregar al lienzo</p>
+                                    </div>
                                     <!-- <button id="agregarSvgToLienz">Agregar SVG al lienzo</button> -->
                                     <div id="root">
                                         <div class="grid-base">
@@ -304,17 +308,13 @@
                                                 <div class="grid-canvas">
                                                     <div class="grid-canvas-inner">
                                                         <div class="browse-btn-wrapper">
-                                                            <div><input type="file" accept="image/png,image/jpeg,image/jpg" multiple="" name="file"
+                                                            <div><input type="file" accept="image/png,image/jpeg,image/jpg,image/svg+xml" multiple="" name="file"
                                                                     style="display: none;">
-                                                                <div class="files-dropzone-list"><button class="btn-wrap">
-                                                                        <div class="browse-icon"><img src="./static/media/upload.b31c79f5.svg"></div>
-                                                                        <div class="browse-text">Arrastre las imagenes acá</div>
-                                                                        <div class="browse-separter">o</div>
-                                                                        <div class="browse-btn btn">Elegir archivo</div>
+                                                                <div class="files-dropzone-list">
+                                                                    <button class="btn-wrap">
                                                                     </button></div>
                                                             </div>
                                                         </div>
-                                                        
                                                         <div id="reduceSvg" style="display: none;"></div>
                                                     </div>
                                                 </div>

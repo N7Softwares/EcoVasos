@@ -1419,3 +1419,7 @@ const loadSVGToFabric = (svgElement) => {
         canvas.renderAll();
     });
 }
+document.addEventListener("DOMContentLoaded", () => {
+    var button = document.querySelector('.browse-btn.btn');
+    button.textContent = 'Subir imagen';
+});
