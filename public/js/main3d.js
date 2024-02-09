@@ -15,16 +15,12 @@ console.log("paso3");
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
 
-//Keep the 3D object on a global variable so we can access it later
 let object;
 
-//OrbitControls allow the camera to move around the scene
 let controls;
 let canvasGeometry;
 //Set which object to render
 let objToRender = 'glass';
-// let objToRender = 'glass';
-// let objToRenderCup = 'cup_glass';
 console.log("paso4");
 document.getElementById("vasoBtn").addEventListener("click", function () {
   cambiarObjeto('glass');
@@ -200,7 +196,6 @@ const cambiarObjeto = function(objeto) {
 
           // Añadir el lienzo al objeto de la copa
           const cupCanvasMesh = new THREE.Mesh(canvasGeometry, canvasMaterial);
-          // cupCanvasMesh.rotation.x = Math.PI / 180; // Rotar el cilindro para que sea perpendicular a la copa
           cupCanvasMesh.position.set(0, 4, 0); // Ajustar la posición según sea necesario
 
           canvas.on('after:render', updateCanvasTextureCup);

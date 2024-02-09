@@ -5,9 +5,9 @@
 const canvas = new fabric.Canvas('canvas', {
     width: 1000,
     height: 400,
-    padding: 30, // Puedes ajustar este valor según tus necesidades
-    renderOnAddRemove: false,  // Evita renderizado redundante al agregar o quitar objetos
-    enableRetinaScaling: true,  // Habilita el escalado de retina para pantallas de alta densidad
+    padding: 30,
+    renderOnAddRemove: false,
+    enableRetinaScaling: true, 
     webgl: true,
   });
 
@@ -38,9 +38,6 @@ fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
         scaleY: 0.07,
         left: 848,
         top: 263,
-        // selectable: false,
-        // evented: false,
-        // hoverCursor: 'default',
         dataTarget:"color-disenio"
     });
     const elementosEnGrupo = svgImg.getObjects();
@@ -75,8 +72,6 @@ const mirrorBtn = document.getElementById("mirrorHorizontalButton");
 const flipVertBtn = document.getElementById("flipVerticalButton");
 
 const canvaLienzo = document.getElementById("canvas");
-// canvaLienzo.style.width="1000px";
-// canvaLienzo.style.height="400px";
 
 // set background default
 canvas.setBackgroundColor("#fff");
@@ -137,7 +132,6 @@ btnDelete.addEventListener("click", ()=>{
 
 
 // Cargar una imagen al lienzo
-// const imageUpload = document.getElementById('image-upload');
 document.getElementById('image-upload').addEventListener('change', handleFileSelect);
 
 const colorPicker = document.getElementById('color-picker'); // Asumiendo que tienes un color picker en tu HTML
@@ -173,20 +167,12 @@ function handleFileSelect(event) {
                             dataTarget: "subir-archivo"
 
                         });
-
-                        // Convertir la imagen a blanco y negro
                         fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
                         fabricImage.applyFilters();
-                        // console.log("INPUT", input.files);
-                        // console.log("validator: ", validador);
 
                         if (validador === false) {
                             canvas.add(fabricImage);
                         }
-
-                        // if((input.files && input.files[0]) && validador === false){
-                        //     canvas.add(fabricImage);
-                        // }
 
                         canvas.renderAll();
                         addColorPicker(fabricImage);
@@ -202,13 +188,6 @@ function handleFileSelect(event) {
     }
 }
 const addColorPicker = (fabricImage) => {
-    // console.log("FABRIC IMAGEN 3", fabricImage);
-    // colorPicker.addEventListener('input', (event) => {
-    //     const newColor = event.target.value;
-    //     fabricImage.set({ fill: newColor });
-    //     console.log("FABRIC IMAGEN 4", fabricImage);
-    //     canvas.renderAll();
-    // });
 }
 
 function handleSvgFile(file) {
@@ -253,7 +232,6 @@ const colorActual = (object)=>{
     const colorActualTD = document.getElementById("color-actual");
     object.on("mousedown",()=>{
         colorActualTD.style.backgroundColor=object.fill;
-        // console.log(object.fill);
     })
 }
 
@@ -332,18 +310,12 @@ const crearPaletaColores = ()=>{
 // Ejecutando funcion para crear paleta de colores
 crearPaletaColores();
 
-
-// Ejecutar funcion para cambiar color a todos los elementos
-
-// Funcion para cambiar color a todos los elementos
 const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
     const paletaColores = document.querySelectorAll(".paleta-color");
     const scopeColorCheck = document.getElementById("scopeColor");
 
     const addColorPickerToImage = (file, color) => {
-        // console.log("fileeee", file);
-        // console.log("migaja 0", color.style.backgroundColor);
         const colorMatrix = rgbToMatrix(color.style.backgroundColor);
         if (file) {
             file.filters[0].matrix= colorMatrix;
@@ -359,14 +331,9 @@ const cambiarColorATodos = () => {
         // Cuando se da click en cualquier color
         color.addEventListener("click", () => {
             selectedColorGlobal = color.style.backgroundColor;
-
-            // Si scopeColorCheck está activo significa que los colores se cambian individualmente
             if (scopeColorCheck.checked) {
                 const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
-                // Verifica si el objeto seleccionado no es un array (el svg de medidas es un array)
                 if(activeObject.type === "group"){
-                // Para cambiar el color en la imagen de MEDIDA
-                    // Nueva funcion para cambiar color de los svg
                     cambiarColorUnicoSvg(selectedColorGlobal)
             
                 }else{
@@ -523,8 +490,6 @@ const agregarMedidas = (svgName) => {
 
                 // Ajusta la escala y la posición del grupo
                 group.set({
-                    // scaleX: 1.1,  // Ajusta según sea necesario
-                    // scaleY: 1.1,  // Ajusta según sea necesario
                     left: canvas.width - 60,
                     top: canvas.padding,
                     lockScalingX: true,
@@ -611,51 +576,7 @@ const cambiarColorUnicoSvg = (color) => {
 
 // Manejar el color del medidor
 const handleColorChange = (event) => {
-    // console.log("COLOR", event);
     const newColor = event;
-    
-    //  // Obtén el objeto activo o el primer objeto del canvas
-    //  const activeObject = canvas.getActiveObject() || canvas.getObjects()[0];
-    //  console.log("VIENE a cambiar el color", activeObject);
- 
-    //  // Convierte el objeto en un elemento HTML
-    //  const svgString = activeObject.toSVG();
-    //  console.log("svg stringgg", svgString);
-    //  const parser = new DOMParser();
-    //    const xmlDoc = parser.parseFromString(svgString, 'text/xml');
-    //    console.log("va por A3 xmlDoccc", xmlDoc)
-    //    // Modificar color del objeto HTML
-     
-    //    if (selectedColorGlobal !== undefined) {
-    //      const paths = xmlDoc.querySelectorAll('path');
-    //      paths.forEach((path) => {
-    //        path.setAttribute('fill', selectedColorGlobal);
-    //      });
-    //      console.log("va por A4 PATH", paths)
-    //    }
-    
-    //    // Convertir objeto HTML modificado a SVG y luego a fabric.js
-    //    const modifiedSVGString = new XMLSerializer().serializeToString(xmlDoc);
-    //    fabric.loadSVGFromString(modifiedSVGString, function (objects, options) {
-    //      const svgObjects = fabric.util.groupSVGElements(objects, options);
- 
-    //      svgObjects.set({
-    //          scaleX: 0.2,
-    //          scaleY: 0.2,
-    //          dataTarget: "svg"
-    //      });
- 
-    //      console.log("va por A5")
- 
-    //      // Elimina objetos existentes en el lienzo con el mismo dataTarget
-    //      const existingObjects = canvas.getObjects().filter(obj => obj.dataTarget === "svg");
-    //      existingObjects.forEach(obj => canvas.remove(obj));
- 
-    //      // Agrega el nuevo objeto al lienzo
-    //      canvas.add(svgObjects);
-    //      canvas.renderAll();
-    //  });
-    // console.log("VIENE a cambiar el color")
     handleFileSelectPreview({
         target: { files: [document.getElementById('image-upload').files[0]] },
     });
@@ -1139,7 +1060,6 @@ const checkValue = ()=>{
     const msgSwitch = document.querySelector(".msg-switch");
 
     scopeColorCheck.addEventListener(("change"), ()=>{
-        // console.log(scopeColorCheck.checked);
         if(scopeColorCheck.checked){
             msgSwitch.textContent="Colores Individuales";
         }else{
@@ -1158,7 +1078,6 @@ const CopyAndPaste = () => {
     const activeObject = canvas.getActiveObject();
 
     if (!activeObject) {
-        // console.log("Selecciona un objeto para copiar.");
         return;
     }
 
@@ -1192,7 +1111,6 @@ const CopyAndPaste = () => {
         _clipboard = clonedObj; // Actualizar el portapapeles
         canvas.setActiveObject(clonedObj);
         canvas.requestRenderAll();
-        // console.log("Objeto copiado y pegado.");
     });
 }
 
@@ -1205,7 +1123,6 @@ const modoEspejo = () => {
         activeObject.set('flipX', !activeObject.flipX); // Cambia el estado del espejo horizontal
         canvas.renderAll();
     } else {
-        console.log("Selecciona un objeto para aplicar el espejo horizontal.");
     }
 }
 // Funcion para girar verticalmente los elementos
@@ -1217,7 +1134,6 @@ const giroVertical = () => {
         activeObject.set({ scaleY: -1 * activeObject.scaleY });
         canvas.renderAll();
     } else {
-        console.log("Selecciona un objeto para voltear verticalmente.");
     }
 }
 
@@ -1402,7 +1318,6 @@ document.addEventListener("DOMContentLoaded", () => {
 const loadSVGToFabric = (svgElement) => {
     // Obtener el contenido SVG como cadena
     let svgString = new XMLSerializer().serializeToString(svgElement);
-
     // Crear objeto SVG desde la cadena
     fabric.loadSVGFromString(svgString, function (objects, options) {
         let group = new fabric.Group(objects, {
