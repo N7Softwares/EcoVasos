@@ -1025,31 +1025,33 @@ agregarTextoAlCanvas('Inserta tu texto aquí');
 const btnPdf = document.getElementById("download-pdf");
 
 btnPdf.addEventListener('click', () => {
-    let canva = document.getElementById("canvas");
-    let width = canva.width;
-    let height = canva.height;
+    let canvas = document.getElementById("canvas");
+    let width = canvas.width;
+    let height = canvas.height;
     let pdf;
 
-    // establecer la orientación
+    // Establecer la orientación del PDF
     if (width > height) {
         pdf = new jsPDF('l', 'px', [width, height]);
     } else {
         pdf = new jsPDF('p', 'px', [height, width]);
     }
 
-    // Deseleccionar todos los objetos en el canvas
-    canvas.discardActiveObject();
-    canvas.requestRenderAll();
-    
+    // Esperar un breve período para que el lienzo se renderice completamente
     setTimeout(() => {
-        // luego obtenemos las dimensiones del propio archivo 'pdf'
+        // Obtener las dimensiones del lienzo en el PDF
         width = pdf.internal.pageSize.getWidth();
         height = pdf.internal.pageSize.getHeight();
-        pdf.addImage(canva, 'PNG', 0, 0, width, height);
-        pdf.save("vaso-personalizado.pdf");
-    }, 500); // 500 milisegundos (0.5 segundo) de espera
 
-    
+        // Crear una imagen en formato JPEG con mayor calidad
+        const dataUrl = canvas.toDataURL({ format: 'jpeg', quality: 1.0 });
+
+        // Agregar la imagen al PDF
+        pdf.addImage(dataUrl, 'JPEG', 0, 0, width, height);
+
+        // Guardar el PDF
+        pdf.save("vaso-personalizado.pdf");
+    }, 500); // Esperar 500 milisegundos (0.5 segundo) antes de generar el PDF
 });
 
 
