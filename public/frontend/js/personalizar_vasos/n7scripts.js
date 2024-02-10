@@ -1378,7 +1378,7 @@ const agregarSeparador = () => {
                 canvas.add(group);
                 canvas.sendToBack(group);
             });
-            canvas.renderAll;
+            canvas.renderAll();
         });
 };
 agregarSeparador();
