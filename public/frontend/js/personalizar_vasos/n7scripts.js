@@ -27,6 +27,7 @@ if (obj.top + obj.height * obj.scaleY > canvas.height - padding) {
 
 });
 
+// ---------------------- SVG de la marca que se pone automaticamente ----------------------
 const svgContainerBrand = document.getElementById('svg-container-brand');
 const svgContentBrand = svgContainerBrand.innerHTML;
 
@@ -36,7 +37,7 @@ fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
     svgImg.set({
         scaleX: 0.07,
         scaleY: 0.07,
-        left: 848,
+        left: 599,
         top: 263,
         dataTarget:"color-disenio"
     });
@@ -490,7 +491,7 @@ const agregarMedidas = (svgName) => {
 
                 // Ajusta la escala y la posición del grupo
                 group.set({
-                    left: canvas.width - 60,
+                    left: ((canvas.width/4)*3) - 60,
                     top: canvas.padding,
                     lockScalingX: true,
                     lockScalingY: true,
@@ -1179,8 +1180,8 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-var ctx = canvas.getContext('2d');
-var miimagen = new Image();
+let ctx = canvas.getContext('2d');
+let miimagen = new Image();
 
 
 function cargarImagen(url) {
@@ -1244,15 +1245,21 @@ let modal = document.getElementById('myModal');
 let btn = document.getElementById('ver3DBtn');
 let span = document.getElementsByClassName('close')[0];
 
-// Agregar evento de clic al botón para mostrar el modal
+// Agregar evento de clic al botón para mostrar el modal después de medio segundo
 btn.onclick = function () {
-    modal.style.display = 'block';
-    canvas.renderAll();
+    eliminarSeparadorSvg();
+    canvas.discardActiveObject().renderAll();
+    // Temporizador de medio segundo (500 milisegundos) Para que se quite el svgSeparador primero
+    setTimeout(function() {
+        modal.style.display = 'block';
+        canvas.renderAll();
+    }, 500);
 };
 
 // Agregar evento de clic al botón de cerrar para ocultar el modal
 span.onclick = function () {
     modal.style.display = 'none';
+    agregarSeparador();
     canvas.renderAll();
 };
 
@@ -1260,6 +1267,8 @@ span.onclick = function () {
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = 'none';
+        agregarSeparador();
+
         canvas.renderAll();
     }
 };
@@ -1340,3 +1349,48 @@ document.addEventListener("DOMContentLoaded", () => {
     var button = document.querySelector('.browse-btn.btn');
     button.textContent = 'Subir imagen';
 });
+
+
+// ----------------------- Separador -----------------------
+
+const agregarSeparador = () => {
+//     // Ruta relativa al archivo SVG
+    const svgFilePath = `/frontend/img/personalizacion_vasos/medidas/separador.svg`;
+
+    // Carga el contenido del archivo SVG utilizando una petición HTTP (puedes ajustar esto según tu entorno)
+    fetch(svgFilePath)
+        .then(response => response.text())
+        .then(svgContent => {
+            // Utiliza Fabric.js para cargar el SVG y agregarlo al lienzo
+            fabric.loadSVGFromString(svgContent, (objects, options) => {
+                const group = new fabric.Group(objects, options);
+
+                // Ajusta la escala y la posición del grupo
+                group.set({
+                    left: 0,
+                    top: 0,
+                    selectable: false,
+                    hoverCursor:"default",
+                    dataTarget:"separador"
+                });
+
+                // Agrega el objeto SVG al lienzo
+                canvas.add(group);
+                canvas.sendToBack(group);
+            });
+            canvas.renderAll;
+        });
+};
+agregarSeparador();
+
+// Encontrar separador
+const eliminarSeparadorSvg = ()=>{
+    // Obtiene todos los objetos en el lienzo
+    const objects = canvas.getObjects();
+
+    const objetoSeparador = objects.find(obj => obj.dataTarget === "separador");
+    if (objetoSeparador) {
+        canvas.remove(objetoSeparador); // Elimina el objeto del lienzo
+        canvas.renderAll(); // Renderiza el lienzo para aplicar los cambios
+    }
+}

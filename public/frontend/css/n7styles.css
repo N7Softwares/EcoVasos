@@ -972,12 +972,12 @@ subir-archivo-content{
 .browse-btn{
     display: flex;
     color:#fff !important;
-    background:var(--green-border);
+    background:var(--green-fill);
 }
 .browse-btn:hover{
     display: flex;
     color:#fff !important;
-    background:#B7C13E !important;
+    background:var(--green-border)!important;
 }
 .browse-text{
     display: none;
