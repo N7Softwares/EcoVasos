@@ -247,6 +247,12 @@ section{
 }
 /* ------------------------------- Colores del Diseño -------------------------------- */
 
+.table-color-actual{
+    /* width:100%; */
+    display:flex;
+    border:1px solid red;
+    gap:10px;
+}
 .color-cube{
     width:20px;
     height:20px;
@@ -263,8 +269,8 @@ section{
 
 /* Cuadro donde se muestra el color global de los elementos */
 #color-actual{
-    width:15px !important; 
-    height:20px; 
+    width:25px !important; 
+    height:25px; 
     border:1px solid var(--border2);
 }
 
@@ -803,7 +809,7 @@ section{
 
 .zoomable-image {
     cursor: pointer;
-    width: 130px;
+    width: 60px;
     transition: transform 0.3s ease-in-out;
 }
 

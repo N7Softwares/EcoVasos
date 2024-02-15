@@ -82,24 +82,6 @@
                                 
                         </div>
                         <div class="col-9 sideLeftContent">
-                            <div class="contenido-side" id="temas-content" style="display: none;">
-                                <h4 class="text-center">Temas</h4>
-                                @foreach ($array['inspirates']->groupBy('category.image_type') as $categoria => $imagenes)
-                                    <div class="galeria-container px-3">
-                                        <h6 class="mt-3">{{ $categoria }}</h6>
-                                        <div class="galeria">
-                                                @foreach ($imagenes as $inspirate)
-                                                    <div class="galeria-item d-flex align-self-center" >
-                                                        <img width="130" class="mx-2 zoomable-image" src="{{ asset($inspirate->url) }}" alt="Inspiración" onclick="cargarImagen('{{ asset($inspirate->url) }}')">
-                                                    </div>
-                                                @endforeach
-                                        </div>
-                                        <button class="galeria-prev">&#8249;</button>
-                                        <button class="galeria-next">&#8250;</button>
-                                    </div>
-                                @endforeach
-                                
-                            </div>
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">
                                 <!--------------- Para cambiar el color del fondo --------------------->
                                 
@@ -149,9 +131,17 @@
                                         </div>
                                         
                                         <h6>Colores Actuales</h6>
-                                        <table style="width:20px;">
-                                            <td id="color-actual" style="background-color: blue;"></td>
-                                        </table>
+                                        <div class="table-color-actual">
+                                            <!-- <td id="color-actual" style="background-color: blue;"></td> -->
+                                            @if(isset($array['colors']) && count($array['colors']) > 0)
+                                            @php
+                                            $firstColor = $array['colors'][0];
+                                            @endphp
+                                            <div id="color-actual"
+                                                style="background-color: {{ $firstColor->hex_code }};"></div>
+                                            <div class="border" id="color-actual-nombre">{{ $firstColor->name }}</div>
+                                            @endif
+                                        </div>
                                     </div>
                                     <div class="mb-3" id="color-table-globales">
                                         
@@ -159,7 +149,7 @@
                                             <div class="colores-bd">
                                                 <h6>Colores disponibles</h6>
                                                 @foreach($array['colors'] as $color)
-                                                    <div class="paleta-color" 
+                                                    <div class="paleta-color" title="{{ $color->name }}"
                                                     style="background-color: {{ $color->hex_code }}"></div>
                                                 @endforeach
                                             </div>
@@ -249,7 +239,7 @@
                             
                                                 @foreach ($imagenes as $element)
                                                     <div class="galeria-item d-flex align-self-center">
-                                                        <img width="130" class="mx-2 zoomable-image" src="{{ asset($element->url) }}" alt="Inspiración" onclick="cargarImagen('{{ asset($element->url) }}')">
+                                                        <img class="mx-2 zoomable-image" src="{{ asset($element->url) }}" alt="Inspiración" onclick="cargarImagen('{{ asset($element->url) }}')">
                                                     </div>
                                                 @endforeach
                                 
