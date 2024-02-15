@@ -928,7 +928,7 @@ section{
 
 
 /* ------------------------ seccion convertir img a svg ------------------------ */
-subir-archivo-content{
+.subir-archivo-content{
     overflow-x:auto;
 }
 #reduceSvg{
