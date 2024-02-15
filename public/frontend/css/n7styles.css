@@ -985,3 +985,7 @@ subir-archivo-content{
 .files-dropzone-list{
     text-align: center !important;
 }
+.signal-red{
+    color: red;
+    font-weight: bold;
+}

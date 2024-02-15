@@ -129,22 +129,6 @@
                                                             </div>
                                                         </div>
                                                     @endforeach
-                                                    <div class="pt-2 pb-2">
-                                                        <span>Monocromáticos</span>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container-personalized">
-                                                            <div class="color-cube" style="background:#fff;"></div>
-                                                            <p class="color-title">Blanco</p>
-                                                        </div>
-                                                    </div>
-                                                    <div class="option-color">
-                                                        <div class="options-container-personalized">
-                                                            <div class="color-cube" style="background:#212121;"></div>
-                                                            <p class="color-title">Negro</p>
-                                                        </div>
-                                                    </div>
-
                                                 </div>
                                             </div>
                                         </div>
@@ -173,22 +157,22 @@
                                         
                                         <div class="container-paleta-color">
                                             <div class="colores-bd">
-                                                <h6>Colores de la Base de Datos</h6>
+                                                <h6>Colores disponibles</h6>
                                                 @foreach($array['colors'] as $color)
                                                     <div class="paleta-color" 
                                                     style="background-color: {{ $color->hex_code }}"></div>
                                                 @endforeach
                                             </div>
-                                            <div class="colores-clasicos">
+                                            <div class="colores-clasicos d-none">
                                                 <h6>Clásicas</h6>
                                             </div>
-                                            <div class="colores-deModa">
+                                            <div class="colores-deModa d-none">
                                                 <h6>De Moda</h6>
                                             </div>
-                                            <div class="colores-metalicos">
+                                            <div class="colores-metalicos d-none">
                                                 <h6>Metálicas</h6>
                                             </div>
-                                            <div class="colores-miscelaneos">
+                                            <div class="colores-miscelaneos d-none">
                                                 <h6>Misceláneos</h6>
                                             </div>
                                         </div>
@@ -661,6 +645,11 @@
                     <!--------------------------- Elemento Canva --------------------------->
                     <div id="canvas-container" style="position: relative;">
                         <div class="container" style="max-width: 1000px">
+                            <div class="row">
+                                <div class="col-12 text-center">
+                                    <p class="signal-red">Aviso: los elementos que sobrepasen los bordes del lienzo, no serán visibles en su diseño final.</p>
+                                </div>
+                            </div>
                             <div class="row text-center mb-1">
                                 <div class="col-3 lado-1">Lateral Izquierdo</div>
                                 <div class="col-3 lado-2">Frente</div>
