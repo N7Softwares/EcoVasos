@@ -36,6 +36,7 @@ fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
     
     svgImg.set({
         scaleX: 0.07,
+        selectable: true,
         scaleY: 0.07,
         left: 599,
         top: 263,
@@ -44,10 +45,6 @@ fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
     const elementosEnGrupo = svgImg.getObjects();
 
     // Itera sobre cada elemento dentro del grupo y cambia su color de relleno
-    elementosEnGrupo.forEach(elemento => {
-        // Cambia el color de relleno del elemento (ajusta el color según tus necesidades)
-        elemento.set({ fill: "rgb(0, 183, 79)" });
-    });
     canvas.add(svgImg);
 });
 
@@ -1026,6 +1023,7 @@ agregarTextoAlCanvas('Inserta tu texto aquí');
 const btnPdf = document.getElementById("download-pdf");
 
 btnPdf.addEventListener('click', () => {
+    eliminarSeparadorSvg();
     let canvas = document.getElementById("canvas");
     let width = canvas.width;
     let height = canvas.height;
@@ -1052,6 +1050,8 @@ btnPdf.addEventListener('click', () => {
 
         // Guardar el PDF
         pdf.save("vaso-personalizado.pdf");
+
+        agregarSeparador();
     }, 500); // Esperar 500 milisegundos (0.5 segundo) antes de generar el PDF
 });
 
@@ -1198,6 +1198,8 @@ function cargarImagen(url) {
                 group.set({
                     scaleX:0.2,
                     scaleY:0.2,
+                    selectable: true,
+                    hoverCursor:"default",
                     top: 0,
                     dataTarget: "elementos"
                 });
@@ -1210,6 +1212,7 @@ function cargarImagen(url) {
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
                 canvas.setActiveObject(group);
+                agregarSeparador();
                 canvas.renderAll();
             });
         })
@@ -1320,6 +1323,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById('reduceSvg').addEventListener('click', ()=> {
         let svgElement = document.getElementById('svgContent');
         if(svgElement) {
+            agregarSeparador();
             loadSVGToFabric(svgElement);
         }
     });
@@ -1335,6 +1339,7 @@ const loadSVGToFabric = (svgElement) => {
             left: 100,
             top: 100,
             selectable: true,
+            hoverCursor:"default",
             dataTarget: "subir-archivo",
             scaleY:0.3,
             scaleX:0.3
@@ -1342,6 +1347,7 @@ const loadSVGToFabric = (svgElement) => {
 
         // Añadir el grupo al lienzo
         canvas.add(group);
+        canvas.setActiveObject(group);
         canvas.renderAll();
     });
 }
@@ -1364,19 +1370,18 @@ const agregarSeparador = () => {
             // Utiliza Fabric.js para cargar el SVG y agregarlo al lienzo
             fabric.loadSVGFromString(svgContent, (objects, options) => {
                 const group = new fabric.Group(objects, options);
-
                 // Ajusta la escala y la posición del grupo
                 group.set({
                     left: 0,
                     top: 0,
                     selectable: false,
                     hoverCursor:"default",
-                    dataTarget:"separador"
+                    dataTarget:"separador",
                 });
 
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
-                canvas.sendToBack(group);
+                group.bringToFront();
             });
             canvas.renderAll();
         });
@@ -1385,12 +1390,13 @@ agregarSeparador();
 
 // Encontrar separador
 const eliminarSeparadorSvg = ()=>{
-    // Obtiene todos los objetos en el lienzo
     const objects = canvas.getObjects();
 
-    const objetoSeparador = objects.find(obj => obj.dataTarget === "separador");
-    if (objetoSeparador) {
-        canvas.remove(objetoSeparador); // Elimina el objeto del lienzo
-        canvas.renderAll(); // Renderiza el lienzo para aplicar los cambios
-    }
+    const objetosSeparadores = objects.filter(obj => obj.dataTarget === "separador");
+
+    objetosSeparadores.forEach(objetoSeparador => {
+        canvas.remove(objetoSeparador);
+    });
+
+    canvas.renderAll();
 }
