@@ -306,7 +306,7 @@ const crearPaletaColores = ()=>{
     })
 };
 // Ejecutando funcion para crear paleta de colores
-crearPaletaColores();
+// crearPaletaColores();
 
 const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
@@ -1173,7 +1173,7 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         function actualizarGaleria() {
-            const translateXValue = -currentIndex * 150 + 'px'; // Ancho de cada imagen
+            const translateXValue = -currentIndex * 70 + 'px'; // Ancho de cada imagen
             galeria.style.transform = 'translateX(' + translateXValue + ')';
         }
     });
@@ -1199,7 +1199,7 @@ function cargarImagen(url) {
                     scaleX:0.2,
                     scaleY:0.2,
                     selectable: true,
-                    top: 0,
+                    top: canvas.padding,
                     dataTarget: "elementos"
                 });
 
@@ -1218,25 +1218,6 @@ function cargarImagen(url) {
         .catch(error => {
             console.error('Error al cargar el archivo SVG:', error);
         });
-    // const fabricImage = new fabric.Image();
-    // fabricImage.setSrc(url, function() {
-    //     fabricImage.set({
-    //         scaleX: 0.2, // Puedes ajustar la escala según tus necesidades
-    //         scaleY: 0.2,
-    //         dataTarget: "elementos"
-    //     });
-
-    //     // Convertir la imagen a blanco y negro
-    //     fabricImage.filters.push(new fabric.Image.filters.BlackWhite());
-    //     fabricImage.applyFilters();
-
-        // Agregar la imagen al lienzo
-        // if(validador === false){
-        //     canvas.add(fabricImage);
-        // }
-        // canvas.renderAll();
-        // addColorPicker(fabricImage);
-
 }
 
 
@@ -1335,8 +1316,8 @@ const loadSVGToFabric = (svgElement) => {
     // Crear objeto SVG desde la cadena
     fabric.loadSVGFromString(svgString, function (objects, options) {
         let group = new fabric.Group(objects, {
-            left: 100,
-            top: 100,
+            left: 0,
+            top: canvas.padding,
             selectable: true,
             dataTarget: "subir-archivo",
             scaleY:0.3,
