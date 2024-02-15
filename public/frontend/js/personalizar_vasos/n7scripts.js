@@ -1199,7 +1199,6 @@ function cargarImagen(url) {
                     scaleX:0.2,
                     scaleY:0.2,
                     selectable: true,
-                    hoverCursor:"default",
                     top: 0,
                     dataTarget: "elementos"
                 });
@@ -1339,7 +1338,6 @@ const loadSVGToFabric = (svgElement) => {
             left: 100,
             top: 100,
             selectable: true,
-            hoverCursor:"default",
             dataTarget: "subir-archivo",
             scaleY:0.3,
             scaleX:0.3
@@ -1381,7 +1379,7 @@ const agregarSeparador = () => {
 
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
-                group.bringToFront();
+                group.sendToBack(); // Para poner el separador en el fondo
             });
             canvas.renderAll();
         });
