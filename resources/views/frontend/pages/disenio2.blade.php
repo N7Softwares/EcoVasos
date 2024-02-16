@@ -672,6 +672,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
+    <!-- Para la conversion de imagenes -->
     <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
     <script src="{{asset('js/scope/2.3a3362a2.chunk.js')}}"></script>
     <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script>
