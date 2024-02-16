@@ -680,9 +680,9 @@
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
     <!-- Para la conversion de imagenes -->
-    <!-- <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
+    <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
     <script src="{{asset('js/scope/2.3a3362a2.chunk.js')}}"></script>
-    <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script> -->
+    <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script>
 </body>
 </html>
 </div>

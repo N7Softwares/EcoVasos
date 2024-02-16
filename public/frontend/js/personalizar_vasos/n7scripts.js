@@ -32,6 +32,37 @@ if (obj.top + obj.height * obj.scaleY > canvas.height - padding) {
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
+// Para obtener el color de los objetos
+const colorActual = (object) => {
+    const paletaColores = document.querySelectorAll(".paleta-color");
+    const colorActualNombre = document.getElementById("color-actual-nombre");
+
+    const colorActualTD = document.getElementById("color-actual");
+    object.on("mousedown", () => {
+        
+        let fillColor;
+        if (object.type === "group" && object._objects.length > 0) {
+            fillColor = object._objects[0].fill;
+        } else {
+            fillColor = object.fill;
+        }
+        colorActualTD.style.backgroundColor = fillColor;
+
+        // Buscar el color correspondiente en la paleta de colores
+        const paletaColor = Array.from(paletaColores).find(paletaColor => paletaColor.style.backgroundColor === fillColor);
+        if (paletaColor) {
+            colorActualNombre.textContent = paletaColor.dataset.bsTitle;
+        }
+    });
+};
+
+// Para leer el color actual en la tabla. <<No confundir con obtener el color de los objetos>>
+const valorColorActual = ()=>{
+    const colorActualTD = document.getElementById("color-actual");
+    colorActualValor = colorActualTD.style.backgroundColor;
+    return colorActualValor;
+}
+
 // ---------------------- SVG de la marca que se pone automaticamente ----------------------
 const svgContainerBrand = document.getElementById('svg-container-brand');
 const svgContentBrand = svgContainerBrand.innerHTML;
@@ -48,6 +79,7 @@ fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
         dataTarget:"color-disenio"
     });
     const elementosEnGrupo = svgImg.getObjects();
+    colorActual(svgImg);    // Para obtener el color del elemento
 
     // Itera sobre cada elemento dentro del grupo y cambia su color de relleno
     canvas.add(svgImg);
@@ -230,29 +262,6 @@ function handleSvgFile(file) {
 }
 
 
-// Para obtener el color de los objetos
-const colorActual = (object) => {
-    const paletaColores = document.querySelectorAll(".paleta-color");
-    const colorActualNombre = document.getElementById("color-actual-nombre");
-
-    const colorActualTD = document.getElementById("color-actual");
-    object.on("mousedown", () => {
-        colorActualTD.style.backgroundColor = object.fill;
-
-        // Buscar el color correspondiente en la paleta de colores
-        const paletaColor = Array.from(paletaColores).find(paletaColor => paletaColor.style.backgroundColor === object.fill);
-        if (paletaColor) {
-            colorActualNombre.textContent=paletaColor.dataset.bsTitle;
-        }
-    });
-};
-
-// Para leer el color actual en la tabla. <<No confundir con obtener el color de los objetos>>
-const valorColorActual = ()=>{
-    const colorActualTD = document.getElementById("color-actual");
-    colorActualValor = colorActualTD.style.backgroundColor;
-    return colorActualValor;
-}
 // generar paleta de colores aleatorios
 const generarPaletaDeColores = (cantidad) => {
     const paleta = [];
@@ -520,6 +529,7 @@ const agregarMedidas = (svgName) => {
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
                 canvas.setActiveObject(group);
+                colorActual(group);
                 // canvas.renderAll();
 
                 // Obtener medidas del vaso
@@ -1227,6 +1237,7 @@ function cargarImagen(url) {
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
                 canvas.setActiveObject(group);
+                colorActual(group);
                 agregarSeparador();
                 canvas.renderAll();
             });
@@ -1343,6 +1354,7 @@ const loadSVGToFabric = (svgElement) => {
         // Añadir el grupo al lienzo
         canvas.add(group);
         canvas.setActiveObject(group);
+        colorActual(group);
         canvas.renderAll();
     });
 }
