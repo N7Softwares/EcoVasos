@@ -250,7 +250,6 @@ section{
 .table-color-actual{
     /* width:100%; */
     display:flex;
-    border:1px solid red;
     gap:10px;
 }
 .color-cube{

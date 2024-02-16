@@ -139,7 +139,7 @@
                                             @endphp
                                             <div id="color-actual"
                                                 style="background-color: {{ $firstColor->hex_code }};"></div>
-                                            <div class="border" id="color-actual-nombre">{{ $firstColor->name }}</div>
+                                            <div class="" id="color-actual-nombre">{{ $firstColor->name }}</div>
                                             @endif
                                         </div>
                                     </div>
