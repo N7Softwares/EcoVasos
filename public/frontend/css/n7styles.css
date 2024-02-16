@@ -246,7 +246,10 @@ section{
     opacity: 0.3; /* Puedes ajustar la opacidad según tus necesidades */
 }
 /* ------------------------------- Colores del Diseño -------------------------------- */
-
+.custom-tooltip {
+    --bs-tooltip-bg: var(--green-fill);
+    --bs-tooltip-opacity:1;
+}
 .table-color-actual{
     /* width:100%; */
     display:flex;

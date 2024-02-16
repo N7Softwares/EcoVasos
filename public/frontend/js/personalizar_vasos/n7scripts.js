@@ -27,6 +27,11 @@ if (obj.top + obj.height * obj.scaleY > canvas.height - padding) {
 
 });
 
+// ---------------------- Inizializando tooltip de boostrap ----------------------
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+
 // ---------------------- SVG de la marca que se pone automaticamente ----------------------
 const svgContainerBrand = document.getElementById('svg-container-brand');
 const svgContentBrand = svgContainerBrand.innerHTML;
@@ -237,7 +242,7 @@ const colorActual = (object) => {
         // Buscar el color correspondiente en la paleta de colores
         const paletaColor = Array.from(paletaColores).find(paletaColor => paletaColor.style.backgroundColor === object.fill);
         if (paletaColor) {
-            colorActualNombre.textContent=paletaColor.title;
+            colorActualNombre.textContent=paletaColor.dataset.bsTitle;
         }
     });
 };
@@ -379,7 +384,7 @@ const cambiarColorATodos = () => {
                 });
             }
             colorActualTD.style.backgroundColor=selectedColorGlobal;
-            colorActualNombre.textContent=color.title;
+            colorActualNombre.textContent=color.dataset.bsTitle;
 
             canvas.renderAll();
         });
