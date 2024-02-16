@@ -226,12 +226,21 @@ function handleSvgFile(file) {
 
 
 // Para obtener el color de los objetos
-const colorActual = (object)=>{
+const colorActual = (object) => {
+    const paletaColores = document.querySelectorAll(".paleta-color");
+    const colorActualNombre = document.getElementById("color-actual-nombre");
+
     const colorActualTD = document.getElementById("color-actual");
-    object.on("mousedown",()=>{
-        colorActualTD.style.backgroundColor=object.fill;
-    })
-}
+    object.on("mousedown", () => {
+        colorActualTD.style.backgroundColor = object.fill;
+
+        // Buscar el color correspondiente en la paleta de colores
+        const paletaColor = Array.from(paletaColores).find(paletaColor => paletaColor.style.backgroundColor === object.fill);
+        if (paletaColor) {
+            colorActualNombre.textContent=paletaColor.title;
+        }
+    });
+};
 
 // Para leer el color actual en la tabla. <<No confundir con obtener el color de los objetos>>
 const valorColorActual = ()=>{
@@ -239,7 +248,6 @@ const valorColorActual = ()=>{
     colorActualValor = colorActualTD.style.backgroundColor;
     return colorActualValor;
 }
-
 // generar paleta de colores aleatorios
 const generarPaletaDeColores = (cantidad) => {
     const paleta = [];
@@ -310,6 +318,7 @@ const crearPaletaColores = ()=>{
 
 const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
+    const colorActualNombre = document.getElementById("color-actual-nombre");
     const paletaColores = document.querySelectorAll(".paleta-color");
     const scopeColorCheck = document.getElementById("scopeColor");
 
@@ -370,6 +379,8 @@ const cambiarColorATodos = () => {
                 });
             }
             colorActualTD.style.backgroundColor=selectedColorGlobal;
+            colorActualNombre.textContent=color.title;
+
             canvas.renderAll();
         });
     });
