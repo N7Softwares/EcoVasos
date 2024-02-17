@@ -414,9 +414,8 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
-
-                        </div>
+                    </div>
+                </div>
                 <div class=" col-main">
                     <div class=" bg-white col-rightSide border">
                         <div class="right-functions">
