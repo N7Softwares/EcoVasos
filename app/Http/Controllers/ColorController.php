@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Color;
+use App\Models\ColorsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +15,8 @@ class ColorController extends Controller
     public function index()
     {
         $colors = Color::all(); // Obtener todos los colores
-        return view('backend.colors_vaso.index', compact('colors'));
+        $categories = ColorsCategory::all(); 
+        return view('backend.colors_vaso.index', compact('colors', 'categories'));
     }
 
     /**
@@ -22,7 +24,8 @@ class ColorController extends Controller
      */
     public function create()
     {
-        return view('backend.colors_vaso.create');
+        $categories = ColorsCategory::all(); 
+        return view('backend.colors_vaso.create', compact('categories'));
     }
 
     /**
