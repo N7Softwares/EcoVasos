@@ -139,7 +139,7 @@
                                             @endphp
                                             <div id="color-actual"
                                                 style="background-color: {{ $firstColor->hex_code }};"></div>
-                                            <div class="border" id="color-actual-nombre">{{ $firstColor->name }}</div>
+                                            <div class="" id="color-actual-nombre">{{ $firstColor->name }}</div>
                                             @endif
                                         </div>
                                     </div>
@@ -149,8 +149,11 @@
                                             <div class="colores-bd">
                                                 <h6>Colores disponibles</h6>
                                                 @foreach($array['colors'] as $color)
-                                                    <div class="paleta-color" title="{{ $color->name }}"
-                                                    style="background-color: {{ $color->hex_code }}"></div>
+                                                    <div class="paleta-color"
+                                                    style="background-color: {{ $color->hex_code }}"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    data-bs-custom-class="custom-tooltip"
+                                                    data-bs-title="{{ $color->name }}"></div>
                                                 @endforeach
                                             </div>
                                             <div class="colores-clasicos d-none">
@@ -666,12 +669,17 @@
         </div>
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" 
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <!-- Para el PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
+    <!-- Para la conversion de imagenes -->
     <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
     <script src="{{asset('js/scope/2.3a3362a2.chunk.js')}}"></script>
     <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script>
