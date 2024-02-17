@@ -127,8 +127,7 @@ section{
 }
 .bloq-side .img-bloq-side{
     width:40px;
-    /* height:50px; */
-    /* border:1px solid var(--border2); */
+
 }
 .bloq-side .img-bloq-side img{
     width:100%;
@@ -1025,9 +1024,30 @@ section{
 
     }
 
+    .contenido-side,#medidor-content{
+        height:200px;
+    }
+    .bloq-side{ /* No funciona todavia */
+        padding:0 5px;
+        border:1px solid #000;
+    }
+
+
     .col-main {
         order: 1; /* Ahora será el primer elemento */
         border:1px solid red;
     }
+    #canvas-container>.container-fluid{
+        width:100% !important;
+        padding:0 !important;
+        border:1px solid var(--info-color);
 
+    }
+    .canvas-container-class {
+        width: 100%;
+        overflow-x: auto; /* Añade un scroll horizontal si es necesario */
+        white-space: nowrap; /* Evita el salto de línea del contenido */
+        padding:20px 0;
+        border:1px solid var(--danger-color);
+    }
 }

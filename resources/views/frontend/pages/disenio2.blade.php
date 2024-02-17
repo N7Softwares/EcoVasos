@@ -400,7 +400,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="contenido-side" id="medidor-content">
+                            <div class="contenido-side" id="medidor-content" style="display: none;">
                                 <!--------------------------- Para agregar medidor --------------------------->
                                 <div class="sub-contenido-side mt-3">
                                     <h4 class="text-center">Medidor</h4>
@@ -636,7 +636,7 @@
                     </div>
                     <!--------------------------- Elemento Canva --------------------------->
                     <div id="canvas-container" style="position: relative;">
-                        <div class="container" style="max-width: 1000px">
+                        <div class="container-fluid w-100">
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <p class="signal-red">Aviso: los elementos que sobrepasen los bordes del lienzo, no serán visibles en su diseño final.</p>
@@ -649,7 +649,7 @@
                                 <div class="col-3 lado-4">Contrafrente</div>
                             </div>
                             <div class="row">
-                                <div class="col-8 pl-0">
+                                <div class="col-8 pl-0 canvas-container-class">
                                     <canvas id="canvas" width="1000" height="400"></canvas>
                                 </div>
                             </div>
