@@ -1382,13 +1382,14 @@ const agregarSeparador = () => {
                     left: 0,
                     top: 0,
                     selectable: false,
+                    evented: false,
                     hoverCursor:"default",
                     dataTarget:"separador",
                 });
 
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
-                group.sendToBack(); // Para poner el separador en el fondo
+                group.bringToFront(); // Para poner el separador en el fondo
             });
             canvas.renderAll();
         });

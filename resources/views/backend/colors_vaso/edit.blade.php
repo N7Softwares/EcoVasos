@@ -21,6 +21,13 @@
         <label for="rgb_code">Código RGB:</label>
         <input type="text" name="rgb_code" id="rgb_code" value="{{ $color->rgb_code }}" placeholder="0,0,0" required>
         <br>
+        <label for="colors_category_id">Seleccione la categoría del color:</label>
+        <select name="colors_category_id" id="colors_category_id">
+            @foreach($categories as $category)
+                <option value="{{ $category->id }}" {{ $color->category && $color->category->id == $category->id ? 'selected' : '' }}>{{ $category->descripcion }}</option>
+            @endforeach
+        </select>        
+        <br>
         <label for="colorPreview">Previsualización:</label>
         <div id="colorPreview" style="width: 200px; height: 50px; border:1px solid #000; margin: 10px; display: flex; align-items: center; justify-content: center;"></div>
 

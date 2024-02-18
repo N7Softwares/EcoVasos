@@ -6,7 +6,7 @@ use App\Models\Color;
 use App\Models\ColorsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\Log;
 class ColorController extends Controller
 {
     /**
@@ -53,15 +53,17 @@ class ColorController extends Controller
      */
     public function edit(string $id)
     {
-        $color = Color::find($id); // Obtener el color por ID
-        return view('backend.colors_vaso.edit', compact('color'));
-    }
+        $color = Color::with('category')->find($id); // Cargar la relación category
+        $categories = ColorsCategory::all(); 
+        return view('backend.colors_vaso.edit', compact('color', 'categories'));
+    }    
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
+        // Log::info('Request data: ' . json_encode($request->all(), JSON_PRETTY_PRINT));
         $color = Color::find($id);
         $color->update($request->all());
 

@@ -104,12 +104,14 @@
                                                 <div class="accordion-body">
                 
                                                     @foreach($array['colors'] as $color)
-                                                        <div class="option-color">
-                                                            <div class="options-container-personalized">
-                                                                <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
-                                                                <p class="color-title">{{ $color->name }}</p>
+                                                        @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
+                                                            <div class="option-color">
+                                                                <div class="options-container-personalized">
+                                                                    <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
+                                                                    <p class="color-title">{{ $color->name }}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -149,11 +151,13 @@
                                             <div class="colores-bd">
                                                 <h6>Colores disponibles</h6>
                                                 @foreach($array['colors'] as $color)
-                                                    <div class="paleta-color"
-                                                    style="background-color: {{ $color->hex_code }}"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-custom-class="custom-tooltip"
-                                                    data-bs-title="{{ $color->name }}"></div>
+                                                    @if($color->colors_category_id == 2 || $color->colors_category_id == 3)
+                                                        <div class="paleta-color"
+                                                        style="background-color: {{ $color->hex_code }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        data-bs-custom-class="custom-tooltip"
+                                                        data-bs-title="{{ $color->name }}"></div>
+                                                    @endif
                                                 @endforeach
                                             </div>
                                             <div class="colores-clasicos d-none">

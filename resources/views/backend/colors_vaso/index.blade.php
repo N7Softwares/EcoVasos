@@ -34,6 +34,7 @@
                 <li> -->
                     <div style="width: 200px; height: 40px; border:1px solid #ccc; border-radius:5px; margin:auto; background-color: {{ $color->hex_code }}"></div>
                     <strong>Nombre:</strong> {{ $color->name }}<br>
+                    <strong>Categoría:</strong> {{ $color->category ? $color->category->descripcion : 'Sin categoría' }}<br>
                     <strong>Código Hex:</strong> {{ $color->hex_code }}<br>
                     <strong>Código RGB:</strong> {{ $color->rgb_code }}
                     <!-- Botón para ir a la ruta de edición -->
