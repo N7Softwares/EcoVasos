@@ -40,7 +40,7 @@
     <section class="padding-top-disenio">
         <div class="container-fluid container-main ">
             <div class="row ">
-                <div class=" col-sideLeft border bg-white">
+                <div class=" col-sideLeft bg-white">
                     <div class="row">
                         <div class="col-3 sideLeft ">
                                 <div class="bloq-side" data-target="color-vaso" style="background: #f1f1f1;">
@@ -119,15 +119,16 @@
                             </div>
                             <div class="contenido-side" id="color-disenio-content" style="display: none;">
                                 <!---------- color de los elementos.------->
-                                <div class="mb-3">
+                                <div class="mb-3 ">
                                     <h4 class="text-center">Colores del diseño</h4>
-                                    <div class="">
+                                    <div class="container-color-disenio">
+                                    <div class="first-container-cS">
                                         <div class="mb-2 container-msg-switch">
-                                        <h6 class="msg-switch">Colores Globales</h6>
-                                        <label class="switch">
-                                            <input type="checkbox" id="scopeColor">
-                                            <span class="slider"></span>
-                                        </label>
+                                            <h6 class="msg-switch">Colores Globales</h6>
+                                            <label class="switch">
+                                                <input type="checkbox" id="scopeColor">
+                                                <span class="slider"></span>
+                                            </label>
                                         </div>
                                         
                                         <h6>Colores Actuales</h6>
@@ -143,7 +144,7 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="mb-3" id="color-table-globales">
+                                    <div class="mb-3 " id="color-table-globales">
                                         
                                         <div class="container-paleta-color">
                                             <div class="colores-bd">
@@ -169,6 +170,7 @@
                                                 <h6>Misceláneos</h6>
                                             </div>
                                         </div>
+                                    </div>
                                     </div>
                                 </div>
                             </div>
@@ -253,156 +255,158 @@
                                 @endforeach
                             </div>
                             <div class="contenido-side" id="textos-content" style="display: none;">
-                                <div class="col-texts">
+                                <div class="col-texts ">
                                     <h4 class="text-center">Agregar Texto</h4>
-                                    <button id="nuevo-texto">Agregar Nuevo Texto</button>
-                                    <textarea id="text-editor" placeholder="Texto"></textarea>
-                                    <div class="container-fonts">
-                                        <!-- Para cambiar el font-family -->
-                                        <!-- Acordeon de fuentes -->
-                                        <div class="accordion" id="accordionExample2">
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingThree">
-                                                    <button class="accordion-button btn-accn-1 collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseThree"
-                                                        aria-expanded="false" aria-controls="collapseThree" value="Arial">
-                                                        Arial
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
-                                                    <div class="accordion-body">
-                                                        <!-- Primer ítem -->
-                                                        <div class="option-color option-fuentes" value="Arial">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Arial</p>
+                                    <div class="container-flex-texts">
+                                        <div class="btn-container">
+                                            <button id="nuevo-texto">Agregar Nuevo Texto</button>
+                                        </div>
+                                        <textarea id="text-editor" placeholder="Texto"></textarea>
+                                        <div class="container-fonts">
+                                            <!-- Para cambiar el font-family -->
+                                            <!-- Acordeon de fuentes -->
+                                            <div class="accordion" id="accordionExample2">
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingThree">
+                                                        <button class="accordion-button btn-accn-1 collapsed" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseThree"
+                                                            aria-expanded="false" aria-controls="collapseThree" value="Arial">
+                                                            Arial
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseThree" class="accordion-collapse collapse"
+                                                        aria-labelledby="headingThree" data-bs-parent="#accordionExample2">
+                                                        <div class="accordion-body">
+                                                            <!-- Primer ítem -->
+                                                            <div class="option-color option-fuentes" value="Arial">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Arial</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Segundo ítem -->
-                                                        <div class="option-color option-fuentes" value="Arial Black">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Arial Black</p>
+                                                            <!-- Segundo ítem -->
+                                                            <div class="option-color option-fuentes" value="Arial Black">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Arial Black</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Tercer ítem -->
-                                                        <div class="option-color option-fuentes" value="Comic Sans MS">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Comic Sans MS</p>
+                                                            <!-- Tercer ítem -->
+                                                            <div class="option-color option-fuentes" value="Comic Sans MS">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Comic Sans MS</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Cuarto ítem -->
-                                                        <div class="option-color option-fuentes" value="Courier New">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Courier New</p>
+                                                            <!-- Cuarto ítem -->
+                                                            <div class="option-color option-fuentes" value="Courier New">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Courier New</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Quinto ítem -->
-                                                        <div class="option-color option-fuentes" value="Impact">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Impact</p>
+                                                            <!-- Quinto ítem -->
+                                                            <div class="option-color option-fuentes" value="Impact">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Impact</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Sexto ítem -->
-                                                        <div class="option-color option-fuentes"
-                                                            value="Times New Roman">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Times New Roman</p>
+                                                            <!-- Sexto ítem -->
+                                                            <div class="option-color option-fuentes"
+                                                                value="Times New Roman">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Times New Roman</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Séptimo ítem -->
-                                                        <div class="option-color option-fuentes" value="Montserrat">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Montserrat</p>
+                                                            <!-- Séptimo ítem -->
+                                                            <div class="option-color option-fuentes" value="Montserrat">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Montserrat</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Octavo ítem -->
-                                                        <div class="option-color option-fuentes" value="Lato">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Lato</p>
+                                                            <!-- Octavo ítem -->
+                                                            <div class="option-color option-fuentes" value="Lato">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Lato</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Noveno ítem -->
-                                                        <div class="option-color option-fuentes"
-                                                            value="Helvetica, sans-serif">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Helvetica</p>
+                                                            <!-- Noveno ítem -->
+                                                            <div class="option-color option-fuentes"
+                                                                value="Helvetica, sans-serif">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Helvetica</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Décimo ítem -->
-                                                        <div class="option-color option-fuentes" value="Georgia, serif">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Georgia</p>
+                                                            <!-- Décimo ítem -->
+                                                            <div class="option-color option-fuentes" value="Georgia, serif">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Georgia</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Undécimo ítem -->
-                                                        <div class="option-color option-fuentes"
-                                                            value="Courier New, monospace">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Courier New</p>
+                                                            <!-- Undécimo ítem -->
+                                                            <div class="option-color option-fuentes"
+                                                                value="Courier New, monospace">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Courier New</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Duodécimo ítem -->
-                                                        <div class="option-color option-fuentes"
-                                                            value="Palatino, serif">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Palatino</p>
+                                                            <!-- Duodécimo ítem -->
+                                                            <div class="option-color option-fuentes"
+                                                                value="Palatino, serif">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Palatino</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Decimotercero ítem -->
-                                                        <div class="option-color option-fuentes"
-                                                            value="Verdana, sans-serif">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Verdana</p>
+                                                            <!-- Decimotercero ítem -->
+                                                            <div class="option-color option-fuentes"
+                                                                value="Verdana, sans-serif">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Verdana</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- Decimocuarto ítem -->
-                                                        <div class="option-color option-fuentes"
-                                                            value="Garamond, serif">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">Garamond</p>
+                                                            <!-- Decimocuarto ítem -->
+                                                            <div class="option-color option-fuentes"
+                                                                value="Garamond, serif">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">Garamond</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- ... Tipografias traidas de la base de datos -->
-                                                        @foreach($array['tipografias'] as $tipografia)
-                                                        <div class="option-color option-fuentes"
-                                                            value="{{ $tipografia->name }}">
-                                                            <div class="options-container-personalized">
-                                                                <p class="color-title">{{ $tipografia->name }}</p>
+                                                            <!-- ... Tipografias traidas de la base de datos -->
+                                                            @foreach($array['tipografias'] as $tipografia)
+                                                            <div class="option-color option-fuentes"
+                                                                value="{{ $tipografia->name }}">
+                                                                <div class="options-container-personalized">
+                                                                    <p class="color-title">{{ $tipografia->name }}</p>
+                                                                </div>
                                                             </div>
+                                                            @endforeach
                                                         </div>
-                                                        @endforeach
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingFour">
-                                                    <button class="accordion-button btn-accn-2 collapsed" type="button"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseFour"
-                                                        aria-expanded="false" aria-controls="collapseFour">
-                                                        40px
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseFour" class="accordion-collapse collapse"
-                                                    aria-labelledby="headingFour" data-bs-parent="#accordionExample2">
-                                                    <!-- id en accordion-body -->
-                                                    <div class="accordion-body" id="fontSizeOptions">
-                                                        <!-- Contenido generado dinámicamente se agregará aca por JavaScript -->
+                                                <div class="accordion-item">
+                                                    <h2 class="accordion-header" id="headingFour">
+                                                        <button class="accordion-button btn-accn-2 collapsed" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseFour"
+                                                            aria-expanded="false" aria-controls="collapseFour">
+                                                            40px
+                                                        </button>
+                                                    </h2>
+                                                    <div id="collapseFour" class="accordion-collapse collapse"
+                                                        aria-labelledby="headingFour" data-bs-parent="#accordionExample2">
+                                                        <!-- id en accordion-body -->
+                                                        <div class="accordion-body" id="fontSizeOptions">
+                                                            <!-- Contenido generado dinámicamente se agregará aca por JavaScript -->
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="container-btns">
-                                        <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
-                                        <button id="negritaBtn" class="fontStyleBtn" title="Negrita">B</button>
-                                    </div>
-                                    <div>
+                                        <div class="container-btns">
+                                            <button id="cursivaBtn" class="fontStyleBtn" title="Cursiva">I</button>
+                                            <button id="negritaBtn" class="fontStyleBtn" title="Negrita">B</button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="contenido-side" id="medidor-content">
+                            <div class="contenido-side" id="medidor-content" style="display: none;">
                                 <!--------------------------- Para agregar medidor --------------------------->
-                                <div class="sub-contenido-side mt-3">
+                                <div class="sub-contenido-side ">
                                     <h4 class="text-center">Medidor</h4>
                                     <select id="select-medidas" class="mb-3">
                                         <option value="240cc">240cc 185x60mm</option>
@@ -414,9 +418,8 @@
                                 </div>
                             </div>
                         </div>
-                        </div>
-
-                        </div>
+                    </div>
+                </div>
                 <div class=" col-main">
                     <div class=" bg-white col-rightSide border">
                         <div class="right-functions">
@@ -637,21 +640,23 @@
                     </div>
                     <!--------------------------- Elemento Canva --------------------------->
                     <div id="canvas-container" style="position: relative;">
-                        <div class="container" style="max-width: 1000px">
+                        <div class="container-fluid " >
                             <div class="row">
                                 <div class="col-12 text-center">
                                     <p class="signal-red">Aviso: los elementos que sobrepasen los bordes del lienzo, no serán visibles en su diseño final.</p>
                                 </div>
                             </div>
-                            <div class="row text-center mb-1">
-                                <div class="col-3 lado-1">Lateral Izquierdo</div>
-                                <div class="col-3 lado-2">Frente</div>
-                                <div class="col-3 lado-3">Lateral Derecho</div>
-                                <div class="col-3 lado-4">Contrafrente</div>
-                            </div>
-                            <div class="row">
-                                <div class="col-8 pl-0">
-                                    <canvas id="canvas" width="1000" height="400"></canvas>
+                            <div class="container-indicador-canva">
+                                <div class="row text-center mb-1" style="width:1000px;">
+                                    <div class="col-3 lado-1">Lateral Izquierdo</div>
+                                    <div class="col-3 lado-2">Frente</div>
+                                    <div class="col-3 lado-3">Lateral Derecho</div>
+                                    <div class="col-3 lado-4">Contrafrente</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8 pl-0 ">
+                                        <canvas id="canvas" width="1000" height="400"></canvas>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -680,9 +685,9 @@
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
     <!-- Para la conversion de imagenes -->
-    <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
+    <!-- <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
     <script src="{{asset('js/scope/2.3a3362a2.chunk.js')}}"></script>
-    <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script>
+    <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script> -->
 </body>
 </html>
 </div>

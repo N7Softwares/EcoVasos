@@ -43,6 +43,7 @@ section{
 .col-sideLeft{
 	width:22%;
     border-radius:7px;
+    border:1px solid var(--border);
 }
 
 .col-main{
@@ -54,13 +55,19 @@ section{
     /* align-items:center; */
     gap:10px;
 }
-
+.container-indicador-canva {
+    width: 100%;
+    overflow-x: auto; /* Añade un scroll horizontal si es necesario */
+    white-space: nowrap; /* Evita el salto de línea del contenido */
+    padding: 0 0 30px;
+}
 .col-rightSide{
 	/* width:16%; */
 	width:100%;
     /* border:1px solid red; */
     padding: 20px 10px;
     display:flex;
+    flex-wrap:wrap;
     justify-content:space-evenly;
     /* flex-direction: column; */
     gap:50px;
@@ -109,6 +116,7 @@ section{
     /* border:1px solid var(--border); */
     padding:10px;
     display:flex;
+    flex-wrap:wrap;
     flex-direction:column;
     align-items:center;
     justify-content:center !important;
@@ -127,8 +135,7 @@ section{
 }
 .bloq-side .img-bloq-side{
     width:40px;
-    /* height:50px; */
-    /* border:1px solid var(--border2); */
+
 }
 .bloq-side .img-bloq-side img{
     width:100%;
@@ -887,7 +894,7 @@ section{
 .show-menu {
     display: none;
 }
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
     .col-sideLeft {
         display: none;
     }
@@ -902,7 +909,7 @@ section{
     .show-menu {
         display: block;
     }
-}
+} */
 
 /*-------------------COLOR ORIENTACION -----------------------*/
 
@@ -997,4 +1004,285 @@ section{
 .signal-red{
     color: red;
     font-weight: bold;
+}
+/* ------------------------ seccion de responsive ------------------------ */
+
+@media (max-width: 991px) {
+    /* col flexbox para la interfaz de usuario */
+    .col-main {
+        width: 100%;
+        /* order: 1; Ahora será el primer elemento */
+    }
+    .col-rightSide{
+        order:2;
+        box-shadow: var(--shadow);
+
+    }
+    #canvas-container{
+        order:1;
+    }
+    .col-sideLeft {
+        /* order: 2; Cambia el orden de aparición, ahora será el segundo */
+        display:flex;
+        flex-direction:column;
+        /* border:1px solid blue; */
+        width: 98%;
+        margin:20px auto;
+        box-shadow: var(--shadow);
+    }
+    .sideLeft{
+        /* border:1px solid blue; */
+        display:flex;
+        justify-content:space-around;
+        width:100%;
+        border:1px solid var(--border);
+
+    }
+    .sideLeftContent{
+        /* border:1px solid green; */
+        display:flex;
+        width:100%;
+
+    }
+
+    .contenido-side,#medidor-content{
+        height:150px;
+        width:100%;
+        padding: 10px 0;
+        /* border:1px solid red; */
+    }
+    .bloq-side{ /* No funciona todavia */
+        padding:0;
+        /* border:1px solid #000; */
+    }
+    .bloq-side .img-bloq-side{
+        width:35px;
+    }
+    /* ----------------- seccion de color del vaso ----------------- */
+    .accordion-body .color-cube{
+        width:100px;
+    }
+    /* ----------------- seccion de color del disenio ----------------- */
+
+    .container-color-disenio{
+        display:flex;
+        /* flex-wrap:wrap; */
+
+    }
+    .first-container-cS{
+        width:300px;
+    }
+    /* ----------------- seccion de textos ----------------- */
+    .container-flex-texts{
+        display:flex;
+        /* flex-wrap:wrap; */
+
+        gap:10px;
+    }
+    #nuevo-texto{
+        height:fit-content;
+        font-size:.8rem;
+        box-shadow: var(--shadow);
+
+    }
+
+    /* ----------------- seccion de textos ----------------- */
+    .sub-contenido-side{
+        width:70%;
+        margin:auto;
+    }
+
+    #canvas-container>.container-fluid{
+        width:100% !important;
+        padding:0 !important;
+        /* border:1px solid var(--info-color); */
+
+    }
+    .container-indicador-canva {
+        width: 100%;
+        overflow-x: auto; /* Añade un scroll horizontal si es necesario */
+        white-space: nowrap; /* Evita el salto de línea del contenido */
+        padding:30px 0;
+        border:1px solid var(--border);
+        border-radius:5px;
+    }
+
+    .signal-red{
+        font-weight: normal;
+        font-size:.8rem !important;
+    }
+}
+
+@media (max-width: 767px) {
+    /* ------------------ col-rightSide ------------------*/
+    .col-rightSide h5{
+        font-size:.9rem;
+    }
+    
+    /* ------------------ sideLeft ------------------*/
+    
+    .sideLeftContent h4{
+        font-size:1rem;
+    }
+    .sideLeftContent h6{
+        font-size:.8rem;
+    }
+    .sideLeftContent h2{
+        font-size:.8rem;
+    }
+
+    .contenido-side,#medidor-content{
+        height:125px;
+    }
+    .bloq-side h6{
+        font-size:.7rem;
+    }
+    .bloq-side .img-bloq-side{
+        width:30px;
+    }
+    /* ----------------- seccion de textos ----------------- */
+
+    #nuevo-texto{
+        font-size:.7rem;
+    }
+
+
+    /* ----------------- CANVA ----------------- */
+    .container-indicador-canva {
+        padding: 0 0 30px;
+    }
+}
+
+@media (max-width: 450px) {
+    .bloq-side{
+        width:50px;
+    }
+    .bloq-side .img-bloq-side{
+        width:25px;
+    }
+    .bloq-side h6{
+        font-size:.6rem;
+    }
+    /* ----------------- seccion de colores ----------------- */
+
+    .table-color-actual{
+        height:fit-content;
+    }
+
+    .container-color-disenio{
+        flex-wrap:wrap;
+
+    }
+    /* ----------------- seccion de textos ----------------- */
+    .container-flex-texts{
+        flex-wrap:wrap;
+
+        gap:5px;
+    }
+    #text-editor{
+        width:50%;
+    }
+    .btn-container{
+        width:100%;
+        display:flex;
+        justify-content:center;
+    }
+    #nuevo-texto{
+        padding:5px 10px;
+    }
+    /* ----------------- col-sideRight ----------------- */
+    .col-rightSide{
+        padding: 10px;
+    }
+
+    .btn-rightOptions{
+        width:35px;
+        height:45px;
+        padding: 2px;
+        font-size:1.15rem;
+    }
+
+    .button {
+        width: 140px;
+        height: 35px;
+    }
+    .button .button__text {
+        transform: translateX(5px);
+        font-weight: normal;
+        font-size:.8rem;
+    }
+    
+    .button .button__icon {
+        transform: translateX(100px);
+        height: 100%;
+        width: 39px;
+    }
+    
+    .button .svg {
+        width: 20px;
+    }
+    /* ----------------- seccion del canva ----------------- */
+
+    .signal-red{
+        line-height: 1;
+    }
+}
+
+@media (max-width: 375px) {
+    
+    /* ----------------- col-sideLeft ----------------- */
+    
+    .sideLeftContent h4{
+        font-size:.9rem;
+    }
+    .sideLeftContent h6{
+        font-size:.7rem;
+    }
+    .sideLeftContent h2{
+        font-size:.7rem;
+    }
+
+    .col-sideLeft {
+        margin: 20px auto 5px auto;
+    }
+    
+
+    .bloq-side h6{
+        font-size:.6rem;
+    }
+
+    .bloq-side .img-bloq-side{
+        width:20px;
+    }
+    /* ----------------- col-sideRight ----------------- */
+
+    .col-rightSide h5{
+        font-size:.8rem;
+    }
+
+    /* ----------------- seccion de textos ----------------- */
+    
+    #text-editor{
+        width:100%;
+    }
+
+    .contenido-side p{
+        font-size:11px;
+        margin-bottom: 5px;
+    }
+
+}
+
+@media (max-width: 320px) {
+    .col-rightSide{
+        padding:20px 10px;
+        gap:20px;
+    }
+    .btn-rightOptions{
+        width:30px;
+        height:40px;
+        padding: 1px;
+        font-size:1.1rem;
+    }
+    
 }
