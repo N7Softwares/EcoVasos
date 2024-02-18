@@ -183,15 +183,9 @@
                                     <p>Agregá tu logo, ilustracciones y outros elementos do seu computador.
                                     </p>
                                     <p class="bold-text">Formatos aceptados: JPG, PNG y SVG</p>
-                                    <p>1. Elementos con dos o más cores pasan a un color único.</p>
+                                    <p>1. Elementos con dos o más cores pasan a un color único cuando se selecciona un color desde "Color del Diseño".</p>
 
-                                    <p>2. razados muy finos pueden perder su detalle.</p>
-
-                                    <p>3. Utilizá siempre imagenes en alta resolución para garantizar buena calidad en el elemento.</p>
-
-                                    <p class="bold-text">4. No utilice el QR Code generado por Instagram.</p>
-
-                                    <p>Se recomienda que el imagen tenga una resolución de por lo menos 300 DPI.</p>
+                                    <p> 2. Se recomienda que la imagen no supere los 1500px de ancho para no dificultar el rendimiento.</p>
 
                                     <p>Elemplo:</p>
 
