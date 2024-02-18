@@ -104,12 +104,14 @@
                                                 <div class="accordion-body">
                 
                                                     @foreach($array['colors'] as $color)
-                                                        <div class="option-color">
-                                                            <div class="options-container-personalized">
-                                                                <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
-                                                                <p class="color-title">{{ $color->name }}</p>
+                                                        @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
+                                                            <div class="option-color">
+                                                                <div class="options-container-personalized">
+                                                                    <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
+                                                                    <p class="color-title">{{ $color->name }}</p>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
                                                     @endforeach
                                                 </div>
                                             </div>
@@ -150,11 +152,13 @@
                                             <div class="colores-bd">
                                                 <h6>Colores disponibles</h6>
                                                 @foreach($array['colors'] as $color)
-                                                    <div class="paleta-color"
-                                                    style="background-color: {{ $color->hex_code }}"
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
-                                                    data-bs-custom-class="custom-tooltip"
-                                                    data-bs-title="{{ $color->name }}"></div>
+                                                    @if($color->colors_category_id == 2 || $color->colors_category_id == 3)
+                                                        <div class="paleta-color"
+                                                        style="background-color: {{ $color->hex_code }}"
+                                                        data-bs-toggle="tooltip" data-bs-placement="top"
+                                                        data-bs-custom-class="custom-tooltip"
+                                                        data-bs-title="{{ $color->name }}"></div>
+                                                    @endif
                                                 @endforeach
                                             </div>
                                             <div class="colores-clasicos d-none">
@@ -181,15 +185,9 @@
                                     <p>Agregá tu logo, ilustracciones y outros elementos do seu computador.
                                     </p>
                                     <p class="bold-text">Formatos aceptados: JPG, PNG y SVG</p>
-                                    <p>1. Elementos con dos o más cores pasan a un color único.</p>
+                                    <p>1. Elementos con dos o más cores pasan a un color único cuando se selecciona un color desde "Color del Diseño".</p>
 
-                                    <p>2. razados muy finos pueden perder su detalle.</p>
-
-                                    <p>3. Utilizá siempre imagenes en alta resolución para garantizar buena calidad en el elemento.</p>
-
-                                    <p class="bold-text">4. No utilice el QR Code generado por Instagram.</p>
-
-                                    <p>Se recomienda que el imagen tenga una resolución de por lo menos 300 DPI.</p>
+                                    <p> 2. Se recomienda que la imagen no supere los 1500px de ancho para no dificultar el rendimiento.</p>
 
                                     <p>Elemplo:</p>
 
@@ -218,7 +216,7 @@
                                                     <div class="grid-canvas-inner">
                                                         <div class="browse-btn-wrapper">
                                                             <div><input type="file" accept="image/png,image/jpeg,image/jpg,image/svg+xml" multiple="" name="file"
-                                                                    style="display: none;">
+                                                                    style="display: none;" id="fileInputSvg">
                                                                 <div class="files-dropzone-list">
                                                                     <button class="btn-wrap">
                                                                     </button></div>

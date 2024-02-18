@@ -1340,28 +1340,65 @@ document.addEventListener("DOMContentLoaded", () => {
 const loadSVGToFabric = (svgElement) => {
     // Obtener el contenido SVG como cadena
     let svgString = new XMLSerializer().serializeToString(svgElement);
-    // Crear objeto SVG desde la cadena
-    fabric.loadSVGFromString(svgString, function (objects, options) {
-        let group = new fabric.Group(objects, {
-            left: 0,
-            top: canvas.padding,
-            selectable: true,
-            dataTarget: "subir-archivo",
-            scaleY:0.3,
-            scaleX:0.3
-        });
+    
+    // Guardar el SVG como un archivo temporal
+    saveSVGTemporarily(svgString, function(svgUrl) {
+        // Crear objeto SVG desde la URL del archivo
+        fabric.loadSVGFromURL(svgUrl, function (objects, options) {
+            let group = new fabric.Group(objects, {
+                left: 0,
+                top: canvas.padding,
+                selectable: true,
+                dataTarget: "subir-archivo",
+                scaleX: 0.3,
+                scaleY: 0.3
+            });
 
-        // Añadir el grupo al lienzo
-        canvas.add(group);
-        canvas.setActiveObject(group);
-        colorActual(group);
-        canvas.renderAll();
+            // Añadir el grupo al lienzo
+            canvas.add(group);
+            canvas.setActiveObject(group);
+            colorActual(group);
+            canvas.renderAll();
+        });
     });
 }
+
+const optimizeSVG = (svgString) => {
+    // Eliminar comentarios y metadatos
+    svgString = svgString.replace(/<!--.*?-->/g, '');
+    svgString = svgString.replace(/<\?xml.*?\?>/g, '');
+    
+    // Simplificar el SVG eliminando elementos innecesarios
+    // Por ejemplo, eliminar elementos ocultos o elementos fuera del área visible
+    
+    // Reducir la precisión de las coordenadas
+    svgString = svgString.replace(/(\d+\.\d{2})\d*/g, '$1');
+    
+    // Minificar el SVG
+    svgString = svgString.replace(/\s+/g, ' ').trim();
+    
+    return svgString;
+}
+
+const saveSVGTemporarily = (svgString, callback) => {
+    // Optimizar el SVG
+    svgString = optimizeSVG(svgString);
+    
+    // Crear un nuevo Blob con el contenido SVG
+    let blob = new Blob([svgString], { type: 'image/svg+xml' });
+    
+    // Crear una URL para el Blob
+    let svgUrl = URL.createObjectURL(blob);
+    
+    // Llamar al callback con la URL del SVG
+    callback(svgUrl);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     var button = document.querySelector('.browse-btn.btn');
     button.textContent = 'Subir imagen';
 });
+
 
 
 // ----------------------- Separador -----------------------
@@ -1382,13 +1419,14 @@ const agregarSeparador = () => {
                     left: 0,
                     top: 0,
                     selectable: false,
+                    evented: false,
                     hoverCursor:"default",
                     dataTarget:"separador",
                 });
 
                 // Agrega el objeto SVG al lienzo
                 canvas.add(group);
-                group.sendToBack(); // Para poner el separador en el fondo
+                group.bringToFront(); // Para poner el separador en el fondo
             });
             canvas.renderAll();
         });
