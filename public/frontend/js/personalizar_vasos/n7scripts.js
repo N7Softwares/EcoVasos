@@ -1307,7 +1307,7 @@ const verificarAnchoPantalla = () => {
 };
 
 // Asociar la función al evento de carga de la página
-window.addEventListener("load", verificarAnchoPantalla);
+// window.addEventListener("load", verificarAnchoPantalla);
 
 document.addEventListener('DOMContentLoaded', function () {
     const burgerBtn = document.getElementById('burger-btn');
