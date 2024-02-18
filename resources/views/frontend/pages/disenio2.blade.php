@@ -220,7 +220,7 @@
                                                     <div class="grid-canvas-inner">
                                                         <div class="browse-btn-wrapper">
                                                             <div><input type="file" accept="image/png,image/jpeg,image/jpg,image/svg+xml" multiple="" name="file"
-                                                                    style="display: none;">
+                                                                    style="display: none;" id="fileInputSvg">
                                                                 <div class="files-dropzone-list">
                                                                     <button class="btn-wrap">
                                                                     </button></div>
