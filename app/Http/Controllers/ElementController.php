@@ -36,14 +36,9 @@ class ElementController extends Controller
     {
         $svgString = $request->input('svgString');
     
-        // Log::info('SVG String: ' . $svgString);
-
-        $tempFile = tempnam(sys_get_temp_dir(), 'svg');
-        file_put_contents($tempFile, $svgString);
-    
         $imageName = time() . '_image.svg';
         $newLocation = public_path('images_elements') . '/' . $imageName;
-        rename($tempFile, $newLocation);
+        file_put_contents($newLocation, $svgString);
     
         $imageUrl = 'images_elements/' . $imageName;
     
@@ -54,6 +49,7 @@ class ElementController extends Controller
     
         return redirect()->route('elements.index')->with('success', 'Imagen Element creada exitosamente.');
     }
+    
     
     public function edit($id)
     {
@@ -72,12 +68,9 @@ class ElementController extends Controller
     
         Log::info('SVG String: ' . $svgString);
     
-        $tempFile = tempnam(sys_get_temp_dir(), 'svg');
-        file_put_contents($tempFile, $svgString);
-    
         $imageName = time() . '_image.svg';
         $newLocation = public_path('images_elements') . '/' . $imageName;
-        rename($tempFile, $newLocation);
+        file_put_contents($newLocation, $svgString);
     
         $imageUrl = 'images_elements/' . $imageName;
     
