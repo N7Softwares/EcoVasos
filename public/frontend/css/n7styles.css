@@ -703,15 +703,16 @@ section{
   }
   
   .close {
-    color: #aaa;
+    color: #ffffff;
     float: right;
-    font-size: 28px;
+    font-size: 40px;
     font-weight: bold;
+    opacity:1 !important;    
   }
   
   .close:hover,
   .close:focus {
-    color: black;
+    color: var(--green-fill);
     text-decoration: none;
     cursor: pointer;
   }
