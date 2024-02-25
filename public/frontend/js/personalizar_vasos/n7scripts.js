@@ -1340,11 +1340,25 @@ document.addEventListener("DOMContentLoaded", () => {
 const loadSVGToFabric = (svgElement) => {
     // Obtener el contenido SVG como cadena
     let svgString = new XMLSerializer().serializeToString(svgElement);
-    
-    // Guardar el SVG como un archivo temporal
-    saveSVGTemporarily(svgString, function(svgUrl) {
-        // Crear objeto SVG desde la URL del archivo
-        fabric.loadSVGFromURL(svgUrl, function (objects, options) {
+
+    // Guardar el SVG y cargarlo en el lienzo
+    fetch('/guardar-svg', {
+        method: 'POST',
+        body: JSON.stringify({ svg: svgString }),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Hubo un problema al guardar el SVG.');
+        }
+        return response.text(); // Obtener el contenido del SVG optimizado
+    })
+    .then(svgContent => {
+        // Cargar el SVG optimizado en el lienzo
+        fabric.loadSVGFromString(svgContent, function(objects, options) {
             let group = new fabric.Group(objects, {
                 left: 0,
                 top: canvas.padding,
@@ -1360,39 +1374,13 @@ const loadSVGToFabric = (svgElement) => {
             colorActual(group);
             canvas.renderAll();
         });
+    })
+    .catch(error => {
+        console.error('Error al guardar y cargar el SVG:', error);
     });
 }
 
-const optimizeSVG = (svgString) => {
-    // Eliminar comentarios y metadatos
-    svgString = svgString.replace(/<!--.*?-->/g, '');
-    svgString = svgString.replace(/<\?xml.*?\?>/g, '');
-    
-    // Simplificar el SVG eliminando elementos innecesarios
-    // Por ejemplo, eliminar elementos ocultos o elementos fuera del área visible
-    
-    // Reducir la precisión de las coordenadas
-    svgString = svgString.replace(/(\d+\.\d{2})\d*/g, '$1');
-    
-    // Minificar el SVG
-    svgString = svgString.replace(/\s+/g, ' ').trim();
-    
-    return svgString;
-}
 
-const saveSVGTemporarily = (svgString, callback) => {
-    // Optimizar el SVG
-    svgString = optimizeSVG(svgString);
-    
-    // Crear un nuevo Blob con el contenido SVG
-    let blob = new Blob([svgString], { type: 'image/svg+xml' });
-    
-    // Crear una URL para el Blob
-    let svgUrl = URL.createObjectURL(blob);
-    
-    // Llamar al callback con la URL del SVG
-    callback(svgUrl);
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     var button = document.querySelector('.browse-btn.btn');

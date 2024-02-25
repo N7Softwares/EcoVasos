@@ -61,12 +61,12 @@ class ElementController extends Controller
 
     public function update(Request $request, $id)
     {
-        Log::info('ID RECIBIDO: ' . $id);
+        // Log::info('ID RECIBIDO: ' . $id);
         $element = Element::find($id);
     
         $svgString = $request->input('svgString');
     
-        Log::info('SVG String: ' . $svgString);
+        // Log::info('SVG String: ' . $svgString);
     
         $imageName = time() . '_image.svg';
         $newLocation = public_path('images_elements') . '/' . $imageName;

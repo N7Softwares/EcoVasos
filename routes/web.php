@@ -126,6 +126,8 @@
 Route::get('/disenio', function () {
     return view('frontend.pages.disenio2');
 })->name('disenio');
+    //SVG SAVE
+Route::post('/guardar-svg', [DisenioController::class, 'guardarSVG'])->name('svg_save');
 Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
 // Backend section start
 
@@ -256,5 +258,4 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         Lfm::routes();
     });
-    
     
