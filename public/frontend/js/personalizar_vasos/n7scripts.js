@@ -530,8 +530,10 @@ const agregarMedidas = (svgName) => {
 
                 // Ajusta la escala y la posición del grupo
                 group.set({
-                    left: ((canvas.width/4)*3) - 60,
-                    top: canvas.padding,
+                    left: ((canvas.width / scaleFactor / 4) * 3) - 60,
+                    top: canvas.padding / scaleFactor,
+                    scaleX: 2 / scaleFactor,
+                    scaleY: 2 / scaleFactor,
                     lockScalingX: true,
                     lockScalingY: true,
                     lockMovementY: true,
@@ -554,13 +556,12 @@ const agregarMedidas = (svgName) => {
                 let height= MedidasCentral.obtenerMedidasActuales().height;
                 // Agrega un elemento de texto con las dimensiones en la esquina inferior izquierda
                 const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
-                    left: 10,
-                    top: canvas.height - canvas.padding - 30,
-                    fontSize: 20,
+                    left: 10 / scaleFactor,
+                    top: (canvas.height - canvas.padding) / scaleFactor - 30,
+                    fontSize: 20 / scaleFactor,
                     fill: valorColorActual(),
                     dataTarget:"medidor"
                 });
-
                 canvas.add(textoMedidas);
                 canvas.renderAll();
             });
