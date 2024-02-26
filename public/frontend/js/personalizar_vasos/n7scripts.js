@@ -2,14 +2,31 @@
 //    Scripts para el Canva y Fabric.js
 // ----------------------------------------------
 
+const canvasWidth = 1000; // Ancho del lienzo visible en píxeles
+const canvasHeight = 400; // Alto del lienzo visible en píxeles
+const scaleFactor = 2; // Factor de escala para aumentar la resolución
+
+// Crear el lienzo con el tamaño visible
 const canvas = new fabric.Canvas('canvas', {
-    width: 1000,
-    height: 400,
+    width: canvasWidth,
+    height: canvasHeight,
     padding: 30,
     renderOnAddRemove: false,
-    enableRetinaScaling: true, 
+    enableRetinaScaling: true, // Desactivar el escalado de retina para evitar problemas de renderizado
     webgl: true,
-  });
+    antialias: true,
+});
+
+// Escalar el lienzo internamente para aumentar la resolución
+canvas.setDimensions({
+    width: canvasWidth * scaleFactor,
+    height: canvasHeight * scaleFactor
+}, { backstoreOnly: true });
+
+// Escalar el lienzo de Fabric.js para mantener la apariencia visual
+canvas.setZoom(scaleFactor);
+
+
 
 canvas.on('object:moving', function(options) {
 const padding = canvas.padding;
@@ -1068,11 +1085,11 @@ btnPdf.addEventListener('click', () => {
         width = pdf.internal.pageSize.getWidth();
         height = pdf.internal.pageSize.getHeight();
 
-        // Crear una imagen en formato JPEG con mayor calidad
-        const dataUrl = canvas.toDataURL({ format: 'jpeg', quality: 1.0 });
+        // Crear una imagen en formato PNG
+        const dataUrl = canvas.toDataURL({ format: 'png' });
 
         // Agregar la imagen al PDF
-        pdf.addImage(dataUrl, 'JPEG', 0, 0, width, height);
+        pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
 
         // Guardar el PDF
         pdf.save("vaso-personalizado.pdf");

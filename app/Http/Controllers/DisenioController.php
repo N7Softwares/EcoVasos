@@ -36,29 +36,15 @@ class DisenioController extends Controller
     }
     public function guardarSVG(Request $request)
     {
-        $nombreCarpeta = uniqid();
-        $rutaCarpeta = public_path('temp_herramienta/' . $nombreCarpeta);
-    
-        // Crear la carpeta
-        if (!file_exists($rutaCarpeta)) {
-            mkdir($rutaCarpeta, 0777, true);
-        }
-    
         // Obtener el contenido del SVG
         $contenidoSVG = $request->svg;
     
         $contenidoSVG = $this->cambiarColorRellenoSVG($contenidoSVG, 'black');
         $contenidoSVG = $this->reducirA2Path($contenidoSVG);
-        // Generar un nombre único para el archivo SVG
-        $nombreArchivo = uniqid() . '.svg';
     
-        // Guardar el SVG en un archivo dentro de la carpeta
-        $rutaArchivo = $rutaCarpeta . '/' . $nombreArchivo;
-        file_put_contents($rutaArchivo, $contenidoSVG);
-    
-        // Devolver la ruta del archivo SVG guardado
-        return Response::file($rutaArchivo, ['Content-Type' => 'image/svg+xml']);
-    }
+        // Devolver el contenido del SVG modificado
+        return response($contenidoSVG, 200, ['Content-Type' => 'image/svg+xml']);
+    }    
     
     private function cambiarColorRellenoSVG($contenidoSVG, $color)
     {
@@ -67,19 +53,24 @@ class DisenioController extends Controller
 
         return $contenidoSVG;
     }
+
     private function reducirA2Path($contenidoSVG)
     {
         // Encontrar todos los elementos <path>
         preg_match_all('/<path[^>]*>/', $contenidoSVG, $matches);
-
+    
         // Mantener solo los dos primeros elementos <path>
-        $nuevosPaths = array_slice($matches[0], 0, 2);
-
-        // Reemplazar los elementos <path> originales con los nuevos
-        $contenidoSVG = preg_replace('/<path[^>]*>/', implode('', $nuevosPaths), $contenidoSVG);
-
+        $nuevosPaths = array_slice($matches[0], 0, 1);
+    
+        // Eliminar todos los elementos <path> del SVG original
+        $contenidoSVG = preg_replace('/<path[^>]*>/', '', $contenidoSVG);
+    
+        // Insertar los dos primeros elementos <path> en el SVG
+        $contenidoSVG = str_replace('</svg>', implode('', $nuevosPaths) . '</svg>', $contenidoSVG);
+    
         return $contenidoSVG;
     }
+    
 
       
 }
