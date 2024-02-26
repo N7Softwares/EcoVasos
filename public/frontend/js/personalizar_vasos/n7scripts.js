@@ -2,14 +2,31 @@
 //    Scripts para el Canva y Fabric.js
 // ----------------------------------------------
 
+const canvasWidth = 1000; // Ancho del lienzo visible en píxeles
+const canvasHeight = 400; // Alto del lienzo visible en píxeles
+const scaleFactor = 2; // Factor de escala para aumentar la resolución
+
+// Crear el lienzo con el tamaño visible
 const canvas = new fabric.Canvas('canvas', {
-    width: 1000,
-    height: 400,
+    width: canvasWidth,
+    height: canvasHeight,
     padding: 30,
     renderOnAddRemove: false,
-    enableRetinaScaling: true, 
+    enableRetinaScaling: true, // Desactivar el escalado de retina para evitar problemas de renderizado
     webgl: true,
-  });
+    antialias: true,
+});
+
+// Escalar el lienzo internamente para aumentar la resolución
+canvas.setDimensions({
+    width: canvasWidth * scaleFactor,
+    height: canvasHeight * scaleFactor
+}, { backstoreOnly: true });
+
+// Escalar el lienzo de Fabric.js para mantener la apariencia visual
+canvas.setZoom(scaleFactor);
+
+
 
 canvas.on('object:moving', function(options) {
 const padding = canvas.padding;
@@ -513,8 +530,10 @@ const agregarMedidas = (svgName) => {
 
                 // Ajusta la escala y la posición del grupo
                 group.set({
-                    left: ((canvas.width/4)*3) - 60,
-                    top: canvas.padding,
+                    left: ((canvas.width / scaleFactor / 4) * 3) - 60,
+                    top: canvas.padding / scaleFactor,
+                    scaleX: 2 / scaleFactor,
+                    scaleY: 2 / scaleFactor,
                     lockScalingX: true,
                     lockScalingY: true,
                     lockMovementY: true,
@@ -537,13 +556,12 @@ const agregarMedidas = (svgName) => {
                 let height= MedidasCentral.obtenerMedidasActuales().height;
                 // Agrega un elemento de texto con las dimensiones en la esquina inferior izquierda
                 const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
-                    left: 10,
-                    top: canvas.height - canvas.padding - 30,
-                    fontSize: 20,
+                    left: 10 / scaleFactor,
+                    top: (canvas.height - canvas.padding) / scaleFactor - 30,
+                    fontSize: 20 / scaleFactor,
                     fill: valorColorActual(),
                     dataTarget:"medidor"
                 });
-
                 canvas.add(textoMedidas);
                 canvas.renderAll();
             });
@@ -1068,11 +1086,11 @@ btnPdf.addEventListener('click', () => {
         width = pdf.internal.pageSize.getWidth();
         height = pdf.internal.pageSize.getHeight();
 
-        // Crear una imagen en formato JPEG con mayor calidad
-        const dataUrl = canvas.toDataURL({ format: 'jpeg', quality: 1.0 });
+        // Crear una imagen en formato PNG
+        const dataUrl = canvas.toDataURL({ format: 'png' });
 
         // Agregar la imagen al PDF
-        pdf.addImage(dataUrl, 'JPEG', 0, 0, width, height);
+        pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
 
         // Guardar el PDF
         pdf.save("vaso-personalizado.pdf");
@@ -1340,11 +1358,25 @@ document.addEventListener("DOMContentLoaded", () => {
 const loadSVGToFabric = (svgElement) => {
     // Obtener el contenido SVG como cadena
     let svgString = new XMLSerializer().serializeToString(svgElement);
-    
-    // Guardar el SVG como un archivo temporal
-    saveSVGTemporarily(svgString, function(svgUrl) {
-        // Crear objeto SVG desde la URL del archivo
-        fabric.loadSVGFromURL(svgUrl, function (objects, options) {
+
+    // Guardar el SVG y cargarlo en el lienzo
+    fetch('/guardar-svg', {
+        method: 'POST',
+        body: JSON.stringify({ svg: svgString }),
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Hubo un problema al guardar el SVG.');
+        }
+        return response.text(); // Obtener el contenido del SVG optimizado
+    })
+    .then(svgContent => {
+        // Cargar el SVG optimizado en el lienzo
+        fabric.loadSVGFromString(svgContent, function(objects, options) {
             let group = new fabric.Group(objects, {
                 left: 0,
                 top: canvas.padding,
@@ -1360,39 +1392,13 @@ const loadSVGToFabric = (svgElement) => {
             colorActual(group);
             canvas.renderAll();
         });
+    })
+    .catch(error => {
+        console.error('Error al guardar y cargar el SVG:', error);
     });
 }
 
-const optimizeSVG = (svgString) => {
-    // Eliminar comentarios y metadatos
-    svgString = svgString.replace(/<!--.*?-->/g, '');
-    svgString = svgString.replace(/<\?xml.*?\?>/g, '');
-    
-    // Simplificar el SVG eliminando elementos innecesarios
-    // Por ejemplo, eliminar elementos ocultos o elementos fuera del área visible
-    
-    // Reducir la precisión de las coordenadas
-    svgString = svgString.replace(/(\d+\.\d{2})\d*/g, '$1');
-    
-    // Minificar el SVG
-    svgString = svgString.replace(/\s+/g, ' ').trim();
-    
-    return svgString;
-}
 
-const saveSVGTemporarily = (svgString, callback) => {
-    // Optimizar el SVG
-    svgString = optimizeSVG(svgString);
-    
-    // Crear un nuevo Blob con el contenido SVG
-    let blob = new Blob([svgString], { type: 'image/svg+xml' });
-    
-    // Crear una URL para el Blob
-    let svgUrl = URL.createObjectURL(blob);
-    
-    // Llamar al callback con la URL del SVG
-    callback(svgUrl);
-}
 
 document.addEventListener("DOMContentLoaded", () => {
     var button = document.querySelector('.browse-btn.btn');
