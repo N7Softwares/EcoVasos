@@ -1065,6 +1065,9 @@ agregarTextoAlCanvas('Inserta tu texto aquí');
 //----------------------- Descargar en PDF --------------------------
 
 const btnPdf = document.getElementById("download-pdf");
+// Para el manejo del cambio de color en el pdf
+let originalBackgroundColor;
+let originalElementColor;
 
 btnPdf.addEventListener('click', () => {
     eliminarSeparadorSvg();
@@ -1086,20 +1089,78 @@ btnPdf.addEventListener('click', () => {
         width = pdf.internal.pageSize.getWidth();
         height = pdf.internal.pageSize.getHeight();
 
-        // Crear una imagen en formato PNG
+        // Obtener los datos de la imagen del lienzo original
         const dataUrl = canvas.toDataURL({ format: 'png' });
 
-        // Agregar la imagen al PDF
+        // Agregar la imagen original al PDF
         pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
+
+        // Modificar el lienzo para que tenga fondo blanco y elementos negros
+        invertColorsAndSaveOriginal()
+
+        // Obtener los datos de la imagen del lienzo modificado
+        const modifiedDataUrl = canvas.toDataURL({ format: 'png' });
+
+        // Agregar la imagen modificada al PDF
+        pdf.addPage();
+        pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height);
 
         // Guardar el PDF
         pdf.save("vaso-personalizado.pdf");
-
         agregarSeparador();
-    }, 500); // Esperar 500 milisegundos (0.5 segundo) antes de generar el PDF
+        // Restaurando los colores originales del lienzo
+        restoreOriginalColors();
+
+    }, 500); // Esperar 500 milisegundos (0.5 segundos) antes de generar el PDF
 });
 
+const invertColorsAndSaveOriginal = () => {
+    // Guardar el color de fondo original del lienzo
+    originalBackgroundColor = canvas.backgroundColor;
+    
+    // Modificar el lienzo para que tenga fondo blanco y elementos negros
+    canvas.backgroundColor = '#ffffff';
+    let firstElementColor = null; // Color del primer elemento
+    canvas.forEachObject(obj => {
+        if (firstElementColor === null && obj.fill) {
+            firstElementColor = obj.fill;
+        }
+        if (obj.type === 'group') {
+            obj.forEachObject(innerObj => {
+                if (innerObj.fill !== undefined) {
+                    innerObj.set('fill', '#000000'); // Establecer a negro
+                }
+            });
+        } else {
+            if (obj.fill !== undefined) {
+                obj.set('fill', '#000000'); // Establecer a negro
+            }
+        }
+    });
+    canvas.renderAll();
+    // Guardar el color del primer elemento original del lienzo
+    originalElementColor = firstElementColor;
+};
 
+const restoreOriginalColors = () => {
+    // Restaurar el color de fondo original del lienzo
+    canvas.backgroundColor = originalBackgroundColor;
+    // Restaurar el color del primer elemento original del lienzo
+    canvas.forEachObject(obj => {
+        if (obj.type === 'group') {
+            obj.forEachObject(innerObj => {
+                if (innerObj.fill !== undefined) {
+                    innerObj.set('fill', originalElementColor);
+                }
+            });
+        } else {
+            if (obj.fill !== undefined) {
+                obj.set('fill', originalElementColor);
+            }
+        }
+    });
+    canvas.renderAll();
+};
 
 // codigo para el check de los colores
 const checkValue = ()=>{
