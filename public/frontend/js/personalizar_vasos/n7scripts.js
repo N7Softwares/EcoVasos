@@ -537,7 +537,7 @@ const agregarMedidas = (svgName) => {
                     lockScalingX: true,
                     lockScalingY: true,
                     lockMovementY: true,
-                    dataTarget: "medidor"
+                    dataTarget: "medidor",
                 });
 
                 // Establece el color de relleno del grupo y de todos los elementos dentro del grupo
@@ -1068,6 +1068,44 @@ const btnPdf = document.getElementById("download-pdf");
 // Para el manejo del cambio de color en el pdf
 let originalBackgroundColor;
 let originalElementColor;
+let originalElementColors = {};
+let originalState;
+
+const invertColorsAndSaveOriginal = () => {
+    // Guardar el estado original del lienzo
+    originalState = canvas.toJSON();
+
+    // Modificar el lienzo para que tenga fondo blanco y elementos negros
+    canvas.backgroundColor = '#ffffff';
+    
+    canvas.forEachObject(obj => {
+        if (obj.type === 'group' && obj._objects.every(innerObj => innerObj.type === 'path')) { // Si el objeto es un grupo con elementos SVG
+            obj._objects.forEach(innerObj => {
+                innerObj.set('fill', '#212121'); // Establecer a negro
+            });
+        } else {
+            if (obj.type === 'group') {
+                obj.forEachObject(innerObj => {
+                    if (innerObj.fill !== undefined) {
+                        innerObj.set('fill', '#212121'); // Establecer a negro
+                    }
+                });
+            } else {
+                if (obj.fill !== undefined) {
+                    obj.set('fill', '#212121'); // Establecer a negro
+                }
+            }
+        }
+    });
+    
+    canvas.renderAll();
+};
+
+
+const restoreOriginalColors = () => {
+    // Restaurar el estado original del lienzo
+    canvas.loadFromJSON(originalState, canvas.renderAll.bind(canvas));
+};
 
 btnPdf.addEventListener('click', () => {
     eliminarSeparadorSvg();
@@ -1107,60 +1145,13 @@ btnPdf.addEventListener('click', () => {
 
         // Guardar el PDF
         pdf.save("vaso-personalizado.pdf");
-        agregarSeparador();
+
         // Restaurando los colores originales del lienzo
         restoreOriginalColors();
 
+        agregarSeparador();
     }, 500); // Esperar 500 milisegundos (0.5 segundos) antes de generar el PDF
 });
-
-const invertColorsAndSaveOriginal = () => {
-    // Guardar el color de fondo original del lienzo
-    originalBackgroundColor = canvas.backgroundColor;
-    
-    // Modificar el lienzo para que tenga fondo blanco y elementos negros
-    canvas.backgroundColor = '#ffffff';
-    let firstElementColor = null; // Color del primer elemento
-    canvas.forEachObject(obj => {
-        if (firstElementColor === null && obj.fill) {
-            firstElementColor = obj.fill;
-        }
-        if (obj.type === 'group') {
-            obj.forEachObject(innerObj => {
-                if (innerObj.fill !== undefined) {
-                    innerObj.set('fill', '#000000'); // Establecer a negro
-                }
-            });
-        } else {
-            if (obj.fill !== undefined) {
-                obj.set('fill', '#000000'); // Establecer a negro
-            }
-        }
-    });
-    canvas.renderAll();
-    // Guardar el color del primer elemento original del lienzo
-    originalElementColor = firstElementColor;
-};
-
-const restoreOriginalColors = () => {
-    // Restaurar el color de fondo original del lienzo
-    canvas.backgroundColor = originalBackgroundColor;
-    // Restaurar el color del primer elemento original del lienzo
-    canvas.forEachObject(obj => {
-        if (obj.type === 'group') {
-            obj.forEachObject(innerObj => {
-                if (innerObj.fill !== undefined) {
-                    innerObj.set('fill', originalElementColor);
-                }
-            });
-        } else {
-            if (obj.fill !== undefined) {
-                obj.set('fill', originalElementColor);
-            }
-        }
-    });
-    canvas.renderAll();
-};
 
 // codigo para el check de los colores
 const checkValue = ()=>{
