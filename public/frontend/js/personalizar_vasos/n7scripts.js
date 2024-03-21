@@ -555,14 +555,14 @@ const agregarMedidas = (svgName) => {
                 let width = MedidasCentral.obtenerMedidasActuales().width;
                 let height= MedidasCentral.obtenerMedidasActuales().height;
                 // Agrega un elemento de texto con las dimensiones en la esquina inferior izquierda
-                const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
-                    left: 10 / scaleFactor,
-                    top: (canvas.height - canvas.padding) / scaleFactor - 30,
-                    fontSize: 20 / scaleFactor,
-                    fill: valorColorActual(),
-                    dataTarget:"medidor"
-                });
-                canvas.add(textoMedidas);
+                // const textoMedidas = new fabric.Text(`${width}x${height}mm`, {
+                //     left: 10 / scaleFactor,
+                //     top: (canvas.height - canvas.padding) / scaleFactor - 30,
+                //     fontSize: 20 / scaleFactor,
+                //     fill: valorColorActual(),
+                //     dataTarget:"medidor"
+                // });
+                // canvas.add(textoMedidas);
                 canvas.renderAll();
             });
         })
