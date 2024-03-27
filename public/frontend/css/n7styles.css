@@ -1006,6 +1006,14 @@ section{
     color: red;
     font-weight: bold;
 }
+
+/* ------------------------ Boton para capturar pantalla ------------------------ */
+
+#capturadoraPantalla {
+	font-size: 24px;
+}
+
+
 /* ------------------------ seccion de responsive ------------------------ */
 
 @media (max-width: 991px) {

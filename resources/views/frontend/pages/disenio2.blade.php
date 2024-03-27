@@ -665,12 +665,16 @@
                     <div class="d-flex justify-content-center">
                         <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
                         <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
+                        <button id="capturadoraPantalla">
+                            ⏺️ Grabar pantalla
+                        </button>
                     </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
                 </div>
             </div>
         </div>
+        
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <!-- Bootstrap -->
@@ -682,6 +686,8 @@
     <!-- Para el PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
+    <!-- Capturadora de Pantalla -->
+    <script src="{{asset('frontend/js/personalizar_vasos/n7grabarpantalla.js')}}"></script>
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
     <!-- Para la conversion de imagenes -->
     <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
