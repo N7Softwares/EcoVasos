@@ -87,7 +87,7 @@
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">
                                 <!--------------- Para cambiar el color del fondo --------------------->
                                 
-                                <h4 class="text-center">Color del Vaso</h4>
+                                {{-- <h4 class="text-center">Color del Vaso</h4>
                                 <div class="mb-3">
                                     <div class="container-color-disenio">
                                         <div class="first-container-cS">
@@ -107,7 +107,42 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div> --}}
+
+                                <h4 class="text-center">Color del Vaso</h4>
+                                <div class="mb-3">
+
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                    <div class="acordion-btnTranslucido">
+                                                        <h6>Cromáticos</h6>
+                                                    </div>
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse"
+                                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                
+                                                    @foreach($array['colors'] as $color)
+                                                        @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
+                                                            <div class="option-color">
+                                                                <div class="options-container-personalized">
+                                                                    <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
+                                                                    <p class="color-title">{{ $color->name }}</p>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                
                             </div>
                             <div class="contenido-side" id="color-disenio-content" style="display: none;">
                                 <!---------- color de los elementos.------->
@@ -135,6 +170,7 @@
                                             <div class="" id="color-actual-nombre">{{ $firstColor->name }}</div>
                                             @endif
                                         </div>
+                                        
                                     </div>
                                     <div class="mb-3 " id="color-table-globales">
                                         
