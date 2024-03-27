@@ -44,6 +44,12 @@
                 <div class=" col-sideLeft bg-white">
                     <div class="row">
                         <div class="col-3 sideLeft ">
+                                <div class="bloq-side subir-logotipo" data-target="subir-archivo">
+                                    <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/upload.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Subir Imagen</h6>
+                                </div>
                                 <div class="bloq-side" data-target="color-vaso" style="background: #f1f1f1;">
                                     <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/vaso.svg')}}" alt="" srcset="">
@@ -56,12 +62,7 @@
                                     </div>
                                     <h6>Color del Diseño</h6>
                                 </div>
-                                <div class="bloq-side" data-target="subir-archivo">
-                                <div class="img-bloq-side">
-                                        <img src="{{asset('frontend/img/personalizacion_vasos/upload.svg')}}" alt="" srcset="">
-                                    </div>
-                                    <h6>Subir Imagen</h6>
-                                </div>
+        
                                 <div class="bloq-side" data-target="elementos">
                                 <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/elements.svg')}}" alt="" srcset="">
@@ -88,33 +89,21 @@
                                 
                                 <h4 class="text-center">Color del Vaso</h4>
                                 <div class="mb-3">
-
-                                    <div class="accordion" id="accordionExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="headingOne">
-                                                <button class="accordion-button collapsed" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                    aria-expanded="true" aria-controls="collapseOne">
-                                                    <div class="acordion-btnTranslucido">
-                                                        <h6>Cromáticos</h6>
-                                                    </div>
-                                                </button>
-                                            </h2>
-                                            <div id="collapseOne" class="accordion-collapse collapse"
-                                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                <div class="accordion-body">
-                
-                                                    @foreach($array['colors'] as $color)
-                                                        @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
-                                                            <div class="option-color">
-                                                                <div class="options-container-personalized">
-                                                                    <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
-                                                                    <p class="color-title">{{ $color->name }}</p>
-                                                                </div>
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                </div>
+                                    <div class="container-color-disenio">
+                                        <div class="first-container-cS">
+                                            <div class="mb-2 container-msg-switch">
+                                                <h6 class="msg-switch">Selecciona un color</h6>
+                                            </div>
+                                            <div class="table-color-actual d-flex justify-content-center">
+                                                @foreach($array['colors'] as $color)
+                                                    @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
+                                                        <div class="paleta-color"
+                                                            style="background-color: {{ $color->hex_code }}"
+                                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                                            data-bs-custom-class="custom-tooltip"
+                                                            data-bs-title="{{ $color->name }}"></div>
+                                                    @endif
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
@@ -186,9 +175,11 @@
                                     <p>Agregá tu logo, ilustracciones y outros elementos do seu computador.
                                     </p>
                                     <p class="bold-text">Formatos aceptados: JPG, PNG y SVG</p>
-                                    <p>1. Elementos con dos o más cores pasan a un color único cuando se selecciona un color desde "Color del Diseño".</p>
+                                    <p>1. Asegurate que tu logo o imagen esté en PNG sin fondo. Te recomendamos <a target="_blank" href="https://www.remove.bg/">www.remove.bg</a> para quitar el fondo a tus imágenes.</p>
 
-                                    <p> 2. Se recomienda que la imagen no supere los 1500px de ancho para no dificultar el rendimiento.</p>
+                                    <p>2. Los elementos de 2 o más colores se convertirán a negro por defecto.</p>
+
+                                    <p>3. Una vez cargada la imagen, dar clic para agregar al lienzo.</p>
 
                                     <p>Elemplo:</p>
 
