@@ -86,29 +86,40 @@
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">
                                 <!--------------- Para cambiar el color del fondo --------------------->
-                                
                                 {{-- <h4 class="text-center">Color del Vaso</h4>
                                 <div class="mb-3">
-                                    <div class="container-color-disenio">
-                                        <div class="first-container-cS">
-                                            <div class="mb-2 container-msg-switch">
-                                                <h6 class="msg-switch">Selecciona un color</h6>
-                                            </div>
-                                            <div class="table-color-actual d-flex justify-content-center">
-                                                @foreach($array['colors'] as $color)
-                                                    @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
-                                                        <div class="paleta-color"
-                                                            style="background-color: {{ $color->hex_code }}"
-                                                            data-bs-toggle="tooltip" data-bs-placement="top"
-                                                            data-bs-custom-class="custom-tooltip"
-                                                            data-bs-title="{{ $color->name }}"></div>
-                                                    @endif
-                                                @endforeach
+
+                                    <div class="accordion" id="accordionExample">
+                                        <div class="accordion-item">
+                                            <h2 class="accordion-header" id="headingOne">
+                                                <button class="accordion-button collapsed" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                    aria-expanded="true" aria-controls="collapseOne">
+                                                    <div class="acordion-btnTranslucido">
+                                                        <h6>Cromáticos</h6>
+                                                    </div>
+                                                </button>
+                                            </h2>
+                                            <div id="collapseOne" class="accordion-collapse collapse"
+                                                aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                <div class="accordion-body">
+                
+                                                    @foreach($array['colors'] as $color)
+                                                        @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
+                                                            <div class="option-color">
+                                                                <div class="options-container-personalized">
+                                                                    <div class="color-cube" style="background:{{ $color->hex_code }}"></div>
+                                                                    <p class="color-title">{{ $color->name }}</p>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div> --}}
-
+                                
                                 <h4 class="text-center">Color del Vaso</h4>
                                 <div class="mb-3">
 
@@ -141,8 +152,27 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                                 
+                                <h4 class="text-center">Color del Vaso</h4>
+                                <div class="mb-3">
+                                    <div class="container-color-disenio">
+                                        <div class="first-container-cS">
+                                            <div class="mb-2 container-msg-switch">
+                                                <h6 class="msg-switch">Selecciona un color</h6>
+                                            </div>
+                                            <div class="table-color-actual d-flex justify-content-center">
+                                                @foreach($array['colors'] as $color)
+                                                    @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
+                                                        <div class="paleta-color" style="background-color: {{ $color->hex_code }}"
+                                                            onclick="changeCanvasColor('{{ $color->hex_code }}')">
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="contenido-side" id="color-disenio-content" style="display: none;">
                                 <!---------- color de los elementos.------->
@@ -692,12 +722,16 @@
                     <div class="d-flex justify-content-center">
                         <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
                         <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
+                        <button id="capturadoraPantalla">
+                            ⏺️ Grabar pantalla
+                        </button>
                     </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
                 </div>
             </div>
         </div>
+        
     </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <!-- Bootstrap -->
@@ -709,6 +743,8 @@
     <!-- Para el PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
+    <!-- Capturadora de Pantalla -->
+    <script src="{{asset('frontend/js/personalizar_vasos/n7grabarpantalla.js')}}"></script>
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
     <!-- Para la conversion de imagenes -->
     <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
