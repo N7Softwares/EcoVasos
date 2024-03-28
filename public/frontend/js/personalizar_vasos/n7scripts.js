@@ -51,7 +51,7 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
 
 // Para obtener el color de los objetos
 const colorActual = (object) => {
-    const paletaColores = document.querySelectorAll(".paleta-color");
+    const paletaColores = document.querySelectorAll(".paleta-color.color-design");
     const colorActualNombre = document.getElementById("color-actual-nombre");
 
     const colorActualTD = document.getElementById("color-actual");
@@ -350,7 +350,7 @@ const crearPaletaColores = ()=>{
 const cambiarColorATodos = () => {
     const colorActualTD = document.getElementById("color-actual");
     const colorActualNombre = document.getElementById("color-actual-nombre");
-    const paletaColores = document.querySelectorAll(".paleta-color");
+    const paletaColores = document.querySelectorAll(".paleta-color.color-design");
     const scopeColorCheck = document.getElementById("scopeColor");
 
     const addColorPickerToImage = (file, color) => {
