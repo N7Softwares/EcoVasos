@@ -44,6 +44,12 @@
                 <div class=" col-sideLeft bg-white">
                     <div class="row">
                         <div class="col-3 sideLeft ">
+                                <div class="bloq-side subir-logotipo" data-target="subir-archivo">
+                                    <div class="img-bloq-side">
+                                        <img src="{{asset('frontend/img/personalizacion_vasos/upload.svg')}}" alt="" srcset="">
+                                    </div>
+                                    <h6>Subir Imagen</h6>
+                                </div>
                                 <div class="bloq-side" data-target="color-vaso" style="background: #f1f1f1;">
                                     <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/vaso.svg')}}" alt="" srcset="">
@@ -56,12 +62,7 @@
                                     </div>
                                     <h6>Color del Diseño</h6>
                                 </div>
-                                <div class="bloq-side" data-target="subir-archivo">
-                                <div class="img-bloq-side">
-                                        <img src="{{asset('frontend/img/personalizacion_vasos/upload.svg')}}" alt="" srcset="">
-                                    </div>
-                                    <h6>Subir Imagen</h6>
-                                </div>
+        
                                 <div class="bloq-side" data-target="elementos">
                                 <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/elements.svg')}}" alt="" srcset="">
@@ -85,8 +86,8 @@
                         <div class="col-9 sideLeftContent">
                             <div class="contenido-side" id="color-vaso-content" style="display: block;">
                                 <!--------------- Para cambiar el color del fondo --------------------->
-                                
-                                <h4 class="text-center">Color del Vaso</h4>
+
+                                {{-- <h4 class="text-center">Color del Vaso</h4>
                                 <div class="mb-3">
 
                                     <div class="accordion" id="accordionExample">
@@ -118,7 +119,28 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div> --}}
+                                
+                                <h4 class="text-center">Color del Vaso</h4>
+                                <div class="mb-3">
+                                    <div class="container-color-disenio">
+                                        <div class="first-container-cS">
+                                            <div class="mb-2 container-msg-switch">
+                                                <h6 class="msg-switch">Selecciona un color</h6>
+                                            </div>
+                                            <div class="table-color-actual d-flex justify-content-center">
+                                                @foreach($array['colors'] as $color)
+                                                    @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
+                                                        <div class="paleta-color" style="background-color: {{ $color->hex_code }}"
+                                                            onclick="changeCanvasColor('{{ $color->hex_code }}')">
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="contenido-side" id="color-disenio-content" style="display: none;">
                                 <!---------- color de los elementos.------->
@@ -146,6 +168,7 @@
                                             <div class="" id="color-actual-nombre">{{ $firstColor->name }}</div>
                                             @endif
                                         </div>
+                                        
                                     </div>
                                     <div class="mb-3 " id="color-table-globales">
                                         
@@ -186,9 +209,11 @@
                                     <p>Agregá tu logo, ilustracciones y outros elementos do seu computador.
                                     </p>
                                     <p class="bold-text">Formatos aceptados: JPG, PNG y SVG</p>
-                                    <p>1. Elementos con dos o más cores pasan a un color único cuando se selecciona un color desde "Color del Diseño".</p>
+                                    <p>1. Asegurate que tu logo o imagen esté en PNG sin fondo. Te recomendamos <a target="_blank" href="https://www.remove.bg/">www.remove.bg</a> para quitar el fondo a tus imágenes.</p>
 
-                                    <p> 2. Se recomienda que la imagen no supere los 1500px de ancho para no dificultar el rendimiento.</p>
+                                    <p>2. Los elementos de 2 o más colores se convertirán a negro por defecto.</p>
+
+                                    <p>3. Una vez cargada la imagen, dar clic para agregar al lienzo.</p>
 
                                     <p>Elemplo:</p>
 

@@ -1503,3 +1503,8 @@ const eliminarSeparadorSvg = ()=>{
 
     canvas.renderAll();
 }
+// Nueva funcion para cambiar el color al fondo del canva
+function changeCanvasColor(color) {
+    canvas.setBackgroundColor(color);
+    canvas.renderAll();
+}
