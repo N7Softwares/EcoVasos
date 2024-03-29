@@ -687,7 +687,7 @@
                     </div>
                 </div>
                 <div id="myModal" class="modal">
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center btns-modal-3d">
                         <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
                         <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
                         <button id="capturadoraPantalla">

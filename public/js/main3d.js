@@ -1,16 +1,17 @@
 //Import the THREE.js library
-console.log("paso1");
+// console.log("paso1");
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 // To allow for the camera to move around the scene
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 // To allow for importing the .gltf file
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
-console.log("paso22");
+// console.log("paso22");
 //Create a Three.JS Scene
 const scene = new THREE.Scene();
 //create a new camera with positions and angles
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-console.log("paso3");
+// const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / (window.innerHeight - 100), 0.1, 1000);
+// console.log("paso3");
 //Keep track of the mouse position, so we can make the eye move
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
@@ -21,7 +22,7 @@ let controls;
 let canvasGeometry;
 //Set which object to render
 let objToRender = 'glass';
-console.log("paso4");
+// console.log("paso4");
 document.getElementById("vasoBtn").addEventListener("click", function () {
   cambiarObjeto('glass');
 });
@@ -34,17 +35,17 @@ document.getElementById("copaBtn").addEventListener("click", function () {
 
 
 
-console.log("paso6");
+// console.log("paso6");
 
 //Instantiate a new renderer and set its size
 const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });  //Alpha: true allows for the transparent background
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize(window.innerWidth, (window.innerHeight-100));
 
 //Add the renderer to the DOM
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.z = 5;
+camera.position.z = 4;
 
 //Add lights to the scene, so we can actually see the 3D model
 const topLight = new THREE.DirectionalLight(0xfff, 2000); // (color, intensity)
@@ -92,9 +93,9 @@ function animate() {
 
 //Add a listener to the window, so we can resize the window and the camera
 window.addEventListener("resize", function () {
-  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.aspect = window.innerWidth / (window.innerHeight - 100);
   camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight - 100);
 });
 
 //add mouse position listener, so we can make the eye move
@@ -105,8 +106,8 @@ document.onmousemove = (e) => {
 
 
 const cambiarObjeto = function(objeto) {
-    console.log("paso5");
-    console.log("RECIBO", objeto);
+    // console.log("paso5");
+    // console.log("RECIBO", objeto);
     objToRender = objeto;
 
     while (scene.children.length > 0) {

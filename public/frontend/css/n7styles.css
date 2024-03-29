@@ -702,6 +702,7 @@ section{
     margin: 5% auto;
     padding: 20px;
     width: 80%;
+
   }
   
   .close {
@@ -718,7 +719,13 @@ section{
     text-decoration: none;
     cursor: pointer;
   }
-  
+.btns-modal-3d{
+    position:fixed;
+    /* width:90%; */
+    /* z-index:101; */
+    left:0;
+    border:1px solid red;
+}
 
 /*-------------------------HOVER DE BOTON-------------------*/
 
