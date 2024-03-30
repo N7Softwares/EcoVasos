@@ -22,6 +22,7 @@
     use App\Http\Controllers\DisenioController;
     use App\Http\Controllers\ColorController;
     use App\Http\Controllers\TipografiaController;
+    use App\Http\Controllers\Modelo3DController;
     /*
     |--------------------------------------------------------------------------
     | Web Routes
@@ -72,6 +73,10 @@
     Route::get('/product-cat/{slug}', [FrontendController::class, 'productCat'])->name('product-cat');
     Route::get('/product-sub-cat/{slug}/{sub_slug}', [FrontendController::class, 'productSubCat'])->name('product-sub-cat');
     Route::get('/product-brand/{slug}', [FrontendController::class, 'productBrand'])->name('product-brand');
+    // Modelo 3d
+    Route::get('/modelo3d', [FrontendController::class, 'modelo3d'])->name('modelo3d');
+
+
 // Cart section
     Route::get('/add-to-cart/{slug}', [CartController::class, 'addToCart'])->name('add-to-cart')->middleware('user');
     Route::post('/add-to-cart', [CartController::class, 'singleAddToCart'])->name('single-add-to-cart')->middleware('user');
@@ -258,4 +263,10 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         Lfm::routes();
     });
+
+    // Para guardar el json del modelo 3d de manera temporal
+
+    Route::post('/guardar-modelo', [Modelo3DController::class, 'guardarModelo'])->name('guardar.modelo');
+    Route::get('/modelo3d/visualizar/{fileName}', [Modelo3DController::class, 'visualizarModelo'])->name('modelo3d.visualizar');
+
     

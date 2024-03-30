@@ -424,5 +424,8 @@ class FrontendController extends Controller
                 return back();
             }
     }
-    
+    // Para la pagina del modelo 3d 
+    public function modelo3d(){
+        return view('frontend.pages.modelo3d');
+    }
 }

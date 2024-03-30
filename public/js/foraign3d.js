@@ -1,3 +1,25 @@
+// Obtener una referencia al canvas de destino
+const canvas = new fabric.Canvas('canvas');
+
+// Obtén el JSON del input oculto
+const jsonInput = document.getElementById('jsonInput');
+const jsonData = jsonInput.value;
+
+// Convierte el JSON a un objeto JavaScript
+const jsonObject = JSON.parse(jsonData);
+
+// Cargar el contenido del JSON en el canvas de destino
+canvas.loadFromJSON(jsonObject, function() {
+    // Hacer algo después de cargar el JSON, si es necesario
+    canvas.renderAll();
+});
+
+
+// Ahora puedes trabajar con el objeto jsonObject en tu script
+console.log(jsonObject);
+
+
+
 //Import the THREE.js library
 // console.log("paso1");
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
@@ -119,7 +141,7 @@ const cambiarObjeto = function(objeto) {
     //Load the file
     if(objToRender === 'glass'){
       loader.load(
-        `3d/${objToRender}/scene.gltf`,
+        `/3d/${objToRender}/scene.gltf`,
         function (gltf) {
           object = gltf.scene;
           // Función para crear la textura y asignarla al material
@@ -171,7 +193,7 @@ const cambiarObjeto = function(objeto) {
         }
       );
     }else if (objToRender === 'cup_glass') {
-      loader.load(`3d/${objToRender}/de_prueba/scene.gltf`, function (gltf) {
+      loader.load(`/3d/${objToRender}/de_prueba/scene.gltf`, function (gltf) {
           object = gltf.scene;
 
           // Centrar la copa en el contenedor
@@ -226,3 +248,11 @@ const cambiarObjeto = function(objeto) {
 animate();
 
 cambiarObjeto('glass');
+
+function selectOption(btn) {
+    let btns = document.getElementsByClassName("option-btn");
+    for (let i = 0; i < btns.length; i++) {
+        btns[i].classList.remove("active");
+    }
+    btn.classList.add("active");
+}
