@@ -1508,3 +1508,27 @@ function changeCanvasColor(color) {
     canvas.setBackgroundColor(color);
     canvas.renderAll();
 }
+
+
+// Agregar un evento de clic al botón "Guardar Modelo"
+const guardarModeloBtn = document.getElementById('guardarModeloBtn');
+guardarModeloBtn.addEventListener('click', function(event) {
+    // Evitar que el formulario se envíe automáticamente
+    event.preventDefault();
+
+    // Obtener una referencia al formulario y al campo de entrada JSON
+    const canvasForm = document.getElementById('canvasForm');
+    const jsonInput = document.getElementById('jsonInput');
+
+    // Obtener el JSON que representa el contenido del canvas original
+    let json = canvas.toJSON();
+
+    // Convertir el JSON a una cadena
+    let jsonString = JSON.stringify(json);
+
+    // Actualizar el valor del campo de entrada JSON con la cadena JSON
+    jsonInput.value = jsonString;
+    console.log(jsonString);
+    // Envía el formulario
+    canvasForm.submit();
+});

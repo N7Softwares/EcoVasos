@@ -701,6 +701,18 @@
         </div>
         
     </section>
+    <button id="buttonEnviar">
+        Compartir Diseño 3D
+    </button>
+    <form id="canvasForm" method="post" action="{{ route('guardar.modelo') }}">
+        @csrf <!-- Token CSRF -->
+        <!-- Input oculto para almacenar el JSON del diseño del canvas -->
+        <input type="hidden" id="jsonInput" name="data">
+        <!-- Botón para guardar el modelo -->
+        <button id="guardarModeloBtn" type="submit">Guardar Modelo</button>
+    </form>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
