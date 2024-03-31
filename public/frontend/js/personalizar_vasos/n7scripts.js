@@ -1364,20 +1364,7 @@ canvas.on('mouse:down', function(options) {
 
 
 // --------- Modal para la advertencia en responsive mobile ---------
-// Definir la función que se ejecutará al cargar la página
-const verificarAnchoPantalla = () => {
-    // Detectar el ancho de la pantalla
-    const anchoPantalla = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 
-    // Comprobar si el ancho de la pantalla es mayor a 600px
-    if (anchoPantalla < 700) {
-        // Mostrar un mensaje de alerta
-        alert("Se recomienda utilizar la herramienta de personalización de EcoIngenio en un ordenador o en una pantalla de mayor tamaño.");
-    }
-};
-
-// Asociar la función al evento de carga de la página
-// window.addEventListener("load", verificarAnchoPantalla);
 
 document.addEventListener('DOMContentLoaded', function () {
     const burgerBtn = document.getElementById('burger-btn');

@@ -30,6 +30,9 @@ class Modelo3DController extends Controller
         
         // Retornar una respuesta, por ejemplo, un enlace para visualizar el modelo
         return response()->json(['success' => true, 'link' => route('modelo3d.visualizar', ['fileName' => $fileName])]);
+        // return view('modelo3d.visualizar', ['fileName' => $fileName]);
+
+
     }
 
     public function visualizarModelo($fileName) {

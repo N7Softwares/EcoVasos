@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,14 +15,30 @@
 </head>
 <body>
     <!-- Contenedor Modelo 3D -->
-    <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
-    <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
-    <div id="container3D" class="container3dClass"></div>
-    <h1>Modelo 3d</h1>
+    <section>
+        <h1 class="text-center">Modelo 3d</h1>
+        <div class="d-flex justify-content-center gap-4">
+            <button id="vasoBtn" class="option-btn active">Vaso</button>
+            <button id="copaBtn" class="option-btn">Copa</button>
+        </div>
+        <div id="container3D" class="container3dClass"></div>    
+    </section>
+    
     <!-- Imprime el JSON en un input oculto -->
     <input type="hidden" id="jsonInput" value="{{ $jsonContent }}">
-
-    <canvas id="canvas" width="1000" height="400"></canvas>
+    <section>
+        <h2 class="text-center">Diseño en el Lienzo</h2>
+        <div class="container-fluid d-flex justify-content-center">
+            <div class="container-indicador-canva canva-modelo3d">
+                
+                <div class="row">
+                    <div class="col-8 pl-0 ">
+                        <canvas id="canvas" width="1000" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">

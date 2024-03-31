@@ -690,9 +690,13 @@
                     <div class="d-flex justify-content-center btns-modal-3d">
                         <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
                         <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
-                        <button id="capturadoraPantalla">
-                            ⏺️ Grabar pantalla
-                        </button>
+                        <form id="canvasForm" method="post" action="{{ route('guardar.modelo') }}">
+                            @csrf <!-- Token CSRF -->
+                            <!-- Input oculto para almacenar el JSON del diseño del canvas -->
+                            <input type="hidden" id="jsonInput" name="data">
+                            <!-- Botón para guardar el modelo -->
+                            <button id="guardarModeloBtn" type="submit">Compartir Diseño 3D</button>
+                        </form>
                     </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
@@ -701,16 +705,6 @@
         </div>
         
     </section>
-    <button id="buttonEnviar">
-        Compartir Diseño 3D
-    </button>
-    <form id="canvasForm" method="post" action="{{ route('guardar.modelo') }}">
-        @csrf <!-- Token CSRF -->
-        <!-- Input oculto para almacenar el JSON del diseño del canvas -->
-        <input type="hidden" id="jsonInput" name="data">
-        <!-- Botón para guardar el modelo -->
-        <button id="guardarModeloBtn" type="submit">Guardar Modelo</button>
-    </form>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
@@ -723,8 +717,7 @@
     <!-- Para el PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script src="{{asset('frontend/js/personalizar_vasos/n7scripts.js')}}"></script>
-    <!-- Capturadora de Pantalla -->
-    <script src="{{asset('frontend/js/personalizar_vasos/n7grabarpantalla.js')}}"></script>
+    <!-- Modulo 3D -->
     <script type="module" src="{{asset('js/main3d.js')}}"></script>
     <!-- Para la conversion de imagenes -->
     <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
