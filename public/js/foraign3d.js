@@ -1,12 +1,50 @@
-// Obtener una referencia al canvas de destino
-const canvas = new fabric.Canvas('canvas');
+//Import the THREE.js library
+// console.log("paso1");
+import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
+// To allow for the camera to move around the scene
+import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
+// To allow for importing the .gltf file
+import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+
+const canvasWidth = 1000; // Ancho del lienzo visible en píxeles
+const canvasHeight = 400; // Alto del lienzo visible en píxeles
+const scaleFactor = 2; // Factor de escala para aumentar la resolución
+
+// Crear el lienzo con el tamaño visible
+const canvas = new fabric.Canvas('canvas', {
+    width: canvasWidth,
+    height: canvasHeight,
+    padding: 30,
+    renderOnAddRemove: false,
+    enableRetinaScaling: true, // Desactivar el escalado de retina para evitar problemas de renderizado
+    webgl: true,
+    antialias: true,
+});
+
+// Escalar el lienzo internamente para aumentar la resolución
+canvas.setDimensions({
+    width: canvasWidth * scaleFactor,
+    height: canvasHeight * scaleFactor
+}, { backstoreOnly: true });
+
+// Escalar el lienzo de Fabric.js para mantener la apariencia visual
+canvas.setZoom(scaleFactor);
+
 
 // Obtén el JSON del input oculto
 const jsonInput = document.getElementById('jsonInput');
 const jsonData = jsonInput.value;
 
 // Convierte el JSON a un objeto JavaScript
-const jsonObject = JSON.parse(jsonData);
+let jsonObject = JSON.parse(jsonData);
+
+// Filtra los objetos que no cumplan con la condición y mantenlos en el arreglo
+jsonObject.objects = jsonObject.objects.filter(obj => {
+  // Retorna true para mantener el objeto si no cumple con la condición
+  return !(obj.type === 'group' && obj.objects.length === 6 && obj.width === 1000);
+});
+
+
 
 // Cargar el contenido del JSON en el canvas de destino
 canvas.loadFromJSON(jsonObject, function() {
@@ -15,18 +53,22 @@ canvas.loadFromJSON(jsonObject, function() {
 });
 
 
+// Deshabilitar la interacción del canvas
+canvas.selection = false;
+
+// Iterar sobre todos los objetos del canvas y deshabilitar su interacción
+canvas.getObjects().forEach(obj => {
+    obj.selectable = false; // Deshabilitar la selección
+    obj.evented = false; // Deshabilitar los eventos
+});
+
+
 // Ahora puedes trabajar con el objeto jsonObject en tu script
-console.log(jsonObject);
+// console.log(jsonObject);
 
 
 
-//Import the THREE.js library
-// console.log("paso1");
-import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
-// To allow for the camera to move around the scene
-import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
-// To allow for importing the .gltf file
-import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
+
 // console.log("paso22");
 //Create a Three.JS Scene
 const scene = new THREE.Scene();
@@ -45,12 +87,23 @@ let canvasGeometry;
 //Set which object to render
 let objToRender = 'glass';
 // console.log("paso4");
+
+const selectOption = (btn) => {
+  let btns = document.getElementsByClassName("option-btn");
+  for (let i = 0; i < btns.length; i++) {
+      btns[i].classList.remove("active");
+  }
+  btn.classList.add("active");
+}
+
 document.getElementById("vasoBtn").addEventListener("click", function () {
   cambiarObjeto('glass');
+  selectOption(this);
 });
 
 document.getElementById("copaBtn").addEventListener("click", function () {
   cambiarObjeto('cup_glass');
+  selectOption(this);
 });
 
 
@@ -249,10 +302,3 @@ animate();
 
 cambiarObjeto('glass');
 
-function selectOption(btn) {
-    let btns = document.getElementsByClassName("option-btn");
-    for (let i = 0; i < btns.length; i++) {
-        btns[i].classList.remove("active");
-    }
-    btn.classList.add("active");
-}

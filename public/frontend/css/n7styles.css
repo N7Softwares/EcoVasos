@@ -706,6 +706,8 @@ section{
   }
   
   .close {
+    transform:translateY(100px) translateX(-100px);
+    /* transform:; */
     color: #ffffff;
     float: right;
     font-size: 40px;
@@ -721,10 +723,11 @@ section{
   }
 .btns-modal-3d{
     position:fixed;
-    /* width:90%; */
+    width:100%;
     /* z-index:101; */
     left:0;
-    border:1px solid red;
+    /* border:1px solid red; */
+    gap:20px;
 }
 
 /*-------------------------HOVER DE BOTON-------------------*/
@@ -1016,13 +1019,24 @@ section{
     font-weight: bold;
 }
 
-/* ------------------------ Boton para capturar pantalla ------------------------ */
+/* ------------------------ Boton para compartir diseño ------------------------ */
 
-#capturadoraPantalla {
-	font-size: 24px;
+#guardarModeloBtn{
+    background:var(--green-border);
+    color:#fafafa;
+    border-radius:7px;
+    padding:15px 10px;
 }
 
-
+.container3dClass{
+    background:#212121;
+    /* margin:0 30px; */
+}
+.canva-modelo3d{
+    padding:40px 0 !important;
+    display:flex;
+    justify-content:center;
+}
 /* ------------------------ seccion de responsive ------------------------ */
 
 @media (max-width: 991px) {
@@ -1128,6 +1142,16 @@ section{
     .signal-red{
         font-weight: normal;
         font-size:.8rem !important;
+    }
+
+    .canva-modelo3d{
+        padding:40px 0 !important;
+        display:block;
+        /* justify-content:center; */
+    }
+
+    .close {
+        transform:translateY(100px) translateX(0);    
     }
 }
 
@@ -1289,6 +1313,19 @@ section{
         margin-bottom: 5px;
     }
 
+    .btns-modal-3d{
+        position:fixed;
+        width:100%;
+        flex-wrap:wrap;
+        /* justify-content:start; */
+    }
+    
+    #guardarModeloBtn{
+        padding:10px;
+        width:100px;
+        flex-wrap:wrap;
+        font-size:.85rem;
+    }
 }
 
 @media (max-width: 320px) {
