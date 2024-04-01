@@ -8,7 +8,7 @@ class CreateInspirateTable extends Migration
 {
     public function up()
     {
-        Schema::create('inspirate', function (Blueprint $table) {
+        Schema::create('inspirates', function (Blueprint $table) {
             $table->id();
             $table->string('url');
             $table->foreignId('category_image_id')->constrained('images_categories');
@@ -18,6 +18,6 @@ class CreateInspirateTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('inspirate');
+        Schema::dropIfExists('inspirates');
     }
 }

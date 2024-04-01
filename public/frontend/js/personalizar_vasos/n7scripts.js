@@ -1515,7 +1515,34 @@ guardarModeloBtn.addEventListener('click', function(event) {
 
     // Actualizar el valor del campo de entrada JSON con la cadena JSON
     jsonInput.value = jsonString;
-    console.log(jsonString);
-    // Envía el formulario
-    canvasForm.submit();
+
+    // Hacer una solicitud AJAX al controlador
+    fetch(canvasForm.action, {
+        method: 'POST',
+        body: new FormData(canvasForm),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Remover la extensión ".json" del enlace
+        let link = data.link.replace('.json', '');
+
+        // Copiar el enlace al portapapeles
+        navigator.clipboard.writeText(link)
+        .then(() => {
+            // Mostrar el mensaje "Enlace copiado"
+            const messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';
+
+            // Hacer que el mensaje desaparezca después de 3 segundos
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 3000);
+        })
+        .catch(err => {
+            console.error('Error al copiar el enlace al portapapeles: ', err);
+        });
+    })
+    .catch(err => {
+        console.error('Error al hacer la solicitud AJAX: ', err);
+    });
 });
