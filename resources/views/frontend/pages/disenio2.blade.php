@@ -697,6 +697,7 @@
                             <!-- Botón para guardar el modelo -->
                             <button id="guardarModeloBtn" type="submit">Compartir Diseño 3D</button>
                         </form>
+                        <div id="message" style="display: none;" class="alert alert-success">Enlace copiado</div>
                     </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
