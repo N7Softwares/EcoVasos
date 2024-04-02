@@ -1081,18 +1081,18 @@ const invertColorsAndSaveOriginal = () => {
     canvas.forEachObject(obj => {
         if (obj.type === 'group' && obj._objects.every(innerObj => innerObj.type === 'path')) { // Si el objeto es un grupo con elementos SVG
             obj._objects.forEach(innerObj => {
-                innerObj.set('fill', '#212121'); // Establecer a negro
+                innerObj.set('fill', '#000'); // Establecer a negro
             });
         } else {
             if (obj.type === 'group') {
                 obj.forEachObject(innerObj => {
                     if (innerObj.fill !== undefined) {
-                        innerObj.set('fill', '#212121'); // Establecer a negro
+                        innerObj.set('fill', '#000'); // Establecer a negro
                     }
                 });
             } else {
                 if (obj.fill !== undefined) {
-                    obj.set('fill', '#212121'); // Establecer a negro
+                    obj.set('fill', '#000'); // Establecer a negro
                 }
             }
         }
