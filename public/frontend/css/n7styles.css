@@ -30,12 +30,12 @@ ul{
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
-.padding-top-disenio{
+/* .padding-top-disenio{
     padding-top: 2% !important;
-}
-section{
+} */
+/* section{
     padding:20px 0;
-}
+} */
 .size-texts{
     font-size: 12px;
 }
@@ -74,6 +74,14 @@ section{
     border-radius:7px;
 }
 
+/* --------------------------- Para el iframe --------------------------- */
+.inner-header, .footer{
+    display:none !important;
+}
+body.js{
+    padding-bottom:70px;
+    height:fit-content;
+}
 /* --------------------------- LeftSideBar --------------------------- */
 
 .sideLeft{
@@ -386,6 +394,12 @@ section{
     font-weight: 600;
     transition: all .4s ease;
 }
+#nuevo-texto{
+    border:none;
+    width:100%;
+    /* min-width */
+
+}
 #ver3DBtn.btn-general{
     width:100%;
 }
@@ -687,7 +701,7 @@ section{
     position: fixed;
     z-index: 1;
     left: 0;
-    top: 10%;
+    /* top: 10%; */
     width: 100%;
     height: 100%;
     padding-right: 1% !important;
