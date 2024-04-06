@@ -18,6 +18,11 @@ class ColorController extends Controller
         $categories = ColorsCategory::all(); 
         return view('backend.colors_vaso.index', compact('colors', 'categories'));
     }
+    public function indexApi()
+    {
+        $colors = Color::all();
+        return response()->json($colors);
+    }
 
     /**
      * Show the form for creating a new resource.

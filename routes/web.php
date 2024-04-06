@@ -3,6 +3,7 @@
     use Illuminate\Support\Facades\Route;
     use Illuminate\Support\Facades\Artisan;
     use App\Http\Controllers\AdminController;
+    use App\Http\Controllers\AdminWordpressRedirectController;
     use App\Http\Controllers\FrontendController;
     use App\Http\Controllers\Auth\LoginController;
     use App\Http\Controllers\MessageController;
@@ -187,48 +188,48 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
 
         
         //--------------------IMAGES CATEGORIES-------------
-        Route::resource('images_categories', ImagesCategoryController::class);
+        // Route::resource('images_categories', ImagesCategoryController::class);
 
-        Route::get('images_categories/create-custom', [ImagesCategoryController::class, 'create'])->name('images_categories.create-custom');
+        // Route::get('images_categories/create-custom', [ImagesCategoryController::class, 'create'])->name('images_categories.create-custom');
         
-        Route::post('images_categories/store', [ImagesCategoryController::class, 'store'])->name('images_categories.store');
-        Route::get('images_categories/{image_category}/edit-custom', [ImagesCategoryController::class, 'edit'])->name('images_categories.edit-custom');
-        Route::put('images_categories/{image_category}/update-custom', [ImagesCategoryController::class, 'update'])->name('images_categories.update-custom');
+        // Route::post('images_categories/store', [ImagesCategoryController::class, 'store'])->name('images_categories.store');
+        // Route::get('images_categories/{image_category}/edit-custom', [ImagesCategoryController::class, 'edit'])->name('images_categories.edit-custom');
+        // Route::put('images_categories/{image_category}/update-custom', [ImagesCategoryController::class, 'update'])->name('images_categories.update-custom');
 
         //----------------------INSPIRATE-----------------------
 
-        Route::resource('inspirate', InspirateController::class);
+        // Route::resource('inspirate', InspirateController::class);
 
-        Route::get('inspirate/create-custom', [InspirateController::class, 'create'])->name('inspirate.create-custom');
-        Route::get('inspirate/{id}/edit', [InspirateController::class, 'edit'])->name('inspirate.edit');
-        Route::put('inspirate/{id}', [InspirateController::class, 'update'])->name('inspirate.update');
-        Route::delete('inspirate/{id}', [InspirateController::class, 'destroy'])->name('inspirate.destroy');
+        // Route::get('inspirate/create-custom', [InspirateController::class, 'create'])->name('inspirate.create-custom');
+        // Route::get('inspirate/{id}/edit', [InspirateController::class, 'edit'])->name('inspirate.edit');
+        // Route::put('inspirate/{id}', [InspirateController::class, 'update'])->name('inspirate.update');
+        // Route::delete('inspirate/{id}', [InspirateController::class, 'destroy'])->name('inspirate.destroy');
 
-        //----------------------ELEMENTS-----------------------
+        // //----------------------ELEMENTS-----------------------
 
-        Route::resource('elements', ElementController::class);
+        // Route::resource('elements', ElementController::class);
 
-        Route::get('elements/create-custom', [ElementController::class, 'create'])->name('elements.create-custom');
-        Route::get('elements/{id}/edit', [ElementController::class, 'edit'])->name('elements.edit');
-        Route::put('elements/{id}', [ElementController::class, 'update'])->name('elements.update');
-        Route::delete('elements/{id}', [ElementController::class, 'destroy'])->name('elements.destroy');
+        // Route::get('elements/create-custom', [ElementController::class, 'create'])->name('elements.create-custom');
+        // Route::get('elements/{id}/edit', [ElementController::class, 'edit'])->name('elements.edit');
+        // Route::put('elements/{id}', [ElementController::class, 'update'])->name('elements.update');
+        // Route::delete('elements/{id}', [ElementController::class, 'destroy'])->name('elements.destroy');
 
-        //----------------------COLORS-VASO-DESIGN-----------------------
-        Route::resource('colors', ColorController::class);
+        // //----------------------COLORS-VASO-DESIGN-----------------------
+        // Route::resource('colors', ColorController::class);
         
-        Route::get('colors/create-custom', [ColorController::class, 'create'])->name('colors.create-custom');
-        Route::get('colors/{id}/edit', [ColorController::class, 'edit'])->name('colors.edit');
-        Route::put('colors/{id}', [ColorController::class, 'update'])->name('colors.update');
-        Route::delete('colors/{id}', [ColorController::class, 'destroy'])->name('colors.destroy');
+        // Route::get('colors/create-custom', [ColorController::class, 'create'])->name('colors.create-custom');
+        // Route::get('colors/{id}/edit', [ColorController::class, 'edit'])->name('colors.edit');
+        // Route::put('colors/{id}', [ColorController::class, 'update'])->name('colors.update');
+        // Route::delete('colors/{id}', [ColorController::class, 'destroy'])->name('colors.destroy');
         
-        //----------------------TIPOGRAFIAS-----------------------
-        Route::resource('tipografias', TipografiaController::class);
+        // //----------------------TIPOGRAFIAS-----------------------
+        // Route::resource('tipografias', TipografiaController::class);
 
-        // Rutas adicionales
-        Route::get('tipografias/create-custom', [TipografiaController::class, 'create'])->name('tipografias.create-custom');
-        Route::get('tipografias/{id}/edit', [TipografiaController::class, 'edit'])->name('tipografias.edit');
-        Route::put('tipografias/{id}', [TipografiaController::class, 'update'])->name('tipografias.update');
-        Route::delete('tipografias/{id}', [TipografiaController::class, 'destroy'])->name('tipografias.destroy');       
+        // // Rutas adicionales
+        // Route::get('tipografias/create-custom', [TipografiaController::class, 'create'])->name('tipografias.create-custom');
+        // Route::get('tipografias/{id}/edit', [TipografiaController::class, 'edit'])->name('tipografias.edit');
+        // Route::put('tipografias/{id}', [TipografiaController::class, 'update'])->name('tipografias.update');
+        // Route::delete('tipografias/{id}', [TipografiaController::class, 'destroy'])->name('tipografias.destroy');       
     });
 
 
@@ -260,6 +261,48 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
 
     });
 
+    //ADMINISTRACION DE WORDPRESS
+
+    Route::group(['prefix' => '/admin-ncilcoperc'], function () {
+
+        Route::get('/', [AdminWordpressRedirectController::class, 'index'])->name('admin');
+
+        //--------------------IMAGES CATEGORIES-------------
+        Route::resource('images_categories', ImagesCategoryController::class);
+
+        Route::get('images_categories/create-custom', [ImagesCategoryController::class, 'create'])->name('images_categories.create-custom');
+        
+        Route::post('images_categories/store', [ImagesCategoryController::class, 'store'])->name('images_categories.store');
+        Route::get('images_categories/{image_category}/edit-custom', [ImagesCategoryController::class, 'edit'])->name('images_categories.edit-custom');
+        Route::put('images_categories/{image_category}/update-custom', [ImagesCategoryController::class, 'update'])->name('images_categories.update-custom');
+
+        //----------------------ELEMENTS-----------------------
+
+        Route::resource('elements', ElementController::class);
+
+        Route::get('elements/create-custom', [ElementController::class, 'create'])->name('elements.create-custom');
+        Route::get('elements/{id}/edit', [ElementController::class, 'edit'])->name('elements.edit');
+        Route::put('elements/{id}', [ElementController::class, 'update'])->name('elements.update');
+        Route::delete('elements/{id}', [ElementController::class, 'destroy'])->name('elements.destroy');
+
+        //----------------------COLORS-VASO-DESIGN-----------------------
+        Route::resource('colors', ColorController::class);
+        
+        Route::get('colors/create-custom', [ColorController::class, 'create'])->name('colors.create-custom');
+        Route::get('colors/{id}/edit', [ColorController::class, 'edit'])->name('colors.edit');
+        Route::put('colors/{id}', [ColorController::class, 'update'])->name('colors.update');
+        Route::delete('colors/{id}', [ColorController::class, 'destroy'])->name('colors.destroy');
+        
+        //----------------------TIPOGRAFIAS-----------------------
+        Route::resource('tipografias', TipografiaController::class);
+
+        // Rutas adicionales
+        Route::get('tipografias/create-custom', [TipografiaController::class, 'create'])->name('tipografias.create-custom');
+        Route::get('tipografias/{id}/edit', [TipografiaController::class, 'edit'])->name('tipografias.edit');
+        Route::put('tipografias/{id}', [TipografiaController::class, 'update'])->name('tipografias.update');
+        Route::delete('tipografias/{id}', [TipografiaController::class, 'destroy'])->name('tipografias.destroy');       
+    });
+
     Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
         Lfm::routes();
     });
@@ -268,5 +311,10 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
 
     Route::post('/guardar-modelo', [Modelo3DController::class, 'guardarModelo'])->name('guardar.modelo');
     Route::get('/modelo3d/visualizar/{fileName}', [Modelo3DController::class, 'visualizarModelo'])->name('modelo3d.visualizar');
+
+    //APIS WORDPRESS
+
+    Route::get('/api/colors', [ColorController::class, 'indexApi']);
+    Route::get('/api/elements', [ElementController::class, 'indexApi']);
 
     

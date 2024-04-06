@@ -992,7 +992,7 @@ section{
 
 .btn-wrap{
     max-width:180px;
-    background-color:#fff !important;
+    background-color:var(--green-fill) !important;
     color:#fff !important;
     padding: 15px;
     border-radius:10px;

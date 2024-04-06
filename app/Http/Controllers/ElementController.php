@@ -19,6 +19,13 @@ class ElementController extends Controller
         return view('backend.elements.index', compact('elements'));
     }
 
+    public function indexApi()
+    {
+        $elements = Element::all();
+
+        return response()->json($elements);
+    }
+
     public function show($id)
     {
         $elements = Element::findOrFail($id);

@@ -1,8 +1,8 @@
 <!-- resources/views/inspirate/create.blade.php -->
 
-@extends('backend.layouts.master')
+{{-- @extends('backend.layouts.master')
 
-@section('main-content')
+@section('main-content') --}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,6 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{asset('frontend/css/n7styles.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -79,10 +80,11 @@
             });
         });
     </script>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{asset('js/scope/runtime-main.11747796.js')}}"></script>
     <script src="{{asset('js/scope/2.3a3362a2.chunk.js')}}"></script>
     <script src="{{asset('js/scope/main.f169c95d.chunk.js')}}"></script>
 </body>
 
 </html>
-@endsection
+{{-- @endsection --}}

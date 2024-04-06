@@ -1,9 +1,10 @@
 <!-- resources/views/colors_vaso/index.blade.php -->
 
-@extends('backend.layouts.master')
+{{-- @extends('backend.layouts.master')
 
-@section('main-content')
-
+@section('main-content') --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <div class="card">
 <div class="container">
 
@@ -39,7 +40,9 @@
                     <strong>Código RGB:</strong> {{ $color->rgb_code }}
                     <!-- Botón para ir a la ruta de edición -->
                     <div class="mt-1 d-flex justify-content-around">
-                        <a href="{{ route('colors.edit', $color->id) }}" class="btn btn-primary">Editar</a>
+                        <div class="">
+                            <a href="{{ route('colors.edit', $color->id) }}" class="btn btn-primary">Editar</a>
+                        </div>
                         <!-- Botón para eliminar -->
                         <form action="{{ route('colors.destroy', $color->id) }}" method="post" style="display: inline;"  onsubmit="return confirm('¿Estás seguro de que deseas eliminar este color?');">
                             @csrf
@@ -59,5 +62,5 @@
 </div>
 </div>
 
-@endsection
+{{-- @endsection --}}
 
