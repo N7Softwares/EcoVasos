@@ -1108,8 +1108,11 @@ const restoreOriginalColors = () => {
 };
 
 btnPdf.addEventListener('click', () => {
+
     eliminarSeparadorSvg();
+   
     let canvas = document.getElementById("canvas");
+ 
     let width = canvas.width;
     let height = canvas.height;
     let pdf;
@@ -1328,7 +1331,6 @@ let span = document.getElementsByClassName('close')[0];
 // Agregar evento de clic al botón para mostrar el modal después de medio segundo
 btn.onclick = function () {
     eliminarSeparadorSvg();
-    canvas.discardActiveObject().renderAll();
     // Temporizador de medio segundo (500 milisegundos) Para que se quite el svgSeparador primero
     setTimeout(function() {
         modal.style.display = 'block';
@@ -1481,7 +1483,7 @@ agregarSeparador();
 // Encontrar separador
 const eliminarSeparadorSvg = ()=>{
     const objects = canvas.getObjects();
-
+    canvas.discardActiveObject();
     const objetosSeparadores = objects.filter(obj => obj.dataTarget === "separador");
 
     objetosSeparadores.forEach(objetoSeparador => {
