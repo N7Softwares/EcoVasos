@@ -1,4 +1,4 @@
-<header id="site-header">
+<header id="site-header" style="display: none;">
     <div class="inner-header">
       <div id="site-branding">
         <a href="{{route('home')}}"><img src="{{asset('frontend/img/logo/ecoingenio-logo.svg')}}" alt="Ecoingenio logo" class="logo-img"></a>
