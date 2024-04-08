@@ -1,6 +1,6 @@
 
 	<!-- Start Footer Area -->
-	<div id="colophon" class="footer">
+	<div id="colophon" class="footer" style="display: none;">
 		
 		
 		<div class="inner-footer">
