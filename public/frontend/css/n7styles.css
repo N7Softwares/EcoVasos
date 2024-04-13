@@ -30,14 +30,14 @@ ul{
     margin-top: 0px !important;
     margin-bottom: 0px !important;
 }
-/* .padding-top-disenio{
-    padding-top: 2% !important;
-} */
- section{
-    padding:0;
+ .padding-top-disenio{
 	/* Para quitar el margen que quedo despues de ocultar el header*/
 	margin:-40px 0 !important;
-}
+} 
+/* section{
+    padding:0;
+	
+}*/
 .size-texts{
     font-size: 12px;
 }
@@ -1212,7 +1212,7 @@ body.js{
 }
 
 @media (max-width: 450px) {
-	section{
+	.padding-top-disenio{
 		padding:0;
 		/* Para quitar el margen que quedo despues de ocultar el header*/
 		margin:-60px 0 !important;
