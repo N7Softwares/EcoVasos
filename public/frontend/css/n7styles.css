@@ -33,9 +33,11 @@ ul{
 /* .padding-top-disenio{
     padding-top: 2% !important;
 } */
-/* section{
-    padding:20px 0;
-} */
+ section{
+    padding:0;
+	/* Para quitar el margen que quedo despues de ocultar el header*/
+	margin:-40px 0 !important;
+}
 .size-texts{
     font-size: 12px;
 }
@@ -79,7 +81,7 @@ ul{
     display:none !important;
 }
 body.js{
-    padding-bottom:70px;
+    padding-bottom:130px;
     height:fit-content;
 }
 /* --------------------------- LeftSideBar --------------------------- */
@@ -1210,6 +1212,11 @@ body.js{
 }
 
 @media (max-width: 450px) {
+	section{
+		padding:0;
+		/* Para quitar el margen que quedo despues de ocultar el header*/
+		margin:-60px 0 !important;
+	}
     .bloq-side{
         width:50px;
     }
