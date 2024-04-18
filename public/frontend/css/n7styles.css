@@ -1053,6 +1053,21 @@ body.js{
     display:flex;
     justify-content:center;
 }
+.logo-ecoingenio3d{
+    position:fixed;
+    top:0;
+    left:0;
+    /* border:1px solid red; */
+    background:#fafafa;
+}
+.logo-ecoingenio3d img{
+    width:200px;
+
+}
+.subtitulo3d p{
+    text-align:center;
+    font-size:1.1rem;
+}
 /* ------------------------ seccion de responsive ------------------------ */
 
 @media (max-width: 991px) {
@@ -1289,6 +1304,13 @@ body.js{
     .signal-red{
         line-height: 1;
     }
+    /* ----------------- Pagina de compartir modelo 3d ----------------- */
+    .compartido3d{
+        padding:30px 0;
+    }
+    .logo-ecoingenio3d img{
+        width:150px;
+    }
 }
 
 @media (max-width: 375px) {
@@ -1346,6 +1368,13 @@ body.js{
         width:100px;
         flex-wrap:wrap;
         font-size:.85rem;
+    }
+    /* ----------------- Pagina de compartir modelo 3d ----------------- */
+    .compartido3d{
+        padding:35px 0;
+    }
+    .subtitulo3d p{
+        font-size:1rem;
     }
 }
 

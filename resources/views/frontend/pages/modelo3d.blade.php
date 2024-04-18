@@ -15,8 +15,14 @@
 </head>
 <body>
     <!-- Contenedor Modelo 3D -->
-    <section>
-        <h1 class="text-center">Modelo 3d</h1>
+    <section class="compartido3d">
+        <h1 class="text-center">Modelo 3D</h1>
+        <div class="logo-ecoingenio3d">
+            <img src="{{asset('images/ecoingenio-logo2.svg')}}"  alt="">
+        </div>
+        <div class="subtitulo3d">
+            <p>Previsualización 3D powered by Ecoingenio.<br> Este montaje 3D se utiliza únicamente con fines ilustrativos.</p>
+        </div>
         <div class="d-flex justify-content-center gap-4">
             <button id="vasoBtn" class="option-btn active">Vaso</button>
             <button id="copaBtn" class="option-btn">Copa</button>
