@@ -88,11 +88,11 @@ fabric.loadSVGFromString(svgContentBrand, function(objects, options) {
     const svgImg = fabric.util.groupSVGElements(objects, options);
     
     svgImg.set({
-        scaleX: 0.07,
+        scaleX: 0.09,
         selectable: true,
-        scaleY: 0.07,
+        scaleY: 0.09,
         left: 599,
-        top: 263,
+        top: 253,
         dataTarget:"color-disenio"
     });
     const elementosEnGrupo = svgImg.getObjects();

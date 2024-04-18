@@ -667,7 +667,8 @@
                         <div class="container-fluid " >
                             <div class="row">
                                 <div class="col-12 text-center">
-                                    <p class="signal-red">Aviso: los elementos que sobrepasen los bordes del lienzo, no serán visibles en su diseño final.</p>
+                                    <p class="signal-red">Aviso: los elementos que sobrepasen los bordes del lienzo, no serán visibles en su diseño final.<br>
+                                    Atención: Evitar los elementos demasiado pequeños ya que podrían no salir en la impresión final.</p>
                                 </div>
                             </div>
                             <div class="container-indicador-canva">
