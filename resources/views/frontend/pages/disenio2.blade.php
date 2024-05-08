@@ -75,12 +75,12 @@
                                     </div>
                                     <h6>Textos</h6>
                                 </div>
-                                <div class="bloq-side" data-target="medidor">
+                                {{-- <div class="bloq-side" data-target="medidor">
                                     <div class="img-bloq-side">
                                         <img src="{{asset('frontend/img/personalizacion_vasos/medidas.svg')}}" alt="" srcset="">
                                     </div>
                                     <h6>Medidor</h6>
-                                </div>
+                                </div> --}}
                                 
                         </div>
                         <div class="col-9 sideLeftContent">
@@ -698,8 +698,11 @@
                             <!-- Botón para guardar el modelo -->
                             <button id="guardarModeloBtn" type="submit">Compartir Diseño 3D</button>
                         </form>
-                        <div id="message" style="display: none; color: #33ff00; padding: 10px; position: absolute; top: 60px; left: 50%; transform: translateX(-50%); z-index: 100; font-size: 25px;">Enlace copiado</div>
-
+                        <div id="message" style="display: none; color: #33ff00; padding: 10px; position: absolute; top: 60px; left: 50%; transform: translateX(-50%); z-index: 100; font-size: 25px;">
+                            <img src="{{asset('frontend/img/icon/image.webp')}}" alt="Check" style="width: 30px; height: 30px; vertical-align: middle;">
+                            <span style="vertical-align: middle;">Enlace copiado</span>
+                        </div>
+                                           
                     </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>

@@ -16,14 +16,14 @@
 <body>
     <!-- Contenedor Modelo 3D -->
     <section class="compartido3d">
-        <h1 class="text-center">Modelo 3D</h1>
+        <h1 class="text-center y-margin">Modelo 3D</h1>
         <div class="logo-ecoingenio3d">
             <img src="{{asset('images/ecoingenio-logo2.svg')}}"  alt="">
         </div>
         <div class="subtitulo3d">
             <p>Previsualización 3D powered by Ecoingenio.<br> Este montaje 3D se utiliza únicamente con fines ilustrativos.</p>
         </div>
-        <div class="d-flex justify-content-center gap-4">
+        <div class="d-flex justify-content-center gap-4 y-margin">
             <button id="vasoBtn" class="option-btn active">Vaso</button>
             <button id="copaBtn" class="option-btn">Copa</button>
         </div>
@@ -33,7 +33,7 @@
     <!-- Imprime el JSON en un input oculto -->
     <input type="hidden" id="jsonInput" value="{{ $jsonContent }}">
     <section>
-        <h2 class="text-center">Diseño en el Lienzo</h2>
+        <h2 class="text-center y-margin">Diseño en el Lienzo</h2>
         <div class="container-fluid d-flex justify-content-center">
             <div class="container-indicador-canva canva-modelo3d">
                 

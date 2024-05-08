@@ -60,7 +60,7 @@ class DisenioController extends Controller
         preg_match_all('/<path[^>]*>/', $contenidoSVG, $matches);
     
         // Mantener solo los dos primeros elementos <path>
-        $nuevosPaths = array_slice($matches[0], 0, 1);
+        $nuevosPaths = array_slice($matches[0], 0, 2);
     
         // Eliminar todos los elementos <path> del SVG original
         $contenidoSVG = preg_replace('/<path[^>]*>/', '', $contenidoSVG);
