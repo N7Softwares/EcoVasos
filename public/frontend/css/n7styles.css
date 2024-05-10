@@ -62,6 +62,18 @@ ul{
     overflow-x: auto; /* Añade un scroll horizontal si es necesario */
     white-space: nowrap; /* Evita el salto de línea del contenido */
     padding: 0 0 30px;
+    /* display:flex;
+    flex-direction:column; */
+}
+.mensaje-scroll{
+    display:none;
+}
+.container-indicador-canva ul{
+    display:flex;
+    list-style: none;
+    gap:30px;
+    color:var(--green-border);
+    font-size:1.1rem;
 }
 .col-rightSide{
 	/* width:16%; */
@@ -1059,6 +1071,7 @@ body.js{
     left:0;
     /* border:1px solid red; */
     background:#fafafa;
+    z-index:10;
 }
 .logo-ecoingenio3d img{
     width:200px;
@@ -1222,7 +1235,15 @@ body.js{
 
     /* ----------------- CANVA ----------------- */
     .container-indicador-canva {
-        padding: 0 0 30px;
+        padding: 70px 0 !important;
+        background-image:url('/frontend/img/personalizacion_vasos/scrolleable.svg') !important;
+        background-repeat: repeat;
+        /* border:1px solid red; */
+    }
+
+    .mensaje-scroll{
+        display:block;
+        font-size:1rem;
     }
 }
 
