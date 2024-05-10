@@ -31,12 +31,12 @@
 
         <div class="container-fluid d-flex justify-content-center">  
             <div class="row" style="position: relative;">
-                <div class="col-1" style="position: absolute; background: #fafafa; top: 0; left: 0; z-index: 9; padding: 500px 20px;">
+                <div class="col-1" style="position: absolute; background: #fafafa; top: 0; left: 0; z-index: 9; padding: 300px 20px;">
                 </div>
                 <div class="col-12">
                     <div id="container3D" class="container3dClass"></div>   
                 </div> 
-                <div class="col-1" style="position: absolute; background: #fafafa; top: 0; right: 0; z-index: 9; padding: 500px 20px;">
+                <div class="col-1" style="position: absolute; background: #fafafa; top: 0; right: 0; z-index: 9; padding: 300px 20px;">
                 </div>
             </div>
         </div>
@@ -47,8 +47,9 @@
     <input type="hidden" id="jsonInput" value="{{ $jsonContent }}">
     <section>
         <h2 class="text-center y-margin">Diseño en el Lienzo</h2>
-        <div class="container-fluid d-flex justify-content-center">
-            <div class="container-indicador-canva canva-modelo3d">
+        <div class="container-fluid d-flex flex-column align-items-center">
+            <h4 class="text-center text-success mensaje-scroll">Deslizar Hacia los Lados para Ver el Diseño Completo</h4>
+            <div class=" container-indicador-canva canva-modelo3d">
                 
                 <div class="row">
                     <div class="col-8 pl-0 ">
