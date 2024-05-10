@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{{asset('frontend/css/n7styles.css')}}">
     
 </head>
+
 <body>
     <!-- Contenedor Modelo 3D -->
     <section class="compartido3d">
@@ -27,7 +28,19 @@
             <button id="vasoBtn" class="option-btn active">Vaso</button>
             <button id="copaBtn" class="option-btn">Copa</button>
         </div>
-        <div id="container3D" class="container3dClass"></div>    
+
+        <div class="container-fluid d-flex justify-content-center">  
+            <div class="row" style="position: relative;">
+                <div class="col-1" style="position: absolute; background: #fafafa; top: 0; left: 0; z-index: 9; padding: 500px 20px;">
+                </div>
+                <div class="col-12">
+                    <div id="container3D" class="container3dClass"></div>   
+                </div> 
+                <div class="col-1" style="position: absolute; background: #fafafa; top: 0; right: 0; z-index: 9; padding: 500px 20px;">
+                </div>
+            </div>
+        </div>
+        
     </section>
     
     <!-- Imprime el JSON en un input oculto -->
@@ -39,7 +52,7 @@
                 
                 <div class="row">
                     <div class="col-8 pl-0 ">
-                        <canvas id="canvas" width="1000" height="400"></canvas>
+                        <canvas id="canvas" width="900" height="400"></canvas>
                     </div>
                 </div>
             </div>
