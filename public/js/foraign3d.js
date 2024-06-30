@@ -54,19 +54,24 @@ canvas.loadFromJSON(jsonObject, function() {
 
 
 // Deshabilitar la interacción del canvas
-canvas.selection = false;
+// canvas.selection = false;
 
 // Iterar sobre todos los objetos del canvas y deshabilitar su interacción
-canvas.getObjects().forEach(obj => {
-    obj.selectable = false; // Deshabilitar la selección
-    obj.evented = false; // Deshabilitar los eventos
-});
+// canvas.getObjects().forEach(obj => {
+    // obj.selectable = false; // Deshabilitar la selección
+    // obj.evented = false; // Deshabilitar los eventos
+// });
 
+addEventListener("DOMContentLoaded",()=>{
+  canvas.getObjects();
+  canvas.renderAll();
+  console.log("Pagina cargada");
+})
 
 // Ahora puedes trabajar con el objeto jsonObject en tu script
-// console.log(jsonObject);
+console.log(jsonObject);
 
-
+window.fabricCanvas = canvas;
 
 
 // console.log("paso22");
