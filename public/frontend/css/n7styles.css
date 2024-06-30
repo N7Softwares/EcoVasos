@@ -1421,4 +1421,56 @@ body.js{
 .y-margin{
     margin: 40px 0;
 }
+#boxReturn{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+#myButtonReturn {
+    background-color: #d9534f; /* Rojo suave */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: auto;
+}
 
+#myButtonReturn:hover {
+    background-color: #c9302c; /* Rojo un poco más oscuro al pasar el mouse */
+    transform: scale(1.05);
+}
+
+/* Estilo para la pantalla de carga */
+#loading_screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    text-align: center;
+}
+
+/* Estilo para la imagen de carga */
+#loading_screen img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 1s infinite linear;
+}
+
+/* Animación de rotación */
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

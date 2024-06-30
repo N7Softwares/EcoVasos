@@ -1548,3 +1548,74 @@ guardarModeloBtn.addEventListener('click', function(event) {
         console.error('Error al hacer la solicitud AJAX: ', err);
     });
 });
+
+//=====================================PDF EN CARRITO=================================
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener el ID de la URL actual
+    function getSessionIdFromUrl() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('session_id');
+    }
+
+    const sessionId = getSessionIdFromUrl();
+
+    // Mostrar el botón si session_id está presente
+    if (sessionId) {
+        document.getElementById('boxReturn').style.display = 'flex';
+    } else {
+        document.getElementById('boxReturn').style.display = 'none';
+    }
+});
+
+const btnReturn = document.getElementById("myButtonReturn");
+
+document.getElementById('myButtonReturn').addEventListener('click', () => {
+    document.getElementById('loading_screen').style.display = 'block';
+
+    let canvas = document.getElementById("canvas");
+    let width = canvas.width;
+    let height = canvas.height;
+    let pdf;
+
+    // Establecer la orientación del PDF
+    if (width > height) {
+        pdf = new jsPDF('l', 'px', [width, height]);
+    } else {
+        pdf = new jsPDF('p', 'px', [height, width]);
+    }
+
+    // Esperar un breve período para que el lienzo se renderice completamente
+    setTimeout(() => {
+        // Obtener las dimensiones del lienzo en el PDF
+        width = pdf.internal.pageSize.getWidth();
+        height = pdf.internal.pageSize.getHeight();
+
+        // Obtener los datos de la imagen del lienzo original
+        const dataUrl = canvas.toDataURL({ format: 'png' });
+
+        // Agregar la imagen original al PDF
+        pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
+
+        // Modificar el lienzo para que tenga fondo blanco y elementos negros
+        invertColorsAndSaveOriginal()
+
+        // Obtener los datos de la imagen del lienzo modificado
+        const modifiedDataUrl = canvas.toDataURL({ format: 'png' });
+
+        // Agregar la imagen modificada al PDF
+        pdf.addPage();
+        pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height);
+
+        // Convertir PDF a base64 y enviarlo al padre
+        const pdfData = pdf.output('datauristring');
+        window.parent.postMessage(pdfData, '*');
+
+        // Restaurar los colores originales del lienzo
+        restoreOriginalColors();
+
+        agregarSeparador();
+
+        // Ocultar la pantalla de carga
+        document.getElementById('loading_screen').style.display = 'none';
+    }, 500); // Esperar 500 milisegundos (0.5 segundos) antes de generar el PDF
+});
