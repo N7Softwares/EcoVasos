@@ -24,6 +24,8 @@
     use App\Http\Controllers\ColorController;
     use App\Http\Controllers\TipografiaController;
     use App\Http\Controllers\Modelo3DController;
+    use App\Http\Controllers\PdfController;
+
     /*
     |--------------------------------------------------------------------------
     | Web Routes
@@ -317,4 +319,12 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
     Route::get('/api/colors', [ColorController::class, 'indexApi']);
     Route::get('/api/elements', [ElementController::class, 'indexApi']);
 
-    
+    // Rutas para que los clientes puedan subir sus pdfs
+    Route::get('/pdf/create', [PdfController::class, 'create'])->name('pdf.create');
+    // backend
+    Route::post('/pdf/store', [PdfController::class, 'store'])->name('pdf.store');
+    Route::get('/pdf/view/{filename}', [PdfController::class, 'view'])->name('pdf.view');
+    Route::get('/pdf/download/{id}', [PdfController::class, 'download'])->name('pdf.download');
+    Route::get('/pdf', [PdfController::class, 'index'])->name('pdf.index');
+    Route::delete('/pdf/{id}', [PdfController::class, 'destroy'])->name('pdf.destroy');
+
