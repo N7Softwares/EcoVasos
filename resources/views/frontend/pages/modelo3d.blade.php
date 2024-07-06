@@ -16,7 +16,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    @foreach($array['tipografias'] as $tipografia)
+    @foreach($tipografias as $tipografia)
         <style>
             @font-face {
                 font-family: '{{ $tipografia->name }}';
@@ -24,6 +24,7 @@
             }
         </style>
     @endforeach
+
 </head>
 
 <body>

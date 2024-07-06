@@ -20,6 +20,8 @@ const canvas = new fabric.Canvas('canvas', {
     webgl: true,
     antialias: true,
 });
+// Hacer la variable global
+window.canvas = canvas;
 
 // Escalar el lienzo internamente para aumentar la resolución
 canvas.setDimensions({
@@ -44,34 +46,46 @@ jsonObject.objects = jsonObject.objects.filter(obj => {
   return !(obj.type === 'group' && obj.objects.length === 6 && obj.width === 1000);
 });
 
-
-
 // Cargar el contenido del JSON en el canvas de destino
-canvas.loadFromJSON(jsonObject, function() {
+  canvas.loadFromJSON(jsonObject, function() {
     // Hacer algo después de cargar el JSON, si es necesario
     canvas.renderAll();
-});
+  });
 
 
-// Deshabilitar la interacción del canvas
-// canvas.selection = false;
-
-// Iterar sobre todos los objetos del canvas y deshabilitar su interacción
-// canvas.getObjects().forEach(obj => {
-    // obj.selectable = false; // Deshabilitar la selección
-    // obj.evented = false; // Deshabilitar los eventos
-// });
+  // Deshabilitar la interacción del canvas
+  canvas.selection = false;
+  
 
 addEventListener("DOMContentLoaded",()=>{
-  canvas.getObjects();
-  canvas.renderAll();
-  console.log("Pagina cargada");
+  // Espera 5 segundos antes de escalar el tamaño de los textos
+  setTimeout(() =>{
+    // Iterar sobre todos los objetos del canvas y deshabilitar su interacción
+    canvas.getObjects().forEach(obj => {
+      
+      // console.log(obj.type);
+      // Escalar el tamaño de los textos para aplicar correctamente las fuentes
+      if(obj.type==="text"){
+        let scaleY = obj.scaleY;
+        let scaleX = obj.scaleX;
+        obj.scaleY = scaleY+0.1;
+        obj.scaleX = scaleX+0.1;
+        // console.log(obj.scaleY);
+        // console.log(obj.scaleX);
+
+      }
+      canvas.renderAll();
+      obj.selectable = false; // Deshabilitar la selección
+      obj.evented = false; // Deshabilitar los eventos
+    });
+  }, 5000);
+
+  
 })
 
 // Ahora puedes trabajar con el objeto jsonObject en tu script
 console.log(jsonObject);
 
-window.fabricCanvas = canvas;
 
 
 // console.log("paso22");
