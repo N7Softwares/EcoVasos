@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use App\Models\Tipografia;
 
 class Modelo3DController extends Controller
 {
@@ -41,13 +42,19 @@ class Modelo3DController extends Controller
         // echo $filePath;
         // echo "<br>";
         // Verificar si el archivo existe
+        $tipografias = Tipografia::all();
+
+        $array = [
+            
+            'tipografias' => $tipografias
+        ];
         if (file_exists($filePath)) {
             // Obtener el contenido del archivo
             $jsonContent = file_get_contents($filePath);
             // echo $jsonContent;
             // die;
             // Pasar los datos del JSON a la vista
-            return view('frontend.pages.modelo3d', ['jsonContent' => $jsonContent]);
+            return view('frontend.pages.modelo3d', ['jsonContent' => $jsonContent], compact('array'));
         } else {
             // Manejar el caso en que el archivo no existe
             abort(404, 'El archivo JSON no fue encontrado');

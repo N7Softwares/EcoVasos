@@ -478,6 +478,14 @@
                             <h5>Visualizar Vaso en 3D</h5>
                             <button class="btn3d" id="ver3DBtn">Ver 3D</button>
                         </div>
+                        <div id="boxReturn">
+                            <!--------------------------- Para mandar de nuevo a la tienda --------------------------->
+                            <h5>Retornar a la compra</h5>
+                            <button id="myButtonReturn">Finalizar diseño</button>
+                        </div>
+                        <div id="loading_screen">
+                            <img src="https://ecoingenio.com.ar/wp-content/uploads/2024/03/recycle-icon.svg" alt="Cargando...">
+                        </div>
                     </div>
                     <div id="svg-container-brand" class="d-none">
                         <svg xmlns="http://www.w3.org/2000/svg"
