@@ -1126,25 +1126,25 @@ btnPdf.addEventListener('click', () => {
 
     // Esperar un breve período para que el lienzo se renderice completamente
     setTimeout(() => {
+
         // Obtener las dimensiones del lienzo en el PDF
         width = pdf.internal.pageSize.getWidth();
         height = pdf.internal.pageSize.getHeight();
 
-        // Obtener los datos de la imagen del lienzo original
-        const dataUrl = canvas.toDataURL({ format: 'png' });
 
-        // Agregar la imagen original al PDF
-        pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
+        const dataUrl = canvas.toDataURL('image/png', 0.5); 
+
+        pdf.addImage(dataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
 
         // Modificar el lienzo para que tenga fondo blanco y elementos negros
         invertColorsAndSaveOriginal()
 
         // Obtener los datos de la imagen del lienzo modificado
-        const modifiedDataUrl = canvas.toDataURL({ format: 'png' });
+        const modifiedDataUrl = canvas.toDataURL('image/png', 0.5); 
 
         // Agregar la imagen modificada al PDF
         pdf.addPage();
-        pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height);
+        pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
 
         // Guardar el PDF
         pdf.save("vaso-personalizado.pdf");
@@ -1572,50 +1572,69 @@ const btnReturn = document.getElementById("myButtonReturn");
 document.getElementById('myButtonReturn').addEventListener('click', () => {
     document.getElementById('loading_screen').style.display = 'block';
 
+    eliminarSeparadorSvg();
     let canvas = document.getElementById("canvas");
     let width = canvas.width;
     let height = canvas.height;
     let pdf;
 
-    // Establecer la orientación del PDF
     if (width > height) {
         pdf = new jsPDF('l', 'px', [width, height]);
     } else {
         pdf = new jsPDF('p', 'px', [height, width]);
     }
 
-    // Esperar un breve período para que el lienzo se renderice completamente
     setTimeout(() => {
-        // Obtener las dimensiones del lienzo en el PDF
         width = pdf.internal.pageSize.getWidth();
         height = pdf.internal.pageSize.getHeight();
 
-        // Obtener los datos de la imagen del lienzo original
-        const dataUrl = canvas.toDataURL({ format: 'png' });
+        const dataUrl = canvas.toDataURL('image/png', 0.5); 
 
-        // Agregar la imagen original al PDF
-        pdf.addImage(dataUrl, 'PNG', 0, 0, width, height);
+        pdf.addImage(dataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
 
-        // Modificar el lienzo para que tenga fondo blanco y elementos negros
-        invertColorsAndSaveOriginal()
+        invertColorsAndSaveOriginal();
 
-        // Obtener los datos de la imagen del lienzo modificado
-        const modifiedDataUrl = canvas.toDataURL({ format: 'png' });
+        const modifiedDataUrl = canvas.toDataURL('image/png', 0.5); 
 
-        // Agregar la imagen modificada al PDF
         pdf.addPage();
-        pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height);
+        pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST'); // Añade imagen comprimida
 
-        // Convertir PDF a base64 y enviarlo al padre
-        const pdfData = pdf.output('datauristring');
-        window.parent.postMessage(pdfData, '*');
-
-        // Restaurar los colores originales del lienzo
         restoreOriginalColors();
 
         agregarSeparador();
 
-        // Ocultar la pantalla de carga
-        document.getElementById('loading_screen').style.display = 'none';
-    }, 500); // Esperar 500 milisegundos (0.5 segundos) antes de generar el PDF
+        const pdfBlob = pdf.output('blob');
+
+        const formData = new FormData();
+        formData.append('nombre_usuario', 'eco');
+        formData.append('nombre_pdf', 'pdf');
+        formData.append('pdf', pdfBlob, 'documento.pdf');
+
+        console.log('Uploading PDF.');
+
+        fetch('https://prueba.ecoingenio.com.ar/api/upload-pdf', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('PDF uploaded successfully:', data);
+            document.getElementById('loading_screen').style.display = 'none';
+            // Manejar la respuesta aquí, como copiar el enlace al portapapeles
+
+            // Envío de la respuesta al iframe de diseño
+            window.parent.postMessage({
+                type: 'PDF_UPLOAD_SUCCESS',
+                link: data.link
+            }, 'https://ecoingenio.com.ar/');
+        })
+        .catch(error => {
+            console.error('Error uploading PDF:', error);
+            document.getElementById('loading_screen').style.display = 'none';
+        });
+
+    }, 5000);
 });

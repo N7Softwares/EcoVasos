@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pdf;
+use App\Models\PdfHerramienta;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PdfController extends Controller
@@ -18,43 +20,62 @@ class PdfController extends Controller
         return view('frontend.pages.create-pdf');
     }
 
-    public function store(Request $request)
+    public function uploadPdf(Request $request)
     {
-        // Validar la solicitud
+        Log::info('uploadPdf called.');
+    
+        // Validación de los datos recibidos
         $request->validate([
             'nombre_usuario' => 'required|string|max:255',
             'nombre_pdf' => 'required|string|max:255',
-            'pdf_file' => 'required|file|mimes:pdf|max:16384', // 16 MB
+            'pdf' => 'required|file|mimes:pdf'
         ]);
-
-        // Obtener los datos del formulario
+    
+        // Obtención de los datos del formulario
         $nombre_usuario = $request->input('nombre_usuario');
         $nombre_diseno = $request->input('nombre_pdf');
-        $pdf_file = $request->file('pdf_file');
-
-        // Generar el nombre del archivo sin espacios, reemplazando espacios por guiones bajos
-        $nombre_archivo = str_replace(' ', '_', $nombre_usuario . '-' . $nombre_diseno . '-' . uniqid() . '.' . $pdf_file->getClientOriginalExtension());
-
-        // Guardar el archivo en la carpeta public/storage/pdf
-        $path = $pdf_file->storeAs('public/pdf', $nombre_archivo);
-
-        // Crear un nuevo registro en la base de datos
-        $pdf = Pdf::create([
-            'nombre_usuario' => $nombre_usuario,
-            'nombre_diseno' => $nombre_diseno,
-            'nombre_archivo' => $nombre_archivo,
-        ]);
-
-        // Generar el enlace para ver el PDF
-        $link = route('pdf.view', ['filename' => $pdf->nombre_archivo]);
-
-        // Retornar una respuesta JSON
-        return response()->json([
-            'message' => 'PDF subido correctamente. Enlace Copiado al Portapapeles',
-            'link' => $link
-        ]);
+        $pdf = $request->file('pdf');
+    
+        // Registro del nombre del PDF recibido
+        Log::info('PDF received: ' . $pdf->getClientOriginalName());
+    
+        // Generación de un nombre único para el archivo PDF
+        $pdfName = str_replace(' ', '_', $nombre_usuario . '-' . $nombre_diseno . '-' . uniqid() . '.pdf');
+    
+        // Ruta final deseada en la carpeta public/pdf/
+        $finalPdfPath = public_path('pdf/' . $pdfName);
+    
+        // Almacenamiento del PDF en la carpeta public/pdf/
+        if (!$pdf->move(public_path('pdf'), $pdfName)) {
+            Log::error('Failed to move PDF to public/pdf/');
+            return response()->json(['error' => 'Error al guardar el archivo PDF.'], 500);
+        }
+    
+        // Registro de la ubicación donde se almacenó el PDF
+        Log::info('PDF stored at: ' . $finalPdfPath);
+    
+        // Guardado de los detalles del PDF en la base de datos
+        try {
+            $pdfEntry = PdfHerramienta::create([
+                'nombre_usuario' => $nombre_usuario,
+                'nombre_diseno' => $nombre_diseno,
+                'nombre_archivo' => $pdfName, // Guardar solo el nombre del archivo
+            ]);
+    
+            Log::info('PDF entry created in database.');
+    
+            // Generación del enlace para ver el PDF
+            $link = url('pdf/' . $pdfName);
+    
+            return response()->json([
+                'message' => 'PDF subido correctamente.',
+                'link' => $link
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error al guardar los detalles del PDF en la base de datos: ' . $e->getMessage());
+            return response()->json(['error' => 'Error al guardar los detalles del PDF en la base de datos.'], 500);
+        }
     }
-
 
     public function view($filename)
     {
