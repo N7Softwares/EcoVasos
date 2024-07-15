@@ -39,22 +39,19 @@ class Modelo3DController extends Controller
     public function visualizarModelo($fileName) {
         // Construir la ruta del archivo
         $filePath = storage_path('app/temp/' . $fileName . '.json');
-        // echo $filePath;
-        // echo "<br>";
+    
         // Verificar si el archivo existe
         $tipografias = Tipografia::all();
-
-        $array = [
-            
-            'tipografias' => $tipografias
-        ];
+    
         if (file_exists($filePath)) {
             // Obtener el contenido del archivo
             $jsonContent = file_get_contents($filePath);
-            // echo $jsonContent;
-            // die;
-            // Pasar los datos del JSON a la vista
-            return view('frontend.pages.modelo3d', ['jsonContent' => $jsonContent], compact('array'));
+    
+            // Pasar los datos del JSON y las tipografías a la vista
+            return view('frontend.pages.modelo3d', [
+                'jsonContent' => $jsonContent,
+                'tipografias' => $tipografias
+            ]);
         } else {
             // Manejar el caso en que el archivo no existe
             abort(404, 'El archivo JSON no fue encontrado');
