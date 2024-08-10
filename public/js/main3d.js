@@ -104,72 +104,102 @@ document.onmousemove = (e) => {
   mouseY = e.clientY;
 }
 
+function getCanvasBackgroundColor(canvas) {
+  const ctx = canvas.getContext('2d');
+  const imageData = ctx.getImageData(0, 0, 1, 1).data;
+  return `rgba(${imageData[0]}, ${imageData[1]}, ${imageData[2]}, ${imageData[3] / 255})`;
+}
+
+let originalCanvasWidth, originalCanvasHeight;
+let currentPadding = 80; // Ajusta este valor según sea necesario
+
+function addPaddingToCanvas(originalCanvas, padding) {
+  const paddedCanvas = document.createElement('canvas');
+  const ctx = paddedCanvas.getContext('2d');
+
+  // Almacenar las dimensiones originales si no se han almacenado
+  if (!originalCanvasWidth || !originalCanvasHeight) {
+    originalCanvasWidth = originalCanvas.width;
+    originalCanvasHeight = originalCanvas.height;
+  }
+
+  // Ajustar el tamaño del nuevo lienzo para incluir el padding
+  paddedCanvas.width = originalCanvasWidth;
+  paddedCanvas.height = originalCanvasHeight + padding * 2;
+
+  // Captura el color de fondo del lienzo original
+  const backgroundColor = getCanvasBackgroundColor(originalCanvas);
+
+  // Rellena el nuevo lienzo con el color de fondo del lienzo original
+  ctx.fillStyle = backgroundColor;
+  ctx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
+
+  // Dibuja la textura original en el centro del nuevo lienzo
+  ctx.drawImage(originalCanvas, 0, padding);
+
+  return paddedCanvas;
+}
+
+const updateCanvasTexture = (canvas, canvasMesh) => {
+  // Crear el lienzo con padding usando las dimensiones y padding almacenados
+  const paddedCanvas = addPaddingToCanvas(canvas, currentPadding);
+
+  // Crear la textura a partir del lienzo con padding
+  const canvasTexture = new THREE.CanvasTexture(paddedCanvas);
+  canvasTexture.wrapS = THREE.RepeatWrapping;
+  canvasTexture.wrapT = THREE.RepeatWrapping;
+  canvasTexture.repeat.set(1, 1); 
+  canvasTexture.needsUpdate = true;
+
+  // Desvincular la textura anterior (si existe)
+  if (canvasMesh.material.map) {
+      canvasMesh.material.map.dispose();
+  }
+
+  // Asignar la nueva textura al material
+  canvasMesh.material.map = canvasTexture;
+}
 
 const cambiarObjeto = function(objeto) {
-    // console.log("paso5");
-    // console.log("RECIBO", objeto);
     objToRender = objeto;
 
+    // Limpiar la escena
     while (scene.children.length > 0) {
       scene.remove(scene.children[0]);
     }
-    //Instantiate a loader for the .gltf file
-    const loader = new GLTFLoader();
 
+    const loader = new GLTFLoader();
+    const canvas3d = document.getElementById("canvas");
+    
     //Load the file
     if(objToRender === 'glass'){
-      loader.load(
-        `3d/${objToRender}/scene.gltf`,
-        function (gltf) {
-          object = gltf.scene;
-          // Función para crear la textura y asignarla al material
-          
-          // Crear el lienzo curvo
-          const canvas3d = document.getElementById("canvas");
-          let canvasTexture = new THREE.CanvasTexture(canvas3d);
-          const canvasMaterial = new THREE.MeshBasicMaterial({ map: canvasTexture });
-      
-          // Crear una geometría cilíndrica para el lienzo
-          const radiusTop = 1.2; // Radio superior del cilindro (ajusta según sea necesario)
-          const radiusBottom = 1; // Radio inferior del cilindro (ajusta según sea necesario)
-          const height = 3; // Altura del cilindro (ajusta según sea necesario)
-          const radialSegments = 50; // Segmentos radiales del cilindro
-          const canvasGeometry = new THREE.CylinderGeometry(radiusTop, radiusBottom, height, radialSegments);
-      
-          // Rotar y posicionar el lienzo cilíndrico
-          const canvasMesh = new THREE.Mesh(canvasGeometry, canvasMaterial);
-          // canvasMesh.rotation.x = Math.PI / 220; // Rotar el cilindro para que sea perpendicular al vaso
-          canvasMesh.position.set(0, 0, 0); // Ajusta la posición según sea necesario
-          canvas.on('after:render', updateCanvasTexture);
-
-          function updateCanvasTexture() {
-            canvasTexture = new THREE.CanvasTexture(canvas3d);
-            canvasTexture.needsUpdate = true;
-          
-            // Desvincular la textura anterior (si existe)
-            if (canvasMesh.material.map) {
-              canvasMesh.material.map.dispose();
-            }
-          
-            // Asignar la nueva textura al material
-            canvasMesh.material.map = canvasTexture;
-          }
-          // Agregar el lienzo al objeto del vaso
-          object.add(canvasMesh);
-      
-          // Agregar el objeto del vaso al escenario
-          scene.add(object);
-          
-        },
-        function (xhr) {
-          //While it is loading, log the progress
-          console.log((xhr.loaded / xhr.total * 100) + '% loaded');
-        },
-        function (error) {
-          //If there is an error, log it
-          console.error(error);
-        }
-      );
+      loader.load(`3d/${objToRender}/scene.gltf`, function (gltf) {
+        object = gltf.scene;
+  
+        // Crear la textura y material
+        let canvasTexture = new THREE.CanvasTexture(canvas3d);
+        const canvasMaterial = new THREE.MeshBasicMaterial({ map: canvasTexture });
+  
+        // Crear una geometría cilíndrica para el lienzo
+        const canvasGeometry = new THREE.CylinderGeometry(1.2, 1, 3, 50);
+  
+        // Crear la malla con la textura del lienzo
+        const canvasMesh = new THREE.Mesh(canvasGeometry, canvasMaterial);
+        canvasMesh.position.set(0, 0, 0);
+  
+        // Actualizar la textura del lienzo
+        updateCanvasTexture(canvas3d, canvasMesh);
+  
+        canvas.on('after:render', () => updateCanvasTexture(canvas3d, canvasMesh));
+  
+        object.add(canvasMesh);
+        scene.add(object);
+  
+      }, function (xhr) {
+        console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+      }, function (error) {
+        console.error(error);
+      });
     }else if (objToRender === 'cup_glass') {
       loader.load(`3d/${objToRender}/de_prueba/scene.gltf`, function (gltf) {
           object = gltf.scene;
@@ -202,7 +232,11 @@ const cambiarObjeto = function(objeto) {
           canvas.on('after:render', updateCanvasTextureCup);
 
           function updateCanvasTextureCup() {
-            canvasTexture = new THREE.CanvasTexture(canvas3d);
+            // Crear el lienzo con padding usando las dimensiones y padding almacenados
+            const paddedCanvas = addPaddingToCanvas(canvas3d, currentPadding);
+          
+            // Crear la textura a partir del lienzo con padding
+            canvasTexture = new THREE.CanvasTexture(paddedCanvas);
             canvasTexture.needsUpdate = true;
           
             // Desvincular la textura anterior (si existe)
