@@ -752,9 +752,19 @@ body.js{
 .btns-modal-3d{
     position:fixed;
     width:100%;
-    /* z-index:101; */
     left:0;
-    /* border:1px solid red; */
+    flex-wrap:wrap;
+    flex-direction:column;
+    /* gap:20px; */
+
+}
+.aviso-modal{
+    padding:5px;
+    width:100% !important; 
+}
+.content-btn{
+    display:flex;
+    justify-content:center;
     gap:20px;
 }
 
@@ -1324,6 +1334,9 @@ body.js{
 
     .signal-red{
         line-height: 1;
+    }
+    .aviso-modal .signal-red{
+        line-height:normal;
     }
     /* ----------------- Pagina de compartir modelo 3d ----------------- */
     .compartido3d{

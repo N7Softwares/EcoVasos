@@ -613,21 +613,31 @@
                     </div>
                 </div>
                 <div id="myModal" class="modal">
-                    <div class="d-flex justify-content-center btns-modal-3d">
-                        <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
-                        <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
-                        <form id="canvasForm" method="post" action="{{ route('guardar.modelo') }}">
-                            @csrf <!-- Token CSRF -->
-                            <!-- Input oculto para almacenar el JSON del diseño del canvas -->
-                            <input type="hidden" id="jsonInput" name="data">
-                            <!-- Botón para guardar el modelo -->
-                            <button id="guardarModeloBtn" type="submit">Compartir Diseño 3D</button>
-                        </form>
-                        <div id="message" style="display: none; color: #33ff00; padding: 10px; position: absolute; top: 60px; left: 50%; transform: translateX(-50%); z-index: 100; font-size: 25px;">
-                            <img src="{{asset('frontend/img/icon/image.webp')}}" alt="Check" style="width: 30px; height: 30px; vertical-align: middle;">
-                            <span style="vertical-align: middle;">Enlace copiado</span>
+                    <div class="d-flex  btns-modal-3d" >
+                        
+                        <div class="content-btn">
+
+                            <button id="vasoBtn" class="option-btn active" onclick="selectOption(this)">Vaso</button>
+                            <button id="copaBtn" class="option-btn" onclick="selectOption(this)">Copa</button>
+                            <form id="canvasForm" method="post" action="{{ route('guardar.modelo') }}">
+                                @csrf <!-- Token CSRF -->
+                                <!-- Input oculto para almacenar el JSON del diseño del canvas -->
+                                <input type="hidden" id="jsonInput" name="data">
+                                <!-- Botón para guardar el modelo -->
+                                <button id="guardarModeloBtn" type="submit">Compartir Diseño 3D</button>
+                            </form>
+                            <div id="message" style="display: none;background:#222; border-radius:7px; color: #33ff00; padding: 10px; position: absolute; top: 60px; left: 50%; transform: translateX(-50%); z-index: 100; font-size: 25px;">
+                                <img src="{{asset('frontend/img/icon/image.webp')}}" alt="Check" style="width: 30px; height: 30px; vertical-align: middle;">
+                                <span style="vertical-align: middle;">Enlace copiado</span>
+                            </div>
                         </div>
-                                           
+                        <div class="w-100 aviso-modal" style=""> 
+                            <p class="signal-red text-center">
+                                El montaje presentado es ilustrativo y podría no reflejar 
+                                con total exactitud el resultado final de la impresión en 
+                                comparación con el modelo 3D.
+                            </p>
+                        </div>
                     </div>
                     <span class="close">&times;</span>
                     <div id="container3D"></div>
