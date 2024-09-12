@@ -1108,53 +1108,65 @@ const restoreOriginalColors = () => {
 };
 
 btnPdf.addEventListener('click', () => {
-
     eliminarSeparadorSvg();
-   
+
     let canvas = document.getElementById("canvas");
- 
+
     let width = canvas.width;
     let height = canvas.height;
     let pdf;
 
-    // Establecer la orientación del PDF
     if (width > height) {
         pdf = new jsPDF('l', 'px', [width, height]);
     } else {
         pdf = new jsPDF('p', 'px', [height, width]);
     }
 
-    // Esperar un breve período para que el lienzo se renderice completamente
     setTimeout(() => {
-
-        // Obtener las dimensiones del lienzo en el PDF
         width = pdf.internal.pageSize.getWidth();
         height = pdf.internal.pageSize.getHeight();
-
 
         const dataUrl = canvas.toDataURL('image/png', 0.5); 
 
         pdf.addImage(dataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
 
-        // Modificar el lienzo para que tenga fondo blanco y elementos negros
-        invertColorsAndSaveOriginal()
+        invertColorsAndSaveOriginal();
 
-        // Obtener los datos de la imagen del lienzo modificado
         const modifiedDataUrl = canvas.toDataURL('image/png', 0.5); 
 
-        // Agregar la imagen modificada al PDF
         pdf.addPage();
         pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
 
-        // Guardar el PDF
-        pdf.save("vaso-personalizado.pdf");
+        const pdfBlob = pdf.output('blob'); // Guardar el PDF en un blob
 
-        // Restaurando los colores originales del lienzo
+        // Crear un FormData para enviar el PDF a PHP
+        const formData = new FormData();
+        formData.append('pdf', new File([pdfBlob], 'vaso-personalizado.pdf'));
+
+        // Enviar el PDF al controlador en Laravel
+        fetch('/api/proteger-pdf', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.blob())
+        .then(blob => {
+            // Crear un enlace para descargar el archivo
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'vaso-personalizado-protegido.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        })
+        .catch(error => console.error('Error:', error));
+
         restoreOriginalColors();
-
         agregarSeparador();
-    }, 500); // Esperar 500 milisegundos (0.5 segundos) antes de generar el PDF
+    }, 500); 
 });
+
+
 
 // codigo para el check de los colores
 const checkValue = ()=>{
