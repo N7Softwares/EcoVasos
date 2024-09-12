@@ -21,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::post('/id-compra', [AdminWordpressRedirectController::class, 'recibirId']);
 Route::post('/upload-pdf', [PdfController::class, 'uploadPdf']);
+Route::post('/proteger-pdf', [PdfController::class, 'agregarProteccionPdf']);

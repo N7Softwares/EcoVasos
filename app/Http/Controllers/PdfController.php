@@ -7,6 +7,8 @@ use App\Models\Pdf;
 use App\Models\PdfHerramienta;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use setasign\Fpdi\Fpdi;
+use setasign\FpdiProtection\FpdiProtection;
 
 class PdfController extends Controller
 {
@@ -105,5 +107,68 @@ class PdfController extends Controller
         $pdf->delete();
     
         return redirect()->route('pdf.index')->with('success', 'PDF eliminado correctamente');  
+    }
+    //=================================PDF CON CONTRASEÑA=================================================
+
+    public function agregarProteccionPdf(Request $request)
+    {
+        // Validar que el archivo PDF sea enviado en el request
+        $request->validate([
+            'pdf' => 'required|file|mimes:pdf',
+        ]);
+    
+        // Obtener el PDF subido
+        $pdfFile = $request->file('pdf');
+        $pdfInputPath = $pdfFile->getPathname(); // Ruta temporal del PDF
+        $pdfOutputPath = public_path('pdfs-clientes/diseño-personalizado.pdf'); // Ruta donde se guardará el PDF protegido en public
+    
+        // Contraseñas para proteger el PDF
+        $userPassword = '1234'; // Contraseña para abrir el PDF
+        $ownerPassword = 'ownerpass'; // Contraseña del propietario
+    
+        // Lógica para agregar la contraseña al PDF
+        $this->protegerPdf($pdfInputPath, $pdfOutputPath, $userPassword, $ownerPassword);
+    
+        // Forzar la descarga del archivo PDF
+        return response()->download($pdfOutputPath, 'diseño-personalizado.pdf', [
+            'Content-Type' => 'application/pdf',
+        ]);
+    }
+    
+    
+    
+    private function protegerPdf($pdfInputPath, $pdfOutputPath, $userPassword, $ownerPassword)
+    {
+        // Crear una instancia de FPDI Protection para modificar el PDF
+        $pdf = new FpdiProtection();
+
+        // Cargar el PDF existente
+        $pageCount = $pdf->setSourceFile($pdfInputPath);
+
+        // Copiar todas las páginas del PDF original
+        for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+            $templateId = $pdf->importPage($pageNo);
+            $size = $pdf->getTemplateSize($templateId);
+
+            // Crear una página nueva con el tamaño original
+            $pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+
+            // Usar el template importado
+            $pdf->useTemplate($templateId);
+        }
+
+        // Configurar las opciones de protección del PDF
+        $permissions = [
+            'modify',            // Permitir modificaciones
+            'copy',              // Permitir copiar contenido
+            'print',             // Permitir impresión
+            'annot-forms'        // Permitir anotaciones y formularios
+        ];
+
+        // Establecer la contraseña del usuario y del propietario
+        $pdf->setProtection($permissions, $userPassword, $ownerPassword);
+
+        // Guardar el PDF protegido con contraseña
+        $pdf->Output($pdfOutputPath, 'F');
     }
 }
