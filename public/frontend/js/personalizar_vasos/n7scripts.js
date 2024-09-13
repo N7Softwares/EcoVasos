@@ -1154,7 +1154,7 @@ btnPdf.addEventListener('click', () => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'vaso-personalizado-protegido.pdf';
+            a.download = 'creacion-personalizada.pdf';
             document.body.appendChild(a);
             a.click();
             a.remove();
