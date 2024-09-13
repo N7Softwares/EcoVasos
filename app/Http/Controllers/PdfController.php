@@ -120,17 +120,17 @@ class PdfController extends Controller
         // Obtener el PDF subido
         $pdfFile = $request->file('pdf');
         $pdfInputPath = $pdfFile->getPathname(); // Ruta temporal del PDF
-        $pdfOutputPath = public_path('pdfs-clientes/diseño-personalizado.pdf'); // Ruta donde se guardará el PDF protegido en public
+        $pdfOutputPath = public_path('pdfs-clientes/creacion-personalizada.pdf'); // Ruta donde se guardará el PDF protegido en public
     
         // Contraseñas para proteger el PDF
-        $userPassword = '1234'; // Contraseña para abrir el PDF
+        $userPassword = 'ecoingenio2024'; // Contraseña para abrir el PDF
         $ownerPassword = 'ownerpass'; // Contraseña del propietario
     
         // Lógica para agregar la contraseña al PDF
         $this->protegerPdf($pdfInputPath, $pdfOutputPath, $userPassword, $ownerPassword);
     
         // Forzar la descarga del archivo PDF
-        return response()->download($pdfOutputPath, 'diseño-personalizado.pdf', [
+        return response()->download($pdfOutputPath, 'creacion-personalizada.pdf', [
             'Content-Type' => 'application/pdf',
         ]);
     }
