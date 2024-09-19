@@ -1107,6 +1107,65 @@ const restoreOriginalColors = () => {
     canvas.loadFromJSON(originalState, canvas.renderAll.bind(canvas));
 };
 
+// btnPdf.addEventListener('click', () => {
+//     eliminarSeparadorSvg();
+
+//     let canvas = document.getElementById("canvas");
+
+//     let width = canvas.width;
+//     let height = canvas.height;
+//     let pdf;
+
+//     if (width > height) {
+//         pdf = new jsPDF('l', 'px', [width, height]);
+//     } else {
+//         pdf = new jsPDF('p', 'px', [height, width]);
+//     }
+
+//     setTimeout(() => {
+//         width = pdf.internal.pageSize.getWidth();
+//         height = pdf.internal.pageSize.getHeight();
+
+//         const dataUrl = canvas.toDataURL('image/png', 0.5); 
+
+//         pdf.addImage(dataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
+
+//         invertColorsAndSaveOriginal();
+
+//         const modifiedDataUrl = canvas.toDataURL('image/png', 0.5); 
+
+//         pdf.addPage();
+//         pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
+
+//         const pdfBlob = pdf.output('blob'); // Guardar el PDF en un blob
+
+//         // Crear un FormData para enviar el PDF a PHP
+//         const formData = new FormData();
+//         formData.append('pdf', new File([pdfBlob], 'vaso-personalizado.pdf'));
+
+//         // Enviar el PDF al controlador en Laravel
+//         fetch('/api/proteger-pdf', {
+//             method: 'POST',
+//             body: formData,
+//         })
+//         .then(response => response.blob())
+//         .then(blob => {
+//             // Crear un enlace para descargar el archivo
+//             const url = window.URL.createObjectURL(blob);
+//             const a = document.createElement('a');
+//             a.href = url;
+//             a.download = 'creacion-personalizada.pdf';
+//             document.body.appendChild(a);
+//             a.click();
+//             a.remove();
+//         })
+//         .catch(error => console.error('Error:', error));
+
+//         restoreOriginalColors();
+//         agregarSeparador();
+//     }, 500); 
+// });
+
 btnPdf.addEventListener('click', () => {
     eliminarSeparadorSvg();
 
@@ -1137,29 +1196,15 @@ btnPdf.addEventListener('click', () => {
         pdf.addPage();
         pdf.addImage(modifiedDataUrl, 'PNG', 0, 0, width, height, undefined, 'FAST');
 
+        // Descargar el PDF directamente sin enviar al servidor
         const pdfBlob = pdf.output('blob'); // Guardar el PDF en un blob
-
-        // Crear un FormData para enviar el PDF a PHP
-        const formData = new FormData();
-        formData.append('pdf', new File([pdfBlob], 'vaso-personalizado.pdf'));
-
-        // Enviar el PDF al controlador en Laravel
-        fetch('/api/proteger-pdf', {
-            method: 'POST',
-            body: formData,
-        })
-        .then(response => response.blob())
-        .then(blob => {
-            // Crear un enlace para descargar el archivo
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'creacion-personalizada.pdf';
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-        })
-        .catch(error => console.error('Error:', error));
+        const url = window.URL.createObjectURL(pdfBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'creacion-personalizada.pdf';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
 
         restoreOriginalColors();
         agregarSeparador();
