@@ -1,0 +1,15 @@
+/**
+ * Minified by jsDelivr using clean-css v4.1.9.
+ * Original file: /npm/jquery-resizable@1.0.6/resizable.css
+ * 
+ * Do NOT use SRI with dynamically generated files! More information: https://www.jsdelivr.com/using-sri-with-dynamic-files
+ */
+/*!
+ * resizable 1.0.0
+ * https://github.com/tannernetwork/resizable
+ *
+ * Copyright 2015 Tanner (http://tanner.zone)
+ * Released under the MIT license
+ */
+ .resizable{position:relative}.resizable .resizable-handle{position:absolute;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.resizable .resizable-l,.resizable .resizable-r{height:calc(100% - 10px);top:5px;width:10px}.resizable .resizable-l{cursor:w-resize;left:-5px}.resizable .resizable-r{cursor:e-resize;right:-5px}.resizable .resizable-b,.resizable .resizable-t{height:10px;left:5px;width:calc(100% - 10px)}.resizable .resizable-t{cursor:n-resize;top:-5px}.resizable .resizable-b{cursor:s-resize;bottom:-5px}.resizable-resizing{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.resizable-resizing-l{cursor:w-resize}.resizable-resizing-r{cursor:e-resize}.resizable-resizing-t{cursor:n-resize}.resizable-resizing-b{cursor:s-resize}
+ /*# sourceMappingURL=/sm/b69cf9a1f93de7a71982c0aa114e12539cd50fe3ae282b3d753fb1345ebc7f79.map */

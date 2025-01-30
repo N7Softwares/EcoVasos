@@ -41,21 +41,45 @@ class ElementController extends Controller
 
     public function store(Request $request)
     {
+        // Obtener el contenido SVG desde el formulario
         $svgString = $request->input('svgString');
     
+        // Generar un nombre único para el archivo SVG
         $imageName = time() . '_image.svg';
-        $newLocation = public_path('images_elements') . '/' . $imageName;
-        file_put_contents($newLocation, $svgString);
     
+        // Ruta final deseada en public_html/images_elements/
+        $finalImagePath = base_path('public_html/images_elements/' . $imageName);
+    
+        // Asegurarse de que la carpeta public_html/images_elements exista antes de guardar el archivo
+        if (!is_dir(base_path('public_html/images_elements'))) {
+            mkdir(base_path('public_html/images_elements'), 0755, true); // Crear la carpeta si no existe
+        }
+    
+        // Guardar el contenido SVG en el archivo
+        file_put_contents($finalImagePath, $svgString);
+    
+        // Registrar la ubicación del archivo guardado en los logs
+        Log::info('SVG stored at: ' . $finalImagePath);
+    
+        // Crear la entrada en la base de datos
         $imageUrl = 'images_elements/' . $imageName;
     
-        Element::create([
-            'url' => $imageUrl,
-            'category_image_id' => $request->input('category_image_id'),
-        ]);
+        try {
+            Element::create([
+                'url' => $imageUrl, // Guardar solo el nombre relativo del archivo
+                'category_image_id' => $request->input('category_image_id'),
+            ]);
     
-        return redirect()->route('elements.index')->with('success', 'Imagen Element creada exitosamente.');
+            Log::info('SVG entry created in database.');
+    
+            // Redirigir con un mensaje de éxito
+            return redirect()->route('elements.index')->with('success', 'Imagen Element creada exitosamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al guardar los detalles del SVG en la base de datos: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error al guardar los detalles del SVG en la base de datos.');
+        }
     }
+
     
     
     public function edit($id)
@@ -68,26 +92,51 @@ class ElementController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Log::info('ID RECIBIDO: ' . $id);
+        // Buscar el elemento por su ID
         $element = Element::find($id);
+        if (!$element) {
+            return redirect()->back()->with('error', 'El elemento no existe.');
+        }
     
+        // Obtener el contenido SVG desde el formulario
         $svgString = $request->input('svgString');
     
-        // Log::info('SVG String: ' . $svgString);
-    
+        // Generar un nombre único para el archivo SVG
         $imageName = time() . '_image.svg';
-        $newLocation = public_path('images_elements') . '/' . $imageName;
-        file_put_contents($newLocation, $svgString);
     
+        // Ruta final deseada en public_html/images_elements/
+        $finalImagePath = base_path('public_html/images_elements/' . $imageName);
+    
+        // Asegurarse de que la carpeta public_html/images_elements exista antes de guardar el archivo
+        if (!is_dir(base_path('public_html/images_elements'))) {
+            mkdir(base_path('public_html/images_elements'), 0755, true); // Crear la carpeta si no existe
+        }
+    
+        // Guardar el contenido SVG en el archivo
+        file_put_contents($finalImagePath, $svgString);
+    
+        // Registrar la ubicación del archivo guardado en los logs
+        Log::info('SVG updated and stored at: ' . $finalImagePath);
+    
+        // Actualizar la entrada en la base de datos
         $imageUrl = 'images_elements/' . $imageName;
     
-        $element->update([
-            'url' => $imageUrl,
-            'category_image_id' => $request->input('category_image_id'),
-        ]);
+        try {
+            $element->update([
+                'url' => $imageUrl, // Guardar solo el nombre relativo del archivo
+                'category_image_id' => $request->input('category_image_id'),
+            ]);
     
-        return redirect()->route('elements.index')->with('success', 'Imagen Element actualizada exitosamente.');
+            Log::info('SVG entry updated in database.');
+    
+            // Redirigir con un mensaje de éxito
+            return redirect()->route('elements.index')->with('success', 'Imagen Element actualizada exitosamente.');
+        } catch (\Exception $e) {
+            Log::error('Error al actualizar los detalles del SVG en la base de datos: ' . $e->getMessage());
+            return redirect()->back()->with('error', 'Error al actualizar los detalles del SVG en la base de datos.');
+        }
     }
+
     
 
     public function destroy($id)

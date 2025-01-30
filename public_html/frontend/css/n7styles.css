@@ -1,0 +1,1489 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+:root{
+    --border:#dee2e6;
+    --border2:#777777;
+    --gray:#f1f1f1;
+    --green-fill: #5e9d5e;
+    --green-border: #386F3B;
+    --shadow: 1px 5px 10px rgb(0 0 0 / 15%);
+
+    --primary-color: #007BFF;
+    --secondary-color: #6C757D;
+    --success-color: #28A745;
+    --danger-color: #DC3545;
+    --warning-color: #FFC107;
+    --info-color: #17A2B8;
+    --light-color: #F8F9FA;
+    --dark-color: #343A40;
+}
+body{
+    background:#fafafa;
+    /* Para probar que el color del lienzo sea translucido u opaco */
+    /* background-image: url("https://picsum.photos/id/1025/600/400"); */
+    
+}
+ul{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+ .padding-top-disenio{
+	/* Para quitar el margen que quedo despues de ocultar el header*/
+	margin:-40px 0 !important;
+} 
+/* section{
+    padding:0;
+	
+}*/
+.size-texts{
+    font-size: 12px;
+}
+/* col flexbox para la interfaz de usuario */
+.col-sideLeft{
+	width:22%;
+    border-radius:7px;
+    border:1px solid var(--border);
+}
+
+.col-main{
+	/* width:62%; */
+	width:78%;
+    display:flex;
+    flex-direction:column;
+    /* justify-content:center; */
+    /* align-items:center; */
+    gap:10px;
+}
+.container-indicador-canva {
+    width: 100%;
+    overflow-x: auto; /* Añade un scroll horizontal si es necesario */
+    white-space: nowrap; /* Evita el salto de línea del contenido */
+    padding: 0 0 30px;
+    /* display:flex;
+    flex-direction:column; */
+}
+.mensaje-scroll{
+    display:none;
+}
+.container-indicador-canva ul{
+    display:flex;
+    list-style: none;
+    gap:30px;
+    color:var(--green-border);
+    font-size:1.1rem;
+}
+.col-rightSide{
+	/* width:16%; */
+	width:100%;
+    /* border:1px solid red; */
+    padding: 20px 10px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:space-evenly;
+    /* flex-direction: column; */
+    gap:50px;
+    border-radius:7px;
+}
+
+/* --------------------------- Para el iframe --------------------------- */
+.inner-header, .footer{
+    display:none !important;
+}
+body.js{
+    padding-bottom:130px;
+    height:fit-content;
+}
+/* --------------------------- LeftSideBar --------------------------- */
+
+.sideLeft{
+    padding:0;
+    max-height: 600px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+::-webkit-scrollbar {
+    width: 7px;
+}
+/* Estilo para el riel de la barra de desplazamiento en navegadores webkit */
+::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Color del riel */
+}
+
+/* Estilo para el mango de la barra de desplazamiento en navegadores webkit */
+::-webkit-scrollbar-thumb {
+    background-color: #ccc; /* Color del mango */
+}
+
+/* Estilo para el fondo del mango cuando está siendo arrastrado en navegadores webkit */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Color del mango cuando es hover */
+}
+/* Estilo específico para el scroll horizontal */
+::-webkit-scrollbar:horizontal {
+    height: 7px; /* Ajusta según sea necesario */
+}
+
+/* Estilo específico para el mango horizontal */
+::-webkit-scrollbar-thumb:horizontal {
+    background-color: #ccc; /* Color del mango horizontal */
+}
+
+/* Estilo específico para el fondo del mango horizontal cuando está siendo arrastrado */
+::-webkit-scrollbar-thumb:horizontal:hover {
+    background-color: #555; /* Color del mango horizontal cuando es hover */
+}
+.bloq-side{
+    /* border:1px solid var(--border); */
+    padding:10px;
+    display:flex;
+    flex-wrap:wrap;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center !important;
+    cursor:pointer;
+    transition:all .4s ease;
+}
+.bloq-side:hover{
+    background:var(--gray) !important;
+    transition:all .4s ease;
+}
+
+.bloq-side h6{
+    text-align:center;
+    font-size:.8rem;
+    /* font-weight:500; */
+}
+.bloq-side .img-bloq-side{
+    width:40px;
+
+}
+.bloq-side .img-bloq-side img{
+    width:100%;
+}
+/* -------------- contenido-side -------------- */
+
+.contenido-side{
+    padding: 20px 0;
+    max-height: 600px;
+    overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+    overflow-x: hidden !important;
+}
+/* -------------- Right-side -------------- */
+.col-rightSide h4, .col-rightSide h5{
+    text-align:center;
+}
+.col-rightOpciones{
+    display: flex;
+    flex-wrap:wrap;
+    gap:10px;
+    /* varsion horizontal */
+    justify-content:center;
+}
+.btn-rightOptions{
+    width:40px;
+    height:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding: 2px;
+    border:1px solid var(--gray) !important;
+    background-color:#fff;
+    font-size:1.25rem;
+    box-shadow: var(--shadow);
+    transition:all .4s ease;
+}
+.btn-rightOptions img{
+    width:100%;
+}
+.btn-rightOptions:hover{
+    background: var(--gray);
+    transition:all .4s ease;
+}
+
+.right-functions.vaso3D-section{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+/* --------------------------- Colores del vaso --------------------------- */
+.color-table {
+    display: none;
+    /* position: absolute; */
+    border: 1px solid #ccc;
+    background-color: white;
+    z-index: 1000;
+}
+.accordion{
+    min-width:150px;
+    width:90%;
+    margin:auto;
+}
+
+.accordion-item {
+    border-top: 1px solid var(--border) !important;
+    margin-bottom:20px;
+    background-color: #fff !important;
+}
+.accordion-item .acordion-btnTranslucido{
+    flex-direction:column;
+}
+.accordion-item .acordion-btnTranslucido span{
+    font-size:.8rem;
+    /* font-weight:bold; */
+}
+
+  /* Cambia el color de fondo de los botones del acordeón cuando están activos */
+.accordion-button:not(.collapsed) {
+    background-color: #fff !important;
+}
+
+.accordion-button{
+    padding:5px 10px;
+    box-shadow: var(--shadow);
+
+}
+.accordion-body .option-color{
+    display:flex;
+    border:1px solid var(--gray);
+    justify-content:center;
+    padding:10px 0;
+    cursor:pointer;
+    transition:all .4s ease;
+}
+.accordion-body .option-color:hover{
+    transition:all .4s ease;
+    background: var(--gray);
+}
+.option-color .options-container-personalized{
+    width:80%;
+    display:flex;
+    /* border:1px solid red; */
+    align-items:center;
+}
+.option-color .options-container-personalized p{
+    margin-left:15px;
+}
+
+.accordion-body .option-color .color-title{
+    margin-bottom:0;
+}
+/* CSS para dar estilo a los elementos desactivados*/
+.accordion-button.disabled {
+    pointer-events: none; /* Evita que el elemento sea clickeable */
+    opacity: 0.3; /* Puedes ajustar la opacidad según tus necesidades */
+}
+/* ------------------------------- Colores del Diseño -------------------------------- */
+.custom-tooltip {
+    --bs-tooltip-bg: var(--green-fill);
+    --bs-tooltip-opacity:1;
+}
+.table-color-actual{
+    /* width:100%; */
+    height:50px;
+    display:flex;
+    gap:10px;
+}
+.color-cube{
+    width:20px;
+    height:20px;
+    border:1px solid var(--border2);
+}
+
+
+/* Estilos para el accordion-body */
+.accordion-body {
+    max-height: 200px; /* Altura máxima */
+    overflow-y: auto; /* Habilita el desplazamiento vertical cuando el contenido excede la altura máxima */
+    padding:0;
+}
+
+/* Cuadro donde se muestra el color global de los elementos */
+#color-actual{
+    width:25px !important; 
+    height:25px; 
+    border:1px solid var(--border2);
+    border-radius: 13px;
+}
+
+#color-table-globales td{
+    width:30px; 
+    height:30px;
+}
+.container-paleta-color{
+    margin-top:20px;
+}
+.container-paleta-color h6{
+    width:100%;
+}
+.container-paleta-color, .colores-clasicos, 
+.colores-deModa, .colores-metalicos, 
+.colores-miscelaneos, .colores-bd{
+    /* development design */
+    margin-bottom:20px;
+
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+.paleta-color{
+    height:20px;
+    width:20px;
+    border:1px solid var(--border2);
+    border-radius: 10px;
+    cursor:pointer;
+}
+
+.color-table td {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+/* Switch para cambiar entre modo individual y global*/
+.container-msg-switch{
+    display:flex;
+    flex-direction: column;
+}
+.msg-switch{
+    text-align:center;
+}
+/* The switch - the box around the slider */
+.switch {
+    font-size: 16px; /* Ajusta el tamaño de la fuente según tus necesidades */
+    position: relative;
+    display: inline-block;
+    width: 2.5em; /* Ajusta el ancho según tus necesidades */
+    height: 1.5em; /* Ajusta la altura según tus necesidades */
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #cc1100;
+    transition: .4s;
+    border-radius: 8px; /* Ajusta el radio de la esquina según tus necesidades */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.1em; /* Ajusta la altura según tus necesidades */
+    width: 1.1em; /* Ajusta el ancho según tus necesidades */
+    border-radius: 6px; /* Ajusta el radio de la esquina según tus necesidades */
+    left: 0.2em; /* Ajusta la posición izquierda según tus necesidades */
+    bottom: 0.2em; /* Ajusta la posición inferior según tus necesidades */
+    transform: rotate(270deg);
+    background-color: rgb(255, 255, 255);
+    transition: .4s;
+}
+
+.switch input:checked + .slider {
+    background-color: #21cc4c;
+}
+
+.switch input:checked + .slider:before {
+    transform: translateX(0.9em); /* Ajusta la posición X según tus necesidades */
+}
+/* --------------------------- Textos --------------------------- */
+#nuevo-texto, .btn-general{
+    background:var(--green-fill);
+    color:#fff;
+    padding:5px 0;
+    border:1px solid var(--green-border);
+    font-weight: 600;
+    transition: all .4s ease;
+}
+#nuevo-texto{
+    border:none;
+    width:100%;
+    /* min-width */
+
+}
+#ver3DBtn.btn-general{
+    width:100%;
+}
+.btn-general.btn-red{
+    background: var(--danger-color);
+}
+#btn-medidas{
+    width:100%;
+    border-radius:0;
+}
+#btn-medidas:hover{
+    color:#fafafa;
+}
+/* Estilo específico para botones deshabilitados */
+.btn-general[disabled],
+.btn-general.btn-red[disabled] {
+  background-color: #6C757D; /* Color gris para botones deshabilitados, ajusta según sea necesario */
+  color: #8C8C8C; /* Color del texto para botones deshabilitados, ajusta según sea necesario */
+}
+#nuevo-texto:hover, .btn-general:hover{
+    background:var(--green-border);
+    transition: all .4s ease;
+}
+.col-texts{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+#fontSizeSelect {
+    font-size: 14px;
+}
+
+#fontSizeSelect option {
+    /* Para disminuir el largo de la lista desplegable del select */
+    font-size: 12px;
+}
+
+#text-editor{
+    width: 100%;
+    height: 150px;
+    padding:5px 10px;
+}
+.btns-fontStyle{
+    display:flex;
+    justify-content:space-around;
+    gap:5px;
+}
+/* .container-fonts{
+    display:flex;
+    align-items:end;
+} */
+.fontStyleBtn{
+    padding: 3px 10px;
+    border:none;
+    background-color:#fff;
+    font-size:1.25rem;
+    box-shadow: var(--shadow);
+    /* margin:10px auto; */
+}
+#cursivaBtn{
+    font-style:italic;
+}
+#negritaBtn{
+    font-weight:bold;
+}
+.btnActivated{
+    background-color:lightblue;
+}
+/* --------------------------- Seccion de subir imagen --------------------------- */
+
+/* Estilo personalizado para el botón de input file */
+/* #image-upload {
+    display: inline-block;
+    color: transparent;
+    border: none;
+    cursor: pointer;
+} */
+
+/* Oculta el texto completamente */
+/* #image-upload::-webkit-file-upload-button {
+    visibility: hidden;
+    display:none !important;
+    width:200px !important;
+}
+ */
+
+/* Estilo opcional para el texto alrededor del botón */
+/* #file-label {
+    width:200px;
+    color:white;
+    background:#4CAF50;
+    border:1px solid #000;
+} */
+/* --------------------------- Descargar como PDF --------------------------- */
+
+#download-pdf {
+    background: var(--green-fill);
+    border: 1px solid var(--gree-border);
+    box-shadow:var(--shadow);
+}
+
+.button {
+    position: relative;
+    width: 180px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 2px solid #17795E;
+    background-color: #209978;
+    overflow: hidden;
+}
+
+.button,
+.button__icon,
+.button__text {
+    transition: all 0.3s;
+}
+
+.button .button__text {
+    transform: translateX(25px);
+    color: #fff;
+    font-weight: 600;
+}
+
+.button .button__icon {
+    position: absolute;
+    transform: translateX(140px);
+    height: 100%;
+    width: 39px;
+    background-color: #17795E;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button .svg {
+    width: 20px;
+    fill: #fff;
+}
+
+.button:hover {
+    background: #17795E;
+}
+
+.button:hover .button__text {
+    color: transparent;
+}
+
+.button:hover .button__icon {
+    width: 100%;
+    transform: translateX(0);
+}
+
+.button:active .button__icon {
+    background-color: #146c54;
+}
+
+.button:active {
+    border: 1px solid #146c54;
+}
+
+/* --------------------------- Medidor --------------------------- */
+
+#medidor-content{
+    height:600px;
+}
+/* #select-medidas option{
+    border:1px solid red !important;
+    height:200px !important;
+    font-size:.8rem !important;
+} */
+.nice-select{
+    width:90%;
+}
+.nice-select ul{
+    border:1px solid var(--gray);
+    /* height:300px; */
+    color:#000 !important;
+    display:flex !important; 
+    flex-direction:column !important;
+    overflow-y: auto; /* Habilita el desplazamiento vertical cuando el contenido excede la altura máxima */
+    width:200px;
+}
+.nice-select ul li{
+    border:1px solid var(--gray);
+    font-size:.9rem;
+    width:90% !important;
+    padding:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+/* --------------------------- Objeto Canva (Lienzo) --------------------------- */
+
+#canvas{
+    /* Por alguna razon no me deja poner width y height*/
+    border: 1px dashed var(--border);
+    background:#fff;
+    /* width:100%;
+    height:400px; */
+}
+.color-palette {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.color-button {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+
+/*-------------------------- GALERIA ----------------------------*/
+
+/* Estilos CSS en tu archivo de estilos o en línea */
+/* .galeria {
+    display: flex;
+    transition: transform 0.5s ease;
+        
+}
+
+.galeria-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease;
+
+}
+
+.galeria-prev {
+    position: absolute;
+    top: 26%;
+    left: 6.5%;
+    color: #cc1100;
+    transform: translateY(-50%);
+    font-size: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 99;
+}
+.galeria-next {
+    position: absolute;
+    top: 26%;
+    color: #cc1100;
+    left: 20.5%;
+    transform: translateY(-50%);
+    font-size: 44px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 99;
+} */
+.galeria-container {
+    position: relative;
+}
+
+.galeria {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.galeria-item {
+    flex: 0 0 auto;
+    transition: transform 0.5s ease;
+}
+
+.galeria-prev,
+.galeria-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 44px;
+    color: #cc1100;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 99;
+}
+
+.galeria-prev {
+    left: 0;
+}
+
+.galeria-next {
+    right: 0;
+}
+#canvas3DContainer {
+    width: 400px;
+    height: 400px;
+  }
+
+
+
+  /* Estilos del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    /* top: 10%; */
+    width: 100%;
+    height: 100%;
+    padding-right: 1% !important;
+    margin-left: 0px !important;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+    z-index: 100;
+  }
+  
+  .modal-content {
+    margin: 5% auto;
+    padding: 20px;
+    width: 80%;
+
+  }
+  
+  .close {
+    transform:translateY(100px) translateX(-100px);
+    /* transform:; */
+    color: #ffffff;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+    opacity:1 !important;    
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: var(--green-fill);
+    text-decoration: none;
+    cursor: pointer;
+  }
+.btns-modal-3d{
+    position:fixed;
+    width:100%;
+    left:0;
+    flex-wrap:wrap;
+    flex-direction:column;
+    /* gap:20px; */
+
+}
+.aviso-modal{
+    padding:5px;
+    width:100% !important; 
+}
+.content-btn{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+}
+
+/*-------------------------HOVER DE BOTON-------------------*/
+
+.btn3d {
+    --previusColor: #00A97F;
+    --color: var(--green-fill);
+    --color2: rgb(10, 25, 30);
+    padding: 0.4em 1.75em;
+    background-color: transparent;
+    border-radius: 6px;
+    border: .3px solid var(--color);
+    transition: .5s;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 17px;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    text-transform: uppercase;
+    color: var(--color);
+   }
+   
+   .btn3d::after, .btn3d::before {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 100%;
+    transform: skew(90deg) translate(-50%, -50%);
+    position: absolute;
+    inset: 50%;
+    left: 25%;
+    z-index: -1;
+    transition: .5s ease-out;
+    background-color: var(--color);
+   }
+   
+   .btn3d::before {
+    top: -50%;
+    left: -25%;
+    transform: skew(90deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .btn3d:hover::before {
+    transform: skew(45deg) rotate(180deg) translate(-50%, -50%);
+   }
+   
+   .btn3d:hover::after {
+    transform: skew(45deg) translate(-50%, -50%);
+   }
+   
+   .btn3d:hover {
+    /* color: var(--color2); */
+    color: var(--light-color);
+   }
+   
+   .btn3d:active {
+    filter: brightness(.7);
+    transform: scale(.98);
+   }
+
+   /*------------------------------UPLOAD IMAGE-------------------------------------*/
+
+   .upload-image {
+    border: none;
+    padding: 0.75rem 1.5rem;
+    background-color: #00A97F;
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    user-select: none;
+    gap: 0.75rem;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+    width:100%;
+  }
+  
+  .upload-image:hover {
+    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+  }
+  
+  .upload-image:focus,.upload-image:active {
+    opacity: .85;
+    box-shadow: none;
+  }
+  
+  .upload-image svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  .bold-text{
+    font-weight: bold;
+  }
+
+.zoomable-image {
+    cursor: pointer;
+    width: 60px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.zoomable-image:hover {
+    transform: scale(1.1); 
+}
+
+/*-----------------------BOTON DE MOVIL SWITCH-------------------------*/
+.toggle {
+    --bg-toggle: #252524;
+    --bg-circle: #B7C13E;
+    width: 120px;
+    height: 60px;
+    background-color: var(--bg-toggle);
+    box-shadow: 0 .3rem 5rem 0 rgba(125, 125, 125, 0.25);
+    border-radius: 4rem;
+    display: flex;
+    align-items: center;
+    padding: 0 .3rem;
+    transition: background-color 400ms;
+  }
+  
+  .toggle__circle {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: var(--bg-circle);
+    border-radius: 50%;
+    position: relative;
+    transition: margin 400ms ease-in-out, background-color 1000ms;
+  }
+  
+  .toggle__circle::after,
+  .toggle__circle::before {
+    content: '';
+    position: absolute;
+    background-color: var(--bg-toggle);
+    bottom: 118%;
+    transform-origin: bottom left;
+  }
+  
+  .toggle__circle::before {
+    width: 15px;
+    height: 25px;
+    left: 32%;
+    border-radius: 0% 100% 0% 100% / 0% 27% 73% 100%;
+    transform: translateX(-70%) rotate(-2deg);
+  }
+  
+  .toggle__circle::after {
+    width: 25px;
+    height: 30px;
+    left: 48%;
+    border-radius: 100% 0% 100% 0% / 100% 0% 100% 0%;
+    transform: rotate(-20deg);
+  }
+  
+  #burger-btn:checked + .toggle > .toggle__circle {
+    margin-left: calc(120px - (.3rem * 2) - 50px);
+  }
+  
+  #burger-btn:checked + .toggle {
+    --bg-toggle: #B7C13E;
+    --bg-circle: #252524;
+  }
+
+
+.burger-menu {
+    display: none;
+}
+
+.show-menu {
+    display: none;
+}
+/* @media screen and (max-width: 768px) {
+    .col-sideLeft {
+        display: none;
+    }
+
+    .burger-menu {
+        display: block;
+        position: absolute;
+        top: 10%;
+        z-index: 7;
+    }
+
+    .show-menu {
+        display: block;
+    }
+} */
+
+/*-------------------COLOR ORIENTACION -----------------------*/
+
+.lado-1, .lado-2, 
+.lado-3, .lado-4 {
+    background-color: #fff; 
+    color: var(--dark-color); /* Texto en color negro */
+    border:1px dashed var(--border);
+    font-size:1.2rem;
+}
+
+/*-----------------------BUTTONS MODAL 3D-----------------------*/
+.option-btn {
+    background-color: #f2f2f2;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 8%;
+}
+
+.option-btn.active {
+    background-color: #B7C13E;
+    color: white;
+}
+
+
+/* ------------------------ seccion convertir img a svg ------------------------ */
+.subir-archivo-content{
+    overflow-x:auto;
+}
+#reduceSvg{
+    width:150px !important;
+    /* display:block; */
+    /* border:1px solid red; */
+    padding:20px 0 !important;
+    height:fit-content;
+    z-index:2 !important;
+    cursor:pointer;
+    margin:auto;
+}
+#reduceSvg svg{
+    width:100% !important;
+    height:fit-content !important;
+    padding:0 !important;
+    z-index:1 !important;
+    cursor:pointer !important;
+    box-shadow: 0 0 40px 10px rgba(0, 255, 0, 0.5) !important;
+
+}
+.color-want, 
+.color-change,
+.footer-btn-wrapper{
+    display:none !important;
+    
+}
+
+.browse-icon{
+    display:none !important;
+}
+
+.btn-wrap{
+    max-width:180px;
+    background-color:var(--green-fill) !important;
+    color:#fff !important;
+    padding: 15px;
+    border-radius:10px;
+    border: #fff !important;
+}
+.browse-btn{
+    display: flex;
+    color:#fff !important;
+    background:var(--green-fill);
+}
+.browse-btn:hover{
+    display: flex;
+    color:#fff !important;
+    background:var(--green-border)!important;
+}
+.browse-text{
+    display: none;
+}
+.files-dropzone-list{
+    text-align: center !important;
+}
+.signal-red{
+    color: red;
+    font-weight: bold;
+}
+
+/* ------------------------ Boton para compartir diseño ------------------------ */
+
+#guardarModeloBtn{
+    background:var(--green-border);
+    color:#fafafa;
+    border-radius:7px;
+    padding:15px 10px;
+}
+
+.container3dClass{
+    background:#212121;
+    /* margin:0 30px; */
+}
+.canva-modelo3d{
+    padding:40px 0 !important;
+    display:flex;
+    justify-content:center;
+}
+.logo-ecoingenio3d{
+    position:fixed;
+    top:0;
+    left:0;
+    /* border:1px solid red; */
+    background:#fafafa;
+    z-index:10;
+}
+.logo-ecoingenio3d img{
+    width:200px;
+
+}
+.subtitulo3d p{
+    text-align:center;
+    font-size:1.1rem;
+}
+/* ------------------------ seccion de responsive ------------------------ */
+
+@media (max-width: 991px) {
+    /* col flexbox para la interfaz de usuario */
+    .col-main {
+        width: 100%;
+        /* order: 1; Ahora será el primer elemento */
+    }
+    .col-rightSide{
+        order:2;
+        box-shadow: var(--shadow);
+
+    }
+    #canvas-container{
+        order:1;
+    }
+    .col-sideLeft {
+        /* order: 2; Cambia el orden de aparición, ahora será el segundo */
+        display:flex;
+        flex-direction:column;
+        /* border:1px solid blue; */
+        width: 98%;
+        margin:20px auto;
+        box-shadow: var(--shadow);
+    }
+    .sideLeft{
+        /* border:1px solid blue; */
+        display:flex;
+        justify-content:space-around;
+        width:100%;
+        border:1px solid var(--border);
+
+    }
+    .sideLeftContent{
+        /* border:1px solid green; */
+        display:flex;
+        width:100%;
+
+    }
+
+    .contenido-side,#medidor-content{
+        height:150px;
+        width:100%;
+        padding: 10px 0;
+        /* border:1px solid red; */
+    }
+    .bloq-side{ /* No funciona todavia */
+        padding:0;
+        /* border:1px solid #000; */
+    }
+    .bloq-side .img-bloq-side{
+        width:35px;
+    }
+    /* ----------------- seccion de color del vaso ----------------- */
+    .accordion-body .color-cube{
+        width:100px;
+    }
+    /* ----------------- seccion de color del disenio ----------------- */
+
+    .container-color-disenio{
+        display:flex;
+        /* flex-wrap:wrap; */
+
+    }
+    .first-container-cS{
+        width:300px;
+    }
+    /* ----------------- seccion de textos ----------------- */
+    .container-flex-texts{
+        display:flex;
+        /* flex-wrap:wrap; */
+
+        gap:10px;
+    }
+    #nuevo-texto{
+        height:fit-content;
+        font-size:.8rem;
+        box-shadow: var(--shadow);
+
+    }
+
+    /* ----------------- seccion de textos ----------------- */
+    .sub-contenido-side{
+        width:70%;
+        margin:auto;
+    }
+
+    #canvas-container>.container-fluid{
+        width:100% !important;
+        padding:0 !important;
+        /* border:1px solid var(--info-color); */
+
+    }
+    .container-indicador-canva {
+        width: 100%;
+        overflow-x: auto; /* Añade un scroll horizontal si es necesario */
+        white-space: nowrap; /* Evita el salto de línea del contenido */
+        padding:30px 0;
+        border:1px solid var(--border);
+        border-radius:5px;
+    }
+
+    .signal-red{
+        font-weight: normal;
+        font-size:.8rem !important;
+    }
+
+    .canva-modelo3d{
+        padding:40px 0 !important;
+        display:block;
+        /* justify-content:center; */
+    }
+
+    .close {
+        transform:translateY(100px) translateX(0);    
+    }
+}
+
+@media (max-width: 767px) {
+    /* ------------------ col-rightSide ------------------*/
+    .col-rightSide h5{
+        font-size:.9rem;
+    }
+    
+    /* ------------------ sideLeft ------------------*/
+    
+    .sideLeftContent h4{
+        font-size:1rem;
+    }
+    .sideLeftContent h6{
+        font-size:.8rem;
+    }
+    .sideLeftContent h2{
+        font-size:.8rem;
+    }
+
+    .contenido-side,#medidor-content{
+        height:125px;
+    }
+    .bloq-side h6{
+        font-size:.7rem;
+    }
+    .bloq-side .img-bloq-side{
+        width:30px;
+    }
+    /* ----------------- seccion de textos ----------------- */
+
+    #nuevo-texto{
+        font-size:.7rem;
+    }
+
+
+    /* ----------------- CANVA ----------------- */
+    .container-indicador-canva {
+        padding: 70px 0 !important;
+        background-image:url('/frontend/img/personalizacion_vasos/scrolleable.svg') !important;
+        background-repeat: repeat;
+        /* border:1px solid red; */
+    }
+
+    .mensaje-scroll{
+        display:block;
+        font-size:1rem;
+    }
+}
+
+@media (max-width: 450px) {
+	.padding-top-disenio{
+		padding:0;
+		/* Para quitar el margen que quedo despues de ocultar el header*/
+		margin:-60px 0 !important;
+	}
+    .bloq-side{
+        width:50px;
+    }
+    .bloq-side .img-bloq-side{
+        width:25px;
+    }
+    .bloq-side h6{
+        font-size:.6rem;
+    }
+    /* ----------------- seccion de colores ----------------- */
+
+    .table-color-actual{
+        height:fit-content;
+    }
+
+    .container-color-disenio{
+        flex-wrap:wrap;
+
+    }
+    /* ----------------- seccion de textos ----------------- */
+    .container-flex-texts{
+        flex-wrap:wrap;
+
+        gap:5px;
+    }
+    #text-editor{
+        width:50%;
+    }
+    .btn-container{
+        width:100%;
+        display:flex;
+        justify-content:center;
+    }
+    #nuevo-texto{
+        padding:5px 10px;
+    }
+    /* ----------------- col-sideRight ----------------- */
+    .col-rightSide{
+        padding: 10px;
+    }
+
+    .btn-rightOptions{
+        width:35px;
+        height:45px;
+        padding: 2px;
+        font-size:1.15rem;
+    }
+
+    .button {
+        width: 140px;
+        height: 35px;
+    }
+    .button .button__text {
+        transform: translateX(5px);
+        font-weight: normal;
+        font-size:.8rem;
+    }
+    
+    .button .button__icon {
+        transform: translateX(100px);
+        height: 100%;
+        width: 39px;
+    }
+    
+    .button .svg {
+        width: 20px;
+    }
+    /* ----------------- seccion del canva ----------------- */
+
+    .signal-red{
+        line-height: 1;
+    }
+    .aviso-modal .signal-red{
+        line-height:normal;
+    }
+    /* ----------------- Pagina de compartir modelo 3d ----------------- */
+    .compartido3d{
+        padding:30px 0;
+    }
+    .logo-ecoingenio3d img{
+        width:150px;
+    }
+}
+
+@media (max-width: 375px) {
+    
+    /* ----------------- col-sideLeft ----------------- */
+    
+    .sideLeftContent h4{
+        font-size:.9rem;
+    }
+    .sideLeftContent h6{
+        font-size:.7rem;
+    }
+    .sideLeftContent h2{
+        font-size:.7rem;
+    }
+
+    .col-sideLeft {
+        margin: 20px auto 5px auto;
+    }
+    
+
+    .bloq-side h6{
+        font-size:.6rem;
+    }
+
+    .bloq-side .img-bloq-side{
+        width:20px;
+    }
+    /* ----------------- col-sideRight ----------------- */
+
+    .col-rightSide h5{
+        font-size:.8rem;
+    }
+
+    /* ----------------- seccion de textos ----------------- */
+    
+    #text-editor{
+        width:100%;
+    }
+
+    .contenido-side p{
+        font-size:11px;
+        margin-bottom: 5px;
+    }
+
+    .btns-modal-3d{
+        position:fixed;
+        width:100%;
+        flex-wrap:wrap;
+        /* justify-content:start; */
+    }
+    
+    #guardarModeloBtn{
+        padding:10px;
+        width:100px;
+        flex-wrap:wrap;
+        font-size:.85rem;
+    }
+    /* ----------------- Pagina de compartir modelo 3d ----------------- */
+    .compartido3d{
+        padding:35px 0;
+    }
+    .subtitulo3d p{
+        font-size:1rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .col-rightSide{
+        padding:20px 10px;
+        gap:20px;
+    }
+    .btn-rightOptions{
+        width:30px;
+        height:40px;
+        padding: 1px;
+        font-size:1.1rem;
+    }
+    
+}
+.subir-logotipo {
+    border: 1px solid #1de31d;
+    box-shadow: inset 0 0 7px rgba(0, 0, 0, 0.3);
+
+}
+
+.y-margin{
+    margin: 40px 0;
+}
+#boxReturn{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+#myButtonReturn {
+    background-color: #d9534f; /* Rojo suave */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    margin: auto;
+}
+
+#myButtonReturn:hover {
+    background-color: #c9302c; /* Rojo un poco más oscuro al pasar el mouse */
+    transform: scale(1.05);
+}
+
+/* Estilo para la pantalla de carga */
+#loading_screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9999;
+    text-align: center;
+}
+
+/* Estilo para la imagen de carga */
+#loading_screen img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate 1s infinite linear;
+}
+
+/* Animación de rotación */
+@keyframes rotate {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

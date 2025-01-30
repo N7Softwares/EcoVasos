@@ -1,0 +1,46 @@
+@font-face {
+  font-family: Inter;
+  src: url(../Fonts/Inter/Inter-ExtraLight.ttf);
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(../Fonts/Inter/Inter-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(../Fonts/Inter/Inter-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(../Fonts/Inter/Inter-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(../Fonts/Inter/Inter-Bold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: Inter;
+  src: url(../Fonts/Inter/Inter-Black.ttf);
+  font-weight: 900;
+}
+
+
+@font-face {
+  font-family: Bahnschrift;
+  src: url(../Fonts/BAHNSCHRIFT1.TTF);
+}
+
+@font-face {
+  font-family: Meatloaf;
+  src: url(../Fonts/Meatloaf-Solid.ttf);
+}

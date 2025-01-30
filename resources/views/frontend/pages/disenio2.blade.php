@@ -261,22 +261,21 @@
                                 
                                 <h4 class="text-center">Elementos</h4>
 
-                                @foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
+                               @foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
                                     <div class="galeria-container px-3">
                                         <h6 class="mt-3">{{ $categoria }}</h6>
                                         <div class="galeria">
-                            
-                                                @foreach ($imagenes as $element)
-                                                    <div class="galeria-item d-flex align-self-center">
-                                                        <img class="mx-2 zoomable-image" src="{{ asset($element->url) }}" alt="Inspiración" onclick="cargarImagen('{{ asset($element->url) }}')">
-                                                    </div>
-                                                @endforeach
-                                
+                                            @foreach ($imagenes as $element)
+                                                <div class="galeria-item d-flex align-self-center">
+                                                    <img class="mx-2 zoomable-image" src="{{ config('app.public_html_url') . $element->url }}" alt="Inspiración" onclick="cargarImagen('{{ config('app.public_html_url') . $element->url }}')">
+                                                </div>
+                                            @endforeach
                                         </div>
                                         <button class="galeria-prev">&#8249;</button>
                                         <button class="galeria-next">&#8250;</button>
                                     </div>
                                 @endforeach
+
                             </div>
                             <div class="contenido-side" id="textos-content" style="display: none;">
                                 <div class="col-texts ">
@@ -320,7 +319,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="accordion-item">
+                                                <div class="accordion-item" style="display: none;">
                                                     <h2 class="accordion-header" id="headingFour">
                                                         <button class="accordion-button btn-accn-2 collapsed" type="button"
                                                             data-bs-toggle="collapse" data-bs-target="#collapseFour"

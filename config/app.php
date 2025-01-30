@@ -27,6 +27,7 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
+    'public_html_url' => env('PUBLIC_HTML_URL', 'https://tudominio.com/public_html/'),
 
     /*
     |--------------------------------------------------------------------------

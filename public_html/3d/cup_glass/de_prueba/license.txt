@@ -1,0 +1,11 @@
+Model Information:
+* title:	[Model] Glass Wine
+* source:	https://sketchfab.com/3d-models/model-glass-wine-c307863bc5de4a528b9b3bbf23b0924c
+* author:	RaZoR._ (https://sketchfab.com/RaZoR._)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "[Model] Glass Wine" (https://sketchfab.com/3d-models/model-glass-wine-c307863bc5de4a528b9b3bbf23b0924c) by RaZoR._ (https://sketchfab.com/RaZoR._) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

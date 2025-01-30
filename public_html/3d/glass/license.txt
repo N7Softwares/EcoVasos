@@ -1,0 +1,11 @@
+Model Information:
+* title:	Drinking Glass with Normal Baked imperfections
+* source:	https://sketchfab.com/3d-models/drinking-glass-with-normal-baked-imperfections-7c2a424fe63c48e7b8f730f7997d02ab
+* author:	olivermead (https://sketchfab.com/olivermead)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Drinking Glass with Normal Baked imperfections" (https://sketchfab.com/3d-models/drinking-glass-with-normal-baked-imperfections-7c2a424fe63c48e7b8f730f7997d02ab) by olivermead (https://sketchfab.com/olivermead) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

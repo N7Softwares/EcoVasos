@@ -44,18 +44,23 @@ class PdfController extends Controller
         // Generación de un nombre único para el archivo PDF
         $pdfName = str_replace(' ', '_', $nombre_usuario . '-' . $nombre_diseno . '-' . uniqid() . '.pdf');
     
-        // Ruta final deseada en la carpeta public/pdf/
-        $finalPdfPath = public_path('pdf/' . $pdfName);
-    
-        // Almacenamiento del PDF en la carpeta public/pdf/
-        if (!$pdf->move(public_path('pdf'), $pdfName)) {
-            Log::error('Failed to move PDF to public/pdf/');
+       // Ruta final deseada en la carpeta public_html/pdf/
+        $finalPdfPath = base_path('public_html/pdf/' . $pdfName);
+        
+        // Asegurarse de que la carpeta exista antes de mover el archivo
+        if (!is_dir(base_path('public_html/pdf'))) {
+            mkdir(base_path('public_html/pdf'), 0755, true); // Crear la carpeta si no existe
+        }
+        
+        // Almacenamiento del PDF en la carpeta public_html/pdf/
+        if (!$pdf->move(base_path('public_html/pdf'), $pdfName)) {
+            Log::error('Failed to move PDF to public_html/pdf/');
             return response()->json(['error' => 'Error al guardar el archivo PDF.'], 500);
         }
-    
+        
         // Registro de la ubicación donde se almacenó el PDF
         Log::info('PDF stored at: ' . $finalPdfPath);
-    
+        
         // Guardado de los detalles del PDF en la base de datos
         try {
             $pdfEntry = PdfHerramienta::create([
@@ -63,12 +68,13 @@ class PdfController extends Controller
                 'nombre_diseno' => $nombre_diseno,
                 'nombre_archivo' => $pdfName, // Guardar solo el nombre del archivo
             ]);
-    
+        
             Log::info('PDF entry created in database.');
-    
+        
             // Generación del enlace para ver el PDF
+            // Asegúrate de que tu servidor sirva archivos desde public_html/pdf/
             $link = url('pdf/' . $pdfName);
-    
+        
             return response()->json([
                 'message' => 'PDF subido correctamente.',
                 'link' => $link
@@ -77,6 +83,7 @@ class PdfController extends Controller
             Log::error('Error al guardar los detalles del PDF en la base de datos: ' . $e->getMessage());
             return response()->json(['error' => 'Error al guardar los detalles del PDF en la base de datos.'], 500);
         }
+
     }
 
     public function view($filename)
@@ -123,7 +130,7 @@ class PdfController extends Controller
         $pdfOutputPath = public_path('pdfs-clientes/creacion-personalizada.pdf'); // Ruta donde se guardará el PDF protegido en public
     
         // Contraseñas para proteger el PDF
-        $userPassword = 'ecoingenio2024'; // Contraseña para abrir el PDF
+        $userPassword = ''; // Contraseña para abrir el PDF
         $ownerPassword = 'ownerpass'; // Contraseña del propietario
     
         // Lógica para agregar la contraseña al PDF
