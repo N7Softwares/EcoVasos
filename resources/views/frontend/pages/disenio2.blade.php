@@ -128,7 +128,7 @@
                                             <div class="mb-2 container-msg-switch">
                                                 <h6 class="msg-switch">Selecciona un color</h6>
                                             </div>
-                                            <div class="table-color-actual d-flex justify-content-center">
+                                            <div class="table-color-actual d-flex flex-wrap">
                                                 @foreach($array['colors'] as $color)
                                                     @if($color->colors_category_id == 1 || $color->colors_category_id == 3)
                                                         <div class="paleta-color" style="background-color: {{ $color->hex_code }}"
