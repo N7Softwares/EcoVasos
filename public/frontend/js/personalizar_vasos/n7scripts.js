@@ -1,1 +1,711 @@
-const canvasWidth=1e3,canvasHeight=400,scaleFactor=2,canvas=new fabric.Canvas("canvas",{width:1e3,height:400,padding:30,renderOnAddRemove:!1,enableRetinaScaling:!0,webgl:!0,antialias:!0});canvas.setDimensions({width:2e3,height:800},{backstoreOnly:!0}),canvas.setZoom(2),canvas.on("object:moving",function(e){let t=canvas.padding,a=e.target;a.top<t&&(a.top=t),a.top+a.height*a.scaleY>canvas.height-t&&(a.top=canvas.height-a.height*a.scaleY-t)});const tooltipTriggerList=document.querySelectorAll('[data-bs-toggle="tooltip"]'),tooltipList=[...tooltipTriggerList].map(e=>new bootstrap.Tooltip(e)),colorActual=e=>{let t=document.querySelectorAll(".paleta-color.color-design"),a=document.getElementById("color-actual-nombre"),o=document.getElementById("color-actual");e.on("mousedown",()=>{let l;l="group"===e.type&&e._objects.length>0?e._objects[0].fill:e.fill,o.style.backgroundColor=l;let n=Array.from(t).find(e=>e.style.backgroundColor===l);n&&(a.textContent=n.dataset.bsTitle)})},valorColorActual=()=>{let e=document.getElementById("color-actual");return e.style.backgroundColor},svgContainerBrand=document.getElementById("svg-container-brand"),svgContentBrand=svgContainerBrand.innerHTML;fabric.loadSVGFromString(svgContentBrand,function(e,t){let a=fabric.util.groupSVGElements(e,t);a.set({scaleX:.09,selectable:!0,scaleY:.09,left:599,top:253,dataTarget:"color-disenio"}),a.getObjects(),colorActual(a),canvas.add(a)}),fabric.Object.prototype.objectCaching=!1,fabric.Object.prototype.statefullCache=!1,fabric.Object.prototype.transparentCorners=!1,fabric.Object.prototype.cornerStrokeColor="#aaaaaa",fabric.Object.prototype.cornerSize=12,fabric.Object.prototype.cornersize=12;let selectedObject,selectedColorGlobal,validador=!1;const btnDelete=document.getElementById("btn-delete"),copyPasteBtn=document.getElementById("duplicateButton"),mirrorBtn=document.getElementById("mirrorHorizontalButton"),flipVertBtn=document.getElementById("flipVerticalButton"),canvaLienzo=document.getElementById("canvas");canvas.setBackgroundColor("#fff"),canvas.renderAll();const optionColor=document.querySelectorAll("#accordionExample .option-color");optionColor.forEach(e=>{e.addEventListener("click",()=>{let t=e.children[0].children[0].style.background;canvas.setBackgroundColor(t),canvas.renderAll()})}),document.addEventListener("keydown",e=>{if("Delete"===e.key){let t=canvas.getActiveObject();"activeSelection"===t.type?t._objects.forEach(e=>{canvas.remove(e),canvas.discardActiveObject(),canvas.requestRenderAll()}):canvas.remove(t),canvas.renderAll()}}),btnDelete.addEventListener("click",()=>{let e=canvas.getActiveObject();e&&("activeSelection"===e.type?e._objects.forEach(e=>{canvas.remove(e),canvas.discardActiveObject(),canvas.requestRenderAll()}):canvas.remove(e)),canvas.renderAll()}),document.getElementById("image-upload").addEventListener("change",handleFileSelect);const colorPicker=document.getElementById("color-picker");function handleFileSelectPreview(e){return validador=!0,e}function handleFileSelect(e){validador=!1;let t=e.target.files[0];if(document.getElementById("image-upload"),t){if("image/svg+xml"===t.type)handleSvgFile(t);else{let a=e.target.files[0];if(a){let o=new FileReader;o.onload=function(e){let t=new Image;t.src=e.target.result,t.onload=function(){let e=new fabric.Image(t,{scaleX:.2,scaleY:.2,dataTarget:"subir-archivo"});e.filters.push(new fabric.Image.filters.BlackWhite),e.applyFilters(),!1===validador&&canvas.add(e),canvas.renderAll(),addColorPicker(e)}},o.readAsDataURL(a)}}validador_2=!1}}const addColorPicker=e=>{};function handleSvgFile(e){let t=new FileReader;t.onload=function(e){let t=e.target.result,a=new DOMParser,o=a.parseFromString(t,"text/xml");if(void 0!==selectedColorGlobal){let l=o.querySelectorAll("path");l.forEach(e=>{e.setAttribute("fill",selectedColorGlobal)})}let n=new XMLSerializer().serializeToString(o);fabric.loadSVGFromString(n,function(e,t){let a=fabric.util.groupSVGElements(e,t);a.set({scaleX:.2,scaleY:.2,dataTarget:"subir-archivo"}),canvas.add(a),canvas.renderAll()})},t.readAsText(e)}const generarPaletaDeColores=e=>{let t=[];for(let a=0;a<e;a++){let o=generarColorAleatorio();t.push(o)}return t},generarColorAleatorio=()=>{let e=Math.floor(256*Math.random()),t=Math.floor(256*Math.random()),a=Math.floor(256*Math.random());return`rgb(${e}, ${t}, ${a})`},rowPaletasColores=(e,t)=>{let a=document.createElement("div");a.className="paleta-color",a.style.backgroundColor=e,t.appendChild(a)},crearPaletaColores=()=>{let e=["#000000","#fff","#f93822","#fbe122","#0072ce","#ed8b00","#00b74f","#87189d","#ffcd00","#e35205","#279989"],t=["#da291c","#f68d2e","#5e8ab4","#e56a54","#9adbe8","#006298","#c63663","#0d5257","#f0e991","#874b52","#ecbaa8","#8f3237","#c0a392","#253746","#e5e1e6","#c1c6c8"],a=["#ac8400","#d8d7df","#b87333"],o=document.querySelector(".colores-clasicos"),l=document.querySelector(".colores-deModa"),n=document.querySelector(".colores-metalicos"),r=document.querySelector(".colores-miscelaneos");e.forEach(e=>{rowPaletasColores(e,o)}),t.forEach(e=>{rowPaletasColores(e,l)}),a.forEach(e=>{rowPaletasColores(e,n)});let c=generarPaletaDeColores(150);c.forEach(e=>{rowPaletasColores(e,r)})},cambiarColorATodos=()=>{let e=document.getElementById("color-actual"),t=document.getElementById("color-actual-nombre"),a=document.querySelectorAll(".paleta-color.color-design"),o=document.getElementById("scopeColor"),l=(e,t)=>{let a=rgbToMatrix(t.style.backgroundColor);e&&(e.filters[0].matrix=a,e.applyFilters(),canvas.renderAll())};a.forEach(a=>{a.addEventListener("click",()=>{if(selectedColorGlobal=a.style.backgroundColor,o.checked){let n=canvas.getActiveObject()||canvas.getObjects()[0];"group"===n.type?cambiarColorUnicoSvg(selectedColorGlobal):n.set("fill",selectedColorGlobal),n&&"image"===n.type?(n.set({fill:selectedColorGlobal}),l(n,a)):n.set("fill",selectedColorGlobal)}else canvas.forEachObject(e=>{e.set("fill",selectedColorGlobal),cambiarColorSvg(selectedColorGlobal)}),canvas.forEachObject(e=>{"image"===e.type?(e.set({fill:selectedColorGlobal}),l(e,a)):e.set("fill",selectedColorGlobal)});e.style.backgroundColor=selectedColorGlobal,t.textContent=a.dataset.bsTitle,canvas.renderAll()})})},rgbToMatrix=e=>{let t=e.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);if(!t)throw Error("Formato de color no v\xe1lido");let a=parseInt(t[1]),o=parseInt(t[2]),l=parseInt(t[3]),n=a/255,r=o/255,c=l/255,i=[n,0,0,0,0,0,r,0,0,0,0,0,c,0,0,0,0,0,1,0];return i};cambiarColorATodos();const selectMedidas=document.getElementById("select-medidas"),arrayValores=[{svg:"240cc",width:185,height:60},{svg:"500cc",width:220,height:85},{svg:"750cc",width:240,height:95},{svg:"400cc_copa",width:40,height:40}],MedidasCentral={medidasActuales:{svg:"500cc",width:220,height:85},actualizarMedidas:(e,t,a)=>{this.medidasActuales={svg:e,width:t,height:a}},obtenerMedidasActuales:()=>this.medidasActuales};document.getElementById("btn-medidas").addEventListener("click",()=>{let e=selectMedidas.value,t=canvas.getObjects().filter(e=>"medidor"===e.dataTarget);t.forEach(e=>{canvas.remove(e)}),agregarMedidas(e);let a=arrayValores.find(t=>t.svg===e);a&&MedidasCentral.actualizarMedidas(e,a.width,a.height)});const agregarMedidas=e=>{let t=`/frontend/img/personalizacion_vasos/medidas/${e}.svg`;fetch(t).then(e=>e.text()).then(e=>{fabric.loadSVGFromString(e,(e,t)=>{let a=new fabric.Group(e,t);a.set({left:canvas.width/2/4*3-60,top:canvas.padding/2,scaleX:1,scaleY:1,lockScalingX:!0,lockScalingY:!0,lockMovementY:!0,dataTarget:"medidor"}),a.forEachObject(e=>{e.set({fill:valorColorActual()})}),canvas.add(a),canvas.setActiveObject(a),colorActual(a),MedidasCentral.obtenerMedidasActuales().width,MedidasCentral.obtenerMedidasActuales().height,canvas.renderAll()})}).catch(e=>{console.error("Error al cargar el archivo SVG:",e)})},cambiarColorSvg=e=>{let t=canvas.getObjects(),a=t.filter(e=>"group"===e.type);a.forEach(t=>{let a=t.getObjects();a.forEach(t=>{t.set({fill:e})}),canvas.requestRenderAll()})},cambiarColorUnicoSvg=e=>{let t=canvas.getActiveObject();if(t&&"group"===t.type){let a=t.getObjects();a.forEach(t=>{t.set({fill:e})}),t.setCoords(),canvas.renderAll()}},handleColorChange=e=>{handleFileSelectPreview({target:{files:[document.getElementById("image-upload").files[0]]}}),validador=!1};let ultimoBloqClicado;const sideBar=()=>{ultimoBloqClicado=null;let e=document.querySelectorAll(".bloq-side"),t=document.querySelectorAll(".contenido-side");ultimoBloqClicado=e[1],e.forEach(e=>{e.addEventListener("click",()=>{ultimoBloqClicado&&(ultimoBloqClicado.style.background="none"),t.forEach(e=>{e.style.display="none"});let a=e.getAttribute("data-target"),o=document.getElementById(a+"-content");o&&(o.style.display="block",e.style.background="#f1f1f1"),ultimoBloqClicado=e})})};sideBar();const ocultarContenidos=()=>{let e=document.querySelectorAll(".contenido-side");e.forEach(e=>{e.style.display="none"})},cambiarFondoBloqSide=(e,t)=>{e.style.background=t},mostrarContenido=(e,t)=>{let a=!1,o=document.querySelectorAll(".bloq-side");if(o.forEach(e=>{let o=e.getAttribute("data-target");"color-disenio"===o&&"rgb(241, 241, 241)"===e.style.background&&(a=!0),o!==t||a?a||cambiarFondoBloqSide(e,"none"):(cambiarFondoBloqSide(e,"#f1f1f1"),ultimoBloqClicado=e)}),!a){ocultarContenidos();let l=document.getElementById(e);l&&(l.style.display="block")}},textEditor=document.getElementById("text-editor"),nuevoTextoButton=document.getElementById("nuevo-texto"),fontSizeSelect=document.getElementById("fontSizeSelect"),cursivaBtn=document.getElementById("cursivaBtn"),negritaBtn=document.getElementById("negritaBtn"),fontAcordion=document.querySelector(".btn-accn-1"),fontSizeAcordion=document.querySelector(".btn-accn-2"),fontSizeOptions=document.getElementById("fontSizeOptions");function agregarTextoAlCanvas(e){let t=new fabric.Text(e||"Nuevo Texto",{left:50,top:50,fontSize:40,fontFamily:"Arial",fill:valorColorActual(),selectable:!0,dataTarget:"textos"});canvas.add(t),canvas.setActiveObject(t),canvas.renderAll(),colorActual(t),textEditor.value=t.text}const valoresTamanosFuente=Array.from({length:30},(e,t)=>(t+1)*10);valoresTamanosFuente.forEach(e=>{let t=document.createElement("div");t.classList.add("option-color","option-fontSize"),t.setAttribute("value",e.toString());let a=document.createElement("div");a.classList.add("options-container");let o=document.createElement("p");o.classList.add("color-title"),o.textContent=`${e}px`,a.appendChild(o),t.appendChild(a),fontSizeOptions.appendChild(t)});const fontSize=()=>fontSizeValue=fontSizeSelect.value;textEditor.addEventListener("input",function(){let e=textEditor.value,t=canvas.getActiveObject();t&&"text"===t.type&&(t.set("text",e),canvas.renderAll())}),nuevoTextoButton.addEventListener("click",function(){agregarTextoAlCanvas()});const fontSelector=document.querySelectorAll(".option-fuentes");document.addEventListener("DOMContentLoaded",()=>{fontSelector.forEach(e=>{let t=e.getAttribute("value");e.children[0].children[0].style.fontFamily=t,e.addEventListener("click",()=>{let t=e.getAttribute("value"),a=canvas.getActiveObject();a&&"text"===a.type&&(a.set("fontFamily",t),fontAcordion.textContent=t,fontAcordion.setAttribute("value",t),aplicarFontFamily(),setTimeout(()=>{canvas.renderAll()},50))})})});const cerrarAcordeonesFonts=()=>{let e=document.querySelector(".btn-accn-1"),t=document.querySelector(".btn-accn-2");e.classList.contains("collapsed")||e.click(),t.classList.contains("collapsed")||t.click()},aplicarFontFamily=()=>{let e=fontAcordion.getAttribute("value");fontAcordion.style.fontFamily=e};aplicarFontFamily();const actualizarSeleccion=e=>{if(e&&"text"===e.type){textEditor.value=e.text,textEditor.disabled=!1,fontAcordion.classList.remove("disabled"),fontSizeAcordion.classList.remove("disabled"),fontAcordion.textContent=e.fontFamily||"Arial",fontAcordion.setAttribute("value",e.fontFamily||"Arial"),aplicarFontFamily();let t=e.fontSize;fontSizeAcordion.textContent=`${t}px`,cursivaBtn.disabled=!1,negritaBtn.disabled=!1,"italic"===e.fontStyle?cursivaBtn.classList.add("btnActivated"):cursivaBtn.classList.remove("btnActivated"),"bold"===e.fontWeight?negritaBtn.classList.add("btnActivated"):negritaBtn.classList.remove("btnActivated")}if(btnDelete.disabled=!1,copyPasteBtn.disabled=!1,mirrorBtn.disabled=!1,flipVertBtn.disabled=!1,"activeSelection"!==e.type){let a=e.dataTarget;mostrarContenido(`${a}-content`,a)}};canvas.on("selection:created",e=>{let t=e.target;actualizarSeleccion(t)}),canvas.on("selection:updated",e=>{let t=e.target;actualizarSeleccion(t)}),canvas.on("selection:cleared",()=>{textEditor.value="",textEditor.disabled=!0,fontAcordion.classList.add("disabled"),fontSizeAcordion.classList.add("disabled"),fontAcordion.textContent="Arial",fontAcordion.setAttribute("value","Arial"),aplicarFontFamily(),fontSizeAcordion.textContent="40px",cerrarAcordeonesFonts(),cursivaBtn.disabled=!0,negritaBtn.disabled=!0,negritaBtn.classList.remove("btnActivated"),cursivaBtn.classList.remove("btnActivated"),btnDelete.disabled=!0,copyPasteBtn.disabled=!0,mirrorBtn.disabled=!0,flipVertBtn.disabled=!0}),canvas.on("object:removed",()=>{let e=canvas.getObjects("text");0===e.length&&(textEditor.value="",fontAcordion.classList.add("disabled"),fontSizeAcordion.classList.add("disabled"),fontAcordion.textContent="Arial",fontAcordion.setAttribute("value","Arial"),aplicarFontFamily(),fontSizeAcordion.textContent="40px",cerrarAcordeonesFonts())});const cambiarTamanioTexto=e=>{let t=canvas.getActiveObject();t&&"text"===t.type&&(t.set("fontSize",e),fontSizeAcordion.textContent=`${e}px`,setTimeout(function(){canvas.renderAll()},50))},fontSizeInnerOptions=document.querySelectorAll(".option-fontSize");fontSizeInnerOptions.forEach((e,t)=>{e.addEventListener("click",()=>{let e=(t+1)*10;cambiarTamanioTexto(e)})}),cursivaBtn.addEventListener("click",()=>{let e=canvas.getActiveObject();"normal"===e.fontStyle?(e.fontStyle="italic",cursivaBtn.classList.add("btnActivated")):(e.fontStyle="normal",cursivaBtn.classList.remove("btnActivated")),canvas.renderAll()}),negritaBtn.addEventListener("click",()=>{let e=canvas.getActiveObject();"normal"===e.fontWeight?(e.fontWeight="bold",negritaBtn.classList.add("btnActivated")):(e.fontWeight="normal",negritaBtn.classList.remove("btnActivated")),canvas.renderAll()}),agregarTextoAlCanvas("Inserta tu texto aqu\xed");const btnPdf=document.getElementById("download-pdf");let originalBackgroundColor,originalElementColor,originalElementColors={},originalState;const invertColorsAndSaveOriginal=()=>{originalState=canvas.toJSON(),canvas.backgroundColor="#ffffff",canvas.forEachObject(e=>{"group"===e.type&&e._objects.every(e=>"path"===e.type)?e._objects.forEach(e=>{e.set("fill","#000")}):"group"===e.type?e.forEachObject(e=>{void 0!==e.fill&&e.set("fill","#000")}):void 0!==e.fill&&e.set("fill","#000")}),canvas.renderAll()},restoreOriginalColors=()=>{canvas.loadFromJSON(originalState,canvas.renderAll.bind(canvas))};btnPdf.addEventListener("click",()=>{eliminarSeparadorSvg();let e=document.getElementById("canvas"),t=e.width,a=e.height,o;o=t>a?new jsPDF("l","px",[t,a]):new jsPDF("p","px",[a,t]),setTimeout(()=>{t=o.internal.pageSize.getWidth(),a=o.internal.pageSize.getHeight();let l=e.toDataURL("image/png",.5);o.addImage(l,"PNG",0,0,t,a,void 0,"FAST"),invertColorsAndSaveOriginal();let n=e.toDataURL("image/png",.5);o.addPage(),o.addImage(n,"PNG",0,0,t,a,void 0,"FAST");let r=o.output("blob"),c=window.URL.createObjectURL(r),i=document.createElement("a");i.href=c,i.download="creacion-personalizada.pdf",document.body.appendChild(i),i.click(),i.remove(),restoreOriginalColors(),agregarSeparador()},500)});const checkValue=()=>{let e=document.getElementById("scopeColor"),t=document.querySelector(".msg-switch");e.addEventListener("change",()=>{e.checked?t.textContent="Colores Individuales":t.textContent="Colores Globales"})};checkValue();let _clipboard=null;const CopyAndPaste=()=>{let e=canvas.getActiveObject();e&&e.clone(function(t){canvas.discardActiveObject(),t.set({left:t.left+10,top:t.top+10,evented:!0}),"activeSelection"===t.type?(t.canvas=canvas,t.forEachObject(function(t,a){t.dataTarget=e.getObjects()[a].dataTarget,canvas.add(t)}),t.setCoords()):(t.dataTarget=e.dataTarget,canvas.add(t)),_clipboard=t,canvas.setActiveObject(t),canvas.requestRenderAll()})},modoEspejo=()=>{let e=canvas.getActiveObject();e&&(e.set("flipX",!e.flipX),canvas.renderAll())},giroVertical=()=>{let e=canvas.getActiveObject();e&&(e.set({scaleY:-1*e.scaleY}),canvas.renderAll())};flipVertBtn.addEventListener("click",giroVertical),copyPasteBtn.addEventListener("click",CopyAndPaste),mirrorBtn.addEventListener("click",modoEspejo),document.addEventListener("DOMContentLoaded",function(){let e=document.querySelectorAll(".galeria-container");e.forEach(function(e){let t=e.querySelector(".galeria"),a=e.querySelectorAll(".galeria-item"),o=e.querySelector(".galeria-prev"),l=e.querySelector(".galeria-next"),n=0;function r(){let e=-(70*n)+"px";t.style.transform="translateX("+e+")"}o.addEventListener("click",function(){n>0&&(n--,r())}),l.addEventListener("click",function(){n<a.length-1&&(n++,r())})})});let ctx=canvas.getContext("2d"),miimagen=new Image;function cargarImagen(e){validador=!1,fetch(e).then(e=>e.text()).then(e=>{fabric.loadSVGFromString(e,(e,t)=>{let a=new fabric.Group(e,t);a.set({scaleX:.2,scaleY:.2,selectable:!0,top:canvas.padding,dataTarget:"elementos"}),a.forEachObject(e=>{e.set({fill:valorColorActual()})}),canvas.add(a),canvas.setActiveObject(a),colorActual(a),agregarSeparador(),canvas.renderAll()})}).catch(e=>{console.error("Error al cargar el archivo SVG:",e)})}let modal=document.getElementById("myModal"),btn=document.getElementById("ver3DBtn"),span=document.getElementsByClassName("close")[0];function selectOption(e){let t=document.getElementsByClassName("option-btn");for(let a=0;a<t.length;a++)t[a].classList.remove("active");e.classList.add("active")}btn.onclick=function(){eliminarSeparadorSvg(),setTimeout(function(){modal.style.display="block",canvas.renderAll()},500)},span.onclick=function(){modal.style.display="none",agregarSeparador(),canvas.renderAll()},window.onclick=function(e){e.target==modal&&(modal.style.display="none",agregarSeparador(),canvas.renderAll())},canvas.on("mouse:down",function(e){null===e.target&&(canvas.discardActiveObject(),canvas.renderAll())}),document.addEventListener("DOMContentLoaded",function(){let e=document.getElementById("burger-btn"),t=document.querySelector(".col-sideLeft");e.addEventListener("click",function(){t.classList.toggle("show-menu")})}),document.addEventListener("DOMContentLoaded",()=>{document.getElementById("reduceSvg").addEventListener("click",()=>{let e=document.getElementById("svgContent");e&&(agregarSeparador(),loadSVGToFabric(e))})});const loadSVGToFabric=e=>{let t=new XMLSerializer().serializeToString(e);fetch("/guardar-svg",{method:"POST",body:JSON.stringify({svg:t}),headers:{"Content-Type":"application/json","X-CSRF-TOKEN":document.querySelector('meta[name="csrf-token"]').getAttribute("content")}}).then(e=>{if(!e.ok)throw Error("Hubo un problema al guardar el SVG.");return e.text()}).then(e=>{fabric.loadSVGFromString(e,function(e,t){let a=new fabric.Group(e,{left:0,top:canvas.padding,selectable:!0,dataTarget:"subir-archivo",scaleX:.3,scaleY:.3});canvas.add(a),canvas.setActiveObject(a),colorActual(a),canvas.renderAll()})}).catch(e=>{console.error("Error al guardar y cargar el SVG:",e)})};document.addEventListener("DOMContentLoaded",()=>{var e;document.querySelector(".browse-btn.btn").textContent="Subir imagen"});const agregarSeparador=()=>{fetch("/frontend/img/personalizacion_vasos/medidas/separador.svg").then(e=>e.text()).then(e=>{fabric.loadSVGFromString(e,(e,t)=>{let a=new fabric.Group(e,t);a.set({left:0,top:0,selectable:!1,evented:!1,hoverCursor:"default",dataTarget:"separador"}),canvas.add(a),a.bringToFront()}),canvas.renderAll()})};agregarSeparador();const eliminarSeparadorSvg=()=>{let e=canvas.getObjects();canvas.discardActiveObject();let t=e.filter(e=>"separador"===e.dataTarget);t.forEach(e=>{canvas.remove(e)}),canvas.renderAll()};function changeCanvasColor(e){canvas.setBackgroundColor(e),canvas.renderAll()}const guardarModeloBtn=document.getElementById("guardarModeloBtn");guardarModeloBtn.addEventListener("click",function(e){e.preventDefault();let t=document.getElementById("canvasForm"),a=document.getElementById("jsonInput"),o=JSON.stringify(canvas.toJSON());a.value=o,fetch(t.action,{method:"POST",body:new FormData(t)}).then(e=>e.json()).then(e=>{let t=e.link.replace(".json","");navigator.clipboard.writeText(t).then(()=>{let e=document.getElementById("message");e.style.display="block",setTimeout(()=>{e.style.display="none"},3e3)}).catch(e=>{console.error("Error al copiar el enlace al portapapeles: ",e)})}).catch(e=>{console.error("Error al hacer la solicitud AJAX: ",e)})}),document.addEventListener("DOMContentLoaded",function(){let e=function e(){let t=new URLSearchParams(window.location.search);return t.get("session_id")}();e?document.getElementById("boxReturn").style.display="flex":document.getElementById("boxReturn").style.display="none"});const btnReturn=document.getElementById("myButtonReturn");document.getElementById("myButtonReturn").addEventListener("click",()=>{document.getElementById("loading_screen").style.display="block",eliminarSeparadorSvg();let e=document.getElementById("canvas"),t=e.width,a=e.height,o;o=t>a?new jsPDF("l","px",[t,a]):new jsPDF("p","px",[a,t]),setTimeout(()=>{t=o.internal.pageSize.getWidth(),a=o.internal.pageSize.getHeight();let l=e.toDataURL("image/png",.5);o.addImage(l,"PNG",0,0,t,a,void 0,"FAST"),invertColorsAndSaveOriginal();let n=e.toDataURL("image/png",.5);o.addPage(),o.addImage(n,"PNG",0,0,t,a,void 0,"FAST"),restoreOriginalColors(),agregarSeparador();let r=o.output("blob"),c=new FormData;c.append("nombre_usuario","eco"),c.append("nombre_pdf","pdf"),c.append("pdf",r,"documento.pdf"),console.log("Uploading PDF."),fetch("https://ecoingeniocustomizacion.com/api/upload-pdf",{method:"POST",headers:{"X-CSRF-TOKEN":document.querySelector('meta[name="csrf-token"]').getAttribute("content")},body:c}).then(e=>e.json()).then(e=>{console.log("PDF uploaded successfully:",e),document.getElementById("loading_screen").style.display="none",window.parent.postMessage({type:"PDF_UPLOAD_SUCCESS",link:e.link},"https://ecoingenio.com.ar/")}).catch(e=>{console.error("Error uploading PDF:",e),document.getElementById("loading_screen").style.display="none"})},5e3)});
+const canvasWidth = 1e3,
+    canvasHeight = 400,
+    scaleFactor = 2,
+    canvas = new fabric.Canvas("canvas", {
+        width: 1e3,
+        height: 400,
+        padding: 30,
+        renderOnAddRemove: !1,
+        enableRetinaScaling: !0,
+        webgl: !0,
+        antialias: !0
+    });
+canvas.setDimensions({
+    width: 2e3,
+    height: 800
+}, {
+    backstoreOnly: !0
+}), canvas.setZoom(2), canvas.on("object:moving", function (e) {
+    let t = canvas.padding,
+        a = e.target;
+    a.top < t && (a.top = t), a.top + a.height * a.scaleY > canvas.height - t && (a.top = canvas.height - a.height * a.scaleY - t)
+});
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]'),
+    tooltipList = [...tooltipTriggerList].map(e => new bootstrap.Tooltip(e)),
+    colorActual = e => {
+        let t = document.querySelectorAll(".paleta-color.color-design"),
+            a = document.getElementById("color-actual-nombre"),
+            o = document.getElementById("color-actual");
+        e.on("mousedown", () => {
+            let l;
+            l = "group" === e.type && e._objects.length > 0 ? e._objects[0].fill : e.fill, o.style.backgroundColor = l;
+            let n = Array.from(t).find(e => e.style.backgroundColor === l);
+            n && (a.textContent = n.dataset.bsTitle)
+        })
+    },
+    valorColorActual = () => {
+        let e = document.getElementById("color-actual");
+        return e.style.backgroundColor
+    },
+    svgContainerBrand = document.getElementById("svg-container-brand"),
+    svgContentBrand = svgContainerBrand.innerHTML;
+fabric.loadSVGFromString(svgContentBrand, function (e, t) {
+    let a = fabric.util.groupSVGElements(e, t);
+    a.set({
+        scaleX: .09,
+        selectable: !0,
+        scaleY: .09,
+        left: 599,
+        top: 253,
+        dataTarget: "color-disenio"
+    }), a.getObjects(), colorActual(a), canvas.add(a)
+}), fabric.Object.prototype.objectCaching = !1, fabric.Object.prototype.statefullCache = !1, fabric.Object.prototype.transparentCorners = !1, fabric.Object.prototype.cornerStrokeColor = "#aaaaaa", fabric.Object.prototype.cornerSize = 12, fabric.Object.prototype.cornersize = 12;
+let selectedObject, selectedColorGlobal, validador = !1;
+const btnDelete = document.getElementById("btn-delete"),
+    copyPasteBtn = document.getElementById("duplicateButton"),
+    mirrorBtn = document.getElementById("mirrorHorizontalButton"),
+    flipVertBtn = document.getElementById("flipVerticalButton"),
+    canvaLienzo = document.getElementById("canvas");
+canvas.setBackgroundColor("#fff"), canvas.renderAll();
+const optionColor = document.querySelectorAll("#accordionExample .option-color");
+optionColor.forEach(e => {
+    e.addEventListener("click", () => {
+        let t = e.children[0].children[0].style.background;
+        canvas.setBackgroundColor(t), canvas.renderAll()
+    })
+}), document.addEventListener("keydown", e => {
+    if ("Delete" === e.key) {
+        let t = canvas.getActiveObject();
+        "activeSelection" === t.type ? t._objects.forEach(e => {
+            canvas.remove(e), canvas.discardActiveObject(), canvas.requestRenderAll()
+        }) : canvas.remove(t), canvas.renderAll()
+    }
+}), btnDelete.addEventListener("click", () => {
+    let e = canvas.getActiveObject();
+    e && ("activeSelection" === e.type ? e._objects.forEach(e => {
+        canvas.remove(e), canvas.discardActiveObject(), canvas.requestRenderAll()
+    }) : canvas.remove(e)), canvas.renderAll()
+}), document.getElementById("image-upload").addEventListener("change", handleFileSelect);
+const colorPicker = document.getElementById("color-picker");
+
+function handleFileSelectPreview(e) {
+    return validador = !0, e
+}
+
+function handleFileSelect(e) {
+    validador = !1;
+    let t = e.target.files[0];
+    if (document.getElementById("image-upload"), t) {
+        if ("image/svg+xml" === t.type) handleSvgFile(t);
+        else {
+            let a = e.target.files[0];
+            if (a) {
+                let o = new FileReader;
+                o.onload = function (e) {
+                    let t = new Image;
+                    t.src = e.target.result, t.onload = function () {
+                        let e = new fabric.Image(t, {
+                            scaleX: .2,
+                            scaleY: .2,
+                            dataTarget: "subir-archivo"
+                        });
+                        e.filters.push(new fabric.Image.filters.BlackWhite), e.applyFilters(), !1 === validador && canvas.add(e), canvas.renderAll(), addColorPicker(e)
+                    }
+                }, o.readAsDataURL(a)
+            }
+        }
+        validador_2 = !1
+    }
+}
+const addColorPicker = e => {};
+
+function handleSvgFile(e) {
+    let t = new FileReader;
+    t.onload = function (e) {
+        let t = e.target.result,
+            a = new DOMParser,
+            o = a.parseFromString(t, "text/xml");
+        if (void 0 !== selectedColorGlobal) {
+            let l = o.querySelectorAll("path");
+            l.forEach(e => {
+                e.setAttribute("fill", selectedColorGlobal)
+            })
+        }
+        let n = new XMLSerializer().serializeToString(o);
+        fabric.loadSVGFromString(n, function (e, t) {
+            let a = fabric.util.groupSVGElements(e, t);
+            a.set({
+                scaleX: .2,
+                scaleY: .2,
+                dataTarget: "subir-archivo"
+            }), canvas.add(a), canvas.renderAll()
+        })
+    }, t.readAsText(e)
+}
+const generarPaletaDeColores = e => {
+        let t = [];
+        for (let a = 0; a < e; a++) {
+            let o = generarColorAleatorio();
+            t.push(o)
+        }
+        return t
+    },
+    generarColorAleatorio = () => {
+        let e = Math.floor(256 * Math.random()),
+            t = Math.floor(256 * Math.random()),
+            a = Math.floor(256 * Math.random());
+        return `rgb(${e}, ${t}, ${a})`
+    },
+    rowPaletasColores = (e, t) => {
+        let a = document.createElement("div");
+        a.className = "paleta-color", a.style.backgroundColor = e, t.appendChild(a)
+    },
+    crearPaletaColores = () => {
+        let e = ["#000000", "#fff", "#f93822", "#fbe122", "#0072ce", "#ed8b00", "#00b74f", "#87189d", "#ffcd00", "#e35205", "#279989"],
+            t = ["#da291c", "#f68d2e", "#5e8ab4", "#e56a54", "#9adbe8", "#006298", "#c63663", "#0d5257", "#f0e991", "#874b52", "#ecbaa8", "#8f3237", "#c0a392", "#253746", "#e5e1e6", "#c1c6c8"],
+            a = ["#ac8400", "#d8d7df", "#b87333"],
+            o = document.querySelector(".colores-clasicos"),
+            l = document.querySelector(".colores-deModa"),
+            n = document.querySelector(".colores-metalicos"),
+            r = document.querySelector(".colores-miscelaneos");
+        e.forEach(e => {
+            rowPaletasColores(e, o)
+        }), t.forEach(e => {
+            rowPaletasColores(e, l)
+        }), a.forEach(e => {
+            rowPaletasColores(e, n)
+        });
+        let c = generarPaletaDeColores(150);
+        c.forEach(e => {
+            rowPaletasColores(e, r)
+        })
+    },
+    cambiarColorATodos = () => {
+        let e = document.getElementById("color-actual"),
+            t = document.getElementById("color-actual-nombre"),
+            a = document.querySelectorAll(".paleta-color.color-design"),
+            o = document.getElementById("scopeColor"),
+            l = (e, t) => {
+                let a = rgbToMatrix(t.style.backgroundColor);
+                e && (e.filters[0].matrix = a, e.applyFilters(), canvas.renderAll())
+            };
+        a.forEach(a => {
+            a.addEventListener("click", () => {
+                if (selectedColorGlobal = a.style.backgroundColor, o.checked) {
+                    let n = canvas.getActiveObject() || canvas.getObjects()[0];
+                    "group" === n.type ? cambiarColorUnicoSvg(selectedColorGlobal) : n.set("fill", selectedColorGlobal), n && "image" === n.type ? (n.set({
+                        fill: selectedColorGlobal
+                    }), l(n, a)) : n.set("fill", selectedColorGlobal)
+                } else canvas.forEachObject(e => {
+                    e.set("fill", selectedColorGlobal), cambiarColorSvg(selectedColorGlobal)
+                }), canvas.forEachObject(e => {
+                    "image" === e.type ? (e.set({
+                        fill: selectedColorGlobal
+                    }), l(e, a)) : e.set("fill", selectedColorGlobal)
+                });
+                e.style.backgroundColor = selectedColorGlobal, t.textContent = a.dataset.bsTitle, canvas.renderAll()
+            })
+        })
+    },
+    rgbToMatrix = e => {
+        let t = e.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        if (!t) throw Error("Formato de color no v\xe1lido");
+        let a = parseInt(t[1]),
+            o = parseInt(t[2]),
+            l = parseInt(t[3]),
+            n = a / 255,
+            r = o / 255,
+            c = l / 255,
+            i = [n, 0, 0, 0, 0, 0, r, 0, 0, 0, 0, 0, c, 0, 0, 0, 0, 0, 1, 0];
+        return i
+    };
+cambiarColorATodos();
+const selectMedidas = document.getElementById("select-medidas"),
+    arrayValores = [{
+        svg: "240cc",
+        width: 185,
+        height: 60
+    }, {
+        svg: "500cc",
+        width: 220,
+        height: 85
+    }, {
+        svg: "750cc",
+        width: 240,
+        height: 95
+    }, {
+        svg: "400cc_copa",
+        width: 40,
+        height: 40
+    }],
+    MedidasCentral = {
+        medidasActuales: {
+            svg: "500cc",
+            width: 220,
+            height: 85
+        },
+        actualizarMedidas: (e, t, a) => {
+            this.medidasActuales = {
+                svg: e,
+                width: t,
+                height: a
+            }
+        },
+        obtenerMedidasActuales: () => this.medidasActuales
+    };
+document.getElementById("btn-medidas").addEventListener("click", () => {
+    let e = selectMedidas.value,
+        t = canvas.getObjects().filter(e => "medidor" === e.dataTarget);
+    t.forEach(e => {
+        canvas.remove(e)
+    }), agregarMedidas(e);
+    let a = arrayValores.find(t => t.svg === e);
+    a && MedidasCentral.actualizarMedidas(e, a.width, a.height)
+});
+const agregarMedidas = e => {
+        let t = `/frontend/img/personalizacion_vasos/medidas/${e}.svg`;
+        fetch(t).then(e => e.text()).then(e => {
+            fabric.loadSVGFromString(e, (e, t) => {
+                let a = new fabric.Group(e, t);
+                a.set({
+                    left: canvas.width / 2 / 4 * 3 - 60,
+                    top: canvas.padding / 2,
+                    scaleX: 1,
+                    scaleY: 1,
+                    lockScalingX: !0,
+                    lockScalingY: !0,
+                    lockMovementY: !0,
+                    dataTarget: "medidor"
+                }), a.forEachObject(e => {
+                    e.set({
+                        fill: valorColorActual()
+                    })
+                }), canvas.add(a), canvas.setActiveObject(a), colorActual(a), MedidasCentral.obtenerMedidasActuales().width, MedidasCentral.obtenerMedidasActuales().height, canvas.renderAll()
+            })
+        }).catch(e => {
+            console.error("Error al cargar el archivo SVG:", e)
+        })
+    },
+    cambiarColorSvg = e => {
+        let t = canvas.getObjects(),
+            a = t.filter(e => "group" === e.type);
+        a.forEach(t => {
+            let a = t.getObjects();
+            a.forEach(t => {
+                t.set({
+                    fill: e
+                })
+            }), canvas.requestRenderAll()
+        })
+    },
+    cambiarColorUnicoSvg = e => {
+        let t = canvas.getActiveObject();
+        if (t && "group" === t.type) {
+            let a = t.getObjects();
+            a.forEach(t => {
+                t.set({
+                    fill: e
+                })
+            }), t.setCoords(), canvas.renderAll()
+        }
+    },
+    handleColorChange = e => {
+        handleFileSelectPreview({
+            target: {
+                files: [document.getElementById("image-upload").files[0]]
+            }
+        }), validador = !1
+    };
+let ultimoBloqClicado;
+const sideBar = () => {
+    ultimoBloqClicado = null;
+    let e = document.querySelectorAll(".bloq-side"),
+        t = document.querySelectorAll(".contenido-side");
+    ultimoBloqClicado = e[1], e.forEach(e => {
+        e.addEventListener("click", () => {
+            ultimoBloqClicado && (ultimoBloqClicado.style.background = "none"), t.forEach(e => {
+                e.style.display = "none"
+            });
+            let a = e.getAttribute("data-target"),
+                o = document.getElementById(a + "-content");
+            o && (o.style.display = "block", e.style.background = "#f1f1f1"), ultimoBloqClicado = e
+        })
+    })
+};
+sideBar();
+const ocultarContenidos = () => {
+        let e = document.querySelectorAll(".contenido-side");
+        e.forEach(e => {
+            e.style.display = "none"
+        })
+    },
+    cambiarFondoBloqSide = (e, t) => {
+        e.style.background = t
+    },
+    mostrarContenido = (e, t) => {
+        let a = !1,
+            o = document.querySelectorAll(".bloq-side");
+        if (o.forEach(e => {
+                let o = e.getAttribute("data-target");
+                "color-disenio" === o && "rgb(241, 241, 241)" === e.style.background && (a = !0), o !== t || a ? a || cambiarFondoBloqSide(e, "none") : (cambiarFondoBloqSide(e, "#f1f1f1"), ultimoBloqClicado = e)
+            }), !a) {
+            ocultarContenidos();
+            let l = document.getElementById(e);
+            l && (l.style.display = "block")
+        }
+    },
+    textEditor = document.getElementById("text-editor"),
+    nuevoTextoButton = document.getElementById("nuevo-texto"),
+    fontSizeSelect = document.getElementById("fontSizeSelect"),
+    cursivaBtn = document.getElementById("cursivaBtn"),
+    negritaBtn = document.getElementById("negritaBtn"),
+    fontAcordion = document.querySelector(".btn-accn-1"),
+    fontSizeAcordion = document.querySelector(".btn-accn-2"),
+    fontSizeOptions = document.getElementById("fontSizeOptions");
+
+function agregarTextoAlCanvas(e) {
+    let t = new fabric.Text(e || "Nuevo Texto", {
+        left: 50,
+        top: 50,
+        fontSize: 40,
+        fontFamily: "Arial",
+        fill: valorColorActual(),
+        selectable: !0,
+        dataTarget: "textos"
+    });
+    canvas.add(t), canvas.setActiveObject(t), canvas.renderAll(), colorActual(t), textEditor.value = t.text
+}
+const valoresTamanosFuente = Array.from({
+    length: 30
+}, (e, t) => (t + 1) * 10);
+valoresTamanosFuente.forEach(e => {
+    let t = document.createElement("div");
+    t.classList.add("option-color", "option-fontSize"), t.setAttribute("value", e.toString());
+    let a = document.createElement("div");
+    a.classList.add("options-container");
+    let o = document.createElement("p");
+    o.classList.add("color-title"), o.textContent = `${e}px`, a.appendChild(o), t.appendChild(a), fontSizeOptions.appendChild(t)
+});
+const fontSize = () => fontSizeValue = fontSizeSelect.value;
+textEditor.addEventListener("input", function () {
+    let e = textEditor.value,
+        t = canvas.getActiveObject();
+    t && "text" === t.type && (t.set("text", e), canvas.renderAll())
+}), nuevoTextoButton.addEventListener("click", function () {
+    agregarTextoAlCanvas()
+});
+const fontSelector = document.querySelectorAll(".option-fuentes");
+document.addEventListener("DOMContentLoaded", () => {
+    fontSelector.forEach(e => {
+        let t = e.getAttribute("value");
+        e.children[0].children[0].style.fontFamily = t, e.addEventListener("click", () => {
+            let t = e.getAttribute("value"),
+                a = canvas.getActiveObject();
+            a && "text" === a.type && (a.set("fontFamily", t), fontAcordion.textContent = t, fontAcordion.setAttribute("value", t), aplicarFontFamily(), setTimeout(() => {
+                canvas.renderAll()
+            }, 50))
+        })
+    })
+});
+const cerrarAcordeonesFonts = () => {
+        let e = document.querySelector(".btn-accn-1"),
+            t = document.querySelector(".btn-accn-2");
+        e.classList.contains("collapsed") || e.click(), t.classList.contains("collapsed") || t.click()
+    },
+    aplicarFontFamily = () => {
+        let e = fontAcordion.getAttribute("value");
+        fontAcordion.style.fontFamily = e
+    };
+aplicarFontFamily();
+const actualizarSeleccion = e => {
+    if (e && "text" === e.type) {
+        textEditor.value = e.text, textEditor.disabled = !1, fontAcordion.classList.remove("disabled"), fontSizeAcordion.classList.remove("disabled"), fontAcordion.textContent = e.fontFamily || "Arial", fontAcordion.setAttribute("value", e.fontFamily || "Arial"), aplicarFontFamily();
+        let t = e.fontSize;
+        fontSizeAcordion.textContent = `${t}px`, cursivaBtn.disabled = !1, negritaBtn.disabled = !1, "italic" === e.fontStyle ? cursivaBtn.classList.add("btnActivated") : cursivaBtn.classList.remove("btnActivated"), "bold" === e.fontWeight ? negritaBtn.classList.add("btnActivated") : negritaBtn.classList.remove("btnActivated")
+    }
+    if (btnDelete.disabled = !1, copyPasteBtn.disabled = !1, mirrorBtn.disabled = !1, flipVertBtn.disabled = !1, "activeSelection" !== e.type) {
+        let a = e.dataTarget;
+        mostrarContenido(`${a}-content`, a)
+    }
+};
+canvas.on("selection:created", e => {
+    let t = e.target;
+    actualizarSeleccion(t)
+}), canvas.on("selection:updated", e => {
+    let t = e.target;
+    actualizarSeleccion(t)
+}), canvas.on("selection:cleared", () => {
+    textEditor.value = "", textEditor.disabled = !0, fontAcordion.classList.add("disabled"), fontSizeAcordion.classList.add("disabled"), fontAcordion.textContent = "Arial", fontAcordion.setAttribute("value", "Arial"), aplicarFontFamily(), fontSizeAcordion.textContent = "40px", cerrarAcordeonesFonts(), cursivaBtn.disabled = !0, negritaBtn.disabled = !0, negritaBtn.classList.remove("btnActivated"), cursivaBtn.classList.remove("btnActivated"), btnDelete.disabled = !0, copyPasteBtn.disabled = !0, mirrorBtn.disabled = !0, flipVertBtn.disabled = !0
+}), canvas.on("object:removed", () => {
+    let e = canvas.getObjects("text");
+    0 === e.length && (textEditor.value = "", fontAcordion.classList.add("disabled"), fontSizeAcordion.classList.add("disabled"), fontAcordion.textContent = "Arial", fontAcordion.setAttribute("value", "Arial"), aplicarFontFamily(), fontSizeAcordion.textContent = "40px", cerrarAcordeonesFonts())
+});
+const cambiarTamanioTexto = e => {
+        let t = canvas.getActiveObject();
+        t && "text" === t.type && (t.set("fontSize", e), fontSizeAcordion.textContent = `${e}px`, setTimeout(function () {
+            canvas.renderAll()
+        }, 50))
+    },
+    fontSizeInnerOptions = document.querySelectorAll(".option-fontSize");
+fontSizeInnerOptions.forEach((e, t) => {
+    e.addEventListener("click", () => {
+        let e = (t + 1) * 10;
+        cambiarTamanioTexto(e)
+    })
+}), cursivaBtn.addEventListener("click", () => {
+    let e = canvas.getActiveObject();
+    "normal" === e.fontStyle ? (e.fontStyle = "italic", cursivaBtn.classList.add("btnActivated")) : (e.fontStyle = "normal", cursivaBtn.classList.remove("btnActivated")), canvas.renderAll()
+}), negritaBtn.addEventListener("click", () => {
+    let e = canvas.getActiveObject();
+    "normal" === e.fontWeight ? (e.fontWeight = "bold", negritaBtn.classList.add("btnActivated")) : (e.fontWeight = "normal", negritaBtn.classList.remove("btnActivated")), canvas.renderAll()
+}), agregarTextoAlCanvas("Inserta tu texto aqu\xed");
+const btnPdf = document.getElementById("download-pdf");
+let originalBackgroundColor, originalElementColor, originalElementColors = {},
+    originalState;
+const invertColorsAndSaveOriginal = () => {
+        originalState = canvas.toJSON(), canvas.backgroundColor = "#ffffff", canvas.forEachObject(e => {
+            "group" === e.type && e._objects.every(e => "path" === e.type) ? e._objects.forEach(e => {
+                e.set("fill", "#000")
+            }) : "group" === e.type ? e.forEachObject(e => {
+                void 0 !== e.fill && e.set("fill", "#000")
+            }) : void 0 !== e.fill && e.set("fill", "#000")
+        }), canvas.renderAll()
+    },
+    restoreOriginalColors = () => {
+        canvas.loadFromJSON(originalState, canvas.renderAll.bind(canvas))
+    };
+btnPdf.addEventListener("click", () => {
+    eliminarSeparadorSvg();
+    let e = document.getElementById("canvas"),
+        t = e.width,
+        a = e.height,
+        o;
+    o = t > a ? new jsPDF("l", "px", [t, a]) : new jsPDF("p", "px", [a, t]), setTimeout(() => {
+        t = o.internal.pageSize.getWidth(), a = o.internal.pageSize.getHeight();
+        let l = e.toDataURL("image/png", .5);
+        o.addImage(l, "PNG", 0, 0, t, a, void 0, "FAST"), invertColorsAndSaveOriginal();
+        let n = e.toDataURL("image/png", .5);
+        o.addPage(), o.addImage(n, "PNG", 0, 0, t, a, void 0, "FAST");
+        let r = o.output("blob"),
+            c = window.URL.createObjectURL(r),
+            i = document.createElement("a");
+        i.href = c, i.download = "creacion-personalizada.pdf", document.body.appendChild(i), i.click(), i.remove(), restoreOriginalColors(), agregarSeparador()
+    }, 500)
+});
+const checkValue = () => {
+    let e = document.getElementById("scopeColor"),
+        t = document.querySelector(".msg-switch");
+    e.addEventListener("change", () => {
+        e.checked ? t.textContent = "Colores Individuales" : t.textContent = "Colores Globales"
+    })
+};
+checkValue();
+let _clipboard = null;
+const CopyAndPaste = () => {
+        let e = canvas.getActiveObject();
+        e && e.clone(function (t) {
+            canvas.discardActiveObject(), t.set({
+                left: t.left + 10,
+                top: t.top + 10,
+                evented: !0
+            }), "activeSelection" === t.type ? (t.canvas = canvas, t.forEachObject(function (t, a) {
+                t.dataTarget = e.getObjects()[a].dataTarget, canvas.add(t)
+            }), t.setCoords()) : (t.dataTarget = e.dataTarget, canvas.add(t)), _clipboard = t, canvas.setActiveObject(t), canvas.requestRenderAll()
+        })
+    },
+    modoEspejo = () => {
+        let e = canvas.getActiveObject();
+        e && (e.set("flipX", !e.flipX), canvas.renderAll())
+    },
+    giroVertical = () => {
+        let e = canvas.getActiveObject();
+        e && (e.set({
+            scaleY: -1 * e.scaleY
+        }), canvas.renderAll())
+    };
+flipVertBtn.addEventListener("click", giroVertical), copyPasteBtn.addEventListener("click", CopyAndPaste), mirrorBtn.addEventListener("click", modoEspejo), document.addEventListener("DOMContentLoaded", function () {
+    let e = document.querySelectorAll(".galeria-container");
+    e.forEach(function (e) {
+        let t = e.querySelector(".galeria"),
+            a = e.querySelectorAll(".galeria-item"),
+            o = e.querySelector(".galeria-prev"),
+            l = e.querySelector(".galeria-next"),
+            n = 0;
+
+        function r() {
+            let e = -(70 * n) + "px";
+            t.style.transform = "translateX(" + e + ")"
+        }
+        o.addEventListener("click", function () {
+            n > 0 && (n--, r())
+        }), l.addEventListener("click", function () {
+            n < a.length - 1 && (n++, r())
+        })
+    })
+});
+let ctx = canvas.getContext("2d"),
+    miimagen = new Image;
+
+function cargarImagen(e) {
+    validador = !1, fetch(e).then(e => e.text()).then(e => {
+        fabric.loadSVGFromString(e, (e, t) => {
+            let a = new fabric.Group(e, t);
+            a.set({
+                scaleX: .2,
+                scaleY: .2,
+                selectable: !0,
+                top: canvas.padding,
+                dataTarget: "elementos"
+            }), a.forEachObject(e => {
+                e.set({
+                    fill: valorColorActual()
+                })
+            }), canvas.add(a), canvas.setActiveObject(a), colorActual(a), agregarSeparador(), canvas.renderAll()
+        })
+    }).catch(e => {
+        console.error("Error al cargar el archivo SVG:", e)
+    })
+}
+let modal = document.getElementById("myModal"),
+    btn = document.getElementById("ver3DBtn"),
+    span = document.getElementsByClassName("close")[0];
+
+function selectOption(e) {
+    let t = document.getElementsByClassName("option-btn");
+    for (let a = 0; a < t.length; a++) t[a].classList.remove("active");
+    e.classList.add("active")
+}
+btn.onclick = function () {
+    eliminarSeparadorSvg(), setTimeout(function () {
+        modal.style.display = "block", canvas.renderAll()
+    }, 500)
+}, span.onclick = function () {
+    modal.style.display = "none", agregarSeparador(), canvas.renderAll()
+}, window.onclick = function (e) {
+    e.target == modal && (modal.style.display = "none", agregarSeparador(), canvas.renderAll())
+}, canvas.on("mouse:down", function (e) {
+    null === e.target && (canvas.discardActiveObject(), canvas.renderAll())
+}), document.addEventListener("DOMContentLoaded", function () {
+    let e = document.getElementById("burger-btn"),
+        t = document.querySelector(".col-sideLeft");
+    e.addEventListener("click", function () {
+        t.classList.toggle("show-menu")
+    })
+}), document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("reduceSvg").addEventListener("click", () => {
+        let e = document.getElementById("svgContent");
+        e && (agregarSeparador(), loadSVGToFabric(e))
+    })
+});
+const loadSVGToFabric = e => {
+    let t = new XMLSerializer().serializeToString(e);
+    fetch("/guardar-svg", {
+        method: "POST",
+        body: JSON.stringify({
+            svg: t
+        }),
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+        }
+    }).then(e => {
+        if (!e.ok) throw Error("Hubo un problema al guardar el SVG.");
+        return e.text()
+    }).then(e => {
+        fabric.loadSVGFromString(e, function (e, t) {
+            let a = new fabric.Group(e, {
+                left: 0,
+                top: canvas.padding,
+                selectable: !0,
+                dataTarget: "subir-archivo",
+                scaleX: .3,
+                scaleY: .3
+            });
+            canvas.add(a), canvas.setActiveObject(a), colorActual(a), canvas.renderAll()
+        })
+    }).catch(e => {
+        console.error("Error al guardar y cargar el SVG:", e)
+    })
+};
+document.addEventListener("DOMContentLoaded", () => {
+    var e;
+    document.querySelector(".browse-btn.btn").textContent = "Subir imagen"
+});
+const agregarSeparador = () => {
+    fetch("/frontend/img/personalizacion_vasos/medidas/separador.svg").then(e => e.text()).then(e => {
+        fabric.loadSVGFromString(e, (e, t) => {
+            let a = new fabric.Group(e, t);
+            a.set({
+                left: 0,
+                top: 0,
+                selectable: !1,
+                evented: !1,
+                hoverCursor: "default",
+                dataTarget: "separador"
+            }), canvas.add(a), a.bringToFront()
+        }), canvas.renderAll()
+    })
+};
+agregarSeparador();
+const eliminarSeparadorSvg = () => {
+    let e = canvas.getObjects();
+    canvas.discardActiveObject();
+    let t = e.filter(e => "separador" === e.dataTarget);
+    t.forEach(e => {
+        canvas.remove(e)
+    }), canvas.renderAll()
+};
+
+function changeCanvasColor(e) {
+    canvas.setBackgroundColor(e), canvas.renderAll()
+}
+const guardarModeloBtn = document.getElementById("guardarModeloBtn");
+guardarModeloBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    let t = document.getElementById("canvasForm"),
+        a = document.getElementById("jsonInput"),
+        o = JSON.stringify(canvas.toJSON());
+    a.value = o, fetch(t.action, {
+        method: "POST",
+        body: new FormData(t)
+    }).then(e => e.json()).then(e => {
+        let t = e.link.replace(".json", "");
+        navigator.clipboard.writeText(t).then(() => {
+            let e = document.getElementById("message");
+            e.style.display = "block", setTimeout(() => {
+                e.style.display = "none"
+            }, 3e3)
+        }).catch(e => {
+            console.error("Error al copiar el enlace al portapapeles: ", e)
+        })
+    }).catch(e => {
+        console.error("Error al hacer la solicitud AJAX: ", e)
+    })
+}), document.addEventListener("DOMContentLoaded", function () {
+    let e = function e() {
+        let t = new URLSearchParams(window.location.search);
+        return t.get("session_id")
+    }();
+    e ? document.getElementById("boxReturn").style.display = "flex" : document.getElementById("boxReturn").style.display = "none"
+});
+const btnReturn = document.getElementById("myButtonReturn");
+document.getElementById("myButtonReturn").addEventListener("click", () => {
+    document.getElementById("loading_screen").style.display = "block", eliminarSeparadorSvg();
+    let e = document.getElementById("canvas"),
+        t = e.width,
+        a = e.height,
+        o;
+    o = t > a ? new jsPDF("l", "px", [t, a]) : new jsPDF("p", "px", [a, t]), setTimeout(() => {
+        t = o.internal.pageSize.getWidth(), a = o.internal.pageSize.getHeight();
+        let l = e.toDataURL("image/png", .5);
+        o.addImage(l, "PNG", 0, 0, t, a, void 0, "FAST"), invertColorsAndSaveOriginal();
+        let n = e.toDataURL("image/png", .5);
+        o.addPage(), o.addImage(n, "PNG", 0, 0, t, a, void 0, "FAST"), restoreOriginalColors(), agregarSeparador();
+        let r = o.output("blob"),
+            c = new FormData;
+        c.append("nombre_usuario", "eco"), c.append("nombre_pdf", "pdf"), c.append("pdf", r, "documento.pdf"), console.log("Uploading PDF."), fetch("https://ecoingeniocustomizacion.com/api/upload-pdf", {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
+            body: c
+        }).then(e => e.json()).then(e => {
+            console.log("PDF uploaded successfully:", e), document.getElementById("loading_screen").style.display = "none", window.parent.postMessage({
+                type: "PDF_UPLOAD_SUCCESS",
+                link: e.link
+            }, "https://ecoingenio.com.ar/")
+        }).catch(e => {
+            console.error("Error uploading PDF:", e), document.getElementById("loading_screen").style.display = "none"
+        })
+    }, 5e3)
+});
