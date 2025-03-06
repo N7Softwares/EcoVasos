@@ -24,6 +24,7 @@
     use App\Http\Controllers\ColorController;
     use App\Http\Controllers\TipografiaController;
     use App\Http\Controllers\Modelo3DController;
+    use App\Http\Controllers\CategoryController;
     /*
     |--------------------------------------------------------------------------
     | Web Routes
@@ -284,6 +285,7 @@ Route::get('/disenio', [DisenioController::class, 'index'])->name('disenio');
         Route::get('elements/{id}/edit', [ElementController::class, 'edit'])->name('elements.edit');
         Route::put('elements/{id}', [ElementController::class, 'update'])->name('elements.update');
         Route::delete('elements/{id}', [ElementController::class, 'destroy'])->name('elements.destroy');
+        Route::post('/update-order', [CategoryController::class, 'updateOrder']);
 
         //----------------------COLORS-VASO-DESIGN-----------------------
         Route::resource('colors', ColorController::class);
