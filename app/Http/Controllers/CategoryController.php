@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Str;
-
+use App\Models\ImagesCategory;  
+use App\Models\Element;
 class CategoryController extends Controller
 {
     /**
@@ -91,6 +92,35 @@ class CategoryController extends Controller
         $parent_cats=Category::where('is_parent',1)->get();
         $category=Category::findOrFail($id);
         return view('backend.category.edit')->with('category',$category)->with('parent_cats',$parent_cats);
+    }
+
+    public function updateOrder(Request $request)
+    {
+        $ids = $request->input('ids');
+    
+        if (!$ids || !is_array($ids)) {
+            return response()->json(['error' => 'Datos inválidos'], 400);
+        }
+    
+        // Actualiza el orden de las categorías en images_categories
+        foreach ($ids as $index => $categoryId) {
+            $category = ImagesCategory::find($categoryId);
+            if ($category) {
+                $category->order = $index;
+                $category->save();
+            }
+        }
+    
+        // Actualiza los elementos en elements
+        foreach ($ids as $categoryId) {
+            $elements = Element::where('category_image_id', $categoryId)->get();
+            foreach ($elements as $element) {
+                $element->category_image_id = $categoryId;
+                $element->save();
+            }
+        }
+    
+        return response()->json(['message' => 'Orden actualizado correctamente.']);
     }
 
     /**

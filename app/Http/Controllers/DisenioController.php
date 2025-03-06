@@ -21,7 +21,7 @@ class DisenioController extends Controller
     public function index()
     {
         $inspirates = Inspirate::all();
-        $elements = Element::orderBy('category_image_id', 'desc')->get(); // Ordenar por category_image_id ascendente
+        $elements = Element::orderBy('created_at', 'desc')->get(); // Ordenar por fecha de creación, más recientes primero
         $colors = Color::all();
         $tipografias = Tipografia::all();
     
@@ -30,13 +30,14 @@ class DisenioController extends Controller
     
         $array = [
             'inspirates' => $inspirates,
-            'elements' => $elements, // Elementos ya ordenados
+            'elements' => $elements, // Elementos ordenados por 'created_at'
             'colors' => $colors,
             'tipografias' => $tipografias
         ];
     
         return view('frontend.pages.disenio2', compact('array'));
     }
+    
     
     
     public function guardarSVG(Request $request)

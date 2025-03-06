@@ -12,22 +12,26 @@
     </div>
 
     <div class="card-body">
-        <ul class="list-group">
-            @foreach ($categories as $category)
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    {{ $category->image_type }}
-                    <div>
-                        <a href="{{ route('images_categories.edit', $category->id) }}" class="btn btn-primary btn-sm">Editar</a>
-                        <form action="{{ route('images_categories.destroy', $category->id) }}" method="post" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">Eliminar</button>
-                        </form>
-                    </div>
-                </li>
-            @endforeach
-        </ul>
-    </div>
+    <ul class="list-group" id="sortable-list">
+        @foreach ($categories as $category)
+            <li class="list-group-item d-flex justify-content-between align-items-center" data-id="{{ $category->id }}">
+                {{ $category->image_type }}
+                <div>
+                    <a href="{{ route('images_categories.edit', $category->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                    <form action="{{ route('images_categories.destroy', $category->id) }}" method="post" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar esta categoría?')">Eliminar</button>
+                    </form>
+                </div>
+            </li>
+        @endforeach
+    </ul>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+<script src="{{ asset('frontend/js/personalizar_vasos/sortable-list.js') }}"></script>
+
+
 
 {{-- @endsection --}}

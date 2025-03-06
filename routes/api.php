@@ -4,7 +4,7 @@ use App\Http\Controllers\AdminWordpressRedirectController;
 use App\Http\Controllers\PdfController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,3 +22,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/id-compra', [AdminWordpressRedirectController::class, 'recibirId']);
 Route::post('/upload-pdf', [PdfController::class, 'uploadPdf']);
 Route::post('/proteger-pdf', [PdfController::class, 'agregarProteccionPdf']);
+Route::post('/update-order', [CategoryController::class, 'updateOrder']);

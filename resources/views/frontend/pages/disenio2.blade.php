@@ -257,26 +257,29 @@
                                 </div>
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
-                                <!--------------------------- Para seleccionar figura --------------------------->
-                                
-                                <h4 class="text-center">Elementos</h4>
+    <h4 class="text-center">Elementos</h4>
 
-                               @foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
-                                    <div class="galeria-container px-3">
-                                        <h6 class="mt-3">{{ $categoria }}</h6>
-                                        <div class="galeria">
-                                            @foreach ($imagenes as $element)
-                                                <div class="galeria-item d-flex align-self-center">
-                                                    <img class="mx-2 zoomable-image" src="{{ config('app.public_html_url') . $element->url }}" alt="Inspiración" onclick="cargarImagen('{{ config('app.public_html_url') . $element->url }}')">
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <button class="galeria-prev">&#8249;</button>
-                                        <button class="galeria-next">&#8250;</button>
-                                    </div>
-                                @endforeach
+    @foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
+        <div class="galeria-container px-3">
+            <h6 class="mt-3">{{ $categoria }}</h6>
+            <div class="galeria">
+                @foreach ($imagenes as $index => $element)
+                    <!-- Resaltar el primer elemento (más reciente) de cada categoría -->
+                    <div class="galeria-item d-flex align-self-center 
+                        {{ $index === 0 ? 'ultimo-agregado' : '' }}">
+                        <img class="mx-2 zoomable-image"
+                             src="{{ config('app.public_html_url') . $element->url }}"
+                             alt="Inspiración"
+                             onclick="cargarImagen('{{ config('app.public_html_url') . $element->url }}')">
+                    </div>
+                @endforeach
+            </div>
+            <button class="galeria-prev">&#8249;</button>
+            <button class="galeria-next">&#8250;</button>
+        </div>
+    @endforeach
+</div>
 
-                            </div>
                             <div class="contenido-side" id="textos-content" style="display: none;">
                                 <div class="col-texts ">
                                     <h4 class="text-center">Agregar Texto</h4>
