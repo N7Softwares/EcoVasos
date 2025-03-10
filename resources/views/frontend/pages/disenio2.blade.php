@@ -241,7 +241,8 @@
                                                 <div class="grid-canvas">
                                                     <div class="grid-canvas-inner">
                                                         <div class="browse-btn-wrapper">
-                                                            <div><input type="file" accept="image/png,image/jpeg,image/jpg,image/svg+xml" multiple="" name="file"
+                                                            <div><input type="file" id="image-upload" accept="image/png, image/jpeg, image/jpg, image/svg+xml" style="display: none;" onchange="handleFileSelect(event)">
+
                                                                     style="display: none;" id="fileInputSvg">
                                                                 <div class="files-dropzone-list">
                                                                     <button class="btn-wrap">

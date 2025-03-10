@@ -45,12 +45,40 @@ class DisenioController extends Controller
         // Obtener el contenido del SVG
         $contenidoSVG = $request->svg;
     
+        // Cambiar el color de relleno si es necesario
         $contenidoSVG = $this->cambiarColorRellenoSVG($contenidoSVG, 'black');
+    
+        // Reducir el SVG si es necesario (ej. simplificar el path)
         $contenidoSVG = $this->reducirA2Path($contenidoSVG);
+        
+        // Ajustar el tamaño del SVG a 200x200
+        $contenidoSVG = $this->ajustarTamanioSVG($contenidoSVG, 1000, 1000); // Ajustar a 200x200
     
         // Devolver el contenido del SVG modificado
         return response($contenidoSVG, 200, ['Content-Type' => 'image/svg+xml']);
-    }    
+    }
+    
+    /**
+     * Función para ajustar el tamaño del SVG
+     */
+    private function ajustarTamanioSVG($contenidoSVG, $ancho, $alto)
+    {
+        // Cargar el SVG en un objeto DOMDocument
+        $dom = new \DOMDocument();
+        $dom->loadXML($contenidoSVG);
+    
+        // Buscar el nodo <svg> para modificar los atributos width y height
+        $svgElement = $dom->getElementsByTagName('svg')->item(0);
+    
+        // Establecer los nuevos atributos width y height si no existen o modificarlos
+        if ($svgElement) {
+            $svgElement->setAttribute('width', $ancho);
+            $svgElement->setAttribute('height', $alto);
+        }
+    
+        // Devolver el SVG modificado como string
+        return $dom->saveXML($dom->documentElement);
+    }
     
     private function cambiarColorRellenoSVG($contenidoSVG, $color)
     {
