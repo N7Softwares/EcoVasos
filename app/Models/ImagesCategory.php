@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ImagesCategory extends Model
 {
-    protected $fillable = ['image_type'];
+    protected $fillable = ['image_type', 'order'];
+   
 }
