@@ -204,7 +204,27 @@
                             </div>
                             <div class="contenido-side" id="subir-archivo-content" style="display: none;">
                                 <!--------------------------- Para subir foto --------------------------->
-                                <h4 class="text-center">Subir Imagen</h4>
+                          <!--      <h4 class="text-center">Subir Imagen</h4> -->
+                                <div id="root">
+                                        <div class="grid-base">
+                                            <div class="grid-main">
+                                                <div class="grid-canvas">
+                                                    <div class="grid-canvas-inner">
+                                                        <div class="browse-btn-wrapper">
+                                                            <div><input type="file" id="image-upload" accept="image/png, image/jpeg, image/jpg, image/svg+xml" style="display: none;" onchange="handleFileSelect(event)">
+
+                                                                    style="display: none;" id="fileInputSvg">
+                                                                <div class="files-dropzone-list">
+                                                                    <button class="btn-wrap">
+                                                                    </button></div>
+                                                            </div>
+                                                        </div>
+                                                        <div id="reduceSvg" style="display: none;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <div class="size-texts px-3">
                                     <p>Agregá tu logo, ilustracciones y outros elementos do seu computador.
                                     </p>
@@ -235,50 +255,38 @@
                                         <p class="bold-text">Una vez cargada la imagen, dar clic para agregar al lienzo</p>
                                     </div>
                                     <!-- <button id="agregarSvgToLienz">Agregar SVG al lienzo</button> -->
-                                    <div id="root">
-                                        <div class="grid-base">
-                                            <div class="grid-main">
-                                                <div class="grid-canvas">
-                                                    <div class="grid-canvas-inner">
-                                                        <div class="browse-btn-wrapper">
-                                                            <div><input type="file" id="image-upload" accept="image/png, image/jpeg, image/jpg, image/svg+xml" style="display: none;" onchange="handleFileSelect(event)">
-
-                                                                    style="display: none;" id="fileInputSvg">
-                                                                <div class="files-dropzone-list">
-                                                                    <button class="btn-wrap">
-                                                                    </button></div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="reduceSvg" style="display: none;"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                             <div class="contenido-side" id="elementos-content" style="display: none;">
-    <h4 class="text-center">Elementos</h4>
+                            <h4 class="text-center">Elementos</h4>
 
-    @foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
-        <div class="galeria-container px-3">
-            <h6 class="mt-3">{{ $categoria }}</h6>
-            <div class="galeria">
-                @foreach ($imagenes as $index => $element)
-                    <!-- Resaltar el primer elemento (más reciente) de cada categoría -->
-                    <div class="galeria-item d-flex align-self-center 
-                        {{ $index === 0 ? 'ultimo-agregado' : '' }}">
-                        <img class="mx-2 zoomable-image"
-                             src="{{ config('app.public_html_url') . $element->url }}"
-                             alt="Inspiración"
-                             onclick="cargarImagen('{{ config('app.public_html_url') . $element->url }}')">
-                    </div>
-                @endforeach
-            </div>
-            <button class="galeria-prev">&#8249;</button>
-            <button class="galeria-next">&#8250;</button>
+@foreach ($array['elements']->groupBy('category.image_type') as $categoria => $imagenes)
+    <div class="galeria-container px-3">
+        <h6 class="mt-3">{{ $categoria }}</h6>
+        <div class="galeria">
+            @foreach ($imagenes as $index => $element)
+                <!-- Resaltar el primer elemento (más reciente) de cada categoría -->
+                <div class="galeria-item d-flex align-self-center 
+                    {{ $index === 0 ? 'ultimo-agregado' : '' }}">
+
+                    <!-- Aquí accedemos a la URL correctamente -->
+                    <img class="mx-2 zoomable-image"
+                         src="{{ config('app.public_html_url') . $element->url }}"
+                         alt="Inspiración"
+                         onclick="cargarImagen('{{ config('app.public_html_url') . $element->url }}')">
+                </div>
+            @endforeach
         </div>
-    @endforeach
+        <button class="galeria-prev">&#8249;</button>
+        <button class="galeria-next">&#8250;</button>
+    </div>
+@endforeach
+
+
+
+
+
 </div>
 
                             <div class="contenido-side" id="textos-content" style="display: none;">

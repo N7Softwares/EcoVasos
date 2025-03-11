@@ -21,6 +21,29 @@ class ImagesCategoryController extends Controller
         return view('backend.images_categories.create');
     }
 
+    // app/Http/Controllers/ImagesCategoryController.php
+
+public function updateOrder(Request $request)
+{
+    $ids = $request->input('ids');
+
+    if (!$ids || !is_array($ids)) {
+        return response()->json(['error' => 'Datos inválidos'], 400);
+    }
+
+    // Actualiza el orden de las categorías en images_categories
+    foreach ($ids as $index => $categoryId) {
+        $category = ImagesCategory::find($categoryId);
+        if ($category) {
+            $category->order = $index;
+            $category->save();
+        }
+    }
+
+    return response()->json(['message' => 'Orden actualizado correctamente.']);
+}
+
+
     public function show()
     {
         $categories = ImagesCategory::all();
