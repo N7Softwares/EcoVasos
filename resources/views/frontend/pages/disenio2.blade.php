@@ -416,6 +416,7 @@
                         </div>
                     </div>
                     <div id="svg-container-brand" class="d-none">
+                        
                         <svg xmlns="http://www.w3.org/2000/svg"
                         width="975.000000pt" height="922.000000pt" viewBox="0 0 975.000000 922.000000"
                         preserveAspectRatio="xMidYMid meet">
@@ -597,6 +598,7 @@
                         0z"/>
                         </g>
                         </svg>
+                        
                     </div>
                     <!--------------------------- Elemento Canva --------------------------->
                     <div id="canvas-container" style="position: relative;">
