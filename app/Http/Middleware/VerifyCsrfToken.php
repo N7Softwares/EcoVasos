@@ -14,5 +14,6 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         'admin-ncilcoperc/*',
         'guardar-svg',
+        'guardar-modelo',
     ];
 }
