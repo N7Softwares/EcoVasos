@@ -643,18 +643,19 @@ const Frase = () => {
         fabric.loadSVGFromString(e, (e, t) => {
             let a = new fabric.Group(e, t);
             a.set({
-                left: 0,
-                top: 0,
+                left: -350,
+                top: 50,
                 selectable: !1,
                 evented: !1,
                 hoverCursor: "default",
                 dataTarget: "frase"
             }), canvas.add(a), a.bringToFront()
         }), canvas.renderAll()
-        console.log('soy frase wey');
     })
 };
 Frase();
+
+
 agregarSeparador();
 const eliminarSeparadorSvg = () => {
     let e = canvas.getObjects();
