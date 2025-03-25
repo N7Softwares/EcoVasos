@@ -10,6 +10,7 @@ const canvasWidth = 1e3,
         webgl: !0,
         antialias: !0
     });
+    
 canvas.setDimensions({
     width: 2e3,
     height: 800
@@ -479,7 +480,7 @@ btnPdf.addEventListener("click", () => {
         let r = o.output("blob"),
             c = window.URL.createObjectURL(r),
             i = document.createElement("a");
-        i.href = c, i.download = "creacion-personalizada.pdf", document.body.appendChild(i), i.click(), i.remove(), restoreOriginalColors(), agregarSeparador()
+        i.href = c, i.download = "creacion-personalizada.pdf", document.body.appendChild(i), i.click(), i.remove(), restoreOriginalColors(), agregarSeparador(), Frase()
     }, 500)
 });
 const checkValue = () => {
@@ -550,7 +551,7 @@ function cargarImagen(e) {
                 e.set({
                     fill: valorColorActual()
                 })
-            }), canvas.add(a), canvas.setActiveObject(a), colorActual(a), agregarSeparador(), canvas.renderAll()
+            }), canvas.add(a), canvas.setActiveObject(a), colorActual(a),Frase(), agregarSeparador(), canvas.renderAll()
         })
     }).catch(e => {
         console.error("Error al cargar el archivo SVG:", e)
@@ -574,7 +575,7 @@ btn.onclick = function () {
 }, window.onclick = function (e) {
     e.target == modal && (modal.style.display = "none", agregarSeparador(), canvas.renderAll())
 }, canvas.on("mouse:down", function (e) {
-    null === e.target && (canvas.discardActiveObject(), canvas.renderAll())
+    null === e.target && (canvas.discardActiveObject(),Frase(), canvas.renderAll())
 }), document.addEventListener("DOMContentLoaded", function () {
     let e = document.getElementById("burger-btn"),
         t = document.querySelector(".col-sideLeft");
@@ -584,7 +585,7 @@ btn.onclick = function () {
 }), document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("reduceSvg").addEventListener("click", () => {
         let e = document.getElementById("svgContent");
-        e && (agregarSeparador(), loadSVGToFabric(e))
+        e && (agregarSeparador(),Frase(), loadSVGToFabric(e))
     })
 });
 const loadSVGToFabric = e => {
@@ -634,8 +635,27 @@ const agregarSeparador = () => {
                 dataTarget: "separador"
             }), canvas.add(a), a.bringToFront()
         }), canvas.renderAll()
+        console.log('soy separador wey');
     })
 };
+const Frase = () => {
+    fetch("/frontend/img/personalizacion_vasos/medidas/frase-eco.svg").then(e => e.text()).then(e => {
+        fabric.loadSVGFromString(e, (e, t) => {
+            let a = new fabric.Group(e, t);
+            a.set({
+                left: -350,
+                top: 50,
+                selectable: !1,
+                evented: !1,
+                hoverCursor: "default",
+                dataTarget: "frase"
+            }), canvas.add(a), a.bringToFront()
+        }), canvas.renderAll()
+    })
+};
+Frase();
+
+
 agregarSeparador();
 const eliminarSeparadorSvg = () => {
     let e = canvas.getObjects();
@@ -678,6 +698,7 @@ guardarModeloBtn.addEventListener("click", function (e) {
     }();
     e ? document.getElementById("boxReturn").style.display = "flex" : document.getElementById("boxReturn").style.display = "none"
 });
+
 const btnReturn = document.getElementById("myButtonReturn");
 document.getElementById("myButtonReturn").addEventListener("click", () => {
     document.getElementById("loading_screen").style.display = "block", eliminarSeparadorSvg();
