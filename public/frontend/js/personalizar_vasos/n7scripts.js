@@ -639,21 +639,36 @@ const agregarSeparador = () => {
     })
 };
 const Frase = () => {
-    fetch("/frontend/img/personalizacion_vasos/medidas/frase-eco.svg").then(e => e.text()).then(e => {
-        fabric.loadSVGFromString(e, (e, t) => {
-            let a = new fabric.Group(e, t);
-            a.set({
-                left: -350,
-                top: 50,
-                selectable: !1,
-                evented: !1,
-                hoverCursor: "default",
-                dataTarget: "frase"
-            }), canvas.add(a), a.bringToFront()
-        }), canvas.renderAll()
-    })
+    fetch("/frontend/img/personalizacion_vasos/medidas/frase-eco.svg")
+        .then(response => response.text())
+        .then(svgContent => {
+            fabric.loadSVGFromString(svgContent, (objects, options) => {
+                let fraseGroup = new fabric.Group(objects, options);
+                fraseGroup.set({
+                    left: -350,
+                    top: 50,
+                    selectable: true,
+                    hoverCursor: "default",
+                    dataTarget: "frase"
+                });
+
+                // Agregar la frase al canvas
+                canvas.add(fraseGroup);
+                fraseGroup.bringToFront();
+                canvas.renderAll();
+
+                // Función para eliminar la frase cuando se necesite
+                fraseGroup.on("dblclick", function () {
+                    canvas.remove(fraseGroup);
+                    canvas.renderAll();
+                });
+            });
+        });
 };
+
+// Llamar a la función
 Frase();
+
 
 
 agregarSeparador();

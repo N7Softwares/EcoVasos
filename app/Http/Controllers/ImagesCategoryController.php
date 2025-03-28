@@ -11,7 +11,7 @@ class ImagesCategoryController extends Controller
 {
     public function index()
     {
-        $categories = ImagesCategory::all();
+        $categories = ImagesCategory::orderBy('order', 'asc')->get();
 
         return view('backend.images_categories.index', compact('categories'));
     }
