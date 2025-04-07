@@ -480,7 +480,7 @@ btnPdf.addEventListener("click", () => {
         let r = o.output("blob"),
             c = window.URL.createObjectURL(r),
             i = document.createElement("a");
-        i.href = c, i.download = "creacion-personalizada.pdf", document.body.appendChild(i), i.click(), i.remove(), restoreOriginalColors(), agregarSeparador(), Frase()
+        i.href = c, i.download = "creacion-personalizada.pdf", document.body.appendChild(i), i.click(), i.remove(), restoreOriginalColors(), agregarSeparador()
     }, 500)
 });
 const checkValue = () => {
@@ -551,7 +551,7 @@ function cargarImagen(e) {
                 e.set({
                     fill: valorColorActual()
                 })
-            }), canvas.add(a), canvas.setActiveObject(a), colorActual(a),Frase(), agregarSeparador(), canvas.renderAll()
+            }), canvas.add(a), canvas.setActiveObject(a), colorActual(a), agregarSeparador(), canvas.renderAll()
         })
     }).catch(e => {
         console.error("Error al cargar el archivo SVG:", e)
@@ -575,7 +575,7 @@ btn.onclick = function () {
 }, window.onclick = function (e) {
     e.target == modal && (modal.style.display = "none", agregarSeparador(), canvas.renderAll())
 }, canvas.on("mouse:down", function (e) {
-    null === e.target && (canvas.discardActiveObject(),Frase(), canvas.renderAll())
+    null === e.target && (canvas.discardActiveObject(), canvas.renderAll())
 }), document.addEventListener("DOMContentLoaded", function () {
     let e = document.getElementById("burger-btn"),
         t = document.querySelector(".col-sideLeft");
@@ -585,7 +585,7 @@ btn.onclick = function () {
 }), document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("reduceSvg").addEventListener("click", () => {
         let e = document.getElementById("svgContent");
-        e && (agregarSeparador(),Frase(), loadSVGToFabric(e))
+        e && (agregarSeparador(), loadSVGToFabric(e))
     })
 });
 const loadSVGToFabric = e => {
@@ -638,35 +638,51 @@ const agregarSeparador = () => {
         console.log('soy separador wey');
     })
 };
+let fraseEliminada = false;
+
 const Frase = () => {
+    if (fraseEliminada) return;
+
     fetch("/frontend/img/personalizacion_vasos/medidas/frase-eco.svg")
         .then(response => response.text())
         .then(svgContent => {
             fabric.loadSVGFromString(svgContent, (objects, options) => {
                 let fraseGroup = new fabric.Group(objects, options);
+
+                canvas.add(fraseGroup);
+
+                // Calcular límites y escalar
+                fraseGroup._calcBounds();
+                fraseGroup.setCoords();
+                fraseGroup.scaleToWidth(90); // Ajustá el ancho como prefieras
+
+                // 📍 Nueva posición visible
+                const currentLeft = 20;
+                const currentTop = 50;
+
                 fraseGroup.set({
-                    left: -350,
-                    top: 50,
+                    left: currentLeft,
+                    top: currentTop,
                     selectable: true,
                     hoverCursor: "default",
                     dataTarget: "frase"
                 });
 
-                // Agregar la frase al canvas
-                canvas.add(fraseGroup);
+                fraseGroup.setCoords();
                 fraseGroup.bringToFront();
                 canvas.renderAll();
 
-                // Función para eliminar la frase cuando se necesite
+                // Eliminar al hacer doble clic
                 fraseGroup.on("dblclick", function () {
                     canvas.remove(fraseGroup);
                     canvas.renderAll();
+                    fraseEliminada = true;
                 });
             });
         });
 };
 
-// Llamar a la función
+
 Frase();
 
 
