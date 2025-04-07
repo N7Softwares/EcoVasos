@@ -20,35 +20,27 @@ class DisenioController extends Controller
 {public function index()
     {
         $inspirates = Inspirate::all();
-        $elements = Element::all(); // Obtener todos los elementos (no los ordenes aquí)
         $colors = Color::all();
         $tipografias = Tipografia::all();
         
-        // Obtener las categorías ordenadas por la columna 'order'
-        $categories = ImagesCategory::orderBy('order', 'asc')->get();
-        
-        // Para cada categoría, ordenar sus elementos por el campo 'order' y asegurar que los que tienen 'order = 0' estén al principio
-        $categories = $categories->map(function($category) use ($elements) {
-            // Filtramos los elementos que pertenecen a esta categoría
-            $category->elements = $elements->where('category_id', $category->id);
-    
-            // Primero, aseguramos que los elementos con 'order = 0' estén al principio
-            $category->elements = $category->elements->sortBy(function($element) {
-                return $element->order == 0 ? -1 : $element->order; // Los elementos con 'order = 0' irán primero
+        // Obtener las categorías ordenadas por 'order' y cargar sus elementos ya ordenados
+        $categories = ImagesCategory::orderBy('order', 'asc')
+            ->with(['elements' => function ($query) {
+                $query->orderBy('created_at', 'desc'); // Cambia 'created_at' si necesitas otro criterio
+            }])
+            ->get()
+            ->filter(function ($category) {
+                return $category->elements->isNotEmpty(); // Filtra las categorías que tienen al menos un elemento
             });
     
-            return $category;
-        });
-        
-        // Pasar las categorías y elementos a la vista
+        // Pasar los datos a la vista en un solo array
         $array = [
             'inspirates' => $inspirates,
-            'elements' => $elements,
             'colors' => $colors,
             'tipografias' => $tipografias,
-            'categories' => $categories, // Pasar las categorías con sus elementos ordenados
+            'categories' => $categories, // Solo con categorías que tienen elementos
         ];
-        
+    
         return view('frontend.pages.disenio2', compact('array'));
     }
     
